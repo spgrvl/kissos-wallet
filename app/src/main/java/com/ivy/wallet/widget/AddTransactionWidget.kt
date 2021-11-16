@@ -2,35 +2,16 @@ package com.ivy.wallet.widget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import com.ivy.wallet.R
-import timber.log.Timber
 
 class AddTransactionWidget : AppWidgetProvider() {
 
     companion object {
         fun updateBroadcast(context: Context) {
-            Timber.d("update()")
-            val intent = Intent(context, AddTransactionWidget::class.java)
-            intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-            val appWidgetManager = AppWidgetManager.getInstance(context)
-            intent.putExtra(
-                AppWidgetManager.EXTRA_APPWIDGET_IDS,
-                getAppWidgetIds(context, appWidgetManager)
-            )
-            context.sendBroadcast(intent)
-        }
-
-        private fun getAppWidgetIds(
-            context: Context,
-            appWidgetManager: AppWidgetManager
-        ): IntArray? {
-            val ivyWidgetComponent =
-                ComponentName(context, AddTransactionWidget::class.java)
-            return appWidgetManager.getAppWidgetIds(ivyWidgetComponent)
+            WidgetBase.updateBroadcast(context, AddTransactionWidget::class.java)
         }
     }
 
