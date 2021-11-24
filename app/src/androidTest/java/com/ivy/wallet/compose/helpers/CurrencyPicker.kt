@@ -13,14 +13,18 @@ class CurrencyPicker<A : ComponentActivity>(
     private val composeTestRule: AndroidComposeTestRule<ActivityScenarioRule<A>, A>
 ) {
 
-    fun searchAndSelect(currency: Currency) {
+    fun searchAndSelect(
+        currency: Currency,
+    ) {
         composeTestRule.onNodeWithTag("search_input")
             .performTextInput(currency.currencyCode)
 
         composeTestRule.onNodeWithText(currency.displayName)
             .performClick()
+    }
 
-        composeTestRule.onNodeWithText("Save")
+    fun modalSave() {
+        composeTestRule.onNodeWithTag("set_currency_save")
             .performClick()
     }
 }
