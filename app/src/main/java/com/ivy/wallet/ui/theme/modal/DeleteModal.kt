@@ -22,6 +22,8 @@ fun BoxWithConstraintsScope.DeleteModal(
     title: String,
     description: String,
     visible: Boolean,
+    buttonText: String = "Delete",
+    iconStart: Int = R.drawable.ic_delete,
     dismiss: () -> Unit,
     onDelete: () -> Unit,
 ) {
@@ -31,8 +33,8 @@ fun BoxWithConstraintsScope.DeleteModal(
         dismiss = dismiss,
         PrimaryAction = {
             ModalNegativeButton(
-                text = "Delete",
-                iconStart = R.drawable.ic_delete
+                text = buttonText,
+                iconStart = iconStart
             ) {
                 onDelete()
             }
