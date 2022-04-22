@@ -1,6 +1,7 @@
 package com.ivy.wallet.domain.action.account
 
-import com.ivy.wallet.domain.action.framework.FPAction
+import com.ivy.fp.action.FPAction
+import com.ivy.fp.action.thenMap
 import com.ivy.wallet.domain.data.core.Transaction
 import com.ivy.wallet.domain.pure.data.ClosedTimeRange
 import com.ivy.wallet.io.persistence.dao.TransactionDao
@@ -22,6 +23,8 @@ class AccTrnsAct @Inject constructor(
                 endDate = range.to
             )
         }
+    } thenMap {
+        it.toDomain()
     }
 
     class Input(
