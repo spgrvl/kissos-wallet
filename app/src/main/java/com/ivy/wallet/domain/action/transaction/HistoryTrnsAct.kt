@@ -9,18 +9,14 @@ import javax.inject.Inject
 
 class HistoryTrnsAct @Inject constructor(
     private val transactionDao: TransactionDao
-) : FPAction<HistoryTrnsAct.Input, List<Transaction>>() {
+) : FPAction<ClosedTimeRange, List<Transaction>>() {
 
-    override suspend fun Input.compose(): suspend () -> List<Transaction> = suspend {
+    override suspend fun ClosedTimeRange.compose(): suspend () -> List<Transaction> = suspend {
         io {
             transactionDao.findAllBetween(
-                startDate = range.from,
-                endDate = range.to
+                startDate = from,
+                endDate = to
             )
         }
     } thenMap { it.toDomain() }
-
-    data class Input(
-        val range: ClosedTimeRange
-    )
 }
