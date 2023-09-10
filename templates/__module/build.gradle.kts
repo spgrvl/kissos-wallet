@@ -1,5 +1,5 @@
 plugins {
-    id("ivy.module")
+    id("ivy.feature")
 }
 
 android {
@@ -9,4 +9,6 @@ android {
 dependencies {
     implementation(projects.ivyCore)
     implementation(projects.ivyResources)
+    implementation(projects.ivyDesign)
+    implementation(projects.ivyNavigation)
 }
