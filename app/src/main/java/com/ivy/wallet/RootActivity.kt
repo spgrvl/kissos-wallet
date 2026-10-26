@@ -40,7 +40,6 @@ import com.ivy.design.api.IvyUI
 import com.ivy.design.system.IvyMaterial3Theme
 import com.ivy.domain.RootScreen
 import com.ivy.home.customerjourney.CustomerJourneyCardsProvider
-import com.ivy.legacy.Constants
 import com.ivy.legacy.IvyWalletCtx
 import com.ivy.legacy.appDesign
 import com.ivy.legacy.utils.activityForResultLauncher
@@ -391,7 +390,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
         val share = Intent.createChooser(
             Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, Constants.URL_IVY_WALLET_GOOGLE_PLAY)
+                putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=$packageName")
                 type = "text/plain"
             },
             null
