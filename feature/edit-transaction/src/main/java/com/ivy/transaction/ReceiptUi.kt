@@ -21,6 +21,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
@@ -34,6 +35,7 @@ import com.ivy.wallet.ui.theme.modal.IvyModal
 import com.ivy.wallet.ui.theme.modal.ModalPositiveButton
 import com.ivy.wallet.ui.theme.modal.ModalSkip
 import com.ivy.wallet.ui.theme.modal.ModalTitle
+import timber.log.Timber
 import java.util.UUID
 
 @Immutable
@@ -76,7 +78,15 @@ fun rememberReceiptScanner(
                     barcode.rawValue?.let(currentOnScanned) ?: currentOnCancelled()
                 }
                 .addOnCanceledListener { currentOnCancelled() }
-                .addOnFailureListener { currentOnUnavailable() }
+                .addOnFailureListener { error ->
+                    Timber.w(error, "Receipt scanner failed: %s", (error as? MlKitException)?.errorCode)
+                    // Backing out of the scanner is sometimes reported as a failure too
+                    if ((error as? MlKitException)?.errorCode == MlKitException.UNAVAILABLE) {
+                        currentOnUnavailable()
+                    } else {
+                        currentOnCancelled()
+                    }
+                }
         }
     }
 }
