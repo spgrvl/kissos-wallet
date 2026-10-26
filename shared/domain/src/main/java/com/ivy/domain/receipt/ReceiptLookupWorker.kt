@@ -39,7 +39,11 @@ class ReceiptLookupScheduler @Inject constructor(
         private const val BACKOFF_MINUTES = 15L
     }
 
-    fun schedule() {
+    /**
+     * @param restart true right after saving a receipt, so it's checked now rather than after
+     * an earlier receipt's backoff. False keeps any check that's already scheduled.
+     */
+    fun schedule(restart: Boolean = true) {
         val request = OneTimeWorkRequestBuilder<ReceiptLookupWorker>()
             .setConstraints(
                 Constraints.Builder()
@@ -49,6 +53,10 @@ class ReceiptLookupScheduler @Inject constructor(
             .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, BACKOFF_MINUTES, TimeUnit.MINUTES)
             .build()
         WorkManager.getInstance(context)
-            .enqueueUniqueWork(UNIQUE_WORK_NAME, ExistingWorkPolicy.REPLACE, request)
+            .enqueueUniqueWork(
+                UNIQUE_WORK_NAME,
+                if (restart) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP,
+                request
+            )
     }
 }

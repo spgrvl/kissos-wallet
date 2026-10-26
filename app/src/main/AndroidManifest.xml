@@ -36,6 +36,7 @@
         <activity
             android:name=".RootActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
             <intent-filter>
@@ -46,11 +47,25 @@
                 <action android:name="ivy.wallet.intent.action.add_transaction" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!-- Receipt QR links, so a receipt scanned with the camera app can open in Kissos -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="www1.aade.gr" />
+                <data android:host="www1.gsis.gr" />
+                <data android:path="/tameiakes/myweb/q1.php" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <!-- Download Google's code scanner when the app is installed, not on first scan -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode_ui" />
         <!-- It fixes HiltWorker injection for newer WorkManager versions -->
         <provider
             android:name="androidx.startup.InitializationProvider"

@@ -18,19 +18,33 @@ import com.ivy.base.time.TimeConverter
 import com.ivy.base.time.TimeProvider
 import com.ivy.data.db.dao.read.LoanDao
 import com.ivy.data.db.dao.read.SettingsDao
+import com.ivy.data.model.AccountId
+import com.ivy.data.model.Afm
 import com.ivy.data.model.Category
 import com.ivy.data.model.CategoryId
+import com.ivy.data.model.Merchant
+import com.ivy.data.model.Receipt
+import com.ivy.data.model.ReceiptId
+import com.ivy.data.model.ReceiptStatus
 import com.ivy.data.model.Tag
 import com.ivy.data.model.TagId
 import com.ivy.data.model.TransactionId
 import com.ivy.data.model.primitive.AssociationId
 import com.ivy.data.model.primitive.NotBlankTrimmedString
+import com.ivy.data.receipt.AadeDataSource
+import com.ivy.data.receipt.AadeQr
+import com.ivy.data.receipt.toPendingReceipt
+import com.ivy.data.receipt.toReceiptMoney
+import com.ivy.data.receipt.withLookup
 import com.ivy.data.repository.CategoryRepository
+import com.ivy.data.repository.MerchantRepository
+import com.ivy.data.repository.ReceiptRepository
 import com.ivy.data.repository.TagRepository
 import com.ivy.data.repository.TransactionRepository
 import com.ivy.data.repository.mapper.TagMapper
 import com.ivy.data.repository.mapper.TransactionMapper
 import com.ivy.domain.features.Features
+import com.ivy.domain.receipt.ReceiptLookupScheduler
 import com.ivy.legacy.data.EditTransactionDisplayLoan
 import com.ivy.legacy.datamodel.Account
 import com.ivy.legacy.datamodel.temp.toDomain
@@ -72,8 +86,10 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import java.text.NumberFormat
 import java.time.Instant
 import java.time.LocalDateTime
+import java.util.Currency
 import java.util.UUID
 import javax.inject.Inject
 
@@ -107,6 +123,10 @@ class EditTransactionViewModel @Inject constructor(
     private val timeConverter: TimeConverter,
     private val timeProvider: TimeProvider,
     private val dateTimePicker: DateTimePicker,
+    private val receiptRepository: ReceiptRepository,
+    private val merchantRepository: MerchantRepository,
+    private val aadeDataSource: AadeDataSource,
+    private val receiptLookupScheduler: ReceiptLookupScheduler,
 ) : ComposeViewModel<EditTransactionViewState, EditTransactionViewEvent>() {
 
     private var transactionType by mutableStateOf(TransactionType.EXPENSE)
@@ -146,6 +166,19 @@ class EditTransactionViewModel @Inject constructor(
     private var tagSearchJob: Job? = null
     private val tagSearchDebounceTimeInMills: Long = 500
 
+    // Receipt scanning
+    private var receipt by mutableStateOf<Receipt?>(null)
+    private var receiptIsNew = false
+    private var receiptLookup by mutableStateOf(ReceiptLookupState.DONE)
+    private var receiptDialog by mutableStateOf<ReceiptDialog?>(null)
+    private var receiptLookupJob: Job? = null
+    private var pendingScanText: String? = null
+
+    // Fields the user set themselves, which AADE's details mustn't overwrite
+    private val editedFields = mutableSetOf<EditedField>()
+    private var merchantPromptAnswered = false
+    private var merchantDisplayName: String? = null
+
     fun start(screen: EditTransactionScreen) {
         viewModelScope.launch {
             editMode = screen.initialTransactionId != null
@@ -183,6 +216,14 @@ class EditTransactionViewModel @Inject constructor(
                 tagRepository.findByAssociatedId(AssociationId(loadedTransaction().id)).map(Tag::id)
                     .toImmutableList()
             display(loadedTransaction!!)
+
+            if (editMode) {
+                receipt = receiptRepository.findByTransactionId(TransactionId(loadedTransaction().id))
+            }
+            (pendingScanText ?: screen.receiptQrText)?.let {
+                pendingScanText = null
+                onReceiptScanned(it)
+            }
         }
     }
 
@@ -207,8 +248,20 @@ class EditTransactionViewModel @Inject constructor(
             backgroundProcessingStarted = getBackgroundProcessingStarted(),
             customExchangeRateState = getCustomExchangeRateState(),
             tags = getTags(),
-            transactionAssociatedTags = getTransactionAssociatedTags()
+            transactionAssociatedTags = getTransactionAssociatedTags(),
+            receiptCaption = getReceiptCaption(),
+            receiptDialog = getReceiptDialog(),
         )
+    }
+
+    @Composable
+    private fun getReceiptCaption(): ReceiptCaption? {
+        return receiptCaption()
+    }
+
+    @Composable
+    private fun getReceiptDialog(): ReceiptDialog? {
+        return receiptDialog
     }
 
     @Composable
@@ -337,6 +390,38 @@ class EditTransactionViewModel @Inject constructor(
             is EditTransactionViewEvent.SetHasChanges -> setHasChanges(event.hasChangesValue)
             is EditTransactionViewEvent.UpdateExchangeRate -> updateExchangeRate(event.exRate)
             is EditTransactionViewEvent.TagEvent -> handleTagEvent(event)
+            is EditTransactionViewEvent.ReceiptEvent -> handleReceiptEvent(event)
+        }
+    }
+
+    private fun handleReceiptEvent(event: EditTransactionViewEvent.ReceiptEvent) {
+        when (event) {
+            is EditTransactionViewEvent.ReceiptEvent.OnScanned -> onReceiptScanned(event.qrText)
+            EditTransactionViewEvent.ReceiptEvent.OnScannerUnavailable -> viewModelScope.launch {
+                toaster.show(R.string.scanner_unavailable)
+            }
+
+            EditTransactionViewEvent.ReceiptEvent.DismissDialog -> receiptDialog = null
+            is EditTransactionViewEvent.ReceiptEvent.OpenDuplicate -> {
+                receiptDialog = null
+                nav.back()
+                nav.navigateTo(
+                    EditTransactionScreen(
+                        initialTransactionId = event.transaction.value,
+                        type = TransactionType.EXPENSE
+                    )
+                )
+            }
+
+            is EditTransactionViewEvent.ReceiptEvent.AnswerRememberMerchant -> {
+                receiptDialog = null
+                merchantPromptAnswered = true
+                merchantDisplayName = event.displayName
+                if (EditedField.TITLE !in editedFields) {
+                    event.displayName?.let(::setTitleFromReceipt)
+                }
+                save(closeScreen = true)
+            }
         }
     }
 
@@ -470,6 +555,7 @@ class EditTransactionViewModel @Inject constructor(
     }
 
     private fun onTitleChanged(newTitle: String?) {
+        editedFields += EditedField.TITLE
         loadedTransaction = loadedTransaction().copy(
             title = newTitle
         )
@@ -490,6 +576,7 @@ class EditTransactionViewModel @Inject constructor(
     }
 
     private fun onAccountChanged(newAccount: Account) {
+        editedFields += EditedField.ACCOUNT
         viewModelScope.launch {
             loadedTransaction = loadedTransaction().copy(
                 accountId = newAccount.id
@@ -572,6 +659,7 @@ class EditTransactionViewModel @Inject constructor(
     }
 
     private fun updateDateTime(newDateTime: LocalDateTime) {
+        editedFields += EditedField.DATE
         val newDateTimeUtc = with(timeConverter) { newDateTime.toUTC() }
         loadedTransaction = loadedTransaction().copy(
             dateTime = newDateTimeUtc,
@@ -655,6 +743,7 @@ class EditTransactionViewModel @Inject constructor(
     }
 
     private fun onCategoryChanged(newCategory: Category?) {
+        editedFields += EditedField.CATEGORY
         loadedTransaction = loadedTransaction().copy(
             categoryId = newCategory?.id?.value
         )
@@ -699,6 +788,13 @@ class EditTransactionViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
+            if (shouldAskToRememberMerchant()) {
+                receiptDialog = ReceiptDialog.RememberMerchant(
+                    merchantName = receipt?.merchantName.orEmpty(),
+                    suggestedName = title?.takeIf { it.isNotBlank() } ?: receipt?.merchantName.orEmpty(),
+                )
+                return@launch
+            }
             saveInternal(closeScreen = closeScreen)
         }
     }
@@ -749,6 +845,9 @@ class EditTransactionViewModel @Inject constructor(
 
                 loadedTransaction().toDomain(transactionMapper)?.let {
                     transactionRepo.save(it)
+                }
+                if (receiptIsNew) {
+                    saveScannedReceipt()
                 }
 
                 refreshWidget(WalletBalanceWidgetReceiver::class.java)
@@ -826,6 +925,14 @@ class EditTransactionViewModel @Inject constructor(
 
     private fun reset() {
         loadedTransaction = null
+        receipt = null
+        receiptIsNew = false
+        receiptDialog = null
+        receiptLookupJob?.cancel()
+        receiptLookup = ReceiptLookupState.DONE
+        editedFields.clear()
+        merchantPromptAnswered = false
+        merchantDisplayName = null
 
         initialTitle = null
         description = null
@@ -997,4 +1104,164 @@ class EditTransactionViewModel @Inject constructor(
     private suspend fun shouldSortCategoriesAscending(): Boolean {
         return features.sortCategoriesAscending.isEnabled(context)
     }
+
+    private fun onReceiptScanned(qrText: String) {
+        if (loadedTransaction == null) {
+            // Still loading, handled at the end of start()
+            pendingScanText = qrText
+            return
+        }
+        viewModelScope.launch {
+            val qr = AadeQr.parse(qrText)
+            val existing = qr?.let { receiptRepository.findById(ReceiptId(it.registerId, it.receiptNumber)) }
+            when {
+                qr == null -> receiptDialog = ReceiptDialog.NotAadeReceipt(qrText)
+                existing != null && existing.transactionId.value != loadedTransaction().id ->
+                    receiptDialog = ReceiptDialog.Duplicate(existing.transactionId)
+
+                else -> applyScannedReceipt(qr)
+            }
+        }
+    }
+
+    /** Prefills the expense from the QR code right away, then asks AADE for the rest. */
+    private fun applyScannedReceipt(qr: AadeQr) {
+        val scanned = qr.toPendingReceipt(TransactionId(loadedTransaction().id), timeProvider.utcNow())
+        receipt = scanned
+        receiptIsNew = true
+        onSetTransactionType(TransactionType.EXPENSE)
+        onAmountChanged(qr.total.toDouble())
+        if (EditedField.DATE !in editedFields) {
+            setDateTimeFromReceipt(scanned.issuedAt ?: timeProvider.utcNow())
+        }
+        lookUpReceipt(qr)
+    }
+
+    private fun lookUpReceipt(qr: AadeQr) {
+        receiptLookupJob?.cancel()
+        receiptLookup = ReceiptLookupState.CHECKING
+        receiptLookupJob = viewModelScope.launch {
+            val result = aadeDataSource.lookup(qr)
+            val current = receipt ?: return@launch
+            receiptLookup = result.fold(
+                ifLeft = { ReceiptLookupState.OFFLINE },
+                ifRight = { lookup ->
+                    val updated = current.withLookup(lookup, checkedAt = timeProvider.utcNow())
+                    receipt = updated
+                    fillFromReceipt(updated)
+                    ReceiptLookupState.DONE
+                }
+            )
+        }
+    }
+
+    /** Fills in what the user hasn't set themselves: the time, then the shop's title, category and account. */
+    private suspend fun fillFromReceipt(receipt: Receipt) {
+        if (receipt.status == ReceiptStatus.FOUND && EditedField.DATE !in editedFields) {
+            receipt.issuedAt?.let(::setDateTimeFromReceipt)
+        }
+        val afm = receipt.merchantAfm ?: return
+        val merchant = merchantRepository.findByAfm(afm)
+        if (EditedField.TITLE !in editedFields) {
+            (merchant?.displayName?.value ?: receipt.merchantName)?.let(::setTitleFromReceipt)
+        }
+        if (EditedField.CATEGORY !in editedFields) {
+            merchant?.defaultCategory
+                ?.let { categoryRepository.findById(it) }
+                ?.let(::setCategoryFromReceipt)
+        }
+        if (EditedField.ACCOUNT !in editedFields) {
+            merchant?.defaultAccount
+                ?.let { id -> accounts.find { it.id == id.value } }
+                ?.let { setAccountFromReceipt(it) }
+        }
+    }
+
+    private fun setDateTimeFromReceipt(time: Instant) {
+        loadedTransaction = loadedTransaction().copy(dateTime = time)
+        dateTime = time
+    }
+
+    private fun setTitleFromReceipt(newTitle: String) {
+        loadedTransaction = loadedTransaction().copy(title = newTitle)
+        title = newTitle
+        initialTitle = newTitle
+    }
+
+    private fun setCategoryFromReceipt(newCategory: Category) {
+        loadedTransaction = loadedTransaction().copy(categoryId = newCategory.id.value)
+        category = newCategory
+    }
+
+    private suspend fun setAccountFromReceipt(newAccount: Account) {
+        loadedTransaction = loadedTransaction().copy(accountId = newAccount.id)
+        account = newAccount
+        updateCurrency(account = newAccount)
+    }
+
+    private suspend fun shouldAskToRememberMerchant(): Boolean {
+        val afm = receipt?.merchantAfm
+        return receiptIsNew && !merchantPromptAnswered && afm != null &&
+                merchantRepository.findByAfm(afm) == null
+    }
+
+    private suspend fun saveScannedReceipt() {
+        val receipt = receipt ?: return
+        receiptRepository.save(receipt)
+        if (receipt.status == ReceiptStatus.PENDING) {
+            receiptLookupScheduler.schedule()
+        }
+        receipt.merchantAfm?.let { updateMerchantMemory(it) }
+    }
+
+    /** Remembers the latest category and account for a shop the user chose to remember. */
+    private suspend fun updateMerchantMemory(afm: Afm) {
+        val displayName = merchantRepository.findByAfm(afm)?.displayName
+            ?: merchantDisplayName?.let { NotBlankTrimmedString.from(it).getOrNull() }
+            ?: return // The user chose not to remember this shop
+        merchantRepository.save(
+            Merchant(
+                afm = afm,
+                displayName = displayName,
+                defaultCategory = category?.id,
+                defaultAccount = account?.id?.let(::AccountId),
+                updatedAt = timeProvider.utcNow(),
+            )
+        )
+    }
+
+    private fun receiptCaption(): ReceiptCaption? {
+        val receipt = receipt ?: return null
+        val merchant = receipt.merchantName
+        fun info(text: String) = ReceiptCaption(text, isWarning = false)
+        fun warning(text: String) = ReceiptCaption(text, isWarning = true)
+        return when {
+            receiptLookup == ReceiptLookupState.CHECKING -> info(context.getString(R.string.receipt_checking))
+            receipt.status == ReceiptStatus.FOUND && receipt.total.compareTo(amount.toReceiptMoney()) != 0 ->
+                warning(context.getString(R.string.receipt_total_mismatch, formatEuros(receipt.total)))
+
+            receipt.status == ReceiptStatus.FOUND -> info(
+                context.getString(R.string.receipt_found, merchant.orEmpty(), receipt.merchantAfm?.value.orEmpty())
+            )
+
+            receipt.status == ReceiptStatus.PENDING && receiptLookup == ReceiptLookupState.OFFLINE ->
+                info(context.getString(R.string.receipt_offline))
+
+            receipt.status == ReceiptStatus.PENDING && merchant != null ->
+                info(context.getString(R.string.receipt_pending_merchant, merchant))
+
+            receipt.status == ReceiptStatus.PENDING -> info(context.getString(R.string.receipt_pending))
+            receipt.status == ReceiptStatus.REJECTED ->
+                warning(context.getString(R.string.receipt_rejected, receipt.aadeMessage.orEmpty()))
+
+            else -> warning(context.getString(R.string.receipt_unrecognized))
+        }
+    }
+
+    private fun formatEuros(value: BigDecimal): String =
+        NumberFormat.getCurrencyInstance().apply { currency = Currency.getInstance("EUR") }.format(value)
+
+    private enum class EditedField { TITLE, CATEGORY, ACCOUNT, DATE }
+
+    private enum class ReceiptLookupState { CHECKING, OFFLINE, DONE }
 }

@@ -95,7 +95,8 @@ fun BoxWithConstraintsScope.EditTransactionScreen(screen: EditTransactionScreen)
     val viewModel: EditTransactionViewModel = screenScopedViewModel()
     val uiState = viewModel.uiState()
 
-    LaunchedEffect(Unit) {
+    // Keyed on the screen: the view model is shared, e.g. when opening a duplicate receipt's expense
+    LaunchedEffect(screen) {
         viewModel.start(screen)
     }
 
@@ -183,7 +184,12 @@ fun BoxWithConstraintsScope.EditTransactionScreen(screen: EditTransactionScreen)
         },
         onTagOperation = {
             viewModel.onEvent(it)
-        }
+        },
+        receiptCaption = uiState.receiptCaption,
+        receiptDialog = uiState.receiptDialog,
+        onReceiptEvent = {
+            viewModel.onEvent(it)
+        },
     )
 }
 
@@ -233,8 +239,10 @@ private fun BoxWithConstraintsScope.UI(
     loanData: EditTransactionDisplayLoan = EditTransactionDisplayLoan(),
     backgroundProcessing: Boolean = false,
     hasChanges: Boolean = false,
-
-    ) {
+    receiptCaption: ReceiptCaption? = null,
+    receiptDialog: ReceiptDialog? = null,
+    onReceiptEvent: (EditTransactionViewEvent.ReceiptEvent) -> Unit = {},
+) {
     var chooseCategoryModalVisible by remember { mutableStateOf(false) }
     var tagModelVisible by remember { mutableStateOf(false) }
     var categoryModalData: CategoryModalData? by remember { mutableStateOf(null) }
@@ -266,6 +274,18 @@ private fun BoxWithConstraintsScope.UI(
     }
     val titleFocus = FocusRequester()
     val scrollState = rememberScrollState()
+
+    val scanReceipt = rememberReceiptScanner(
+        onScan = { onReceiptEvent(EditTransactionViewEvent.ReceiptEvent.OnScanned(it)) },
+        onCancel = {
+            // Fall back to entering the expense manually
+            if (shouldFocusAmount(amount = amount)) amountModalShown = true
+        },
+        onUnavailable = {
+            onReceiptEvent(EditTransactionViewEvent.ReceiptEvent.OnScannerUnavailable)
+            if (shouldFocusAmount(amount = amount)) amountModalShown = true
+        },
+    )
 
     // This is to scroll the column to the customExchangeCard composable when it is shown
     var customExchangeRatePosition by remember { mutableFloatStateOf(0F) }
@@ -338,6 +358,11 @@ private fun BoxWithConstraintsScope.UI(
                     fontWeight = FontWeight.Normal
                 )
             )
+        }
+
+        if (receiptCaption != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            ReceiptCaptionText(caption = receiptCaption)
         }
 
         Spacer(Modifier.height(32.dp))
@@ -426,12 +451,30 @@ private fun BoxWithConstraintsScope.UI(
             )
         }
 
+        if (screen.initialTransactionId == null && transactionType != TransactionType.TRANSFER) {
+            Spacer(Modifier.height(12.dp))
+
+            AddPrimaryAttributeButton(
+                icon = R.drawable.ic_scan_receipt,
+                text = stringResource(R.string.scan_receipt),
+                onClick = {
+                    amountModalShown = false
+                    scanReceipt()
+                }
+            )
+        }
+
         Spacer(Modifier.height(600.dp)) // scroll hack
     }
 
     onScreenStart {
         if (screen.initialTransactionId == null) {
-            amountModalShown = true
+            when {
+                screen.scanReceipt -> scanReceipt()
+                // Already scanned: the amount comes from the QR code
+                screen.receiptQrText != null -> Unit
+                else -> amountModalShown = true
+            }
         }
     }
 
@@ -610,6 +653,12 @@ private fun BoxWithConstraintsScope.UI(
         onAmountChanged = {
             onExchangeRateChange(it)
         }
+    )
+
+    ReceiptDialogs(
+        dialog = receiptDialog,
+        onEvent = onReceiptEvent,
+        onEnterManually = { amountModalShown = true },
     )
 
     ShowTagModal(

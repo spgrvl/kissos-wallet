@@ -317,6 +317,12 @@ class RootActivity : AppCompatActivity(), RootScreen {
         }
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        viewModel.handleNewIntent(intent)
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (viewModel.isAppLockEnabled() && !hasFocus) {

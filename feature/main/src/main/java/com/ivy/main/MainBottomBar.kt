@@ -8,11 +8,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -72,6 +74,7 @@ import kotlin.math.roundToInt
 val TRN_BUTTON_CLICK_AREA_HEIGHT = 150.dp
 val FAB_BUTTON_SIZE = 56.dp
 
+@Suppress("LongMethod")
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
 fun BoxWithConstraintsScope.BottomBar(
@@ -82,6 +85,7 @@ fun BoxWithConstraintsScope.BottomBar(
     onAddExpense: () -> Unit,
     onAddTransfer: () -> Unit,
     onAddPlannedPayment: () -> Unit,
+    onScanReceipt: () -> Unit,
 
     showAddAccountModal: () -> Unit,
 ) {
@@ -174,7 +178,8 @@ fun BoxWithConstraintsScope.BottomBar(
         onAddIncome = onAddIncome,
         onAddExpense = onAddExpense,
         onAddTransfer = onAddTransfer,
-        onAddPlannedPayment = onAddPlannedPayment
+        onAddPlannedPayment = onAddPlannedPayment,
+        onScanReceipt = onScanReceipt,
     )
 
     var dragOffset by remember {
@@ -277,6 +282,7 @@ private fun TransactionButtons(
     onAddExpense: () -> Unit,
     onAddTransfer: () -> Unit,
     onAddPlannedPayment: () -> Unit,
+    onScanReceipt: () -> Unit,
 ) {
     val ivyContext = ivyWalletCtx()
 
@@ -293,7 +299,7 @@ private fun TransactionButtons(
 
         val clickAreaWidth = ivyContext.screenWidth / 3
 
-        IvyOutlinedButton(
+        Column(
             modifier = Modifier
                 .layout { measurable, constraints ->
                     val placealbe = measurable.measure(constraints)
@@ -307,11 +313,25 @@ private fun TransactionButtons(
                 .padding(horizontal = 8.dp)
                 .alpha(buttonsShownPercent)
                 .zIndex(200f),
-            iconStart = R.drawable.ic_planned_payments,
-            text = stringResource(R.string.add_planned_payment),
-            solidBackground = true
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            onAddPlannedPayment()
+            IvyOutlinedButton(
+                iconStart = R.drawable.ic_scan_receipt,
+                text = stringResource(R.string.scan_receipt),
+                solidBackground = true
+            ) {
+                onScanReceipt()
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            IvyOutlinedButton(
+                iconStart = R.drawable.ic_planned_payments,
+                text = stringResource(R.string.add_planned_payment),
+                solidBackground = true
+            ) {
+                onAddPlannedPayment()
+            }
         }
 
         // Add INCOME ------------------------------------------------------------------------------
