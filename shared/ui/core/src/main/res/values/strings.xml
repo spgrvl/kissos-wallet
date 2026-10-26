@@ -171,7 +171,7 @@
     <string name="or_enter_with_offline_account">OR ENTER WITH OFFLINE ACCOUNT</string>
     <string name="offline_warning">Your data will be saved only on your device and won\'t sync with the cloud. Uninstalling the app or changing devices may result in data loss. You can enable sync later if needed.</string>
     <string name="import_csv_file">Import CSV file</string>
-    <string name="from_ivy_or_another_app">from Ivy or another app</string>
+    <string name="from_ivy_or_another_app">from Ivy Wallet / Kissos or another app</string>
     <string name="importing_another_time_warning">Importing a backup file from another app may take up to 5 minutes. You can always import your data later if you wish.</string>
     <string name="import_backup_file">Import backup file</string>
     <string name="start_fresh">Start fresh</string>

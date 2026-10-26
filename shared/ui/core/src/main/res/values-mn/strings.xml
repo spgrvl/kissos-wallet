@@ -168,7 +168,7 @@
     <string name="or_enter_with_offline_account">ЭСВЭЛ ОФФЛАЙН БҮРТГЭЛЭЭР НЭВТРЭХ</string>
     <string name="offline_warning">Таны мэдээлэл зөвхөн таны утсан дээр хадгалагдана. Таныг төхөөрөмжөө солих, аппыг устгах үед бүх мэдээлэл тань цуг устах болно. Та дараа хүссэн үедээ нөөцлөх тохиргоог идэвхжүүлэх боломжтой.</string>
     <string name="import_csv_file">CSV файлаас сэргээх</string>
-    <string name="from_ivy_or_another_app">Ivy эсвэл өөр аппаас</string>
+    <string name="from_ivy_or_another_app">Ivy Wallet / Kissos эсвэл өөр аппаас</string>
     <string name="importing_another_time_warning">Өгөгдөл нөөцөөс сэргээхэд 5 хүртэлх минут болдог шүү. Мөн та дараа хүссэн үедээ сэргээх боломжтой.</string>
     <string name="import_backup_file">Нөөцөөс мэдээлэл сэргээх</string>
     <string name="start_fresh">Цоо шинээр эхлэх</string>
