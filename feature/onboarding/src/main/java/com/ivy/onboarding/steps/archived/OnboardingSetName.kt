@@ -83,7 +83,7 @@ fun OnboardingSetName(
                     width = 56.dp,
                     height = 48.dp
                 ),
-            painter = painterResource(id = R.drawable.ivy_wallet_logo),
+            painter = painterResource(id = R.drawable.kissos_logo),
             contentScale = ContentScale.FillBounds,
             contentDescription = "Kissos logo"
         )
