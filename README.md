@@ -7,12 +7,16 @@
 Kissos (κισσός, Greek for *ivy*) is a personal money manager forked from [Ivy Wallet](https://github.com/Ivy-Apps/ivy-wallet). It keeps everything Ivy Wallet does well (accounts, categories, budgets, planned payments, loans, reports) and adds features for everyday life in Greece.
 
 > [!NOTE]
-> Kissos is in early development. The Greek features below are planned and not available yet.
+> Kissos is in early development.
+
+## Made for Greece
+
+- **Scan Greek receipts.** Add an expense by scanning the QR code on a cash-register (ΦΗΜ) receipt, from the add-expense screen, the quick-add menu, or by opening the receipt's link from your camera app. The amount is read offline, and the merchant, date and VAT are filled in from AADE. Receipts scanned offline, or not yet sent to AADE, are checked again in the background.
+- **Merchant memory.** Remembers your name, category and account for each shop (by ΑΦΜ), so repeat scans take one tap. Manage them under *Settings → Merchants*.
+- **In Greek.** The whole app is translated to Greek.
 
 ## Planned
 
-- **Scan Greek receipts.** Add an expense by scanning the QR code on a cash-register (ΦΗΜ) receipt. The amount is read offline, and the merchant, date and VAT are filled in from AADE.
-- **Merchant memory.** Remembers your category and account for each shop (by ΑΦΜ), so repeat scans take one tap.
 - **Better statistics.** Spending trends, spending per merchant, and progress towards the yearly e-payment target.
 - **Net worth.** Track investments, property and loans alongside your everyday accounts.
 
