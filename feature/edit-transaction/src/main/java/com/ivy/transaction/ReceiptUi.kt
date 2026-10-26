@@ -21,8 +21,14 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.common.moduleinstall.InstallStatusListener
+import com.google.android.gms.common.moduleinstall.ModuleInstall
+import com.google.android.gms.common.moduleinstall.ModuleInstallClient
+import com.google.android.gms.common.moduleinstall.ModuleInstallRequest
+import com.google.android.gms.common.moduleinstall.ModuleInstallStatusUpdate
 import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanner
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.ivy.data.model.TransactionId
@@ -55,40 +61,102 @@ sealed interface ReceiptDialog {
 /**
  * Opens Google's code scanner (no camera permission needed) and returns a function that starts it.
  * [onScan] gets the raw QR text; [onCancel] runs when the user backs out.
+ * [onDownload] runs when Google Play services first has to download the scanner.
  */
 @Composable
 fun rememberReceiptScanner(
     onScan: (String) -> Unit,
     onCancel: () -> Unit,
     onUnavailable: () -> Unit,
+    onDownload: () -> Unit,
 ): () -> Unit {
     val context = LocalContext.current
     val currentOnScanned by rememberUpdatedState(onScan)
     val currentOnCancelled by rememberUpdatedState(onCancel)
     val currentOnUnavailable by rememberUpdatedState(onUnavailable)
+    val currentOnDownload by rememberUpdatedState(onDownload)
     return remember(context) {
         {
             val options = GmsBarcodeScannerOptions.Builder()
                 .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
                 .enableAutoZoom()
                 .build()
-            GmsBarcodeScanning.getClient(context, options)
-                .startScan()
-                .addOnSuccessListener { barcode ->
-                    barcode.rawValue?.let(currentOnScanned) ?: currentOnCancelled()
-                }
-                .addOnCanceledListener { currentOnCancelled() }
-                .addOnFailureListener { error ->
-                    Timber.w(error, "Receipt scanner failed: %s", (error as? MlKitException)?.errorCode)
-                    // Backing out of the scanner is sometimes reported as a failure too
-                    if ((error as? MlKitException)?.errorCode == MlKitException.UNAVAILABLE) {
-                        currentOnUnavailable()
+            val scanner = GmsBarcodeScanning.getClient(context, options)
+            val startScan = {
+                scanner.startScan()
+                    .addOnSuccessListener { barcode ->
+                        barcode.rawValue?.let(currentOnScanned) ?: currentOnCancelled()
+                    }
+                    .addOnCanceledListener { currentOnCancelled() }
+                    .addOnFailureListener { error ->
+                        Timber.w(error, "Receipt scanner failed: %s", (error as? MlKitException)?.errorCode)
+                        // Backing out of the scanner is sometimes reported as a failure too
+                        if ((error as? MlKitException)?.errorCode == MlKitException.UNAVAILABLE) {
+                            currentOnUnavailable()
+                        } else {
+                            currentOnCancelled()
+                        }
+                    }
+                Unit
+            }
+            val modules = ModuleInstall.getClient(context)
+            modules.areModulesAvailable(scanner)
+                .addOnSuccessListener { response ->
+                    if (response.areModulesAvailable()) {
+                        startScan()
                     } else {
-                        currentOnCancelled()
+                        currentOnDownload()
+                        installScanner(modules, scanner, onInstall = startScan, onFail = currentOnUnavailable)
                     }
                 }
+                .addOnFailureListener { startScan() }
         }
     }
+}
+
+/**
+ * The scanner ships with Google Play services but is only preinstalled for apps from the Play Store,
+ * so sideloaded builds download it on first use.
+ */
+private fun installScanner(
+    modules: ModuleInstallClient,
+    scanner: GmsBarcodeScanner,
+    onInstall: () -> Unit,
+    onFail: () -> Unit,
+) {
+    val listener = object : InstallStatusListener {
+        override fun onInstallStatusUpdated(update: ModuleInstallStatusUpdate) {
+            when (update.installState) {
+                ModuleInstallStatusUpdate.InstallState.STATE_COMPLETED -> {
+                    modules.unregisterListener(this)
+                    onInstall()
+                }
+
+                ModuleInstallStatusUpdate.InstallState.STATE_FAILED,
+                ModuleInstallStatusUpdate.InstallState.STATE_CANCELED -> {
+                    Timber.w("Receipt scanner download failed: %s", update.errorCode)
+                    modules.unregisterListener(this)
+                    onFail()
+                }
+            }
+        }
+    }
+    val request = ModuleInstallRequest.newBuilder()
+        .addApi(scanner)
+        .setListener(listener)
+        .build()
+    modules.installModules(request)
+        .addOnSuccessListener { response ->
+            if (response.areModulesAlreadyInstalled()) {
+                modules.unregisterListener(listener)
+                onInstall()
+            }
+        }
+        .addOnFailureListener { error ->
+            Timber.w(error, "Receipt scanner download failed")
+            modules.unregisterListener(listener)
+            onFail()
+        }
 }
 
 @Composable

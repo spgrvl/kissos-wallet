@@ -480,6 +480,7 @@
     <!-- Receipt scanning -->
     <string name="scan_receipt">Scan receipt</string>
     <string name="scanner_unavailable">The scanner isn’t available. Check that Google Play services is up to date.</string>
+    <string name="scanner_downloading">Downloading the receipt scanner…</string>
     <string name="receipt_checking">Receipt · checking AADE…</string>
     <string name="receipt_offline">Receipt · offline, AADE will be checked later</string>
     <string name="receipt_found">Receipt · %1$s · ΑΦΜ %2$s</string>

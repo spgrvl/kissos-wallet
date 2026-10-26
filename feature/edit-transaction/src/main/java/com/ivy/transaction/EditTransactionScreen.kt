@@ -285,6 +285,7 @@ private fun BoxWithConstraintsScope.UI(
             onReceiptEvent(EditTransactionViewEvent.ReceiptEvent.OnScannerUnavailable)
             if (shouldFocusAmount(amount = amount)) amountModalShown = true
         },
+        onDownload = { onReceiptEvent(EditTransactionViewEvent.ReceiptEvent.OnScannerDownloading) },
     )
 
     // This is to scroll the column to the customExchangeCard composable when it is shown

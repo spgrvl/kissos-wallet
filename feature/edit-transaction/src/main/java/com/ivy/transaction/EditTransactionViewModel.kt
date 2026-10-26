@@ -397,6 +397,10 @@ class EditTransactionViewModel @Inject constructor(
     private fun handleReceiptEvent(event: EditTransactionViewEvent.ReceiptEvent) {
         when (event) {
             is EditTransactionViewEvent.ReceiptEvent.OnScanned -> onReceiptScanned(event.qrText)
+            EditTransactionViewEvent.ReceiptEvent.OnScannerDownloading -> viewModelScope.launch {
+                toaster.show(R.string.scanner_downloading)
+            }
+
             EditTransactionViewEvent.ReceiptEvent.OnScannerUnavailable -> viewModelScope.launch {
                 toaster.show(R.string.scanner_unavailable)
             }
