@@ -14,7 +14,9 @@ import com.ivy.data.db.dao.read.BudgetDao
 import com.ivy.data.db.dao.read.CategoryDao
 import com.ivy.data.db.dao.read.LoanDao
 import com.ivy.data.db.dao.read.LoanRecordDao
+import com.ivy.data.db.dao.read.MerchantDao
 import com.ivy.data.db.dao.read.PlannedPaymentRuleDao
+import com.ivy.data.db.dao.read.ReceiptDao
 import com.ivy.data.db.dao.read.SettingsDao
 import com.ivy.data.db.dao.read.TagAssociationDao
 import com.ivy.data.db.dao.read.TagDao
@@ -23,7 +25,9 @@ import com.ivy.data.db.dao.write.WriteBudgetDao
 import com.ivy.data.db.dao.write.WriteCategoryDao
 import com.ivy.data.db.dao.write.WriteLoanDao
 import com.ivy.data.db.dao.write.WriteLoanRecordDao
+import com.ivy.data.db.dao.write.WriteMerchantDao
 import com.ivy.data.db.dao.write.WritePlannedPaymentRuleDao
+import com.ivy.data.db.dao.write.WriteReceiptDao
 import com.ivy.data.db.dao.write.WriteSettingsDao
 import com.ivy.data.db.dao.write.WriteTagAssociationDao
 import com.ivy.data.db.dao.write.WriteTagDao
@@ -72,7 +76,11 @@ class BackupDataUseCase @Inject constructor(
     private val tagsReader: TagDao,
     private val tagAssociationReader: TagAssociationDao,
     private val tagsWriter: WriteTagDao,
-    private val tagAssociationWriter: WriteTagAssociationDao
+    private val tagAssociationWriter: WriteTagAssociationDao,
+    private val receiptReader: ReceiptDao,
+    private val receiptWriter: WriteReceiptDao,
+    private val merchantReader: MerchantDao,
+    private val merchantWriter: WriteMerchantDao,
 ) {
     suspend fun exportToFile(
         zipFileUri: Uri
@@ -108,6 +116,8 @@ class BackupDataUseCase @Inject constructor(
             val sharedPrefs = async { getSharedPrefsData() }
             val tags = async { tagsReader.findAll() }
             val tagAssociations = async { tagAssociationReader.findAll() }
+            val receipts = async { receiptReader.findAll() }
+            val merchants = async { merchantReader.findAll() }
 
             val completeData = IvyWalletCompleteData(
                 accounts = accounts.await(),
@@ -120,7 +130,9 @@ class BackupDataUseCase @Inject constructor(
                 transactions = transactions.await(),
                 sharedPrefs = sharedPrefs.await(),
                 tags = tags.await(),
-                tagAssociations = tagAssociations.await()
+                tagAssociations = tagAssociations.await(),
+                receipts = receipts.await(),
+                merchants = merchants.await(),
             )
 
             json.encodeToString(completeData)
@@ -312,6 +324,10 @@ class BackupDataUseCase @Inject constructor(
             settings.await()
             tags.await()
             tagAssociations.await()
+
+            // Receipts reference transactions, so they go in after them.
+            receiptWriter.saveMany(completeData.receipts)
+            merchantWriter.saveMany(completeData.merchants)
 
             onProgress(0.9)
         }

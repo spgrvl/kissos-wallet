@@ -8,7 +8,9 @@ import com.ivy.data.db.dao.read.CategoryDao
 import com.ivy.data.db.dao.read.ExchangeRatesDao
 import com.ivy.data.db.dao.read.LoanDao
 import com.ivy.data.db.dao.read.LoanRecordDao
+import com.ivy.data.db.dao.read.MerchantDao
 import com.ivy.data.db.dao.read.PlannedPaymentRuleDao
+import com.ivy.data.db.dao.read.ReceiptDao
 import com.ivy.data.db.dao.read.SettingsDao
 import com.ivy.data.db.dao.read.TagAssociationDao
 import com.ivy.data.db.dao.read.TagDao
@@ -20,7 +22,9 @@ import com.ivy.data.db.dao.write.WriteCategoryDao
 import com.ivy.data.db.dao.write.WriteExchangeRatesDao
 import com.ivy.data.db.dao.write.WriteLoanDao
 import com.ivy.data.db.dao.write.WriteLoanRecordDao
+import com.ivy.data.db.dao.write.WriteMerchantDao
 import com.ivy.data.db.dao.write.WritePlannedPaymentRuleDao
+import com.ivy.data.db.dao.write.WriteReceiptDao
 import com.ivy.data.db.dao.write.WriteSettingsDao
 import com.ivy.data.db.dao.write.WriteTagAssociationDao
 import com.ivy.data.db.dao.write.WriteTagDao
@@ -161,5 +165,25 @@ object RoomDbModule {
     @Provides
     fun provideWriteTagAssociationDao(db: IvyRoomDatabase): WriteTagAssociationDao {
         return db.writeTagAssociationDao
+    }
+
+    @Provides
+    fun provideReceiptDao(db: IvyRoomDatabase): ReceiptDao {
+        return db.receiptDao
+    }
+
+    @Provides
+    fun provideMerchantDao(db: IvyRoomDatabase): MerchantDao {
+        return db.merchantDao
+    }
+
+    @Provides
+    fun provideWriteReceiptDao(db: IvyRoomDatabase): WriteReceiptDao {
+        return db.writeReceiptDao
+    }
+
+    @Provides
+    fun provideWriteMerchantDao(db: IvyRoomDatabase): WriteMerchantDao {
+        return db.writeMerchantDao
     }
 }
