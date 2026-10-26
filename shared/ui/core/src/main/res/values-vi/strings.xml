@@ -168,7 +168,7 @@
     <string name="or_enter_with_offline_account">HOẶC THAM GIA BẰNG TÀI KHOẢN NGOẠI TUYẾN</string>
     <string name="offline_warning">Dữ liệu của bạn sẽ chỉ được lưu trữ trên bộ nhớ máy và không được đồng bộ hóa với cloud. Gỡ bỏ ứng dụng hoặc thay đổi thiết bị có thể dẫn đến mất dữ liệu. Bạn có thể bật đồng bộ sau này nếu cần.</string>
     <string name="import_csv_file">Tải lên tệp CSV</string>
-    <string name="from_ivy_or_another_app">từ Ivy hoặc ứng dụng khác</string>
+    <string name="from_ivy_or_another_app">từ Ivy Wallet / Kissos hoặc ứng dụng khác</string>
     <string name="importing_another_time_warning">Việc tải tệp sao lưu từ ứng dụng khác có thể mất tối đa 5 phút. Bạn luôn có thể tải lên dữ liệu của mình sau này nếu muốn.</string>
     <string name="import_backup_file">Tải lên tệp sao lưu</string>
     <string name="start_fresh">Bắt đầu</string>

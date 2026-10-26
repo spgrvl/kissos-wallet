@@ -168,7 +168,7 @@
     <string name="or_enter_with_offline_account">أو الدخول بحساب غير متصل على الانترنت</string>
     <string name="offline_warning">سوف يتم حفظ بياناتك محليا على جهازك و لن يتم مزامنتها مع السحابة. انت تخاطر بخسارة ملفاتك إذا ألغيت تثبيت التطبيق أو غيرت جهازك. يمكنك دائما تفعيل المزامنة لاحقا في حال تغيير رأيك.</string>
     <string name="import_csv_file">CSV إستيراد ملف</string>
-    <string name="from_ivy_or_another_app">Ivy من تطبيق اخر او من </string>
+    <string name="from_ivy_or_another_app">Ivy Wallet / Kissos من تطبيق اخر او من </string>
     <string name="importing_another_time_warning">استيراد ملف نسخ احتياطي من تطبيق اخر يمكن ان يستغرق حتى 5 دقائق. يمكنك دائمًا استيراد البيانات لاحقًا اذا اردت.</string>
     <string name="import_backup_file">استيراد ملف نسخ احتياطي</string>
     <string name="start_fresh">ابدأ من الصفر</string>

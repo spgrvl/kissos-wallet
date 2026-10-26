@@ -171,7 +171,7 @@
     <string name="or_enter_with_offline_account">或使用離線帳戶輸入</string>
     <string name="offline_warning">您的資料將僅保存在本地，不會與雲端同步。解除安裝應用程式或更換裝置可能會導致資料遺失。如果需要，您可以稍後啟用同步。</string>
     <string name="import_csv_file">導入 CSV 檔案</string>
-    <string name="from_ivy_or_another_app">來自 Ivy 或其他應用程式</string>
+    <string name="from_ivy_or_another_app">來自 Ivy Wallet / Kissos 或其他應用程式</string>
     <string name="importing_another_time_warning">從其他應用程式匯入備份檔案可能需要 5 分鐘。如果您願意，您可以隨時匯入資料。</string>
     <string name="import_backup_file">導入備份檔</string>
     <string name="start_fresh">重新開始</string>

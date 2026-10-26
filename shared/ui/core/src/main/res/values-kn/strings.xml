@@ -168,7 +168,7 @@
     <string name="or_enter_with_offline_account">ಅಥವಾ ಆಫ್‌ಲೈನ್ ಖಾತೆಯೊಂದಿಗೆ ನಮೂದಿಸಿ</string>
     <string name="offline_warning">ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಉಳಿಸಲಾಗುತ್ತದೆ (ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಮಾತ್ರ) ಮತ್ತು ಕ್ಲೌಡ್‌ನೊಂದಿಗೆ ಸಿಂಕ್ ಆಗುವುದಿಲ್ಲ. ನೀವು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದರೆ ಅಥವಾ ನಿಮ್ಮ ಸಾಧನವನ್ನು ಬದಲಾಯಿಸಿದರೆ ನೀವು ಅದನ್ನು ಕಳೆದುಕೊಳ್ಳುವ ಅಪಾಯವಿದೆ. ನೀವು ನಿರ್ಧರಿಸಿದರೆ ನೀವು ಯಾವಾಗಲೂ ಸಿಂಕ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಬಹುದು.</string>
     <string name="import_csv_file">CSV ಫೈಲ್ ಅನ್ನು ಆಮದು ಮಾಡಿ</string>
-    <string name="from_ivy_or_another_app">Ivy ಅಥವಾ ಇನ್ನೊಂದು ಅಪ್ಲಿಕೇಶನ್‌ನಿಂದ</string>
+    <string name="from_ivy_or_another_app">Ivy Wallet / Kissos ಅಥವಾ ಇನ್ನೊಂದು ಅಪ್ಲಿಕೇಶನ್‌ನಿಂದ</string>
     <string name="importing_another_time_warning">ಇನ್ನೊಂದರಿಂದ ಬ್ಯಾಕಪ್ ಫೈಲ್ ಅನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲು 5 ನಿಮಿಷಗಳವರೆಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದು. ನೀವು ಬಯಸಿದಲ್ಲಿ ಯಾವಾಗಲೂ ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಬಹುದು.</string>
     <string name="import_backup_file">ಬ್ಯಾಕಪ್ ಫೈಲ್ ಅನ್ನು ಆಮದು ಮಾಡಿ</string>
     <string name="start_fresh">ಹೊಸದಾಗಿ ಪ್ರಾರಂಭಿಸಿ</string>

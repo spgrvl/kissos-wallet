@@ -168,7 +168,7 @@
     <string name="or_enter_with_offline_account">ИЛИ ВЛЕЗ С ОФЛАЙН АКАУНТ</string>
     <string name="offline_warning">Данните ти ще бъдат съхванявани само локално, на устройството. Има риск да ги загубите.</string>
     <string name="import_csv_file">Импортирай CSV файл</string>
-    <string name="from_ivy_or_another_app">от Ivy Wallet или друго приложение</string>
+    <string name="from_ivy_or_another_app">от Ivy Wallet / Kissos или друго приложение</string>
     <string name="importing_another_time_warning">Импортирай файл за възстановяване.</string>
     <string name="import_backup_file">Импортирай</string>
     <string name="start_fresh">Стартирай на чисто</string>

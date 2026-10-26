@@ -169,7 +169,7 @@
     <string name="or_enter_with_offline_account">LUB ZAŁÓŻ KONTO OFFLINE</string>
     <string name="offline_warning">Twoje dane będą zapisywane lokalnie (tylko na Twoim telefonie) i nie będą synchronizowane z chmurą. Ryzykujesz utratą danych, jeśli odinstalujesz aplikację lub zmienisz urządzenie. Zawsze możesz aktywować synchronizację później, jeśli się zdecydujesz.</string>
     <string name="import_csv_file">Importuj plik CSV</string>
-    <string name="from_ivy_or_another_app">z Ivy lub innej aplikacji</string>
+    <string name="from_ivy_or_another_app">z Ivy Wallet / Kissos lub innej aplikacji</string>
     <string name="importing_another_time_warning">Importowanie pliku kopii zapasowej z innego może zająć do 5 minut. Zawsze możesz zaimportować swoje dane później, jeśli chcesz.</string>
     <string name="import_backup_file">Zaimportuj plik kopii zapasowej</string>
     <string name="start_fresh">Zacznij na świeżo</string>

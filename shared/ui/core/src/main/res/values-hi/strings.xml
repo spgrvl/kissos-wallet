@@ -164,7 +164,7 @@
     <string name="data_integrity_protection_warning">डेटा अखंडता और सुरक्षा की गारंटी नहीं है!</string>
     <string name="or_enter_with_offline_account">या ऑफ़लाइन खाते से दर्ज करें</string>
     <string name="import_csv_file">CSV फाइल इम्पोर्ट करे</string>
-    <string name="from_ivy_or_another_app">Ivy या किसी अन्य ऐप से</string>
+    <string name="from_ivy_or_another_app">Ivy Wallet / Kissos या किसी अन्य ऐप से</string>
     <string name="import_backup_file">बैकअप फ़ाइल इम्पोर्ट करें</string>
     <string name="start_fresh">नए से शुरू करें</string>
     <string name="set_payment_type">भुगतान प्रकार सेट करें</string>

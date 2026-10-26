@@ -169,7 +169,7 @@
     <string name="or_enter_with_offline_account">O PROCEDI CON UN ACCOUNT OFFLINE</string>
     <string name="offline_warning">I tuoi dati verranno salvati localmente (solo sul tuo telefono) e non verranno sincronizzati nel cloud. Rischi di perdete i dati se disinstalli l\'applicazione o se cambi il tuo dispositivo. È sempre possibile attivare la sincronizzazione in seguito se decidi di farlo.</string>
     <string name="import_csv_file">Importa un file CSV</string>
-    <string name="from_ivy_or_another_app">da Ivy o da un\'altra app</string>
+    <string name="from_ivy_or_another_app">da Ivy Wallet / Kissos o da un\'altra app</string>
     <string name="importing_another_time_warning">Importare un file di backup da un\'altra app può richiedere fino a 5 minuti. È sempre possibile importare i dati in un secondo momento, se lo desideri.</string>
     <string name="import_backup_file">Importa un file di backup</string>
     <string name="start_fresh">Inizia da zero</string>
