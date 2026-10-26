@@ -8,11 +8,16 @@ import com.ivy.data.db.dao.fake.FakeBudgetDao
 import com.ivy.data.db.dao.fake.FakeCategoryDao
 import com.ivy.data.db.dao.fake.FakeLoanDao
 import com.ivy.data.db.dao.fake.FakeLoanRecordDao
+import com.ivy.data.db.dao.fake.FakeMerchantDao
 import com.ivy.data.db.dao.fake.FakePlannedPaymentDao
+import com.ivy.data.db.dao.fake.FakeReceiptDao
 import com.ivy.data.db.dao.fake.FakeSettingsDao
 import com.ivy.data.db.dao.fake.FakeTagAssociationDao
 import com.ivy.data.db.dao.fake.FakeTagDao
 import com.ivy.data.db.dao.fake.FakeTransactionDao
+import com.ivy.data.db.entity.MerchantEntity
+import com.ivy.data.db.entity.ReceiptEntity
+import com.ivy.data.model.ReceiptStatus
 import com.ivy.data.repository.AccountRepository
 import com.ivy.data.repository.CurrencyRepository
 import com.ivy.data.repository.fake.fakeRepositoryMemoFactory
@@ -23,6 +28,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import java.time.Instant
 
 class BackupDataUseCaseTest {
     private fun newBackupDataUseCase(
@@ -35,7 +41,9 @@ class BackupDataUseCaseTest {
         loanDao: FakeLoanDao = FakeLoanDao(),
         loanRecordDao: FakeLoanRecordDao = FakeLoanRecordDao(),
         tagDao: FakeTagDao = FakeTagDao(),
-        tagAssociationDao: FakeTagAssociationDao = FakeTagAssociationDao()
+        tagAssociationDao: FakeTagAssociationDao = FakeTagAssociationDao(),
+        receiptDao: FakeReceiptDao = FakeReceiptDao(),
+        merchantDao: FakeMerchantDao = FakeMerchantDao(),
     ): BackupDataUseCase {
         val accountMapper = AccountMapper(
             CurrencyRepository(
@@ -78,7 +86,11 @@ class BackupDataUseCaseTest {
             tagsReader = tagDao,
             tagsWriter = tagDao,
             tagAssociationReader = tagAssociationDao,
-            tagAssociationWriter = tagAssociationDao
+            tagAssociationWriter = tagAssociationDao,
+            receiptReader = receiptDao,
+            receiptWriter = receiptDao,
+            merchantReader = merchantDao,
+            merchantWriter = merchantDao,
         )
     }
 
@@ -114,5 +126,54 @@ class BackupDataUseCaseTest {
     @Test
     fun `backup compatibility with 450 (150)`() = runTest {
         backupTestCase("450-150")
+    }
+
+    @Test
+    fun `receipts and merchants survive a backup round trip`() = runTest {
+        // given
+        val transactionDao = FakeTransactionDao()
+        val receiptDao = FakeReceiptDao()
+        val merchantDao = FakeMerchantDao()
+        val useCase = newBackupDataUseCase(
+            transactionDao = transactionDao,
+            receiptDao = receiptDao,
+            merchantDao = merchantDao,
+        )
+        useCase.importJson(testResource("backups/450-150.json").readText(Charsets.UTF_16))
+        val transactionId = transactionDao.findAll().first().id
+        val receipt = ReceiptEntity(
+            transactionId = transactionId,
+            sig = "DNX2500229500000595FB606FFCE12C6B8A38B439DE864D17261022185912.00",
+            registerId = "DNX25002295",
+            receiptNumber = 595,
+            total = 12.0,
+            issuedAt = Instant.parse("2026-10-22T15:59:00Z"),
+            merchantAfm = "067022059",
+            merchantName = "ΚΟΥΜΑΝΤΟΣ ΓΕΩΡΓ",
+            netE = 12.0,
+            vatE = 0.0,
+            status = ReceiptStatus.FOUND,
+            scannedAt = Instant.parse("2026-10-22T16:00:00Z"),
+        )
+        val merchant = MerchantEntity(
+            afm = "067022059",
+            displayName = "Barber",
+            defaultCategoryId = null,
+            defaultAccountId = null,
+            updatedAt = Instant.parse("2026-10-22T16:00:00Z"),
+        )
+        receiptDao.save(receipt)
+        merchantDao.save(merchant)
+
+        // when
+        val exportedJson = useCase.generateJsonBackup()
+        val freshReceiptDao = FakeReceiptDao()
+        val freshMerchantDao = FakeMerchantDao()
+        newBackupDataUseCase(receiptDao = freshReceiptDao, merchantDao = freshMerchantDao)
+            .importJson(exportedJson)
+
+        // then
+        freshReceiptDao.findAll() shouldBe listOf(receipt)
+        freshMerchantDao.findAll() shouldBe listOf(merchant)
     }
 }

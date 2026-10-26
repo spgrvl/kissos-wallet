@@ -8,6 +8,7 @@ import com.ivy.base.model.LoanRecordType
 import com.ivy.base.model.TransactionType
 import com.ivy.data.model.IntervalType
 import com.ivy.data.model.LoanType
+import com.ivy.data.model.ReceiptStatus
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.*
@@ -63,4 +64,11 @@ class RoomTypeConverters {
     @TypeConverter
     fun parseLoanRecordType(value: String?): LoanRecordType? =
         value?.let { LoanRecordType.valueOf(it) }
+
+    @TypeConverter
+    fun saveReceiptStatus(value: ReceiptStatus?): String? = value?.name
+
+    @TypeConverter
+    fun parseReceiptStatus(value: String?): ReceiptStatus? =
+        value?.let { ReceiptStatus.valueOf(it) }
 }

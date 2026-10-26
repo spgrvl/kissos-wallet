@@ -9,6 +9,7 @@ import com.ivy.data.db.migration.Migration123to124_LoanIncludeDateTime
 import com.ivy.data.db.migration.Migration124to125_LoanEditDateTime
 import com.ivy.data.db.migration.Migration126to127_LoanRecordType
 import com.ivy.data.db.migration.Migration129to130_LoanIncludeNote
+import com.ivy.data.db.migration.Migration130to131_Receipts
 import com.ivy.data.model.LoanType
 import io.kotest.matchers.shouldBe
 import org.junit.Rule
@@ -26,6 +27,51 @@ class IvyRoomDatabaseMigrationTest {
         listOf(IvyRoomDatabase.DeleteSEMigration()),
         FrameworkSQLiteOpenHelperFactory()
     )
+
+    @Test
+    fun migrate130to131_Receipts() {
+        // given
+        val transactionId = UUID.randomUUID().toString()
+        helper.createDatabase(TestDb, 130).apply {
+            execSQL(
+                "INSERT INTO transactions (accountId, type, amount, title, isSynced, isDeleted, id) " +
+                    "VALUES ('${UUID.randomUUID()}', 'EXPENSE', 12.0, 'Barber', 0, 0, '$transactionId')"
+            )
+            close()
+        }
+
+        // when
+        val newDb = helper.runMigrationsAndValidate(
+            TestDb,
+            131,
+            true,
+            Migration130to131_Receipts()
+        )
+
+        // then: existing data is kept and receipts can be attached to transactions
+        newDb.query("SELECT title FROM transactions WHERE id = ?", arrayOf(transactionId)).apply {
+            moveToFirst() shouldBe true
+            getString(0) shouldBe "Barber"
+        }
+        newDb.execSQL(
+            "INSERT INTO receipts (transactionId, sig, registerId, receiptNumber, total, status, scannedAt) " +
+                "VALUES ('$transactionId', 'SIG', 'DNX25002295', 595, 12.0, 'PENDING', 0)"
+        )
+        newDb.execSQL("INSERT INTO merchants (afm, displayName, updatedAt) VALUES ('067022059', 'Barber', 0)")
+
+        // and: a receipt is deleted together with its transaction
+        newDb.execSQL("PRAGMA foreign_keys = ON")
+        newDb.execSQL("DELETE FROM transactions WHERE id = '$transactionId'")
+        newDb.query("SELECT COUNT(*) FROM receipts").apply {
+            moveToFirst()
+            getInt(0) shouldBe 0
+        }
+        newDb.query("SELECT COUNT(*) FROM merchants").apply {
+            moveToFirst()
+            getInt(0) shouldBe 1
+        }
+        newDb.close()
+    }
 
     @Test
     fun migrate129to130_LoanIncludeNote() {

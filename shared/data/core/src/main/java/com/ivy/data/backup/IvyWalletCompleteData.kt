@@ -6,7 +6,9 @@ import com.ivy.data.db.entity.BudgetEntity
 import com.ivy.data.db.entity.CategoryEntity
 import com.ivy.data.db.entity.LoanEntity
 import com.ivy.data.db.entity.LoanRecordEntity
+import com.ivy.data.db.entity.MerchantEntity
 import com.ivy.data.db.entity.PlannedPaymentRuleEntity
+import com.ivy.data.db.entity.ReceiptEntity
 import com.ivy.data.db.entity.SettingsEntity
 import com.ivy.data.db.entity.TagAssociationEntity
 import com.ivy.data.db.entity.TagEntity
@@ -39,5 +41,10 @@ data class IvyWalletCompleteData(
     @SerialName("tags")
     val tags: List<TagEntity> = emptyList(),
     @SerialName("tagAssociations")
-    val tagAssociations: List<TagAssociationEntity> = emptyList()
+    val tagAssociations: List<TagAssociationEntity> = emptyList(),
+    // Kissos only. Missing from Ivy Wallet backups.
+    @SerialName("receipts")
+    val receipts: List<ReceiptEntity> = emptyList(),
+    @SerialName("merchants")
+    val merchants: List<MerchantEntity> = emptyList(),
 )
