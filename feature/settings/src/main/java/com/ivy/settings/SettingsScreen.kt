@@ -51,6 +51,7 @@ import com.ivy.navigation.ContributorsScreen
 import com.ivy.navigation.ExchangeRatesScreen
 import com.ivy.navigation.FeaturesScreen
 import com.ivy.navigation.ImportScreen
+import com.ivy.navigation.MerchantsScreen
 import com.ivy.navigation.Navigation
 import com.ivy.navigation.ReleasesScreen
 import com.ivy.navigation.navigation
@@ -320,6 +321,15 @@ private fun BoxWithConstraintsScope.UI(
                 text = stringResource(R.string.exchange_rates),
             ) {
                 nav.navigateTo(ExchangeRatesScreen)
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            SettingsDefaultButton(
+                icon = R.drawable.ic_scan_receipt,
+                text = stringResource(R.string.merchants),
+            ) {
+                nav.navigateTo(MerchantsScreen)
             }
 
             Spacer(Modifier.height(12.dp))
