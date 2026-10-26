@@ -109,7 +109,7 @@ abstract class IvyRoomDatabase : RoomDatabase() {
     abstract val writeTagAssociationDao: WriteTagAssociationDao
 
     companion object {
-        const val DB_NAME = "ivywallet.db"
+        const val DB_NAME = "kissos.db"
 
         fun migrations() = arrayOf(
             Migration105to106_TrnRecurringRules(),
