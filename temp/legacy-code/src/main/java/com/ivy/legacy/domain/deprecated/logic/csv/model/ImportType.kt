@@ -68,7 +68,7 @@ enum class ImportType {
     }
 
     fun listName(): String = when (this) {
-        IVY -> "Ivy Wallet"
+        IVY -> "Ivy Wallet / Kissos"
         MONEY_MANAGER -> "Money Manager"
         WALLET_BY_BUDGET_BAKERS -> "Wallet by BudgetBakers"
         SPENDEE -> "Spendee"
@@ -81,7 +81,7 @@ enum class ImportType {
     }
 
     fun appName(): String = when (this) {
-        IVY -> "Ivy Wallet"
+        IVY -> "Ivy Wallet / Kissos"
         else -> listName()
     }
 }
