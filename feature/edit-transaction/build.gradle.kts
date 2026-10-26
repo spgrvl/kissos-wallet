@@ -16,5 +16,7 @@ dependencies {
     implementation(projects.temp.oldDesign)
     implementation(projects.widget.balance)
 
+    implementation(libs.google.code.scanner)
+
     testImplementation(projects.shared.ui.testing)
 }

@@ -5,6 +5,7 @@ import com.ivy.base.model.TransactionType
 import com.ivy.data.model.Category
 import com.ivy.data.model.Tag
 import com.ivy.data.model.TagId
+import com.ivy.data.model.TransactionId
 import com.ivy.legacy.data.EditTransactionDisplayLoan
 import com.ivy.legacy.datamodel.Account
 import com.ivy.wallet.domain.data.CustomExchangeRateState
@@ -35,7 +36,9 @@ data class EditTransactionViewState(
     val backgroundProcessingStarted: Boolean,
     val customExchangeRateState: CustomExchangeRateState,
     val tags: ImmutableList<Tag>,
-    val transactionAssociatedTags: ImmutableList<TagId>
+    val transactionAssociatedTags: ImmutableList<TagId>,
+    val receiptCaption: ReceiptCaption?,
+    val receiptDialog: ReceiptDialog?,
 )
 
 sealed interface EditTransactionViewEvent {
@@ -60,6 +63,16 @@ sealed interface EditTransactionViewEvent {
     data class Save(val closeScreen: Boolean) : EditTransactionViewEvent
     data class SetHasChanges(val hasChangesValue: Boolean) : EditTransactionViewEvent
     data class UpdateExchangeRate(val exRate: Double?) : EditTransactionViewEvent
+
+    sealed interface ReceiptEvent : EditTransactionViewEvent {
+        data class OnScanned(val qrText: String) : ReceiptEvent
+        data object OnScannerUnavailable : ReceiptEvent
+        data object DismissDialog : ReceiptEvent
+        data class OpenDuplicate(val transaction: TransactionId) : ReceiptEvent
+
+        /** [displayName] is null when the user chose not to remember the shop. */
+        data class AnswerRememberMerchant(val displayName: String?) : ReceiptEvent
+    }
 
     sealed interface TagEvent : EditTransactionViewEvent {
         data class SaveTag(val name: String) : TagEvent

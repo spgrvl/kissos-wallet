@@ -104,6 +104,15 @@ private fun BoxWithConstraintsScope.UI(
                 )
             )
         },
+        onScanReceipt = {
+            nav.navigateTo(
+                EditTransactionScreen(
+                    initialTransactionId = null,
+                    type = TransactionType.EXPENSE,
+                    scanReceipt = true,
+                )
+            )
+        },
 
         showAddAccountModal = {
             accountModalData = AccountModalData(

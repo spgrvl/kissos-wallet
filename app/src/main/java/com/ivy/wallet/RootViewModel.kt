@@ -9,7 +9,9 @@ import com.ivy.base.legacy.Theme
 import com.ivy.base.legacy.stringRes
 import com.ivy.base.model.TransactionType
 import com.ivy.data.db.dao.read.SettingsDao
+import com.ivy.data.receipt.AadeQr
 import com.ivy.data.repository.LegalRepository
+import com.ivy.domain.receipt.ReceiptLookupScheduler
 import com.ivy.frp.test.TestIdlingResource
 import com.ivy.legacy.IvyWalletCtx
 import com.ivy.legacy.utils.ioThread
@@ -41,6 +43,7 @@ class RootViewModel @Inject constructor(
     private val settingsDao: SettingsDao,
     private val sharedPrefs: SharedPrefs,
     private val transactionReminderLogic: TransactionReminderLogic,
+    private val receiptLookupScheduler: ReceiptLookupScheduler,
     private val migrationsManager: MigrationsManager,
     private val legalRepo: LegalRepository,
 ) : ViewModel() {
@@ -97,34 +100,54 @@ class RootViewModel @Inject constructor(
         }
     }
 
+    /** A receipt link or widget action while the app is already open. */
+    fun handleNewIntent(intent: Intent) {
+        if (isOnboardingCompleted()) {
+            handleSpecialStart(intent)
+        }
+    }
+
     private fun navigateOnboardedUser(intent: Intent) {
         if (!handleSpecialStart(intent)) {
             nav.navigateTo(MainScreen)
             transactionReminderLogic.scheduleReminder()
+            // Picks up receipts still waiting for AADE
+            receiptLookupScheduler.schedule(restart = false)
         }
     }
 
-    @Suppress("SwallowedException")
     private fun handleSpecialStart(intent: Intent): Boolean {
+        val screen = scannedReceiptScreen(intent) ?: addTransactionScreen(intent)
+        screen?.let(nav::navigateTo)
+        return screen != null
+    }
+
+    /** A receipt's AADE link, opened from the phone's camera app or a QR scanner. */
+    private fun scannedReceiptScreen(intent: Intent): EditTransactionScreen? =
+        intent.dataString
+            ?.takeIf { intent.action == Intent.ACTION_VIEW && AadeQr.parse(it) != null }
+            ?.let {
+                EditTransactionScreen(
+                    initialTransactionId = null,
+                    type = TransactionType.EXPENSE,
+                    receiptQrText = it,
+                )
+            }
+
+    @Suppress("SwallowedException")
+    private fun addTransactionScreen(intent: Intent): EditTransactionScreen? {
         val addTrnType: TransactionType? = try {
             intent.getSerializableExtra(EXTRA_ADD_TRANSACTION_TYPE) as? TransactionType
                 ?: TransactionType.valueOf(intent.getStringExtra(EXTRA_ADD_TRANSACTION_TYPE) ?: "")
         } catch (e: IllegalArgumentException) {
             null
         }
-
-        if (addTrnType != null) {
-            nav.navigateTo(
-                EditTransactionScreen(
-                    initialTransactionId = null,
-                    type = addTrnType
-                )
+        return addTrnType?.let {
+            EditTransactionScreen(
+                initialTransactionId = null,
+                type = it
             )
-
-            return true
         }
-
-        return false
     }
 
     @Suppress("EmptyFunctionBlock")

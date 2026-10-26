@@ -23,12 +23,17 @@ data class CSVScreen(
         get() = true
 }
 
+@Suppress("DataClassDefaultValues")
 data class EditTransactionScreen(
     val initialTransactionId: UUID?,
     val type: TransactionType,
     // extras
     val accountId: UUID? = null,
-    val categoryId: UUID? = null
+    val categoryId: UUID? = null,
+    /** Opens the receipt scanner right away. */
+    val scanReceipt: Boolean = false,
+    /** A receipt QR code that was already scanned, e.g. opened from the phone's camera app. */
+    val receiptQrText: String? = null,
 ) : Screen {
     override val isLegacy: Boolean
         get() = true
@@ -125,6 +130,11 @@ data object SearchScreen : Screen {
 data class LoanDetailsScreen(
     val loanId: UUID
 ) : Screen {
+    override val isLegacy: Boolean
+        get() = true
+}
+
+data object MerchantsScreen : Screen {
     override val isLegacy: Boolean
         get() = true
 }
