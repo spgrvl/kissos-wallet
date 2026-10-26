@@ -19,13 +19,13 @@ import com.ivy.data.model.primitive.NotBlankTrimmedString
 import com.ivy.data.repository.AccountRepository
 import com.ivy.data.repository.CategoryRepository
 import com.ivy.data.repository.MerchantRepository
+import com.ivy.legacy.legacy.ui.theme.components.OptionUi
 import com.ivy.ui.ComposeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
-import java.util.UUID
 import javax.inject.Inject
 
 @Immutable
@@ -44,11 +44,6 @@ data class MerchantUi(
     /** E.g. "Food · Revolut" */
     val defaults: String?,
 )
-
-/** A category or an account to pick. */
-@Suppress("DataClassTypedIDs")
-@Immutable
-data class OptionUi(val id: UUID, val name: String, val color: Int)
 
 sealed interface MerchantsEvent {
     data class Save(

@@ -421,8 +421,11 @@ class EditTransactionViewModel @Inject constructor(
                 receiptDialog = null
                 merchantPromptAnswered = true
                 merchantDisplayName = event.displayName
-                if (EditedField.TITLE !in editedFields) {
-                    event.displayName?.let(::setTitleFromReceipt)
+                if (event.displayName != null) {
+                    if (EditedField.TITLE !in editedFields) setTitleFromReceipt(event.displayName)
+                    if (event.category != category?.id) {
+                        onCategoryChanged(categories.find { it.id == event.category })
+                    }
                 }
                 save(closeScreen = true)
             }
@@ -796,6 +799,7 @@ class EditTransactionViewModel @Inject constructor(
                 receiptDialog = ReceiptDialog.RememberMerchant(
                     merchantName = receipt?.merchantName.orEmpty(),
                     suggestedName = title?.takeIf { it.isNotBlank() } ?: receipt?.merchantName.orEmpty(),
+                    category = category?.id,
                 )
                 return@launch
             }

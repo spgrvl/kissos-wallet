@@ -658,6 +658,7 @@ private fun BoxWithConstraintsScope.UI(
 
     ReceiptDialogs(
         dialog = receiptDialog,
+        categories = categories,
         onEvent = onReceiptEvent,
         onEnterManually = { amountModalShown = true },
     )
