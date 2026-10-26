@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.ivy.design.system.colors.IvyColors
 import com.ivy.ui.R
 
-const val IvyWalletGitHubRepoUrl = "https://github.com/Ivy-Apps/ivy-wallet"
+const val KissosGitHubRepoUrl = "https://github.com/spgrvl/kissos-wallet"
 
 @Composable
 fun OpenSourceCard(
@@ -31,7 +31,7 @@ fun OpenSourceCard(
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
         onClick = {
-            uriHandler.openUri(IvyWalletGitHubRepoUrl)
+            uriHandler.openUri(KissosGitHubRepoUrl)
         }
     ) {
         Row(
@@ -68,7 +68,7 @@ private fun OpenSourceTexts(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = IvyWalletGitHubRepoUrl,
+            text = KissosGitHubRepoUrl,
             style = MaterialTheme.typography.labelSmall,
             color = IvyColors.Blue.primary
         )
