@@ -3,6 +3,7 @@ package com.ivy.transaction
 import androidx.compose.runtime.Immutable
 import com.ivy.base.model.TransactionType
 import com.ivy.data.model.Category
+import com.ivy.data.model.CategoryId
 import com.ivy.data.model.Tag
 import com.ivy.data.model.TagId
 import com.ivy.data.model.TransactionId
@@ -72,7 +73,10 @@ sealed interface EditTransactionViewEvent {
         data class OpenDuplicate(val transaction: TransactionId) : ReceiptEvent
 
         /** [displayName] is null when the user chose not to remember the shop. */
-        data class AnswerRememberMerchant(val displayName: String?) : ReceiptEvent
+        data class AnswerRememberMerchant(
+            val displayName: String?,
+            val category: CategoryId?,
+        ) : ReceiptEvent
     }
 
     sealed interface TagEvent : EditTransactionViewEvent {

@@ -31,16 +31,22 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+import com.ivy.data.model.Category
+import com.ivy.data.model.CategoryId
 import com.ivy.data.model.TransactionId
 import com.ivy.design.l0_system.Orange
 import com.ivy.design.l0_system.UI
 import com.ivy.design.l0_system.style
+import com.ivy.legacy.legacy.ui.theme.components.OptionUi
+import com.ivy.legacy.legacy.ui.theme.components.OptionsRow
 import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.components.IvyNameTextField
 import com.ivy.wallet.ui.theme.modal.IvyModal
 import com.ivy.wallet.ui.theme.modal.ModalPositiveButton
 import com.ivy.wallet.ui.theme.modal.ModalSkip
 import com.ivy.wallet.ui.theme.modal.ModalTitle
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import timber.log.Timber
 import java.util.UUID
 
@@ -55,7 +61,11 @@ sealed interface ReceiptDialog {
     data class Duplicate(val transaction: TransactionId) : ReceiptDialog
 
     /** Asked the first time an expense from this shop is saved. */
-    data class RememberMerchant(val merchantName: String, val suggestedName: String) : ReceiptDialog
+    data class RememberMerchant(
+        val merchantName: String,
+        val suggestedName: String,
+        val category: CategoryId?,
+    ) : ReceiptDialog
 }
 
 /**
@@ -178,6 +188,7 @@ fun ReceiptCaptionText(
 @Composable
 fun BoxWithConstraintsScope.ReceiptDialogs(
     dialog: ReceiptDialog?,
+    categories: ImmutableList<Category>,
     onEvent: (EditTransactionViewEvent.ReceiptEvent) -> Unit,
     onEnterManually: () -> Unit,
 ) {
@@ -206,8 +217,11 @@ fun BoxWithConstraintsScope.ReceiptDialogs(
 
     RememberMerchantModal(
         dialog = dialog as? ReceiptDialog.RememberMerchant,
+        categories = categories,
         dismiss = dismiss,
-        onAnswer = { onEvent(EditTransactionViewEvent.ReceiptEvent.AnswerRememberMerchant(it)) },
+        onAnswer = { displayName, category ->
+            onEvent(EditTransactionViewEvent.ReceiptEvent.AnswerRememberMerchant(displayName, category))
+        },
     )
 }
 
@@ -240,16 +254,21 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
 @Composable
 private fun BoxWithConstraintsScope.RememberMerchantModal(
     dialog: ReceiptDialog.RememberMerchant?,
+    categories: ImmutableList<Category>,
     dismiss: () -> Unit,
-    onAnswer: (displayName: String?) -> Unit,
+    onAnswer: (displayName: String?, category: CategoryId?) -> Unit,
 ) {
     var name by remember(dialog) { mutableStateOf(TextFieldValue(dialog?.suggestedName.orEmpty())) }
+    var category by remember(dialog) { mutableStateOf(dialog?.category?.value) }
+    val options = remember(categories) {
+        categories.map { OptionUi(it.id.value, it.name.value, it.color.value) }.toImmutableList()
+    }
     IvyModal(
         id = remember { UUID.randomUUID() },
         visible = dialog != null,
         dismiss = dismiss,
         SecondaryActions = {
-            ModalSkip(text = stringResource(R.string.not_now)) { onAnswer(null) }
+            ModalSkip(text = stringResource(R.string.not_now)) { onAnswer(null, null) }
         },
         PrimaryAction = {
             ModalPositiveButton(
@@ -257,7 +276,7 @@ private fun BoxWithConstraintsScope.RememberMerchantModal(
                 iconStart = R.drawable.ic_check,
                 enabled = name.text.isNotBlank(),
             ) {
-                onAnswer(name.text)
+                onAnswer(name.text, category?.let(::CategoryId))
             }
         }
     ) {
@@ -274,6 +293,13 @@ private fun BoxWithConstraintsScope.RememberMerchantModal(
         ) {
             name = it
         }
+        Spacer(Modifier.height(24.dp))
+        OptionsRow(
+            label = stringResource(R.string.category),
+            options = options,
+            selected = category,
+            onSelect = { category = it },
+        )
         Spacer(Modifier.height(48.dp))
     }
 }
