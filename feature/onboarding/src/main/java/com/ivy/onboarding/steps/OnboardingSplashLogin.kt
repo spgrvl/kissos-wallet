@@ -169,7 +169,7 @@ fun BoxWithConstraintsScope.OnboardingSplashLogin(
                 .clickableNoIndication(rememberInteractionSource()) {
                     internalSwitch = !internalSwitch
                 },
-            painter = painterResource(id = R.drawable.ivy_wallet_logo),
+            painter = painterResource(id = R.drawable.kissos_logo),
             contentScale = ContentScale.FillBounds,
             contentDescription = "Kissos logo"
         )
