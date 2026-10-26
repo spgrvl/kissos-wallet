@@ -12,6 +12,7 @@ dependencies {
     implementation(projects.shared.base)
     implementation(projects.shared.data.core)
 
+    implementation(libs.androidx.work)
     implementation(libs.datastore)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.opencsv)
