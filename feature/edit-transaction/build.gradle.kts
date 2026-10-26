@@ -17,6 +17,7 @@ dependencies {
     implementation(projects.widget.balance)
 
     implementation(libs.google.code.scanner)
+    implementation(libs.google.play.services.base)
 
     testImplementation(projects.shared.ui.testing)
 }

@@ -109,6 +109,7 @@ hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", 
 google-play-services = { module = "com.google.android.gms:play-services-tasks", version = "18.2.0" }
 google-play-review = { module = "com.google.android.play:review-ktx", version = "2.0.1" }
 google-code-scanner = { module = "com.google.android.gms:play-services-code-scanner", version = "16.1.0" }
+google-play-services-base = { module = "com.google.android.gms:play-services-base", version = "18.5.0" }
 
 # AndroidX
 androidx-security = { module = "androidx.security:security-crypto", version = "1.0.0" }

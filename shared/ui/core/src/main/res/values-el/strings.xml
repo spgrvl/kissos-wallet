@@ -480,6 +480,7 @@
     <!-- Receipt scanning -->
     <string name="scan_receipt">Σάρωση απόδειξης</string>
     <string name="scanner_unavailable">Η σάρωση δεν είναι διαθέσιμη. Ελέγξτε ότι οι Υπηρεσίες Google Play είναι ενημερωμένες.</string>
+    <string name="scanner_downloading">Γίνεται λήψη του σαρωτή αποδείξεων…</string>
     <string name="receipt_checking">Απόδειξη · έλεγχος στην ΑΑΔΕ…</string>
     <string name="receipt_offline">Απόδειξη · χωρίς σύνδεση, θα ελεγχθεί αργότερα στην ΑΑΔΕ</string>
     <string name="receipt_found">Απόδειξη · %1$s · ΑΦΜ %2$s</string>

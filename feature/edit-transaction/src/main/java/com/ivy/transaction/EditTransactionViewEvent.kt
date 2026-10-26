@@ -67,6 +67,7 @@ sealed interface EditTransactionViewEvent {
     sealed interface ReceiptEvent : EditTransactionViewEvent {
         data class OnScanned(val qrText: String) : ReceiptEvent
         data object OnScannerUnavailable : ReceiptEvent
+        data object OnScannerDownloading : ReceiptEvent
         data object DismissDialog : ReceiptEvent
         data class OpenDuplicate(val transaction: TransactionId) : ReceiptEvent
 
