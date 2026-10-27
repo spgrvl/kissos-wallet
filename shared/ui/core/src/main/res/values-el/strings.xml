@@ -481,7 +481,6 @@
     <string name="scan_receipt">Σάρωση απόδειξης</string>
     <string name="scanner_unavailable">Η σάρωση δεν είναι διαθέσιμη. Ελέγξτε ότι οι Υπηρεσίες Google Play είναι ενημερωμένες.</string>
     <string name="scanner_downloading">Γίνεται λήψη του σαρωτή αποδείξεων…</string>
-    <string name="receipt_checking">Απόδειξη · έλεγχος στην ΑΑΔΕ…</string>
     <string name="receipt_offline">Απόδειξη · χωρίς σύνδεση, θα ελεγχθεί αργότερα στην ΑΑΔΕ</string>
     <string name="receipt_found">Απόδειξη · %1$s · ΑΦΜ %2$s</string>
     <string name="receipt_pending">Απόδειξη · δεν έχει φτάσει ακόμα στην ΑΑΔΕ, θα ελεγχθεί ξανά</string>
@@ -489,7 +488,10 @@
     <string name="receipt_rejected">Η ΑΑΔΕ απέρριψε την απόδειξη: %1$s</string>
     <string name="receipt_unrecognized">Η σελίδα της ΑΑΔΕ για την απόδειξη δεν διαβάστηκε.</string>
     <string name="receipt_found_afm">Απόδειξη · ΑΦΜ %1$s</string>
-    <string name="receipt_opening_provider">Απόδειξη · άνοιγμα της σελίδας του παρόχου…</string>
+    <string name="receipt_step_open_provider">Άνοιγμα της σελίδας του παρόχου</string>
+    <string name="receipt_step_find_aade_link">Εύρεση του συνδέσμου της απόδειξης στην ΑΑΔΕ</string>
+    <string name="receipt_step_check_aade">Ανάγνωση της απόδειξης από την ΑΑΔΕ</string>
+    <string name="receipt_step_download">Λήψη της απόδειξης από τον πάροχο</string>
     <string name="receipt_provider_failed">Η απόδειξη δεν άνοιξε στη σελίδα του παρόχου. Καταχωρίστε το έξοδο χειροκίνητα.</string>
     <string name="receipt_total_mismatch">Σύμφωνα με την ΑΑΔΕ το σύνολο είναι %1$s, όχι το παραπάνω ποσό</string>
     <string name="not_aade_receipt_title">Η απόδειξη δεν υποστηρίζεται</string>

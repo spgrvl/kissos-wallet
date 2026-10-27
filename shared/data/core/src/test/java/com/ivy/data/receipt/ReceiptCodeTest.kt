@@ -65,6 +65,19 @@ class ReceiptCodeTest {
     }
 
     @Test
+    fun `a Fiscal Sign receipt is downloaded from its link`() {
+        // given
+        val url = "https://fiscalsign.gr/api/PrintInvoice/download/3f431961-dc73-4878-bf1d-ef17c2c1dbd6"
+
+        // when
+        val code = ReceiptCode.parse(url)
+
+        // then
+        code shouldBe ReceiptCode.FiscalSign(url)
+        ReceiptCode.fromKey(url) shouldBe code
+    }
+
+    @Test
     fun `other codes are not receipts`() {
         ReceiptCode.parse("https://example.com/receipt?q=1") shouldBe null
         ReceiptCode.parse("https://notepsilonnet.gr/fd/1") shouldBe null

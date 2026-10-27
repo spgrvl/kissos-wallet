@@ -481,7 +481,6 @@
     <string name="scan_receipt">Scan receipt</string>
     <string name="scanner_unavailable">The scanner isn’t available. Check that Google Play services is up to date.</string>
     <string name="scanner_downloading">Downloading the receipt scanner…</string>
-    <string name="receipt_checking">Receipt · checking AADE…</string>
     <string name="receipt_offline">Receipt · offline, AADE will be checked later</string>
     <string name="receipt_found">Receipt · %1$s · ΑΦΜ %2$s</string>
     <string name="receipt_pending">Receipt · not on AADE yet, will be checked again</string>
@@ -489,7 +488,10 @@
     <string name="receipt_rejected">AADE rejected this receipt: %1$s</string>
     <string name="receipt_unrecognized">Couldn’t read AADE’s page for this receipt.</string>
     <string name="receipt_found_afm">Receipt · ΑΦΜ %1$s</string>
-    <string name="receipt_opening_provider">Receipt · opening the provider’s page…</string>
+    <string name="receipt_step_open_provider">Opening the provider’s page</string>
+    <string name="receipt_step_find_aade_link">Finding the receipt’s link to AADE</string>
+    <string name="receipt_step_check_aade">Reading the receipt from AADE</string>
+    <string name="receipt_step_download">Downloading the receipt from the provider</string>
     <string name="receipt_provider_failed">Couldn’t open the receipt on the provider’s page. Enter the expense manually.</string>
     <string name="receipt_total_mismatch">AADE says the total is %1$s, not the amount above</string>
     <string name="not_aade_receipt_title">Receipt not supported</string>

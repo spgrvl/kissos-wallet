@@ -39,6 +39,7 @@ data class EditTransactionViewState(
     val tags: ImmutableList<Tag>,
     val transactionAssociatedTags: ImmutableList<TagId>,
     val receiptCaption: ReceiptCaption?,
+    val receiptProgress: ReceiptProgress?,
     val receiptDialog: ReceiptDialog?,
 )
 

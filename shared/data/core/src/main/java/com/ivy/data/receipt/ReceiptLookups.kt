@@ -24,10 +24,10 @@ fun BigDecimal.toReceiptMoney(): BigDecimal = setScale(2, RoundingMode.HALF_UP)
 fun Double.toReceiptMoney(): BigDecimal = toBigDecimal().toReceiptMoney()
 
 /** What is known from the QR code alone, before AADE has been asked. */
-fun ReceiptCode.OnAade.toPendingReceipt(transactionId: TransactionId, scannedAt: Instant): Receipt =
+fun ReceiptCode.Fetchable.toPendingReceipt(transactionId: TransactionId, scannedAt: Instant): Receipt =
     when (this) {
         is ReceiptCode.CashRegister -> qr.toPendingReceipt(transactionId, scannedAt)
-        is ReceiptCode.MyData -> Receipt(
+        is ReceiptCode.MyData, is ReceiptCode.FiscalSign -> Receipt(
             transactionId = transactionId,
             sig = key,
             registerId = null,

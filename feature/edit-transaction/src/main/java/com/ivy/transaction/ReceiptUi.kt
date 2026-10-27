@@ -1,10 +1,16 @@
 package com.ivy.transaction
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -167,6 +173,45 @@ private fun installScanner(
             modules.unregisterListener(listener)
             onFail()
         }
+}
+
+/** Looking a scanned receipt up: its steps, and which one is running. */
+@Immutable
+data class ReceiptProgress(val steps: ImmutableList<String>, val current: Int)
+
+/** A spinner beside the steps: the finished ones ticked, the running one in bold, the rest faded. */
+@Composable
+fun ReceiptProgressView(
+    progress: ReceiptProgress,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier = modifier.padding(horizontal = 24.dp)) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .padding(top = 2.dp)
+                .size(16.dp),
+            color = UI.colors.primary,
+            strokeWidth = 2.dp,
+        )
+        Spacer(Modifier.width(12.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            progress.steps.forEachIndexed { index, step ->
+                val done = index < progress.current
+                val running = index == progress.current
+                Text(
+                    text = if (done) "✓ $step" else step,
+                    style = UI.typo.nB2.style(
+                        color = when {
+                            running -> UI.colors.pureInverse
+                            done -> UI.colors.mediumInverse
+                            else -> UI.colors.gray
+                        },
+                        fontWeight = if (running) FontWeight.Bold else FontWeight.Normal,
+                    )
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -2,6 +2,7 @@ package com.ivy.transaction
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -170,6 +171,10 @@ class EditTransactionViewModel @Inject constructor(
     private var receipt by mutableStateOf<Receipt?>(null)
     private var receiptIsNew = false
     private var receiptLookup by mutableStateOf(ReceiptLookupState.DONE)
+
+    /** What looking the scanned receipt up takes, while it runs. */
+    private var receiptSteps by mutableStateOf<List<ReceiptStep>>(emptyList())
+    private var receiptStep by mutableStateOf<ReceiptStep?>(null)
     private var receiptDialog by mutableStateOf<ReceiptDialog?>(null)
     private var receiptLookupJob: Job? = null
     private var pendingScanText: String? = null
@@ -250,6 +255,7 @@ class EditTransactionViewModel @Inject constructor(
             tags = getTags(),
             transactionAssociatedTags = getTransactionAssociatedTags(),
             receiptCaption = getReceiptCaption(),
+            receiptProgress = getReceiptProgress(),
             receiptDialog = getReceiptDialog(),
         )
     }
@@ -257,6 +263,19 @@ class EditTransactionViewModel @Inject constructor(
     @Composable
     private fun getReceiptCaption(): ReceiptCaption? {
         return receiptCaption()
+    }
+
+    @Composable
+    private fun getReceiptProgress(): ReceiptProgress? {
+        val current = receiptSteps.indexOf(receiptStep)
+        return if (current < 0) {
+            null
+        } else {
+            ReceiptProgress(
+                steps = receiptSteps.map { context.getString(it.label) }.toImmutableList(),
+                current = current,
+            )
+        }
     }
 
     @Composable
@@ -939,6 +958,7 @@ class EditTransactionViewModel @Inject constructor(
         receiptDialog = null
         receiptLookupJob?.cancel()
         receiptLookup = ReceiptLookupState.DONE
+        showReceiptSteps()
         editedFields.clear()
         merchantPromptAnswered = false
         merchantDisplayName = null
@@ -1124,14 +1144,15 @@ class EditTransactionViewModel @Inject constructor(
             when (val code = ReceiptCode.parse(qrText)) {
                 null -> receiptDialog = ReceiptDialog.NotAadeReceipt(qrText)
                 is ReceiptCode.Provider -> openProviderPage(code)
-                is ReceiptCode.OnAade -> onAadeCodeScanned(code)
+                is ReceiptCode.Fetchable -> onFetchableScanned(code)
             }
         }
     }
 
-    private suspend fun onAadeCodeScanned(code: ReceiptCode.OnAade) {
+    private suspend fun onFetchableScanned(code: ReceiptCode.Fetchable) {
         val existing = receiptRepository.findBySig(code.key)
         if (existing != null && existing.isOfAnotherTransaction()) {
+            showReceiptSteps()
             receiptDialog = ReceiptDialog.Duplicate(existing.transactionId)
         } else {
             applyScannedReceipt(code)
@@ -1144,19 +1165,22 @@ class EditTransactionViewModel @Inject constructor(
     private fun openProviderPage(code: ReceiptCode.Provider) {
         onSetTransactionType(TransactionType.EXPENSE)
         receiptLookupJob?.cancel()
-        receiptLookup = ReceiptLookupState.OPENING_PROVIDER
+        showReceiptSteps(ReceiptStep.OPEN_PROVIDER, ReceiptStep.FIND_AADE_LINK, ReceiptStep.CHECK_AADE)
         receiptLookupJob = viewModelScope.launch {
-            val myData = providerPageResolver.findMyDataLink(code)
+            val myData = providerPageResolver.findMyDataLink(code) {
+                receiptStep = ReceiptStep.FIND_AADE_LINK
+            }
             if (myData == null) {
+                showReceiptSteps()
                 receiptLookup = ReceiptLookupState.PROVIDER_FAILED
             } else {
-                onAadeCodeScanned(myData)
+                onFetchableScanned(myData)
             }
         }
     }
 
     /** Prefills the expense from the QR code right away, then asks AADE for the rest. */
-    private fun applyScannedReceipt(code: ReceiptCode.OnAade) {
+    private fun applyScannedReceipt(code: ReceiptCode.Fetchable) {
         val scanned = code.toPendingReceipt(TransactionId(loadedTransaction().id), timeProvider.utcNow())
         receipt = scanned
         receiptIsNew = true
@@ -1168,11 +1192,14 @@ class EditTransactionViewModel @Inject constructor(
         lookUpReceipt(code)
     }
 
-    private fun lookUpReceipt(code: ReceiptCode.OnAade) {
+    private fun lookUpReceipt(code: ReceiptCode.Fetchable) {
         receiptLookupJob?.cancel()
-        receiptLookup = ReceiptLookupState.CHECKING
+        val step = if (code is ReceiptCode.FiscalSign) ReceiptStep.DOWNLOAD_RECEIPT else ReceiptStep.CHECK_AADE
+        // After a provider's page, this is its last step
+        if (step in receiptSteps) receiptStep = step else showReceiptSteps(step)
         receiptLookupJob = viewModelScope.launch {
             val result = aadeDataSource.lookup(code)
+            showReceiptSteps()
             val current = receipt ?: return@launch
             receiptLookup = result.fold(
                 ifLeft = { ReceiptLookupState.OFFLINE },
@@ -1182,6 +1209,12 @@ class EditTransactionViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    /** Shows these steps with the first one running, or hides them when there are none. */
+    private fun showReceiptSteps(vararg steps: ReceiptStep) {
+        receiptSteps = steps.toList()
+        receiptStep = steps.firstOrNull()
     }
 
     private suspend fun onLookedUp(updated: Receipt) {
@@ -1273,9 +1306,12 @@ class EditTransactionViewModel @Inject constructor(
         )
     }
 
-    private fun receiptCaption(): ReceiptCaption? = when (receiptLookup) {
-        ReceiptLookupState.OPENING_PROVIDER -> info(context.getString(R.string.receipt_opening_provider))
-        ReceiptLookupState.PROVIDER_FAILED -> warning(context.getString(R.string.receipt_provider_failed))
+    private fun receiptCaption(): ReceiptCaption? = when {
+        // The steps show instead
+        receiptStep != null -> null
+        receiptLookup == ReceiptLookupState.PROVIDER_FAILED ->
+            warning(context.getString(R.string.receipt_provider_failed))
+
         else -> receipt?.let(::receiptCaption)
     }
 
@@ -1288,7 +1324,6 @@ class EditTransactionViewModel @Inject constructor(
         val total = receipt.total
         val afm = receipt.merchantAfm?.value.orEmpty()
         return when {
-            receiptLookup == ReceiptLookupState.CHECKING -> info(context.getString(R.string.receipt_checking))
             receipt.status == ReceiptStatus.FOUND && total != null && total.compareTo(amount.toReceiptMoney()) != 0 ->
                 warning(context.getString(R.string.receipt_total_mismatch, formatEuros(total)))
 
@@ -1316,5 +1351,12 @@ class EditTransactionViewModel @Inject constructor(
 
     private enum class EditedField { TITLE, CATEGORY, ACCOUNT, DATE }
 
-    private enum class ReceiptLookupState { OPENING_PROVIDER, PROVIDER_FAILED, CHECKING, OFFLINE, DONE }
+    private enum class ReceiptLookupState { PROVIDER_FAILED, OFFLINE, DONE }
+
+    private enum class ReceiptStep(@StringRes val label: Int) {
+        OPEN_PROVIDER(R.string.receipt_step_open_provider),
+        FIND_AADE_LINK(R.string.receipt_step_find_aade_link),
+        CHECK_AADE(R.string.receipt_step_check_aade),
+        DOWNLOAD_RECEIPT(R.string.receipt_step_download),
+    }
 }

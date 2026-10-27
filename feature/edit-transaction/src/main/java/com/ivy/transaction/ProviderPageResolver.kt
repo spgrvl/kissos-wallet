@@ -58,12 +58,19 @@ class ProviderPageResolver @Inject constructor(
         """
     }
 
-    /** @return the myDATA link, or null if the page didn't show one in time. */
+    /**
+     * @param onPageLoad runs once the provider's page has loaded and the link is being looked for.
+     * @return the myDATA link, or null if the page didn't show one in time.
+     */
     @SuppressLint("SetJavaScriptEnabled")
-    suspend fun findMyDataLink(provider: ReceiptCode.Provider): ReceiptCode.MyData? = withContext(dispatchers.main) {
+    suspend fun findMyDataLink(
+        provider: ReceiptCode.Provider,
+        onPageLoad: () -> Unit,
+    ): ReceiptCode.MyData? = withContext(dispatchers.main) {
         val webView = WebView(context)
         val popups = mutableListOf<WebView>()
         var openedLink: String? = null
+        var pageLoaded = false
         try {
             webView.settings.javaScriptEnabled = true
             webView.settings.domStorageEnabled = true
@@ -82,6 +89,13 @@ class ProviderPageResolver @Inject constructor(
                     if (ReceiptCode.parse(url) is ReceiptCode.MyData) {
                         openedLink = url
                         view.stopLoading()
+                    }
+                }
+
+                override fun onPageFinished(view: WebView, url: String) {
+                    if (view == webView && !pageLoaded) {
+                        pageLoaded = true
+                        onPageLoad()
                     }
                 }
             }
