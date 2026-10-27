@@ -31,15 +31,15 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.DividerW
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyText
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosText
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerVer
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconS
 import com.spgrvl.kissos.wallet.ui.theme.dynamicContrast
 import kotlinx.collections.immutable.ImmutableList
@@ -66,7 +66,7 @@ fun BoxWithConstraintsScope.ChooseIconModal(
         mutableStateOf(initialIcon)
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -114,7 +114,7 @@ private fun LazyListScope.icons(
 
     onIconSelected: (String) -> Unit
 ) {
-    val icons = ivyIcons()
+    val icons = kissosIcons()
 
     iconsR(
         icons = icons,
@@ -313,7 +313,7 @@ private fun Section(
 
         SpacerHor(width = 16.dp)
 
-        IvyText(
+        KissosText(
             text = title,
             typo = UI.typo.b1.style(
                 color = UI.colors.pureInverse,
@@ -331,11 +331,11 @@ private fun Section(
 @Preview
 @Composable
 private fun ChooseIconModal() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         ChooseIconModal(
             visible = true,
             initialIcon = "gift",
-            color = Ivy,
+            color = Kissos,
             dismiss = {}
         ) {
         }
@@ -344,7 +344,7 @@ private fun ChooseIconModal() {
 
 data class IconPickerSection(val title: String)
 
-fun ivyIcons(): List<Any> = listOf(
+fun kissosIcons(): List<Any> = listOf(
     IconPickerSection("Ivy"),
     "account",
     "category",

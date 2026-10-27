@@ -40,10 +40,10 @@ import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.IconScale
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyIconScaled
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIconScaled
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.Constants
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.rootScreen
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.navigation.AttributionsScreen
@@ -57,15 +57,15 @@ import com.spgrvl.kissos.navigation.ReleasesScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.MediumBlack
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvySwitch
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyToolbar
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosSwitch
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosToolbar
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChooseStartDateOfMonthModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.CurrencyModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.DeleteModal
@@ -183,7 +183,7 @@ private fun BoxWithConstraintsScope.UI(
             .testTag("settings_lazy_column")
     ) {
         stickyHeader {
-            IvyToolbar(
+            KissosToolbar(
                 onBack = { nav.onBackPressed() },
             ) {
                 Spacer(Modifier.weight(1f))
@@ -476,7 +476,7 @@ private fun BoxWithConstraintsScope.UI(
 
     CurrencyModal(
         title = stringResource(R.string.set_currency),
-        initialCurrency = IvyCurrency.fromCode(currencyCode),
+        initialCurrency = KissosCurrency.fromCode(currencyCode),
         visible = currencyModalVisible,
         dismiss = { currencyModalVisible = false }
     ) {
@@ -557,7 +557,7 @@ private fun StartDateOfMonth(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = R.drawable.ic_custom_calendar_m,
             tint = UI.colors.pureInverse,
             iconScale = IconScale.M,
@@ -598,7 +598,7 @@ private fun CustomFeatures(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = R.drawable.ic_custom_programming_m,
             tint = UI.colors.pureInverse,
             iconScale = IconScale.M,
@@ -709,7 +709,7 @@ private fun AppSwitch(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = icon,
             tint = UI.colors.pureInverse,
             iconScale = IconScale.M,
@@ -744,7 +744,7 @@ private fun AppSwitch(
 
         // Spacer(Modifier.weight(1f))
 
-        IvySwitch(enabled = lockApp) {
+        KissosSwitch(enabled = lockApp) {
             onSetLockApp(it)
         }
 
@@ -806,7 +806,7 @@ private fun AccountCardLocalAccount(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(Modifier.width(20.dp))
-        IvyIconScaled(
+        KissosIconScaled(
             icon = R.drawable.ic_local_account,
             iconScale = IconScale.M
         )
@@ -859,7 +859,7 @@ private fun SettingsPrimaryButton(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = icon,
             tint = textColor,
             iconScale = IconScale.M,
@@ -938,7 +938,7 @@ private fun AccountCardButton(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = icon,
             iconScale = IconScale.M
         )
@@ -977,7 +977,7 @@ private fun CurrencyButton(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = R.drawable.ic_currency,
             iconScale = IconScale.M,
             padding = 0.dp
@@ -1006,7 +1006,7 @@ private fun CurrencyButton(
 
         Spacer(Modifier.height(4.dp))
 
-        IvyIconScaled(
+        KissosIconScaled(
             icon = R.drawable.ic_arrow_right,
             iconScale = IconScale.M
         )
@@ -1058,7 +1058,7 @@ private fun SettingsDefaultButton(
 @Preview
 @Composable
 private fun Preview(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         UI(
             nameLocalAccount = null,
             theme = Theme.AUTO,

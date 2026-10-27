@@ -30,7 +30,7 @@ import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerVer
 import com.spgrvl.kissos.exchangerates.component.RateItem
 import com.spgrvl.kissos.exchangerates.data.RateUi
 import com.spgrvl.kissos.exchangerates.modal.AddRateModal
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.ui.SearchInput
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.navigation.navigation
@@ -193,7 +193,7 @@ private fun SearchField(
 @Preview
 @Composable
 private fun Preview(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         UI(
             state = RatesState(
                 baseCurrency = "BGN",

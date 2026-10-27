@@ -14,7 +14,7 @@ import com.spgrvl.kissos.base.time.TimeConverter
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.read.SettingsDao
 import com.spgrvl.kissos.data.model.Category
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
 import com.spgrvl.kissos.legacy.utils.ioThread
 import com.spgrvl.kissos.navigation.PieChartStatisticScreen
@@ -34,7 +34,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PieChartStatisticViewModel @Inject constructor(
     private val settingsDao: SettingsDao,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val pieChartAct: PieChartAct,
     private val sharedPrefs: SharedPrefs,
     private val timeProvider: TimeProvider,
@@ -144,7 +144,7 @@ class PieChartStatisticViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.Default) {
             startInternally(
-                period = ivyContext.selectedPeriod,
+                period = kissosContext.selectedPeriod,
                 type = screen.type,
                 accountIdFilterList = screen.accountList,
                 filterExclude = screen.filterExcluded,
@@ -193,7 +193,7 @@ class PieChartStatisticViewModel @Inject constructor(
         val accountIdFilterList = accountIdFilterList
         val transactions = transactions
         val baseCurrency = baseCurrency
-        val range = periodValue.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+        val range = periodValue.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         val treatTransferAsIncExp =
             sharedPrefs.getBoolean(
@@ -225,7 +225,7 @@ class PieChartStatisticViewModel @Inject constructor(
     }
 
     private suspend fun onSetPeriod(periodValue: TimePeriod) {
-        ivyContext.updateSelectedPeriodInMemory(periodValue)
+        kissosContext.updateSelectedPeriodInMemory(periodValue)
         load(
             periodValue = periodValue
         )
@@ -236,7 +236,7 @@ class PieChartStatisticViewModel @Inject constructor(
         val year = period.year ?: com.spgrvl.kissos.legacy.utils.dateNowUTC().year
         if (month != null) {
             load(
-                periodValue = month.incrementMonthPeriod(ivyContext, 1L, year)
+                periodValue = month.incrementMonthPeriod(kissosContext, 1L, year)
             )
         }
     }
@@ -246,7 +246,7 @@ class PieChartStatisticViewModel @Inject constructor(
         val year = period.year ?: com.spgrvl.kissos.legacy.utils.dateNowUTC().year
         if (month != null) {
             load(
-                periodValue = month.incrementMonthPeriod(ivyContext, -1L, year)
+                periodValue = month.incrementMonthPeriod(kissosContext, -1L, year)
             )
         }
     }

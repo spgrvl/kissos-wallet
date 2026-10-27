@@ -52,8 +52,8 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionUi
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionsRow
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalPositiveButton
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSkip
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
@@ -344,7 +344,7 @@ private fun BoxWithConstraintsScope.RememberMerchantModal(
     val options = remember(categories) {
         categories.map { OptionUi(it.id.value, it.name.value, it.color.value) }.toImmutableList()
     }
-    IvyModal(
+    KissosModal(
         id = remember { UUID.randomUUID() },
         visible = dialog != null,
         dismiss = dismiss,
@@ -366,7 +366,7 @@ private fun BoxWithConstraintsScope.RememberMerchantModal(
         Spacer(Modifier.height(16.dp))
         ModalDescription(stringResource(R.string.remember_merchant_description, dialog?.merchantName.orEmpty()))
         Spacer(Modifier.height(24.dp))
-        IvyNameTextField(
+        KissosNameTextField(
             modifier = Modifier.padding(horizontal = 32.dp),
             underlineModifier = Modifier.padding(horizontal = 24.dp),
             value = name,
@@ -395,7 +395,7 @@ private fun BoxWithConstraintsScope.MessageModal(
     secondaryActions: (@Composable () -> Unit)? = null,
     primaryAction: @Composable () -> Unit,
 ) {
-    IvyModal(
+    KissosModal(
         id = remember { UUID.randomUUID() },
         visible = visible,
         dismiss = dismiss,

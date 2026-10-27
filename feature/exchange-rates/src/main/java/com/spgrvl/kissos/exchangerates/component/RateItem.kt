@@ -22,7 +22,7 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerWeight
 import com.spgrvl.kissos.exchangerates.data.RateUi
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.components.DeleteButton
@@ -105,7 +105,7 @@ private fun RateColumn(label: String, rate: String, value: String) {
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         RateItem(
             rate = RateUi(
             from = "BGN",
@@ -121,7 +121,7 @@ private fun Preview() {
 @Preview
 @Composable
 private fun Preview_Delete() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         RateItem(
             rate = RateUi(
                 from = "BGN",

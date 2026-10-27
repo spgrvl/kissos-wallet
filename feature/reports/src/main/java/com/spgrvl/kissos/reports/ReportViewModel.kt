@@ -36,7 +36,7 @@ import com.spgrvl.kissos.domain.RootScreen
 import com.spgrvl.kissos.domain.features.Features
 import com.spgrvl.kissos.domain.usecase.csv.ExportCsvUseCase
 import com.spgrvl.kissos.frp.filterSuspend
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.temp.toLegacy
 import com.spgrvl.kissos.legacy.utils.getISOFormattedDateTime
@@ -78,7 +78,7 @@ import javax.inject.Inject
 class ReportViewModel @Inject constructor(
     private val plannedPaymentsLogic: PlannedPaymentsLogic,
     private val transactionRepository: TransactionRepository,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val exchangeAct: ExchangeAct,
     private val accountsAct: AccountsAct,
     private val categoryRepository: CategoryRepository,
@@ -381,7 +381,7 @@ class ReportViewModel @Inject constructor(
         val filterCategoryIds =
             filter.categories.map { if (it.id.value == unSpecifiedCategory.id.value) null else it.id }
         val filterRange =
-            filter.period?.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+            filter.period?.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         val transactions = if (filter.includedTags.isNotEmpty()) {
             tagRepository.findByAllAssociatedIdForTagId(filter.includedTags)
@@ -528,7 +528,7 @@ class ReportViewModel @Inject constructor(
         val filter = filter ?: return
         if (!filter.validate()) return
 
-        ivyContext.createNewFile(
+        kissosContext.createNewFile(
             "IvyWalletReport-${
                 timeNowUTC().getISOFormattedDateTime()
             }.csv"

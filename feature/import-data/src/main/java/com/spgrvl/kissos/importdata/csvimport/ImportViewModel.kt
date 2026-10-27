@@ -27,7 +27,7 @@ import kotlin.math.roundToInt
 
 @HiltViewModel
 class ImportViewModel @Inject constructor(
-    private val ivyContext: com.spgrvl.kissos.legacy.IvyWalletCtx,
+    private val kissosContext: com.spgrvl.kissos.legacy.KissosWalletCtx,
     private val nav: Navigation,
     private val fileReader: FileSystem,
     private val csvNormalizer: CSVNormalizer,
@@ -75,7 +75,7 @@ class ImportViewModel @Inject constructor(
     fun uploadFile(context: Context) {
         val importType = importType.value ?: return
 
-        ivyContext.openFile { fileUri ->
+        kissosContext.openFile { fileUri ->
             viewModelScope.launch {
                 TestIdlingResource.increment()
 

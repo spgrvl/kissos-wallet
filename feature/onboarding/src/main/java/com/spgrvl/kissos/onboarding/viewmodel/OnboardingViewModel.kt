@@ -27,7 +27,7 @@ import com.spgrvl.kissos.onboarding.OnboardingDetailState
 import com.spgrvl.kissos.onboarding.OnboardingEvent
 import com.spgrvl.kissos.onboarding.OnboardingState
 import com.spgrvl.kissos.wallet.domain.action.account.AccountsAct
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.CategoryCreator
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.PreloadDataLogic
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.WalletAccountLogic
@@ -65,7 +65,7 @@ class OnboardingViewModel @Inject constructor(
     private val _state = mutableStateOf(OnboardingState.SPLASH)
     val state: State<OnboardingState> = _state
 
-    private val _currency = mutableStateOf(IvyCurrency.getDefault())
+    private val _currency = mutableStateOf(KissosCurrency.getDefault())
     private val _opGoogleSignIn = mutableStateOf<OpResult<Unit>?>(null)
     private val _accounts = mutableStateOf(listOf<AccountBalance>().toImmutableList())
     private val _accountSuggestions = mutableStateOf(listOf<CreateAccountData>().toImmutableList())
@@ -119,7 +119,7 @@ class OnboardingViewModel @Inject constructor(
     }
 
     private suspend fun initiateSettings(isSystemDarkMode: Boolean) {
-        val defaultCurrency = IvyCurrency.getDefault()
+        val defaultCurrency = KissosCurrency.getDefault()
         _currency.value = defaultCurrency
 
         ioThread {
@@ -180,7 +180,7 @@ class OnboardingViewModel @Inject constructor(
     }
     // Step 2 ---------------------------------------------------------------------------------------
 
-    private suspend fun setBaseCurrency(baseCurrency: IvyCurrency) {
+    private suspend fun setBaseCurrency(baseCurrency: KissosCurrency) {
         updateBaseCurrency(baseCurrency)
         router.setBaseCurrencyNext(
             baseCurrency = baseCurrency,
@@ -188,7 +188,7 @@ class OnboardingViewModel @Inject constructor(
         )
     }
 
-    private suspend fun updateBaseCurrency(baseCurrency: IvyCurrency) {
+    private suspend fun updateBaseCurrency(baseCurrency: KissosCurrency) {
         ioThread {
             settingsWriter.save(
                 settingsDao.findFirst().copy(

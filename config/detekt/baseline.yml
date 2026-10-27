@@ -212,14 +212,14 @@
     <ID>ArgumentListWrapping:TestRuntimeOnlyConfigurationAccessors.kt$( this, "testRuntimeOnly", dependencyNotation, dependencyConfiguration )</ID>
     <ID>ArgumentListWrapping:TestWearAppConfigurationAccessors.kt$( this, "testWearApp", dependencyNotation, dependencyConfiguration )</ID>
     <ID>ArgumentListWrapping:WearAppConfigurationAccessors.kt$( this, "wearApp", dependencyNotation, dependencyConfiguration )</ID>
-    <ID>ClassNaming:Ivy_composePlugin.kt$Ivy_composePlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_detektPlugin.kt$Ivy_detektPlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_featurePlugin.kt$Ivy_featurePlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_integration_testingPlugin.kt$Ivy_integration_testingPlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_modulePlugin.kt$Ivy_modulePlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_roomPlugin.kt$Ivy_roomPlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_scriptPlugin.kt$Ivy_scriptPlugin : Plugin</ID>
-    <ID>ClassNaming:Ivy_widgetPlugin.kt$Ivy_widgetPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_composePlugin.kt$Ivy_composePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_detektPlugin.kt$Ivy_detektPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_featurePlugin.kt$Ivy_featurePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_integration_testingPlugin.kt$Ivy_integration_testingPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_modulePlugin.kt$Ivy_modulePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_roomPlugin.kt$Ivy_roomPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_scriptPlugin.kt$Ivy_scriptPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_widgetPlugin.kt$Ivy_widgetPlugin : Plugin</ID>
     <ID>ClassNaming:Migration105to106_TrnRecurringRules.kt$Migration105to106_TrnRecurringRules : Migration</ID>
     <ID>ClassNaming:Migration106to107_Wishlist.kt$Migration106to107_Wishlist : Migration</ID>
     <ID>ClassNaming:Migration107to108_Sync.kt$Migration107to108_Sync : Migration</ID>
@@ -279,29 +279,29 @@
     <ID>ComposableParamOrder:ItemIcon.kt$ItemIconMDefaultIcon</ID>
     <ID>ComposableParamOrder:ItemIcon.kt$ItemIconS</ID>
     <ID>ComposableParamOrder:ItemIcon.kt$ItemIconSDefaultIcon</ID>
-    <ID>ComposableParamOrder:IvyBasicTextField.kt$IvyBasicTextField</ID>
-    <ID>ComposableParamOrder:IvyBorderButton.kt$IvyBorderButton</ID>
-    <ID>ComposableParamOrder:IvyButton.kt$IvyButton</ID>
-    <ID>ComposableParamOrder:IvyCheckbox.kt$IvyCheckbox</ID>
-    <ID>ComposableParamOrder:IvyCheckbox.kt$IvyCheckboxWithText</ID>
-    <ID>ComposableParamOrder:IvyChecklistTextField.kt$IvyChecklistTextField</ID>
-    <ID>ComposableParamOrder:IvyCircleButton.kt$IvyCircleButton</ID>
-    <ID>ComposableParamOrder:IvyDescriptionTextField.kt$IvyDescriptionTextField</ID>
-    <ID>ComposableParamOrder:IvyIcon.kt$IvyIcon</ID>
-    <ID>ComposableParamOrder:IvyIcon.kt$IvyIconScaled</ID>
-    <ID>ComposableParamOrder:IvyLineChart.kt$IvyLineChart</ID>
-    <ID>ComposableParamOrder:IvyModal.kt$IvyModal</ID>
-    <ID>ComposableParamOrder:IvyModalComponents.kt$ModalCheck</ID>
-    <ID>ComposableParamOrder:IvyModalComponents.kt$ModalDynamicPrimaryAction</ID>
-    <ID>ComposableParamOrder:IvyModalComponents.kt$ModalPositiveButton</ID>
-    <ID>ComposableParamOrder:IvyNameTextFieldValue.kt$IvyNameTextField</ID>
-    <ID>ComposableParamOrder:IvyNumberTextField.kt$IvyNumberTextField</ID>
-    <ID>ComposableParamOrder:IvyOutlinedButton.kt$IvyOutlinedButton</ID>
-    <ID>ComposableParamOrder:IvyOutlinedButton.kt$IvyOutlinedButtonFillMaxWidth</ID>
-    <ID>ComposableParamOrder:IvyOutlinedTextField.kt$IvyOutlinedTextField</ID>
-    <ID>ComposableParamOrder:IvySwitch.kt$IvySwitch</ID>
-    <ID>ComposableParamOrder:IvyText.kt$IvyText</ID>
-    <ID>ComposableParamOrder:IvyTitleTextField.kt$IvyTitleTextField</ID>
+    <ID>ComposableParamOrder:KissosBasicTextField.kt$KissosBasicTextField</ID>
+    <ID>ComposableParamOrder:KissosBorderButton.kt$KissosBorderButton</ID>
+    <ID>ComposableParamOrder:KissosButton.kt$KissosButton</ID>
+    <ID>ComposableParamOrder:KissosCheckbox.kt$KissosCheckbox</ID>
+    <ID>ComposableParamOrder:KissosCheckbox.kt$KissosCheckboxWithText</ID>
+    <ID>ComposableParamOrder:KissosChecklistTextField.kt$KissosChecklistTextField</ID>
+    <ID>ComposableParamOrder:KissosCircleButton.kt$KissosCircleButton</ID>
+    <ID>ComposableParamOrder:KissosDescriptionTextField.kt$KissosDescriptionTextField</ID>
+    <ID>ComposableParamOrder:KissosIcon.kt$KissosIcon</ID>
+    <ID>ComposableParamOrder:KissosIcon.kt$KissosIconScaled</ID>
+    <ID>ComposableParamOrder:KissosLineChart.kt$KissosLineChart</ID>
+    <ID>ComposableParamOrder:KissosModal.kt$KissosModal</ID>
+    <ID>ComposableParamOrder:KissosModalComponents.kt$ModalCheck</ID>
+    <ID>ComposableParamOrder:KissosModalComponents.kt$ModalDynamicPrimaryAction</ID>
+    <ID>ComposableParamOrder:KissosModalComponents.kt$ModalPositiveButton</ID>
+    <ID>ComposableParamOrder:KissosNameTextFieldValue.kt$KissosNameTextField</ID>
+    <ID>ComposableParamOrder:KissosNumberTextField.kt$KissosNumberTextField</ID>
+    <ID>ComposableParamOrder:KissosOutlinedButton.kt$KissosOutlinedButton</ID>
+    <ID>ComposableParamOrder:KissosOutlinedButton.kt$KissosOutlinedButtonFillMaxWidth</ID>
+    <ID>ComposableParamOrder:KissosOutlinedTextField.kt$KissosOutlinedTextField</ID>
+    <ID>ComposableParamOrder:KissosSwitch.kt$KissosSwitch</ID>
+    <ID>ComposableParamOrder:KissosText.kt$KissosText</ID>
+    <ID>ComposableParamOrder:KissosTitleTextField.kt$KissosTitleTextField</ID>
     <ID>ComposableParamOrder:LoanDetailsScreen.kt$Header</ID>
     <ID>ComposableParamOrder:LoanModal.kt$AccountsRow</ID>
     <ID>ComposableParamOrder:LoanModal.kt$LoanModal</ID>
@@ -312,7 +312,7 @@
     <ID>ComposableParamOrder:OnboardingProgressSlider.kt$OnboardingProgressSlider</ID>
     <ID>ComposableParamOrder:PeriodSelector.kt$PeriodSelector</ID>
     <ID>ComposableParamOrder:PlannedPaymentsBottomBar.kt$PlannedPaymentsBottomBar</ID>
-    <ID>ComposableParamOrder:Preview.kt$IvyPreview</ID>
+    <ID>ComposableParamOrder:Preview.kt$KissosPreview</ID>
     <ID>ComposableParamOrder:PrimaryAttributeColumn.kt$PrimaryAttributeColumn</ID>
     <ID>ComposableParamOrder:ProgressBar.kt$ProgressBar</ID>
     <ID>ComposableParamOrder:ProgressModal.kt$ProgressModal</ID>
@@ -324,10 +324,10 @@
     <ID>ComposableParamOrder:Switch.kt$Switch</ID>
     <ID>ComposableParamOrder:Title.kt$Title</ID>
     <ID>ComposableParamOrder:WrapContentRow.kt$WrapContentRow</ID>
-    <ID>CompositionLocalAllowlist:IvyTheme.kt$LocalIvyColors</ID>
-    <ID>CompositionLocalAllowlist:IvyTheme.kt$LocalIvyShapes</ID>
-    <ID>CompositionLocalAllowlist:IvyTheme.kt$LocalIvyTypography</ID>
-    <ID>CompositionLocalAllowlist:IvyUI.kt$LocalIvyContext</ID>
+    <ID>CompositionLocalAllowlist:KissosTheme.kt$LocalKissosColors</ID>
+    <ID>CompositionLocalAllowlist:KissosTheme.kt$LocalKissosShapes</ID>
+    <ID>CompositionLocalAllowlist:KissosTheme.kt$LocalKissosTypography</ID>
+    <ID>CompositionLocalAllowlist:KissosUI.kt$LocalKissosContext</ID>
     <ID>CompositionLocalAllowlist:NavigationRoot.kt$LocalNavigation</ID>
     <ID>ConstructorParameterNaming:LoanTransactionsLogic.kt$LoanTransactionsLogic$val Loan: LTLoanMapper</ID>
     <ID>ConstructorParameterNaming:LoanTransactionsLogic.kt$LoanTransactionsLogic$val LoanRecord: LTLoanRecordMapper</ID>
@@ -336,7 +336,7 @@
     <ID>CyclomaticComplexMethod:EditPlannedViewModel.kt$EditPlannedViewModel$override fun onEvent(event: EditPlannedScreenEvent)</ID>
     <ID>CyclomaticComplexMethod:EditTransactionScreen.kt$@ExperimentalFoundationApi @Composable private fun BoxWithConstraintsScope.UI( screen: EditTransactionScreen, transactionType: TransactionType, baseCurrency: String, initialTitle: String?, titleSuggestions: ImmutableSet&lt;String&gt;, description: String?, category: Category?, dateTime: LocalDateTime?, account: Account?, toAccount: Account?, dueDate: LocalDateTime?, amount: Double, customExchangeRateState: CustomExchangeRateState, categories: ImmutableList&lt;Category&gt;, accounts: ImmutableList&lt;Account&gt;, onTitleChanged: (String?) -&gt; Unit, onDescriptionChanged: (String?) -&gt; Unit, onAmountChanged: (Double) -&gt; Unit, onCategoryChanged: (Category?) -&gt; Unit, onAccountChanged: (Account) -&gt; Unit, onToAccountChanged: (Account) -&gt; Unit, onDueDateChanged: (LocalDateTime?) -&gt; Unit, onSetDate: (LocalDate) -&gt; Unit, onSetTime: (LocalTime) -&gt; Unit, onSetTransactionType: (TransactionType) -&gt; Unit, onCreateCategory: (CreateCategoryData) -&gt; Unit, onEditCategory: (Category) -&gt; Unit, onPayPlannedPayment: () -&gt; Unit, onSave: (closeScreen: Boolean) -&gt; Unit, onSetHasChanges: (hasChanges: Boolean) -&gt; Unit, onDelete: () -&gt; Unit, onCreateAccount: (CreateAccountData) -&gt; Unit, onExchangeRateChanged: (Double?) -&gt; Unit = { }, loanData: EditTransactionDisplayLoan = EditTransactionDisplayLoan(), backgroundProcessing: Boolean = false, hasChanges: Boolean = false, )</ID>
     <ID>CyclomaticComplexMethod:EditTransactionViewModel.kt$EditTransactionViewModel$override fun onEvent(event: EditTransactionEvent)</ID>
-    <ID>CyclomaticComplexMethod:IvyNavGraph.kt$@ExperimentalFoundationApi @ExperimentalAnimationApi @Composable fun BoxWithConstraintsScope.IvyNavGraph(screen: Screen?)</ID>
+    <ID>CyclomaticComplexMethod:KissosNavGraph.kt$@ExperimentalFoundationApi @ExperimentalAnimationApi @Composable fun BoxWithConstraintsScope.KissosNavGraph(screen: Screen?)</ID>
     <ID>CyclomaticComplexMethod:LoanModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun BoxWithConstraintsScope.LoanModal( accounts: List&lt;Account&gt; = emptyList(), onCreateAccount: (CreateAccountData) -&gt; Unit = {}, modal: LoanModalData?, onCreateLoan: (CreateLoanData) -&gt; Unit, onEditLoan: (Loan, Boolean) -&gt; Unit, onPerformCalculations: () -&gt; Unit = {}, dismiss: () -&gt; Unit, )</ID>
     <ID>CyclomaticComplexMethod:LoanRecordModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun BoxWithConstraintsScope.LoanRecordModal( modal: LoanRecordModalData?, accounts: List&lt;Account&gt; = emptyList(), onCreateAccount: (CreateAccountData) -&gt; Unit = {}, onCreate: (CreateLoanRecordData) -&gt; Unit, onEdit: (EditLoanRecordData) -&gt; Unit, onDelete: (LoanRecord) -&gt; Unit, dismiss: () -&gt; Unit )</ID>
     <ID>CyclomaticComplexMethod:ReportViewModel.kt$ReportViewModel$private suspend fun filterTransactions( baseCurrency: String, accounts: List&lt;Account&gt;, filter: ReportFilter, ): ImmutableList&lt;Transaction&gt;</ID>
@@ -369,11 +369,11 @@
     <ID>DataClassDefaultValues:BudgetModal.kt$BudgetModalData$val autoFocusKeyboard: Boolean = true</ID>
     <ID>DataClassDefaultValues:BudgetModal.kt$BudgetModalData$val id: UUID = UUID.randomUUID()</ID>
     <ID>DataClassDefaultValues:BufferModal.kt$BufferModalData$val id: UUID = UUID.randomUUID()</ID>
-    <ID>DataClassDefaultValues:CalcAccBalanceAct.kt$CalcAccBalanceAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeIvy()</ID>
+    <ID>DataClassDefaultValues:CalcAccBalanceAct.kt$CalcAccBalanceAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeKissos()</ID>
     <ID>DataClassDefaultValues:CalcAccIncomeExpenseAct.kt$CalcAccIncomeExpenseAct.Input$val includeTransfersInCalc: Boolean = false</ID>
-    <ID>DataClassDefaultValues:CalcAccIncomeExpenseAct.kt$CalcAccIncomeExpenseAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeIvy()</ID>
+    <ID>DataClassDefaultValues:CalcAccIncomeExpenseAct.kt$CalcAccIncomeExpenseAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeKissos()</ID>
     <ID>DataClassDefaultValues:CalcWalletBalanceAct.kt$CalcWalletBalanceAct.Input$val balanceCurrency: String = baseCurrency</ID>
-    <ID>DataClassDefaultValues:CalcWalletBalanceAct.kt$CalcWalletBalanceAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeIvy()</ID>
+    <ID>DataClassDefaultValues:CalcWalletBalanceAct.kt$CalcWalletBalanceAct.Input$val range: ClosedTimeRange = ClosedTimeRange.allTimeKissos()</ID>
     <ID>DataClassDefaultValues:CalcWalletBalanceAct.kt$CalcWalletBalanceAct.Input$val withExcluded: Boolean = false</ID>
     <ID>DataClassDefaultValues:CategoriesScreenEvent.kt$CategoriesScreenEvent.OnReorder$val sortOrder: SortOrder = SortOrder.DEFAULT</ID>
     <ID>DataClassDefaultValues:CategoriesScreenState.kt$CategoriesScreenState$val baseCurrency: String = ""</ID>
@@ -427,16 +427,16 @@
     <ID>DataClassDefaultValues:EditTransactionDisplayLoan.kt$EditTransactionDisplayLoan$val loanWarningDescription: String = ""</ID>
     <ID>DataClassDefaultValues:Exchange.kt$ExchangeData$val toCurrency: String = baseCurrency</ID>
     <ID>DataClassDefaultValues:ExchangeRateEntity.kt$ExchangeRateEntity$@SerialName("manualOverride") val manualOverride: Boolean = false</ID>
-    <ID>DataClassDefaultValues:IvyLineChart.kt$Function$val colorDown: Color? = null</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("accounts") val accounts: List&lt;AccountEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("budgets") val budgets: List&lt;BudgetEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("categories") val categories: List&lt;CategoryEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("loanRecords") val loanRecords: List&lt;LoanRecordEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("loans") val loans: List&lt;LoanEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("plannedPaymentRules") val plannedPaymentRules: List&lt;PlannedPaymentRuleEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("settings") val settings: List&lt;SettingsEntity&gt; = emptyList()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("sharedPrefs") val sharedPrefs: HashMap&lt;String, String&gt; = HashMap()</ID>
-    <ID>DataClassDefaultValues:IvyWalletCompleteData.kt$IvyWalletCompleteData$@SerialName("transactions") val transactions: List&lt;TransactionEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosLineChart.kt$Function$val colorDown: Color? = null</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("accounts") val accounts: List&lt;AccountEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("budgets") val budgets: List&lt;BudgetEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("categories") val categories: List&lt;CategoryEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("loanRecords") val loanRecords: List&lt;LoanRecordEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("loans") val loans: List&lt;LoanEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("plannedPaymentRules") val plannedPaymentRules: List&lt;PlannedPaymentRuleEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("settings") val settings: List&lt;SettingsEntity&gt; = emptyList()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("sharedPrefs") val sharedPrefs: HashMap&lt;String, String&gt; = HashMap()</ID>
+    <ID>DataClassDefaultValues:KissosWalletCompleteData.kt$KissosWalletCompleteData$@SerialName("transactions") val transactions: List&lt;TransactionEntity&gt; = emptyList()</ID>
     <ID>DataClassDefaultValues:Loan.kt$Loan$val accountId: UUID? = null</ID>
     <ID>DataClassDefaultValues:Loan.kt$Loan$val color: Int = 0</ID>
     <ID>DataClassDefaultValues:Loan.kt$Loan$val dateTime: LocalDateTime? = null</ID>
@@ -618,15 +618,15 @@
     <ID>DataClassFunctions:FromToTimeRange.kt$FromToTimeRange$fun to(): LocalDateTime</ID>
     <ID>DataClassFunctions:FromToTimeRange.kt$FromToTimeRange$fun toDisplay(): String</ID>
     <ID>DataClassFunctions:FromToTimeRange.kt$FromToTimeRange$fun upcomingFrom(): LocalDateTime</ID>
-    <ID>DataClassFunctions:IvyColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asHorizontalBrush()</ID>
-    <ID>DataClassFunctions:IvyColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asVerticalBrush()</ID>
-    <ID>DataClassFunctions:IvyLineChart.kt$Function$fun determineLineColor(valueStart: Double, valueEnd: Double): Color</ID>
+    <ID>DataClassFunctions:KissosColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asHorizontalBrush()</ID>
+    <ID>DataClassFunctions:KissosColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asVerticalBrush()</ID>
+    <ID>DataClassFunctions:KissosLineChart.kt$Function$fun determineLineColor(valueStart: Double, valueEnd: Double): Color</ID>
     <ID>DataClassFunctions:LastNTimeRange.kt$LastNTimeRange$fun forDisplay(): String</ID>
     <ID>DataClassFunctions:LastNTimeRange.kt$LastNTimeRange$fun fromDate(): LocalDateTime</ID>
     <ID>DataClassFunctions:Loan.kt$Loan$fun toEntity(): LoanEntity</ID>
     <ID>DataClassFunctions:LoanRecord.kt$LoanRecord$fun toEntity(): LoanRecordEntity</ID>
     <ID>DataClassFunctions:LoanTransactionsLogic.kt$LoanTransactionsLogic$suspend fun updateAssociatedLoanData( transaction: Transaction?, onBackgroundProcessingStart: suspend () -&gt; Unit = {}, onBackgroundProcessingEnd: suspend () -&gt; Unit = {}, accountsChanged: Boolean = true )</ID>
-    <ID>DataClassFunctions:Month.kt$Month$fun incrementMonthPeriod( ivyContext: IvyWalletCtx, increment: Long, year: Int ): TimePeriod</ID>
+    <ID>DataClassFunctions:Month.kt$Month$fun incrementMonthPeriod( kissosContext: KissosWalletCtx, increment: Long, year: Int ): TimePeriod</ID>
     <ID>DataClassFunctions:Month.kt$Month$fun toDate(): LocalDate</ID>
     <ID>DataClassFunctions:Month.kt$Month$fun toTimePeriod(): TimePeriod</ID>
     <ID>DataClassFunctions:OpResult.kt$OpResult.Failure$fun error()</ID>
@@ -2366,13 +2366,13 @@
     <ID>FunctionParameterNaming:EditBottomSheet.kt$ActionButton: @Composable () -&gt; Unit</ID>
     <ID>FunctionParameterNaming:FRPComposable.kt$UI: @Composable BoxWithConstraintsScope.( state: S, onEvent: (E) -&gt; Unit ) -&gt; Unit</ID>
     <ID>FunctionParameterNaming:ItemIcon.kt$Default: (@Composable () -&gt; Unit)? = null</ID>
-    <ID>FunctionParameterNaming:IvyComponents.kt$Content: @Composable RowScope.() -&gt; Unit</ID>
-    <ID>FunctionParameterNaming:IvyComposeApp.kt$Content: @Composable BoxScope.() -&gt; Unit</ID>
-    <ID>FunctionParameterNaming:IvyModal.kt$Content: @Composable ColumnScope.() -&gt; Unit</ID>
-    <ID>FunctionParameterNaming:IvyModal.kt$PrimaryAction: @Composable () -&gt; Unit</ID>
-    <ID>FunctionParameterNaming:IvyModal.kt$SecondaryActions: (@Composable () -&gt; Unit)? = null</ID>
-    <ID>FunctionParameterNaming:IvyModalDomainComponents.kt$Header: (@Composable () -&gt; Unit)? = null</ID>
-    <ID>FunctionParameterNaming:IvyToolbar.kt$Content: @Composable RowScope.() -&gt; Unit = { }</ID>
+    <ID>FunctionParameterNaming:KissosComponents.kt$Content: @Composable RowScope.() -&gt; Unit</ID>
+    <ID>FunctionParameterNaming:KissosComposeApp.kt$Content: @Composable BoxScope.() -&gt; Unit</ID>
+    <ID>FunctionParameterNaming:KissosModal.kt$Content: @Composable ColumnScope.() -&gt; Unit</ID>
+    <ID>FunctionParameterNaming:KissosModal.kt$PrimaryAction: @Composable () -&gt; Unit</ID>
+    <ID>FunctionParameterNaming:KissosModal.kt$SecondaryActions: (@Composable () -&gt; Unit)? = null</ID>
+    <ID>FunctionParameterNaming:KissosModalDomainComponents.kt$Header: (@Composable () -&gt; Unit)? = null</ID>
+    <ID>FunctionParameterNaming:KissosToolbar.kt$Content: @Composable RowScope.() -&gt; Unit = { }</ID>
     <ID>FunctionParameterNaming:PlannedPaymentsLazyColumn.kt$Header: @Composable () -&gt; Unit</ID>
     <ID>FunctionParameterNaming:Preview.kt$Content: @Composable BoxWithConstraintsScope.() -&gt; Unit</ID>
     <ID>FunctionParameterNaming:PrimaryAttributeColumn.kt$Content: @Composable ColumnScope.() -&gt; Unit</ID>
@@ -2468,35 +2468,35 @@
     <ID>InvalidPackageDeclaration:IntervalPickerRow.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
     <ID>InvalidPackageDeclaration:IntervalType.kt$package com.spgrvl.kissos.data.model</ID>
     <ID>InvalidPackageDeclaration:ItemIcon.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyBasicTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyBorderButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyCheckbox.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyChecklistTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyCircleButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyColorPicker.kt$package com.spgrvl.kissos.domain.legacy.ui</ID>
-    <ID>InvalidPackageDeclaration:IvyColors.kt$package com.spgrvl.kissos.wallet.ui.theme</ID>
-    <ID>InvalidPackageDeclaration:IvyComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyCurrency.kt$package com.spgrvl.kissos.wallet.domain.data</ID>
-    <ID>InvalidPackageDeclaration:IvyDataStore.kt$package com.spgrvl.kissos.wallet.io.persistence.datastore</ID>
-    <ID>InvalidPackageDeclaration:IvyDescriptionTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyDivider.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyDividerDot.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyDomainUtils.kt$package com.spgrvl.kissos.wallet.domain.pure.util</ID>
-    <ID>InvalidPackageDeclaration:IvyIcon.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyLineChart.kt$package com.spgrvl.kissos.wallet.ui.theme.components.charts.linechart</ID>
-    <ID>InvalidPackageDeclaration:IvyModal.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
-    <ID>InvalidPackageDeclaration:IvyModalComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
-    <ID>InvalidPackageDeclaration:IvyModalDomainComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
-    <ID>InvalidPackageDeclaration:IvyNameTextFieldValue.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyNotification.kt$package com.spgrvl.kissos.wallet.android.notification</ID>
-    <ID>InvalidPackageDeclaration:IvyNotificationChannel.kt$package com.spgrvl.kissos.wallet.android.notification</ID>
-    <ID>InvalidPackageDeclaration:IvyNumberTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyOutlinedButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyOutlinedTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvySwitch.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyTitleTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
-    <ID>InvalidPackageDeclaration:IvyToolbar.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosBasicTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosBorderButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosCheckbox.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosChecklistTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosCircleButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosColorPicker.kt$package com.spgrvl.kissos.domain.legacy.ui</ID>
+    <ID>InvalidPackageDeclaration:KissosColors.kt$package com.spgrvl.kissos.wallet.ui.theme</ID>
+    <ID>InvalidPackageDeclaration:KissosComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosCurrency.kt$package com.spgrvl.kissos.wallet.domain.data</ID>
+    <ID>InvalidPackageDeclaration:KissosDataStore.kt$package com.spgrvl.kissos.wallet.io.persistence.datastore</ID>
+    <ID>InvalidPackageDeclaration:KissosDescriptionTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosDivider.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosDividerDot.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosDomainUtils.kt$package com.spgrvl.kissos.wallet.domain.pure.util</ID>
+    <ID>InvalidPackageDeclaration:KissosIcon.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosLineChart.kt$package com.spgrvl.kissos.wallet.ui.theme.components.charts.linechart</ID>
+    <ID>InvalidPackageDeclaration:KissosModal.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
+    <ID>InvalidPackageDeclaration:KissosModalComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
+    <ID>InvalidPackageDeclaration:KissosModalDomainComponents.kt$package com.spgrvl.kissos.wallet.ui.theme.modal</ID>
+    <ID>InvalidPackageDeclaration:KissosNameTextFieldValue.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosNotification.kt$package com.spgrvl.kissos.wallet.android.notification</ID>
+    <ID>InvalidPackageDeclaration:KissosNotificationChannel.kt$package com.spgrvl.kissos.wallet.android.notification</ID>
+    <ID>InvalidPackageDeclaration:KissosNumberTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosOutlinedButton.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosOutlinedTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosSwitch.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosTitleTextField.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
+    <ID>InvalidPackageDeclaration:KissosToolbar.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
     <ID>InvalidPackageDeclaration:LTLoanMapper.kt$package com.spgrvl.kissos.wallet.domain.deprecated.logic.loantrasactions</ID>
     <ID>InvalidPackageDeclaration:LTLoanRecordMapper.kt$package com.spgrvl.kissos.wallet.domain.deprecated.logic.loantrasactions</ID>
     <ID>InvalidPackageDeclaration:ListItem.kt$package com.spgrvl.kissos.domain.legacy.ui.theme.components</ID>
@@ -2576,7 +2576,7 @@
     <ID>InvalidPackageDeclaration:WrapContentRow.kt$package com.spgrvl.kissos.wallet.ui.theme.components</ID>
     <ID>LargeClass:TransactionsViewModel.kt$TransactionsViewModel : ComposeViewModel</ID>
     <ID>LongMethod:AccountModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun BoxWithConstraintsScope.AccountModal( modal: AccountModalData?, onCreateAccount: (CreateAccountData) -&gt; Unit, onEditAccount: (Account, balance: Double) -&gt; Unit, dismiss: () -&gt; Unit, )</ID>
-    <ID>LongMethod:ChooseIconModal.kt$fun ivyIcons(): List&lt;Any&gt;</ID>
+    <ID>LongMethod:ChooseIconModal.kt$fun kissosIcons(): List&lt;Any&gt;</ID>
     <ID>LongMethod:EditPlannedScreen.kt$@ExperimentalFoundationApi @Composable private fun BoxWithConstraintsScope.UI( screen: EditPlannedScreen, state: EditPlannedScreenState, onEvent: (EditPlannedScreenEvent) -&gt; Unit )</ID>
     <ID>LongMethod:EditTransactionScreen.kt$@ExperimentalFoundationApi @Composable private fun BoxWithConstraintsScope.UI( screen: EditTransactionScreen, transactionType: TransactionType, baseCurrency: String, initialTitle: String?, titleSuggestions: ImmutableSet&lt;String&gt;, description: String?, category: Category?, dateTime: LocalDateTime?, account: Account?, toAccount: Account?, dueDate: LocalDateTime?, amount: Double, customExchangeRateState: CustomExchangeRateState, categories: ImmutableList&lt;Category&gt;, accounts: ImmutableList&lt;Account&gt;, onTitleChanged: (String?) -&gt; Unit, onDescriptionChanged: (String?) -&gt; Unit, onAmountChanged: (Double) -&gt; Unit, onCategoryChanged: (Category?) -&gt; Unit, onAccountChanged: (Account) -&gt; Unit, onToAccountChanged: (Account) -&gt; Unit, onDueDateChanged: (LocalDateTime?) -&gt; Unit, onSetDate: (LocalDate) -&gt; Unit, onSetTime: (LocalTime) -&gt; Unit, onSetTransactionType: (TransactionType) -&gt; Unit, onCreateCategory: (CreateCategoryData) -&gt; Unit, onEditCategory: (Category) -&gt; Unit, onPayPlannedPayment: () -&gt; Unit, onSave: (closeScreen: Boolean) -&gt; Unit, onSetHasChanges: (hasChanges: Boolean) -&gt; Unit, onDelete: () -&gt; Unit, onCreateAccount: (CreateAccountData) -&gt; Unit, onExchangeRateChanged: (Double?) -&gt; Unit = { }, loanData: EditTransactionDisplayLoan = EditTransactionDisplayLoan(), backgroundProcessing: Boolean = false, hasChanges: Boolean = false, )</ID>
     <ID>LongMethod:FilterOverlay.kt$@Composable fun BoxWithConstraintsScope.FilterOverlay( visible: Boolean, baseCurrency: String, accounts: List&lt;Account&gt;, categories: List&lt;Category&gt;, filter: ReportFilter?, onClose: () -&gt; Unit, onSetFilter: (ReportFilter?) -&gt; Unit )</ID>
@@ -2668,17 +2668,17 @@
     <ID>MagicNumber:ImportViewModel.kt$ImportViewModel$100</ID>
     <ID>MagicNumber:InputField.kt$100</ID>
     <ID>MagicNumber:IntervalPickerRow.kt$180f</ID>
-    <ID>MagicNumber:IvyColors.kt$0.1f</ID>
-    <ID>MagicNumber:IvyColors.kt$0.4f</ID>
-    <ID>MagicNumber:IvyColors.kt$0.5</ID>
-    <ID>MagicNumber:IvyColors.kt$0.5f</ID>
-    <ID>MagicNumber:IvyColors.kt$0.6f</ID>
-    <ID>MagicNumber:IvyColors.kt$0.8f</ID>
-    <ID>MagicNumber:IvyColors.kt$3</ID>
-    <ID>MagicNumber:IvyLineChart.kt$3</ID>
-    <ID>MagicNumber:IvyModal.kt$0.01f</ID>
-    <ID>MagicNumber:IvyModal.kt$1000f</ID>
-    <ID>MagicNumber:IvyModal.kt$1100f</ID>
+    <ID>MagicNumber:KissosColors.kt$0.1f</ID>
+    <ID>MagicNumber:KissosColors.kt$0.4f</ID>
+    <ID>MagicNumber:KissosColors.kt$0.5</ID>
+    <ID>MagicNumber:KissosColors.kt$0.5f</ID>
+    <ID>MagicNumber:KissosColors.kt$0.6f</ID>
+    <ID>MagicNumber:KissosColors.kt$0.8f</ID>
+    <ID>MagicNumber:KissosColors.kt$3</ID>
+    <ID>MagicNumber:KissosLineChart.kt$3</ID>
+    <ID>MagicNumber:KissosModal.kt$0.01f</ID>
+    <ID>MagicNumber:KissosModal.kt$1000f</ID>
+    <ID>MagicNumber:KissosModal.kt$1100f</ID>
     <ID>MagicNumber:LoanDetailsScreen.kt$100</ID>
     <ID>MagicNumber:LoanTransactionsCore.kt$LoanTransactionsCore$12</ID>
     <ID>MagicNumber:LoanViewModel.kt$LoanViewModel$100</ID>
@@ -3166,8 +3166,8 @@
     <ID>MaxLineLength:ImplementationDependenciesMetadataConfigurationAccessors.kt$this</ID>
     <ID>MaxLineLength:IntransitiveDependenciesMetadataConfigurationAccessors.kt$fun</ID>
     <ID>MaxLineLength:IntransitiveDependenciesMetadataConfigurationAccessors.kt$this</ID>
-    <ID>MaxLineLength:IvyChecklistTextField.kt$"Cur habitio favere? Sunt navises promissio grandis, primus accolaes. Yes, there is chaos, it contacts with light."</ID>
-    <ID>MaxLineLength:IvyDescriptionTextField.kt$"Cur habitio favere? Sunt navises promissio grandis, primus accolaes. Yes, there is chaos, it contacts with light."</ID>
+    <ID>MaxLineLength:KissosChecklistTextField.kt$"Cur habitio favere? Sunt navises promissio grandis, primus accolaes. Yes, there is chaos, it contacts with light."</ID>
+    <ID>MaxLineLength:KissosDescriptionTextField.kt$"Cur habitio favere? Sunt navises promissio grandis, primus accolaes. Yes, there is chaos, it contacts with light."</ID>
     <ID>MaxLineLength:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$fun</ID>
     <ID>MaxLineLength:KotlinCompilerClasspathConfigurationAccessors.kt$fun</ID>
     <ID>MaxLineLength:KotlinCompilerPluginClasspathConfigurationAccessors.kt$fun</ID>
@@ -3741,8 +3741,8 @@
     <ID>MaximumLineLength:ImplementationDependenciesMetadataConfigurationAccessors.kt$fun</ID>
     <ID>MaximumLineLength:IntransitiveDependenciesMetadataConfigurationAccessors.kt$ </ID>
     <ID>MaximumLineLength:IntransitiveDependenciesMetadataConfigurationAccessors.kt$fun</ID>
-    <ID>MaximumLineLength:IvyChecklistTextField.kt$ </ID>
-    <ID>MaximumLineLength:IvyDescriptionTextField.kt$ </ID>
+    <ID>MaximumLineLength:KissosChecklistTextField.kt$ </ID>
+    <ID>MaximumLineLength:KissosDescriptionTextField.kt$ </ID>
     <ID>MaximumLineLength:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$fun</ID>
     <ID>MaximumLineLength:KotlinCompilerClasspathConfigurationAccessors.kt$fun</ID>
     <ID>MaximumLineLength:KotlinCompilerPluginClasspathConfigurationAccessors.kt$fun</ID>
@@ -4219,14 +4219,14 @@
     <ID>ModifierListSpacing:ImplementationConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:ImplementationDependenciesMetadataConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:IntransitiveDependenciesMetadataConfigurationAccessors.kt$internal</ID>
-    <ID>ModifierListSpacing:Ivy_composePlugin.kt$Ivy_composePlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_detektPlugin.kt$Ivy_detektPlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_featurePlugin.kt$Ivy_featurePlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_integration_testingPlugin.kt$Ivy_integration_testingPlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_modulePlugin.kt$Ivy_modulePlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_roomPlugin.kt$Ivy_roomPlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_scriptPlugin.kt$Ivy_scriptPlugin$public</ID>
-    <ID>ModifierListSpacing:Ivy_widgetPlugin.kt$Ivy_widgetPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_composePlugin.kt$Ivy_composePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_detektPlugin.kt$Ivy_detektPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_featurePlugin.kt$Ivy_featurePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_integration_testingPlugin.kt$Ivy_integration_testingPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_modulePlugin.kt$Ivy_modulePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_roomPlugin.kt$Ivy_roomPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_scriptPlugin.kt$Ivy_scriptPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_widgetPlugin.kt$Ivy_widgetPlugin$public</ID>
     <ID>ModifierListSpacing:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:KotlinCompilerClasspathConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:KotlinCompilerPluginClasspathConfigurationAccessors.kt$internal</ID>
@@ -4414,18 +4414,18 @@
     <ID>ModifierMissing:IncomeExpenseCards.kt$IncomeExpensesCards</ID>
     <ID>ModifierMissing:IntervalPickerRow.kt$IntervalPickerRow</ID>
     <ID>ModifierMissing:ItemStatisticToolbar.kt$ItemStatisticToolbar</ID>
-    <ID>ModifierMissing:IvyColorPicker.kt$IvyColorPicker</ID>
-    <ID>ModifierMissing:IvyComposeApp.kt$IvyWalletComponentPreview</ID>
-    <ID>ModifierMissing:IvyDividerDot.kt$IvyDividerDot</ID>
-    <ID>ModifierMissing:IvyModal.kt$IvyModal</ID>
-    <ID>ModifierMissing:IvyModal.kt$ModalActionsRow</ID>
-    <ID>ModifierMissing:IvyModal.kt$ModalPreviewActionRowSpacer</ID>
-    <ID>ModifierMissing:IvyModalComponents.kt$ModalAdd</ID>
-    <ID>ModifierMissing:IvyModalComponents.kt$ModalDelete</ID>
-    <ID>ModifierMissing:IvyModalComponents.kt$ModalDynamicPrimaryAction</ID>
-    <ID>ModifierMissing:IvyModalComponents.kt$ModalTitle</ID>
-    <ID>ModifierMissing:IvyToolbar.kt$IvyToolbar</ID>
-    <ID>ModifierMissing:IvyUI.kt$IvyUI</ID>
+    <ID>ModifierMissing:KissosColorPicker.kt$KissosColorPicker</ID>
+    <ID>ModifierMissing:KissosComposeApp.kt$KissosWalletComponentPreview</ID>
+    <ID>ModifierMissing:KissosDividerDot.kt$KissosDividerDot</ID>
+    <ID>ModifierMissing:KissosModal.kt$KissosModal</ID>
+    <ID>ModifierMissing:KissosModal.kt$ModalActionsRow</ID>
+    <ID>ModifierMissing:KissosModal.kt$ModalPreviewActionRowSpacer</ID>
+    <ID>ModifierMissing:KissosModalComponents.kt$ModalAdd</ID>
+    <ID>ModifierMissing:KissosModalComponents.kt$ModalDelete</ID>
+    <ID>ModifierMissing:KissosModalComponents.kt$ModalDynamicPrimaryAction</ID>
+    <ID>ModifierMissing:KissosModalComponents.kt$ModalTitle</ID>
+    <ID>ModifierMissing:KissosToolbar.kt$KissosToolbar</ID>
+    <ID>ModifierMissing:KissosUI.kt$KissosUI</ID>
     <ID>ModifierMissing:IvyWalletSteps.kt$IvyWalletSteps</ID>
     <ID>ModifierMissing:ListItem.kt$ListItem</ID>
     <ID>ModifierMissing:LoanModal.kt$LoanModal</ID>
@@ -4446,7 +4446,7 @@
     <ID>ModifierMissing:PlannedPaymentCard.kt$PlannedPaymentCard</ID>
     <ID>ModifierMissing:PlannedPaymentsBottomBar.kt$PlannedPaymentsBottomBar</ID>
     <ID>ModifierMissing:PlannedPaymentsLazyColumn.kt$PlannedPaymentsLazyColumn</ID>
-    <ID>ModifierMissing:Preview.kt$IvyComponentPreview</ID>
+    <ID>ModifierMissing:Preview.kt$KissosComponentPreview</ID>
     <ID>ModifierMissing:PrimaryAttributeColumn.kt$PrimaryAttributeColumn</ID>
     <ID>ModifierMissing:ProgressModal.kt$ProgressModal</ID>
     <ID>ModifierMissing:RateItem.kt$RateItem</ID>
@@ -4472,17 +4472,17 @@
     <ID>ModifierMissing:WalletBalanceWidgetContent.kt$WalletBalanceWidgetContent</ID>
     <ID>ModifierMissing:WalletBalanceWidgetContent.kt$WidgetClickableItem</ID>
     <ID>ModifierNotUsedAtRoot:ItemIcon.kt$modifier = modifier</ID>
-    <ID>ModifierNotUsedAtRoot:IvyNameTextFieldValue.kt$modifier = modifier</ID>
+    <ID>ModifierNotUsedAtRoot:KissosNameTextFieldValue.kt$modifier = modifier</ID>
     <ID>ModifierReused:ItemIcon.kt$Image( modifier = modifier, painter = painterResource(id = defaultIcon), colorFilter = ColorFilter.tint(tint), contentDescription = "item icon" )</ID>
     <ID>ModifierReused:ItemIcon.kt$ItemIconM( modifier = modifier, iconName = iconName, tint = tint, Default = { Image( modifier = modifier, painter = painterResource(id = defaultIcon), colorFilter = ColorFilter.tint(tint), contentDescription = "item icon" ) } )</ID>
     <ID>ModifierReused:ItemIcon.kt$ItemIconS( modifier = modifier, iconName = iconName, tint = tint, Default = { Image( modifier = modifier, painter = painterResource(id = defaultIcon), colorFilter = ColorFilter.tint(tint), contentDescription = "item icon" ) } )</ID>
-    <ID>ModifierReused:IvyChecklistTextField.kt$BasicTextField( modifier = textModifier .focusRequester(inputFieldFocus) .clickableNoIndication(rememberInteractionSource()) { inputFieldFocus.requestFocus() } .padding(vertical = paddingVertical), value = value, onValueChange = onValueChanged, readOnly = readOnly, textStyle = UI.typo.b2.style( color = textColor, fontWeight = fontWeight, textAlign = textAlign ), singleLine = false, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Sentences, autoCorrect = true, keyboardType = KeyboardType.Text, imeAction = ImeAction.Done ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
-    <ID>ModifierReused:IvyChecklistTextField.kt$Text( modifier = textModifier .clickableNoIndication(rememberInteractionSource()) { inputFieldFocus.requestFocus() } .padding(vertical = paddingVertical), text = hint!!, textAlign = textAlign, style = UI.typo.b2.style( color = hintColor, fontWeight = hintFontWeight, textAlign = textAlign ) )</ID>
-    <ID>ModifierReused:IvyDescriptionTextField.kt$BasicTextField( modifier = textModifier.testTag(testTag), value = value, onValueChange = onValueChanged, textStyle = UI.typo.nB2.style( color = textColor, fontWeight = fontWeight, textAlign = TextAlign.Start ), singleLine = false, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Sentences, autoCorrect = true, keyboardType = KeyboardType.Text, imeAction = ImeAction.Done ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
-    <ID>ModifierReused:IvyDescriptionTextField.kt$Text( modifier = textModifier, text = hint!!, textAlign = TextAlign.Start, style = UI.typo.b2.style( color = hintColor, fontWeight = fontWeight, textAlign = TextAlign.Start ) )</ID>
-    <ID>ModifierReused:IvyNumberTextField.kt$BasicTextField( modifier = textModifier .testTag("base_number_input"), value = value, onValueChange = onValueChanged, textStyle = UI.typo.nB2.style( color = textColor, fontWeight = fontWeight, textAlign = TextAlign.Center ), singleLine = true, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Characters, imeAction = ImeAction.Done, keyboardType = KeyboardType.Number, autoCorrect = false ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
-    <ID>ModifierReused:IvyNumberTextField.kt$Text( modifier = textModifier, text = hint!!, textAlign = TextAlign.Start, style = UI.typo.nB2.style( color = hintColor, fontWeight = fontWeight, textAlign = TextAlign.Center ) )</ID>
-    <ID>ModifierWithoutDefault:IvyLineChart.kt$modifier</ID>
+    <ID>ModifierReused:KissosChecklistTextField.kt$BasicTextField( modifier = textModifier .focusRequester(inputFieldFocus) .clickableNoIndication(rememberInteractionSource()) { inputFieldFocus.requestFocus() } .padding(vertical = paddingVertical), value = value, onValueChange = onValueChanged, readOnly = readOnly, textStyle = UI.typo.b2.style( color = textColor, fontWeight = fontWeight, textAlign = textAlign ), singleLine = false, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Sentences, autoCorrect = true, keyboardType = KeyboardType.Text, imeAction = ImeAction.Done ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
+    <ID>ModifierReused:KissosChecklistTextField.kt$Text( modifier = textModifier .clickableNoIndication(rememberInteractionSource()) { inputFieldFocus.requestFocus() } .padding(vertical = paddingVertical), text = hint!!, textAlign = textAlign, style = UI.typo.b2.style( color = hintColor, fontWeight = hintFontWeight, textAlign = textAlign ) )</ID>
+    <ID>ModifierReused:KissosDescriptionTextField.kt$BasicTextField( modifier = textModifier.testTag(testTag), value = value, onValueChange = onValueChanged, textStyle = UI.typo.nB2.style( color = textColor, fontWeight = fontWeight, textAlign = TextAlign.Start ), singleLine = false, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Sentences, autoCorrect = true, keyboardType = KeyboardType.Text, imeAction = ImeAction.Done ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
+    <ID>ModifierReused:KissosDescriptionTextField.kt$Text( modifier = textModifier, text = hint!!, textAlign = TextAlign.Start, style = UI.typo.b2.style( color = hintColor, fontWeight = fontWeight, textAlign = TextAlign.Start ) )</ID>
+    <ID>ModifierReused:KissosNumberTextField.kt$BasicTextField( modifier = textModifier .testTag("base_number_input"), value = value, onValueChange = onValueChanged, textStyle = UI.typo.nB2.style( color = textColor, fontWeight = fontWeight, textAlign = TextAlign.Center ), singleLine = true, cursorBrush = SolidColor(UI.colors.pureInverse), visualTransformation = visualTransformation, keyboardOptions = keyboardOptions ?: KeyboardOptions( capitalization = KeyboardCapitalization.Characters, imeAction = ImeAction.Done, keyboardType = KeyboardType.Number, autoCorrect = false ), keyboardActions = keyboardActions ?: KeyboardActions( onDone = { hideKeyboard(view) } ) )</ID>
+    <ID>ModifierReused:KissosNumberTextField.kt$Text( modifier = textModifier, text = hint!!, textAlign = TextAlign.Start, style = UI.typo.nB2.style( color = hintColor, fontWeight = fontWeight, textAlign = TextAlign.Center ) )</ID>
+    <ID>ModifierWithoutDefault:KissosLineChart.kt$modifier</ID>
     <ID>MultipleEmitters:AmountCurrency.kt$AmountCurrencyB1</ID>
     <ID>MultipleEmitters:AmountCurrency.kt$AmountCurrencyCaption</ID>
     <ID>MultipleEmitters:AmountCurrency.kt$AmountCurrencyH1</ID>
@@ -4511,11 +4511,11 @@
     <ID>MultipleEmitters:HistoryDateDivider.kt$HistoryDateDivider</ID>
     <ID>MultipleEmitters:ImportFrom.kt$ImportOption</ID>
     <ID>MultipleEmitters:ImportInstructions.kt$UploadFileStep</ID>
-    <ID>MultipleEmitters:IvyBorderButton.kt$IconEnd</ID>
-    <ID>MultipleEmitters:IvyBorderButton.kt$IconStart</ID>
-    <ID>MultipleEmitters:IvyButton.kt$IconEnd</ID>
-    <ID>MultipleEmitters:IvyButton.kt$IconStart</ID>
-    <ID>MultipleEmitters:IvyColorPicker.kt$ColorItem</ID>
+    <ID>MultipleEmitters:KissosBorderButton.kt$IconEnd</ID>
+    <ID>MultipleEmitters:KissosBorderButton.kt$IconStart</ID>
+    <ID>MultipleEmitters:KissosButton.kt$IconEnd</ID>
+    <ID>MultipleEmitters:KissosButton.kt$IconStart</ID>
+    <ID>MultipleEmitters:KissosColorPicker.kt$ColorItem</ID>
     <ID>MultipleEmitters:IvyWalletSteps.kt$IvyWalletSteps</ID>
     <ID>MultipleEmitters:ListItem.kt$ListItem</ID>
     <ID>MultipleEmitters:LoanModal.kt$Account</ID>
@@ -5014,26 +5014,26 @@
     <ID>NoImplicitFunctionReturnType:ExchangeRatesViewModel.kt$ExchangeRatesViewModel$private fun toUi(entity: ExchangeRateEntity)</ID>
     <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private fun switchTheme()</ID>
     <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private suspend fun dismissCustomerJourneyCard(card: CustomerJourneyCardModel)</ID>
-    <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private suspend fun reload( timePeriod: TimePeriod = ivyContext.selectedPeriod )</ID>
+    <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private suspend fun reload( timePeriod: TimePeriod = kissosContext.selectedPeriod )</ID>
     <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private suspend fun setBuffer(newBuffer: Double)</ID>
     <ID>NoImplicitFunctionReturnType:HomeViewModel.kt$HomeViewModel$private suspend fun setCurrency(newCurrency: String)</ID>
-    <ID>NoImplicitFunctionReturnType:IvyAnimation.kt$fun &lt;T&gt; springBounce( stiffness: Float = 500f, )</ID>
-    <ID>NoImplicitFunctionReturnType:IvyAnimation.kt$fun &lt;T&gt; springBounceFast()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyAnimation.kt$fun &lt;T&gt; springBounceMedium()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyAnimation.kt$fun &lt;T&gt; springBounceSlow()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyAnimation.kt$fun &lt;T&gt; springBounceVerySlow()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun gradientExpenses()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun mediumBlur()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun pureBlur()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun Int.toComposeColor()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asHorizontalBrush()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asVerticalBrush()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun black()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun from(gradient: com.spgrvl.kissos.design.l0_system.Gradient)</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun from(startColor: Int, endColor: Int?)</ID>
-    <ID>NoImplicitFunctionReturnType:IvyColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun solid(color: Color)</ID>
-    <ID>NoImplicitFunctionReturnType:IvyModal.kt$@Composable fun modalPreviewActionRowHeight()</ID>
-    <ID>NoImplicitFunctionReturnType:IvyRoomDatabase.kt$IvyRoomDatabase.Companion$fun migrations()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosAnimation.kt$fun &lt;T&gt; springBounce( stiffness: Float = 500f, )</ID>
+    <ID>NoImplicitFunctionReturnType:KissosAnimation.kt$fun &lt;T&gt; springBounceFast()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosAnimation.kt$fun &lt;T&gt; springBounceMedium()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosAnimation.kt$fun &lt;T&gt; springBounceSlow()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosAnimation.kt$fun &lt;T&gt; springBounceVerySlow()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun gradientExpenses()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun mediumBlur()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun pureBlur()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun Int.toComposeColor()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asHorizontalBrush()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun asVerticalBrush()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") @Composable fun black()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun from(gradient: com.spgrvl.kissos.design.l0_system.Gradient)</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun from(startColor: Int, endColor: Int?)</ID>
+    <ID>NoImplicitFunctionReturnType:KissosColors.kt$Gradient.Companion$@Deprecated("Old design system. Use `:ivy-design` and Material3") fun solid(color: Color)</ID>
+    <ID>NoImplicitFunctionReturnType:KissosModal.kt$@Composable fun modalPreviewActionRowHeight()</ID>
+    <ID>NoImplicitFunctionReturnType:KissosRoomDatabase.kt$KissosRoomDatabase.Companion$fun migrations()</ID>
     <ID>NoImplicitFunctionReturnType:LoanTransactionsCore.kt$LoanTransactionsCore$suspend fun fetchAccounts()</ID>
     <ID>NoImplicitFunctionReturnType:LoanTransactionsCore.kt$LoanTransactionsCore$suspend fun fetchAllLoanRecords(loanId: UUID)</ID>
     <ID>NoImplicitFunctionReturnType:LoanTransactionsCore.kt$LoanTransactionsCore$suspend fun fetchLoan(loanId: UUID)</ID>
@@ -7102,11 +7102,11 @@
     <ID>NoWildcardImports:InputField.kt$import com.spgrvl.kissos.design.utils.*</ID>
     <ID>NoWildcardImports:IntransitiveDependenciesMetadataConfigurationAccessors.kt$import org.gradle.kotlin.dsl.*</ID>
     <ID>NoWildcardImports:IntransitiveDependenciesMetadataConfigurationAccessors.kt$import org.gradle.kotlin.dsl.accessors.runtime.*</ID>
-    <ID>NoWildcardImports:IvyRoomDatabase.kt$import androidx.room.*</ID>
-    <ID>NoWildcardImports:IvySwitch.kt$import androidx.compose.foundation.layout.*</ID>
-    <ID>NoWildcardImports:IvySwitch.kt$import androidx.compose.runtime.*</ID>
-    <ID>NoWildcardImports:IvyToolbar.kt$import androidx.compose.foundation.layout.*</ID>
-    <ID>NoWildcardImports:IvyWalletDesign.kt$import com.spgrvl.kissos.design.l0_system.*</ID>
+    <ID>NoWildcardImports:KissosRoomDatabase.kt$import androidx.room.*</ID>
+    <ID>NoWildcardImports:KissosSwitch.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>NoWildcardImports:KissosSwitch.kt$import androidx.compose.runtime.*</ID>
+    <ID>NoWildcardImports:KissosToolbar.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>NoWildcardImports:KissosWalletDesign.kt$import com.spgrvl.kissos.design.l0_system.*</ID>
     <ID>NoWildcardImports:Keyboard.kt$import androidx.compose.runtime.*</ID>
     <ID>NoWildcardImports:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$import org.gradle.kotlin.dsl.*</ID>
     <ID>NoWildcardImports:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$import org.gradle.kotlin.dsl.accessors.runtime.*</ID>
@@ -8258,13 +8258,13 @@
     <ID>PackageName:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageName:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
     <ID>PackageName:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._d2d1dfc15d0c2a9463dd9442318702f0</ID>
-    <ID>PackageName:IvyColors.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageName:IvyIcon.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
-    <ID>PackageName:IvyPadding.kt$package com.spgrvl.kissos.design.l1_buildingBlocks.data</ID>
-    <ID>PackageName:IvyShapes.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageName:IvyText.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
-    <ID>PackageName:IvyTheme.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageName:IvyTypography.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageName:KissosColors.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageName:KissosIcon.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
+    <ID>PackageName:KissosPadding.kt$package com.spgrvl.kissos.design.l1_buildingBlocks.data</ID>
+    <ID>PackageName:KissosShapes.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageName:KissosText.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
+    <ID>PackageName:KissosTheme.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageName:KissosTypography.kt$package com.spgrvl.kissos.design.l0_system</ID>
     <ID>PackageName:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._0f6c96550b20caec005f95558bbb0634</ID>
     <ID>PackageName:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageName:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
@@ -8369,7 +8369,7 @@
     <ID>PackageName:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageName:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
     <ID>PackageName:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._d2d1dfc15d0c2a9463dd9442318702f0</ID>
-    <ID>PackageName:ScreenTitle.kt$package com.spgrvl.kissos.design.l3_ivyComponents</ID>
+    <ID>PackageName:ScreenTitle.kt$package com.spgrvl.kissos.design.l3_kissosComponents</ID>
     <ID>PackageName:Shapes.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
     <ID>PackageName:Spacers.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
     <ID>PackageName:Switch.kt$package com.spgrvl.kissos.design.l2_components</ID>
@@ -9504,13 +9504,13 @@
     <ID>PackageNaming:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageNaming:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
     <ID>PackageNaming:IntransitiveDependenciesMetadataConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._d2d1dfc15d0c2a9463dd9442318702f0</ID>
-    <ID>PackageNaming:IvyColors.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageNaming:IvyIcon.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
-    <ID>PackageNaming:IvyPadding.kt$package com.spgrvl.kissos.design.l1_buildingBlocks.data</ID>
-    <ID>PackageNaming:IvyShapes.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageNaming:IvyText.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
-    <ID>PackageNaming:IvyTheme.kt$package com.spgrvl.kissos.design.l0_system</ID>
-    <ID>PackageNaming:IvyTypography.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageNaming:KissosColors.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageNaming:KissosIcon.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
+    <ID>PackageNaming:KissosPadding.kt$package com.spgrvl.kissos.design.l1_buildingBlocks.data</ID>
+    <ID>PackageNaming:KissosShapes.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageNaming:KissosText.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
+    <ID>PackageNaming:KissosTheme.kt$package com.spgrvl.kissos.design.l0_system</ID>
+    <ID>PackageNaming:KissosTypography.kt$package com.spgrvl.kissos.design.l0_system</ID>
     <ID>PackageNaming:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._0f6c96550b20caec005f95558bbb0634</ID>
     <ID>PackageNaming:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageNaming:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
@@ -9615,7 +9615,7 @@
     <ID>PackageNaming:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._a568f78b412045bc377fc4283b656e34</ID>
     <ID>PackageNaming:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._c23ff688c05f8d96905906a4ad831734</ID>
     <ID>PackageNaming:RuntimeOnlyConfigurationAccessors.kt$package gradle.kotlin.dsl.accessors._d2d1dfc15d0c2a9463dd9442318702f0</ID>
-    <ID>PackageNaming:ScreenTitle.kt$package com.spgrvl.kissos.design.l3_ivyComponents</ID>
+    <ID>PackageNaming:ScreenTitle.kt$package com.spgrvl.kissos.design.l3_kissosComponents</ID>
     <ID>PackageNaming:Shapes.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
     <ID>PackageNaming:Spacers.kt$package com.spgrvl.kissos.design.l1_buildingBlocks</ID>
     <ID>PackageNaming:Switch.kt$package com.spgrvl.kissos.design.l2_components</ID>
@@ -10054,7 +10054,7 @@
     <ID>PrintStackTrace:EditTransactionViewModel.kt$EditTransactionViewModel$e</ID>
     <ID>PrintStackTrace:ExportCSVLogic.kt$ExportCSVLogic$e</ID>
     <ID>PrintStackTrace:FileUtil.kt$e</ID>
-    <ID>PrintStackTrace:IvyCurrency.kt$IvyCurrency.Companion$e</ID>
+    <ID>PrintStackTrace:KissosCurrency.kt$KissosCurrency.Companion$e</ID>
     <ID>PrintStackTrace:Keyboard.kt$e</ID>
     <ID>PrintStackTrace:LoanCreator.kt$LoanCreator$e</ID>
     <ID>PrintStackTrace:LoanRecordCreator.kt$LoanRecordCreator$e</ID>
@@ -10129,7 +10129,7 @@
     <ID>ReturnCount:EditTransactionViewModel.kt$EditTransactionViewModel$private suspend fun defaultAccountId( screen: EditTransactionScreen, accounts: List&lt;Account&gt;, ): UUID</ID>
     <ID>ReturnCount:EditTransactionViewModel.kt$EditTransactionViewModel$private suspend fun getDisplayLoanHelper(trans: Transaction): EditTransactionDisplayLoan</ID>
     <ID>ReturnCount:ExchangeRatesLogic.kt$ExchangeRatesLogic$private suspend fun exchangeRate( baseCurrency: String, currency: String ): Double</ID>
-    <ID>ReturnCount:IvyCurrency.kt$IvyCurrency.Companion$fun fromCode(code: String): IvyCurrency?</ID>
+    <ID>ReturnCount:KissosCurrency.kt$KissosCurrency.Companion$fun fromCode(code: String): KissosCurrency?</ID>
     <ID>ReturnCount:LoanCreator.kt$LoanCreator$suspend fun create( data: CreateLoanData, onRefreshUI: suspend (Loan) -&gt; Unit ): UUID?</ID>
     <ID>ReturnCount:LoanRecordCreator.kt$LoanRecordCreator$suspend fun create( loanId: UUID, data: CreateLoanRecordData, onRefreshUI: suspend (LoanRecord) -&gt; Unit ): UUID?</ID>
     <ID>ReturnCount:PlannedPaymentsLogic.kt$PlannedPaymentsLogic$private suspend fun amountForMonthInBaseCurrency( plannedPayment: PlannedPaymentRule, baseCurrency: String, accounts: List&lt;Account&gt; ): Double</ID>
@@ -10401,8 +10401,8 @@
     <ID>TopLevelPropertyNaming:ChooseIconModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") private const val ICON_PICKER_ICONS_PER_ROW = 5</ID>
     <ID>TopLevelPropertyNaming:EditBottomSheet.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") const val SWIPE_UP_EXPANDED_THRESHOLD = 200</ID>
     <ID>TopLevelPropertyNaming:HomeMoreMenu.kt$private const val SWIPE_UP_THRESHOLD_CLOSE_MORE_MENU = 300</ID>
-    <ID>TopLevelPropertyNaming:IvyModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") const val DURATION_MODAL_ANIM = 200</ID>
-    <ID>TopLevelPropertyNaming:IvyModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") private const val DURATION_BACKGROUND_BLUR_ANIM = 400</ID>
+    <ID>TopLevelPropertyNaming:KissosModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") const val DURATION_MODAL_ANIM = 200</ID>
+    <ID>TopLevelPropertyNaming:KissosModal.kt$@Deprecated("Old design system. Use `:ivy-design` and Material3") private const val DURATION_BACKGROUND_BLUR_ANIM = 400</ID>
     <ID>TopLevelPropertyNaming:ParseStatus.kt$const val SAMPLE_SIZE = 20</ID>
     <ID>TopLevelPropertyNaming:PieChart.kt$const val PIE_CHART_RADIUS_DP = 128</ID>
     <ID>TopLevelPropertyNaming:PieChart.kt$const val RADIUS_DP = 112f</ID>
@@ -10596,8 +10596,8 @@
     <ID>UnstableCollections:FilterOverlay.kt$List&lt;Account&gt;</ID>
     <ID>UnstableCollections:FilterOverlay.kt$List&lt;Category&gt;</ID>
     <ID>UnstableCollections:IncomeExpenseCards.kt$List&lt;TransactionHistoryItem&gt;</ID>
-    <ID>UnstableCollections:IvyLineChart.kt$List&lt;Function&gt;</ID>
-    <ID>UnstableCollections:IvyLineChart.kt$List&lt;Value&gt;</ID>
+    <ID>UnstableCollections:KissosLineChart.kt$List&lt;Function&gt;</ID>
+    <ID>UnstableCollections:KissosLineChart.kt$List&lt;Value&gt;</ID>
     <ID>UnstableCollections:LoanModal.kt$List&lt;Account&gt;</ID>
     <ID>UnstableCollections:LoanRecordModal.kt$List&lt;Account&gt;</ID>
     <ID>UnstableCollections:OnboardingAccounts.kt$List&lt;AccountBalance&gt;</ID>
@@ -10624,10 +10624,10 @@
     <ID>UnusedParameter:FileUtil.kt$directoryType: String</ID>
     <ID>UnusedParameter:HomeMoreMenu.kt$onCurrencyClick: () -&gt; Unit</ID>
     <ID>UnusedParameter:HomeViewModel.kt$HomeViewModel$unit: Unit</ID>
-    <ID>UnusedParameter:IvyBasicTextField.kt$textColor: Color = UI.colors.pureInverse</ID>
-    <ID>UnusedParameter:IvyLineChart.kt$cellSize: Float</ID>
-    <ID>UnusedParameter:IvyLineChart.kt$chartWidth: Float</ID>
-    <ID>UnusedParameter:IvyLineChart.kt$offsetRight: Float</ID>
+    <ID>UnusedParameter:KissosBasicTextField.kt$textColor: Color = UI.colors.pureInverse</ID>
+    <ID>UnusedParameter:KissosLineChart.kt$cellSize: Float</ID>
+    <ID>UnusedParameter:KissosLineChart.kt$chartWidth: Float</ID>
+    <ID>UnusedParameter:KissosLineChart.kt$offsetRight: Float</ID>
     <ID>UnusedParameter:LoansScreen.kt$screen: LoansScreen</ID>
     <ID>UnusedParameter:MainScreen.kt$screen: MainScreen</ID>
     <ID>UnusedParameter:ParseFields.kt$metadata: Unit</ID>
@@ -10644,14 +10644,14 @@
     <ID>UnusedPrivateProperty:AccountModal.kt$val context = LocalContext.current</ID>
     <ID>UnusedPrivateProperty:DateExt.kt$val seconds = TimeUnit.MILLISECONDS.toSeconds(timeLeftAfterCalculations)</ID>
     <ID>UnusedPrivateProperty:HomeMoreMenu.kt$val context = LocalContext.current</ID>
-    <ID>UnusedPrivateProperty:IvyLineChart.kt$val marginFromX = 4.dp.toPx()</ID>
+    <ID>UnusedPrivateProperty:KissosLineChart.kt$val marginFromX = 4.dp.toPx()</ID>
     <ID>UnusedPrivateProperty:LoanDetailsViewModel.kt$LoanDetailsViewModel$private val accountDao: AccountDao</ID>
-    <ID>UnusedPrivateProperty:LoanDetailsViewModel.kt$LoanDetailsViewModel$private val ivyContext: IvyWalletCtx</ID>
+    <ID>UnusedPrivateProperty:LoanDetailsViewModel.kt$LoanDetailsViewModel$private val kissosContext: KissosWalletCtx</ID>
     <ID>UnusedPrivateProperty:LoanDetailsViewModel.kt$LoanDetailsViewModel$private val loanDao: LoanDao</ID>
     <ID>UnusedPrivateProperty:OnboardingPrivacyTC.kt$val context = LocalContext.current</ID>
     <ID>UnusedPrivateProperty:TransactionReminderLogic.kt$TransactionReminderLogic.Companion$private const val UNIQUE_WORK_NAME_V1 = "transaction_reminder_work"</ID>
-    <ID>UseCheckOrError:IvyContext.kt$IvyContext$throw IllegalStateException("screenHeight not initialized")</ID>
-    <ID>UseCheckOrError:IvyContext.kt$IvyContext$throw IllegalStateException("screenWidth not initialized")</ID>
+    <ID>UseCheckOrError:KissosContext.kt$KissosContext$throw IllegalStateException("screenHeight not initialized")</ID>
+    <ID>UseCheckOrError:KissosContext.kt$KissosContext$throw IllegalStateException("screenWidth not initialized")</ID>
     <ID>UseCheckOrError:SharedPrefs.kt$SharedPrefs$throw IllegalStateException("SharePrefs key '$key' cannot be null")</ID>
     <ID>UseCheckOrError:ZipUtils.kt$throw IllegalStateException("Location file must be directory or not exist")</ID>
     <ID>UtilityClassWithPublicConstructor:WidgetBase.kt$WidgetBase</ID>
@@ -11300,11 +11300,11 @@
     <ID>WildcardImport:InputField.kt$import com.spgrvl.kissos.design.utils.*</ID>
     <ID>WildcardImport:IntransitiveDependenciesMetadataConfigurationAccessors.kt$import org.gradle.kotlin.dsl.*</ID>
     <ID>WildcardImport:IntransitiveDependenciesMetadataConfigurationAccessors.kt$import org.gradle.kotlin.dsl.accessors.runtime.*</ID>
-    <ID>WildcardImport:IvyRoomDatabase.kt$import androidx.room.*</ID>
-    <ID>WildcardImport:IvySwitch.kt$import androidx.compose.foundation.layout.*</ID>
-    <ID>WildcardImport:IvySwitch.kt$import androidx.compose.runtime.*</ID>
-    <ID>WildcardImport:IvyToolbar.kt$import androidx.compose.foundation.layout.*</ID>
-    <ID>WildcardImport:IvyWalletDesign.kt$import com.spgrvl.kissos.design.l0_system.*</ID>
+    <ID>WildcardImport:KissosRoomDatabase.kt$import androidx.room.*</ID>
+    <ID>WildcardImport:KissosSwitch.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:KissosSwitch.kt$import androidx.compose.runtime.*</ID>
+    <ID>WildcardImport:KissosToolbar.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:KissosWalletDesign.kt$import com.spgrvl.kissos.design.l0_system.*</ID>
     <ID>WildcardImport:Keyboard.kt$import androidx.compose.runtime.*</ID>
     <ID>WildcardImport:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$import org.gradle.kotlin.dsl.*</ID>
     <ID>WildcardImport:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$import org.gradle.kotlin.dsl.accessors.runtime.*</ID>

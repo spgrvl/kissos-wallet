@@ -23,15 +23,15 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.domain.RootScreen
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.rootScreen
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.dynamicContrast
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import kotlinx.collections.immutable.ImmutableList
@@ -42,7 +42,7 @@ fun CustomerJourney(
     modifier: Modifier = Modifier,
     onDismiss: (CustomerJourneyCardModel) -> Unit,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
     val nav = navigation()
     // Check is added for Paparazzi Test where context is different
     if (LocalContext.current is RootScreen) {
@@ -62,7 +62,7 @@ fun CustomerJourney(
                     onDismiss(card)
                 }
             ) {
-                card.onAction(nav, ivyContext, rootScreen)
+                card.onAction(nav, kissosContext, rootScreen)
             }
         }
     } else {
@@ -105,7 +105,7 @@ fun CustomerJourneyCard(
             )
 
             if (cardData.hasDismiss) {
-                IvyIcon(
+                KissosIcon(
                     modifier = Modifier
                         .clickable {
                             onDismiss()
@@ -136,7 +136,7 @@ fun CustomerJourneyCard(
         Spacer(Modifier.height(32.dp))
 
         if (cardData.cta != null) {
-            IvyButton(
+            KissosButton(
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(horizontal = 20.dp)
@@ -163,7 +163,7 @@ fun CustomerJourneyCard(
 @Preview
 @Composable
 private fun PreviewCard() {
-    IvyPreview {
+    KissosPreview {
         CustomerJourneyCard(
             cardData = CustomerJourneyCardsProvider.adjustBalanceCard(),
             onCTA = { },

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.data.model.IntervalType
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.forDisplay
 import com.spgrvl.kissos.legacy.utils.formatDateOnly
 import com.spgrvl.kissos.legacy.utils.timeNowUTC
@@ -29,7 +29,7 @@ import com.spgrvl.kissos.legacy.utils.uppercaseLocal
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.components.AddPrimaryAttributeButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import java.time.LocalDateTime
 
 @Composable
@@ -96,7 +96,7 @@ private fun RecurringRuleCard(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(icon = R.drawable.ic_planned_payments)
+        KissosIcon(icon = R.drawable.ic_planned_payments)
 
         Spacer(Modifier.width(8.dp))
 
@@ -139,7 +139,7 @@ private fun RecurringRuleCard(
 @Preview
 @Composable
 private fun Preview_Empty() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         RecurringRule(
             startDate = null,
             intervalN = null,
@@ -153,7 +153,7 @@ private fun Preview_Empty() {
 @Preview
 @Composable
 private fun Preview_Repeat() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         RecurringRule(
             startDate = timeNowUTC(),
             intervalN = 1,
@@ -167,7 +167,7 @@ private fun Preview_Repeat() {
 @Preview
 @Composable
 private fun Preview_OneTime() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         RecurringRule(
             startDate = timeNowUTC().plusDays(5),
             intervalN = null,

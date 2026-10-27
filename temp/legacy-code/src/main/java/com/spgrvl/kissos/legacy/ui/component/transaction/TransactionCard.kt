@@ -48,9 +48,9 @@ import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.BlueLight
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyText
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosText
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
@@ -62,24 +62,24 @@ import com.spgrvl.kissos.navigation.TransactionsScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.ui.time.TimeFormatter
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Blue
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.GradientOrangeRevert
 import com.spgrvl.kissos.wallet.ui.theme.GradientRed
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.GreenDark
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.gradientExpenses
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
@@ -214,7 +214,7 @@ fun TransactionCard(
                 modifier = Modifier.padding(start = 68.dp),
                 text = "${
                     transaction.toAmount.toDouble()
-                        .format(IvyCurrency.getDecimalPlaces(toAccountCurrency))
+                        .format(KissosCurrency.getDecimalPlaces(toAccountCurrency))
                 } $toAccountCurrency",
                 style = UI.typo.nB2.style(
                     color = Gray,
@@ -228,7 +228,7 @@ fun TransactionCard(
             Spacer(Modifier.height(16.dp))
             val isExpense = transaction.type == TransactionType.EXPENSE
             Row {
-                IvyButton(
+                KissosButton(
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 24.dp),
@@ -245,7 +245,7 @@ fun TransactionCard(
 
                 Spacer(Modifier.width(8.dp))
 
-                IvyButton(
+                KissosButton(
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 24.dp),
@@ -446,7 +446,7 @@ private fun TransactionBadge(
 
         SpacerHor(width = 4.dp)
 
-        IvyText(
+        KissosText(
             text = text,
             typo = UI.typo.c.style(
                 color = contrastColor,
@@ -523,7 +523,7 @@ private fun TransferHeader(
 
         Spacer(Modifier.width(12.dp))
 
-        IvyIcon(icon = R.drawable.ic_arrow_right, tint = accountContrastColor)
+        KissosIcon(icon = R.drawable.ic_arrow_right, tint = accountContrastColor)
 
         Spacer(Modifier.width(12.dp))
 
@@ -619,14 +619,14 @@ fun TypeAmountCurrency(
                 // Transfer
                 AmountTypeStyle(
                     icon = R.drawable.ic_transfer,
-                    gradient = GradientIvy,
+                    gradient = GradientKissos,
                     iconTint = White,
-                    textColor = Ivy
+                    textColor = Kissos
                 )
             }
         }
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier
                 .background(style.gradient.asHorizontalBrush(), CircleShape),
             icon = style.icon,
@@ -655,7 +655,7 @@ private data class AmountTypeStyle(
 @Preview
 @Composable
 private fun PreviewUpcomingExpense() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "Cash", Green.toArgb())
             val food = Category(
@@ -694,7 +694,7 @@ private fun PreviewUpcomingExpense() {
 @Preview
 @Composable
 private fun PreviewUpcomingExpenseBadgeSecondRow() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "Cash", Green.toArgb())
             val food = Category(
@@ -733,7 +733,7 @@ private fun PreviewUpcomingExpenseBadgeSecondRow() {
 @Preview
 @Composable
 private fun PreviewOverdueExpense() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "Cash", color = Green.toArgb())
             val food = Category(
@@ -772,7 +772,7 @@ private fun PreviewOverdueExpense() {
 @Preview
 @Composable
 private fun PreviewNormalExpense() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "Cash", color = Green.toArgb())
             val food = Category(
@@ -810,7 +810,7 @@ private fun PreviewNormalExpense() {
 @Preview
 @Composable
 private fun PreviewIncome() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "DSK Bank", color = Green.toArgb())
             val category = Category(
@@ -848,10 +848,10 @@ private fun PreviewIncome() {
 @Preview
 @Composable
 private fun PreviewTransfer() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val acc1 = Account(name = "DSK Bank", color = Green.toArgb(), icon = "bank")
-            val acc2 = Account(name = "Revolut", color = IvyDark.toArgb(), icon = "revolut")
+            val acc2 = Account(name = "Revolut", color = KissosDark.toArgb(), icon = "revolut")
 
             item {
                 TransactionCard(
@@ -880,13 +880,13 @@ private fun PreviewTransfer() {
 @Preview
 @Composable
 private fun PreviewTransfer_differentCurrency() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val acc1 = Account(name = "DSK Bank", color = Green.toArgb(), icon = "bank")
             val acc2 = Account(
                 name = "Revolut",
                 currency = "EUR",
-                color = IvyDark.toArgb(),
+                color = KissosDark.toArgb(),
                 icon = "revolut"
             )
 

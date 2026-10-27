@@ -36,10 +36,10 @@ import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.data.model.LoanType
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Loan
 import com.spgrvl.kissos.legacy.humanReadableType
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.getDefaultFIATCurrency
 import com.spgrvl.kissos.legacy.utils.horizontalSwipeListener
 import com.spgrvl.kissos.legacy.utils.rememberSwipeListenerState
@@ -55,7 +55,7 @@ import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilled
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.ProgressBar
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderButton
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderModalSingleType
@@ -111,9 +111,9 @@ private fun BoxWithConstraintsScope.UI(
 
         val scrollState = rememberScrollPositionListState(
             key = "loans_lazy_column",
-            initialFirstVisibleItemIndex = ivyWalletCtx()
+            initialFirstVisibleItemIndex = kissosWalletCtx()
                 .loanListState?.firstVisibleItemIndex ?: 0,
-            initialFirstVisibleItemScrollOffset = ivyWalletCtx()
+            initialFirstVisibleItemScrollOffset = kissosWalletCtx()
                 .loanListState?.firstVisibleItemScrollOffset ?: 0
         )
 
@@ -407,7 +407,7 @@ private fun NoLoansEmptyState(
     ) {
         Spacer(Modifier.height(32.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_custom_loan_l,
             tint = Gray
         )
@@ -486,7 +486,7 @@ private fun Preview(theme: Theme = Theme.LIGHT) {
         paidOffLoanVisibility = true,
         dateTime = Instant.now()
     )
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         UI(
             state = state
         ) {}

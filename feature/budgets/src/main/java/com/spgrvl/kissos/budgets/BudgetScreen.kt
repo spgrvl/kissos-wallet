@@ -35,7 +35,7 @@ import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderButton
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderModalSingleType
 import com.spgrvl.kissos.wallet.ui.theme.wallet.AmountCurrencyB1
@@ -335,7 +335,7 @@ private fun NoBudgetsEmptyState(
     ) {
         Spacer(Modifier.height(32.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_budget_xl,
             tint = Gray
         )

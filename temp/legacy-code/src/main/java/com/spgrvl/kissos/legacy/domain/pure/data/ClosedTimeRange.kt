@@ -1,7 +1,7 @@
 package com.spgrvl.kissos.wallet.domain.pure.data
 
 import com.spgrvl.kissos.base.time.TimeProvider
-import com.spgrvl.kissos.legacy.utils.ivyMinTime
+import com.spgrvl.kissos.legacy.utils.kissosMinTime
 import java.time.Instant
 
 data class ClosedTimeRange(
@@ -9,15 +9,15 @@ data class ClosedTimeRange(
     val to: Instant,
 ) {
     companion object {
-        fun allTimeIvy(
+        fun allTimeKissos(
             timeProvider: TimeProvider,
         ): ClosedTimeRange = ClosedTimeRange(
-            from = ivyMinTime(),
+            from = kissosMinTime(),
             to = timeProvider.utcNow(),
         )
 
         fun to(to: Instant): ClosedTimeRange = ClosedTimeRange(
-            from = ivyMinTime(),
+            from = kissosMinTime(),
             to = to
         )
     }

@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.White
@@ -80,7 +80,7 @@ fun BufferBattery(
                         }
 
                         bufferExceededPercent <= 0.50 -> {
-                            Ivy
+                            Kissos
                         }
 
                         bufferExceededPercent <= 0.75 -> {
@@ -104,7 +104,7 @@ fun BufferBattery(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = if (bufferExceeded) R.drawable.ic_buffer_exceeded else R.drawable.ic_buffer_ok,
             tint = textColor
         )
@@ -140,7 +140,7 @@ fun BufferBattery(
 @Preview
 @Composable
 private fun Preview_buffer_0() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -160,7 +160,7 @@ private fun Preview_buffer_0() {
 @Preview
 @Composable
 private fun Preview_buffer_balance_0() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -180,7 +180,7 @@ private fun Preview_buffer_balance_0() {
 @Preview
 @Composable
 private fun Preview_buffer_very_low() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -200,7 +200,7 @@ private fun Preview_buffer_very_low() {
 @Preview
 @Composable
 private fun Preview_buffer_25() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -220,7 +220,7 @@ private fun Preview_buffer_25() {
 @Preview
 @Composable
 private fun Preview_buffer_50() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -240,7 +240,7 @@ private fun Preview_buffer_50() {
 @Preview
 @Composable
 private fun Preview_buffer_75() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -260,7 +260,7 @@ private fun Preview_buffer_75() {
 @Preview
 @Composable
 private fun Preview_buffer_90() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -280,7 +280,7 @@ private fun Preview_buffer_90() {
 @Preview
 @Composable
 private fun Preview_buffer_100() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -300,7 +300,7 @@ private fun Preview_buffer_100() {
 @Preview
 @Composable
 private fun Preview_buffer_125() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Box(
             modifier = Modifier
                 .fillMaxSize()

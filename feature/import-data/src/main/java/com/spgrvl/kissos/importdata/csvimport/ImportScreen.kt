@@ -114,7 +114,7 @@ private fun BoxWithConstraintsScope.UI(
 @Preview
 @Composable
 private fun Preview() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         UI(
             screen = ImportScreen(launchedFromOnboarding = true),
             importStep = ImportStep.IMPORT_FROM,

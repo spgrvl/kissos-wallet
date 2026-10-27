@@ -3,7 +3,7 @@ package com.spgrvl.kissos.ui
 import androidx.compose.runtime.Composable
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import com.spgrvl.kissos.design.system.IvyMaterial3Theme
+import com.spgrvl.kissos.design.system.KissosMaterial3Theme
 import org.junit.Rule
 
 open class PaparazziScreenshotTest {
@@ -16,7 +16,7 @@ open class PaparazziScreenshotTest {
 
     protected fun snapshot(theme: PaparazziTheme, content: @Composable () -> Unit) {
         paparazzi.snapshot {
-            IvyMaterial3Theme(
+            KissosMaterial3Theme(
                 dark = when (theme) {
                     PaparazziTheme.Light -> false
                     PaparazziTheme.Dark -> true

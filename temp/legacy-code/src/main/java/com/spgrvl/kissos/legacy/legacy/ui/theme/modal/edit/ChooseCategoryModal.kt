@@ -35,21 +35,21 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyBorderButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosBorderButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
 import com.spgrvl.kissos.wallet.ui.theme.components.WrapContentRow
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSkip
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
@@ -73,7 +73,7 @@ fun BoxWithConstraintsScope.ChooseCategoryModal(
         mutableStateOf(initialCategory)
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -245,7 +245,7 @@ private fun CategoryButton(
 
         if (selected) {
             val deselectBtnBackground = findContrastTextColor(categoryColor)
-            IvyCircleButton(
+            KissosCircleButton(
                 modifier = Modifier
                     .size(32.dp),
                 icon = R.drawable.ic_remove,
@@ -266,7 +266,7 @@ fun AddNewButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    IvyBorderButton(
+    KissosBorderButton(
         modifier = modifier,
         text = stringResource(R.string.add_new),
         backgroundGradient = Gradient.solid(UI.colors.mediumInverse),
@@ -288,11 +288,11 @@ private class AddNewCategory
 @Preview
 @Composable
 private fun PreviewChooseCategoryModal() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val categories = mutableListOf(
             Category(
                 name = NotBlankTrimmedString.unsafe("Test"),
-                color = ColorInt(Ivy.toArgb()),
+                color = ColorInt(Kissos.toArgb()),
                 icon = null,
                 id = CategoryId(UUID.randomUUID()),
                 orderNum = 0.0,

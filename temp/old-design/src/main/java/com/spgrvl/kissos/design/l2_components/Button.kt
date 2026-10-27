@@ -17,7 +17,7 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.Background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.clipBackground
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.padding
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -54,7 +54,7 @@ fun Button(
 @Preview
 @Composable
 private fun Preview_Solid() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             text = "Okay",
             background = Background.Solid(
@@ -74,7 +74,7 @@ private fun Preview_Solid() {
 @Preview
 @Composable
 private fun Preview_Outlined() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             text = "Continue",
             background = Background.Outlined(
@@ -95,7 +95,7 @@ private fun Preview_Outlined() {
 @Preview
 @Composable
 private fun Preview_FillMaxWidth() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             modifier = Modifier
                 .fillMaxWidth()

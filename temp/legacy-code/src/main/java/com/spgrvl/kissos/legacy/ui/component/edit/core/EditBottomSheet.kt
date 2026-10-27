@@ -49,9 +49,9 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.frp.test.TestingContext
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.KeyboardListener
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.consumeClicks
@@ -66,19 +66,19 @@ import com.spgrvl.kissos.legacy.utils.rememberSwipeListenerState
 import com.spgrvl.kissos.legacy.utils.springBounce
 import com.spgrvl.kissos.legacy.utils.verticalSwipeListener
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.GreenDark
 import com.spgrvl.kissos.wallet.ui.theme.GreenLight
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.components.ActionsRow
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButton
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.modal.DURATION_MODAL_ANIM
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSave
@@ -151,7 +151,7 @@ fun BoxWithConstraintsScope.EditBottomSheet(
             mutableStateOf(
                 "${
                     convertedAmount.format(
-                        IvyCurrency.getDecimalPlaces(
+                        KissosCurrency.getDecimalPlaces(
                             convertedAmountCurrencyCode
                         )
                     )
@@ -320,7 +320,7 @@ private fun BottomBar(
     navBarPadding: Dp,
     ActionButton: @Composable () -> Unit
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     ActionsRow(
         modifier = Modifier
@@ -332,7 +332,7 @@ private fun BottomBar(
 
                 val systemOffsetBottom = keyboardShownInsetDp.toPx()
                 val visibleHeight = placeable.height * 1f
-                val y = ivyContext.screenHeight - visibleHeight - systemOffsetBottom
+                val y = kissosContext.screenHeight - visibleHeight - systemOffsetBottom
 
                 layout(placeable.width, placeable.height) {
                     placeable.place(
@@ -400,9 +400,9 @@ private fun TransferRowMini(
     ) {
         Spacer(Modifier.width(24.dp))
 
-        val fromColor = fromAccount?.color?.toComposeColor() ?: Ivy
+        val fromColor = fromAccount?.color?.toComposeColor() ?: Kissos
         val fromContrastColor = findContrastTextColor(fromColor)
-        IvyButton(
+        KissosButton(
             text = fromAccount?.name ?: "Null",
             iconStart = R.drawable.ic_accounts,
             backgroundGradient = Gradient.solid(fromColor),
@@ -416,14 +416,14 @@ private fun TransferRowMini(
             onSetExpanded()
         }
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_arrow_right,
             tint = UI.colors.pureInverse
         )
 
-        val toColor = toAccount?.color?.toComposeColor() ?: Ivy
+        val toColor = toAccount?.color?.toComposeColor() ?: Kissos
         val toContrastColor = findContrastTextColor(toColor)
-        IvyButton(
+        KissosButton(
             text = toAccount?.name ?: "Null",
             iconStart = R.drawable.ic_accounts,
             backgroundGradient = Gradient.solid(toColor),
@@ -463,7 +463,7 @@ private fun SheetHeader(
                 .layout { measurable, constraints ->
                     val placeable = measurable.measure(constraints)
 
-//                    val x = lerp(0, ivyContext.screenWidth, (1f - percentExpanded))
+//                    val x = lerp(0, kissosContext.screenWidth, (1f - percentExpanded))
                     val height = placeable.height * percentExpanded
 
                     layout(placeable.width, height.roundToInt()) {
@@ -646,7 +646,7 @@ private fun AddAccount(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_plus,
             tint = UI.colors.pureInverse
         )
@@ -791,7 +791,7 @@ private fun LabelAccountMini(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val acc1 = Account("Cash", color = Green.toArgb())
 
         BoxWithConstraints(
@@ -811,7 +811,7 @@ private fun Preview() {
                     acc1,
                     Account("DSK", color = GreenDark.toArgb()),
                     Account("phyre", color = GreenLight.toArgb()),
-                    Account("Revolut", color = IvyDark.toArgb()),
+                    Account("Revolut", color = KissosDark.toArgb()),
                 ),
                 selectedAccount = acc1,
                 toAccount = null,
@@ -829,7 +829,7 @@ private fun Preview() {
 @Preview
 @Composable
 private fun Preview_Transfer() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val acc1 = Account("Cash", color = Green.toArgb())
         val acc2 = Account("DSK", color = GreenDark.toArgb())
 
@@ -850,7 +850,7 @@ private fun Preview_Transfer() {
                     acc1,
                     acc2,
                     Account("phyre", color = GreenLight.toArgb(), icon = "cash"),
-                    Account("Revolut", color = IvyDark.toArgb()),
+                    Account("Revolut", color = KissosDark.toArgb()),
                 ),
                 selectedAccount = acc1,
                 toAccount = acc2,

@@ -14,9 +14,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.spgrvl.kissos.accounts.AccountsTab
 import com.spgrvl.kissos.base.model.TransactionType
 import com.spgrvl.kissos.home.HomeTab
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.MainTab
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.EditTransactionScreen
@@ -38,10 +38,10 @@ fun BoxWithConstraintsScope.MainScreen(screen: MainScreen) {
         viewModel.start(screen)
     }
 
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
     UI(
         screen = screen,
-        tab = ivyContext.mainTab,
+        tab = kissosContext.mainTab,
         baseCurrency = currency,
         selectTab = viewModel::selectTab,
         onCreateAccount = viewModel::createAccount
@@ -138,7 +138,7 @@ private fun BoxWithConstraintsScope.UI(
 @Preview
 @Composable
 private fun PreviewMainScreen() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         UI(
             screen = MainScreen,
             tab = MainTab.HOME,

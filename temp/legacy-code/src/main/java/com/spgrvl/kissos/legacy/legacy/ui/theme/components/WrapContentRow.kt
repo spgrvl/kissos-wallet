@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Category
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -88,7 +88,7 @@ fun <T> WrapContentRow(
 @Preview
 @Composable
 private fun PreviewWrapContentRow() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         WrapContentRow(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 24.dp)

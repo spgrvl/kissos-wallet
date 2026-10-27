@@ -16,7 +16,7 @@ import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Transparent
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButton
 import com.spgrvl.kissos.wallet.ui.theme.components.DeleteButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 
 @SuppressLint("ComposeModifierMissing")
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -47,7 +47,7 @@ fun ItemStatisticToolbar(
         Spacer(Modifier.weight(1f))
 
         if (showEditButton) {
-            IvyOutlinedButton(
+            KissosOutlinedButton(
                 iconStart = R.drawable.ic_edit,
                 text = stringRes(R.string.edit),
                 borderColor = contrastColor,

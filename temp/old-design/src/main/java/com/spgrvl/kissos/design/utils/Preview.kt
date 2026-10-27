@@ -13,23 +13,23 @@ import com.spgrvl.kissos.base.resource.AndroidResourceProvider
 import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.base.time.impl.DeviceTimeProvider
 import com.spgrvl.kissos.base.time.impl.StandardTimeConverter
-import com.spgrvl.kissos.design.IvyContext
-import com.spgrvl.kissos.design.api.IvyDesign
-import com.spgrvl.kissos.design.api.IvyUI
-import com.spgrvl.kissos.design.api.systems.IvyWalletDesign
+import com.spgrvl.kissos.design.KissosContext
+import com.spgrvl.kissos.design.api.KissosDesign
+import com.spgrvl.kissos.design.api.KissosUI
+import com.spgrvl.kissos.design.api.systems.KissosWalletDesign
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.ui.time.impl.AndroidDevicePreferences
-import com.spgrvl.kissos.ui.time.impl.IvyTimeFormatter
+import com.spgrvl.kissos.ui.time.impl.KissosTimeFormatter
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
-fun IvyComponentPreview(
+fun KissosComponentPreview(
     modifier: Modifier = Modifier,
-    design: IvyDesign = defaultDesign(),
+    design: KissosDesign = defaultDesign(),
     theme: Theme = Theme.LIGHT,
     content: @Composable BoxScope.() -> Unit
 ) {
-    IvyPreview(
+    KissosPreview(
         design = design,
         theme = theme
     ) {
@@ -46,20 +46,20 @@ fun IvyComponentPreview(
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
-fun IvyPreview(
-    design: IvyDesign,
+fun KissosPreview(
+    design: KissosDesign,
     theme: Theme = Theme.LIGHT,
     content: @Composable BoxWithConstraintsScope.() -> Unit
 ) {
     design.context().switchTheme(theme = theme)
     val timeProvider = DeviceTimeProvider()
     val timeConverter = StandardTimeConverter(timeProvider)
-    IvyUI(
+    KissosUI(
         design = design,
         content = content,
         timeConverter = timeConverter,
         timeProvider = timeProvider,
-        timeFormatter = IvyTimeFormatter(
+        timeFormatter = KissosTimeFormatter(
             resourceProvider = AndroidResourceProvider(LocalContext.current),
             timeProvider = timeProvider,
             converter = timeConverter,
@@ -69,7 +69,7 @@ fun IvyPreview(
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-fun defaultDesign(): IvyDesign = object : IvyWalletDesign() {
-    override fun context(): IvyContext = object : IvyContext() {
+fun defaultDesign(): KissosDesign = object : KissosWalletDesign() {
+    override fun context(): KissosContext = object : KissosContext() {
     }
 }

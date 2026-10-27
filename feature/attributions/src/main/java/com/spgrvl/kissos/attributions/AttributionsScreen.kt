@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
@@ -185,7 +185,7 @@ private fun AttributionsUIPreview(isDark: Boolean = false) {
         )
     )
 
-    IvyPreview(isDark) {
+    KissosPreview(isDark) {
         AttributionsUI(uiState = AttributionsState(attributionItems))
     }
 }

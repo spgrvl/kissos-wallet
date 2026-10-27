@@ -21,7 +21,7 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.Purple
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.PlannedPaymentRule
 import com.spgrvl.kissos.legacy.utils.timeNowUTC
@@ -107,7 +107,7 @@ private fun BoxWithConstraintsScope.UI(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val account = Account(name = "Cash", Green.toArgb())
         val food = Category(
             name = NotBlankTrimmedString.unsafe("Food"),

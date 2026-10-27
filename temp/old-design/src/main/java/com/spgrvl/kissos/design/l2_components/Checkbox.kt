@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.R
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyIcon
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIcon
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.clickableNoIndication
 import com.spgrvl.kissos.design.utils.rememberInteractionSource
 
@@ -32,7 +32,7 @@ fun Checkbox(
     contentDescription: String = "checkbox",
     onCheckedChange: (checked: Boolean) -> Unit
 ) {
-    IvyIcon(
+    KissosIcon(
         modifier = modifier
             .size(48.dp)
             .clip(CircleShape)
@@ -82,8 +82,8 @@ fun CheckboxWithText(
 
 @Preview
 @Composable
-private fun PreviewIvyCheckboxWithText() {
-    IvyComponentPreview {
+private fun PreviewKissosCheckboxWithText() {
+    KissosComponentPreview {
         CheckboxWithText(
             text = "Default category",
             checked = false,

@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.spgrvl.kissos.design.system.colors.IvyColors
+import com.spgrvl.kissos.design.system.colors.KissosColors
 import com.spgrvl.kissos.ui.R
 
 const val KissosGitHubRepoUrl = "https://github.com/spgrvl/kissos-wallet"
@@ -70,7 +70,7 @@ private fun OpenSourceTexts(modifier: Modifier = Modifier) {
         Text(
             text = KissosGitHubRepoUrl,
             style = MaterialTheme.typography.labelSmall,
-            color = IvyColors.Blue.primary
+            color = KissosColors.Blue.primary
         )
     }
 }

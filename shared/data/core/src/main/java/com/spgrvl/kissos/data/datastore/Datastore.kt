@@ -7,13 +7,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 
-typealias IvyDataStore = DataStore<Preferences>
+typealias KissosDataStore = DataStore<Preferences>
 
-val Context.dataStore: IvyDataStore by preferencesDataStore(
+val Context.dataStore: KissosDataStore by preferencesDataStore(
     name = "ivy_wallet_datastore_v1"
 )
 
 @Composable
-fun datastore(): IvyDataStore {
+fun datastore(): KissosDataStore {
     return LocalContext.current.dataStore
 }

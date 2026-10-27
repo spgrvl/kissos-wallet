@@ -31,7 +31,7 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.domain.legacy.ui.theme.components.ListItem
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.Budget
 import com.spgrvl.kissos.legacy.legacy.ui.theme.modal.ModalNameInput
@@ -43,7 +43,7 @@ import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Purple1Dark
 import com.spgrvl.kissos.wallet.ui.theme.Red3Light
 import com.spgrvl.kissos.wallet.ui.theme.modal.DeleteModal
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAddSave
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAmountSection
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalDelete
@@ -91,7 +91,7 @@ fun BoxWithConstraintsScope.BudgetModal(
     var amountModalVisible by remember(modal) { mutableStateOf(false) }
     var deleteModalVisible by remember(modal) { mutableStateOf(false) }
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -267,7 +267,7 @@ private fun CategoriesRow(
 @Preview
 @Composable
 private fun Preview_create() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val cat1 = Category(
             name = NotBlankTrimmedString.unsafe("Science"),
             color = ColorInt(Purple1Dark.toArgb()),
@@ -310,7 +310,7 @@ private fun Preview_create() {
 @Preview
 @Composable
 private fun Preview_edit() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val cat1 = Category(
             name = NotBlankTrimmedString.unsafe("Science"),
             color = ColorInt(Purple1Dark.toArgb()),

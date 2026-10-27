@@ -19,7 +19,7 @@ class CalcAccBalanceAct @Inject constructor(
     override suspend fun Input.compose(): suspend () -> Output = suspend {
         AccTrnsAct.Input(
             accountId = account.id.value,
-            range = range ?: ClosedTimeRange.allTimeIvy(timeProvider)
+            range = range ?: ClosedTimeRange.allTimeKissos(timeProvider)
         )
     } then accTrnsAct then { accTrns ->
         foldTransactions(

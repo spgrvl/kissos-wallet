@@ -21,8 +21,8 @@ class Migration128to129Test {
     @get:Rule
     val helper: MigrationTestHelper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
-        IvyRoomDatabase::class.java,
-        listOf(IvyRoomDatabase.DeleteSEMigration()),
+        KissosRoomDatabase::class.java,
+        listOf(KissosRoomDatabase.DeleteSEMigration()),
         FrameworkSQLiteOpenHelperFactory()
     )
 

@@ -16,7 +16,7 @@ import com.spgrvl.kissos.navigation.MainScreen
 import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.OnboardingScreen
 import com.spgrvl.kissos.onboarding.OnboardingState
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.PreloadDataLogic
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
@@ -160,7 +160,7 @@ class OnboardingRouter(
 
     // ------------------------------------- Step 3 - Currency --------------------------------------
     suspend fun setBaseCurrencyNext(
-        baseCurrency: IvyCurrency,
+        baseCurrency: KissosCurrency,
         accountsWithBalance: suspend () -> ImmutableList<AccountBalance>,
     ) {
         routeToAccounts(
@@ -189,11 +189,11 @@ class OnboardingRouter(
     // ------------------------------------- Step 4 -------------------------------------------------
 
     // ------------------------------------- Step 5 - Categories ------------------------------------
-    suspend fun categoriesNext(baseCurrency: IvyCurrency?) {
+    suspend fun categoriesNext(baseCurrency: KissosCurrency?) {
         completeOnboarding(baseCurrency = baseCurrency)
     }
 
-    suspend fun categoriesSkip(baseCurrency: IvyCurrency?) {
+    suspend fun categoriesSkip(baseCurrency: KissosCurrency?) {
         completeOnboarding(baseCurrency = baseCurrency)
 
         ioThread {
@@ -204,7 +204,7 @@ class OnboardingRouter(
 
     // -------------------------------------- Routes ------------------------------------------------
     private suspend fun routeToAccounts(
-        baseCurrency: IvyCurrency,
+        baseCurrency: KissosCurrency,
         accountsWithBalance: suspend () -> ImmutableList<AccountBalance>,
     ) {
         val accounts = accountsWithBalance()
@@ -224,7 +224,7 @@ class OnboardingRouter(
     }
 
     private suspend fun completeOnboarding(
-        baseCurrency: IvyCurrency?
+        baseCurrency: KissosCurrency?
     ) {
         sharedPrefs.putBoolean(SharedPrefs.ONBOARDING_COMPLETED, true)
 
@@ -234,7 +234,7 @@ class OnboardingRouter(
         ioThread {
             transactionReminderLogic.scheduleReminder()
 
-            AssetCode.from(baseCurrency?.code ?: IvyCurrency.getDefault().code)
+            AssetCode.from(baseCurrency?.code ?: KissosCurrency.getDefault().code)
                 .onRight {
                     syncExchangeRatesUseCase.sync(baseCurrency = it)
                 }

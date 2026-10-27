@@ -16,7 +16,7 @@ fun DeleteButton(
     hasShadow: Boolean = true,
     onClick: () -> Unit,
 ) {
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = modifier
             .size(48.dp)
             .testTag("delete_button"),

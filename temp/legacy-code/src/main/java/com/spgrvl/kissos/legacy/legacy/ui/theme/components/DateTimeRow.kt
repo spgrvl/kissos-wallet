@@ -14,7 +14,7 @@ import com.spgrvl.kissos.legacy.utils.convertUTCToLocal
 import com.spgrvl.kissos.legacy.utils.formatNicely
 import com.spgrvl.kissos.legacy.utils.timeNowUTC
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -34,7 +34,7 @@ fun DateTimeRow(
     ) {
         Spacer(Modifier.width(24.dp))
 
-        IvyOutlinedButton(
+        KissosOutlinedButton(
             text = dateTime.formatNicely(),
             iconStart = R.drawable.ic_date,
             onClick = onEditDate
@@ -42,7 +42,7 @@ fun DateTimeRow(
 
         Spacer(Modifier.weight(1f))
 
-        IvyOutlinedButton(
+        KissosOutlinedButton(
             text = with(timeFormatter) {
                 dateTime.toLocalTime().format()
             },

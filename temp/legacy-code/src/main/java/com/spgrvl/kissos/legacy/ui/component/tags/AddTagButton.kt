@@ -11,8 +11,8 @@ import com.spgrvl.kissos.design.l0_system.Orange3
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyBorderButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosBorderButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import kotlinx.collections.immutable.ImmutableList
 import com.spgrvl.kissos.ui.R
@@ -35,7 +35,7 @@ private fun ViewTagsButton(
     onClick: () -> Unit,
 ) {
     val contrastColor = findContrastTextColor(Orange3)
-    IvyButton(
+    KissosButton(
         modifier = Modifier.padding(start = 24.dp),
         text = if (transactionTags.size <= 1) "${transactionTags.size}\t Tag" else "${transactionTags.size}\t Tags",
         backgroundGradient = Gradient.solid(Orange3),
@@ -55,7 +55,7 @@ private fun ViewTagsButton(
 private fun AddTagsButton(
     onClick: () -> Unit,
 ) {
-    IvyBorderButton(
+    KissosBorderButton(
         modifier = Modifier.padding(start = 24.dp),
         iconStart = R.drawable.ic_plus,
         iconTint = UI.colors.pureInverse,

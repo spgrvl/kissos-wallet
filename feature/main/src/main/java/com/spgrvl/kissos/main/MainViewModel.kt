@@ -7,7 +7,7 @@ import com.spgrvl.kissos.base.legacy.SharedPrefs
 import com.spgrvl.kissos.data.repository.CurrencyRepository
 import com.spgrvl.kissos.domain.usecase.exchange.SyncExchangeRatesUseCase
 import com.spgrvl.kissos.frp.test.TestIdlingResource
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.MainTab
 import com.spgrvl.kissos.legacy.domain.deprecated.logic.AccountCreator
 import com.spgrvl.kissos.legacy.utils.asLiveData
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val nav: Navigation,
     private val syncExchangeRatesUseCase: SyncExchangeRatesUseCase,
     private val accountCreator: AccountCreator,
@@ -34,8 +34,8 @@ class MainViewModel @Inject constructor(
 
     fun start(screen: MainScreen) {
         nav.onBackPressed[screen] = {
-            if (ivyContext.mainTab == MainTab.ACCOUNTS) {
-                ivyContext.selectMainTab(MainTab.HOME)
+            if (kissosContext.mainTab == MainTab.ACCOUNTS) {
+                kissosContext.selectMainTab(MainTab.HOME)
                 true
             } else {
                 // Exiting (the backstack will close the app)
@@ -49,7 +49,7 @@ class MainViewModel @Inject constructor(
             val baseCurrency = currencyRepository.getBaseCurrency()
             _currency.value = baseCurrency.code
 
-            ivyContext.dataBackupCompleted =
+            kissosContext.dataBackupCompleted =
                 sharedPrefs.getBoolean(SharedPrefs.DATA_BACKUP_COMPLETED, false)
 
             ioThread {
@@ -62,7 +62,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun selectTab(tab: MainTab) {
-        ivyContext.selectMainTab(tab)
+        kissosContext.selectMainTab(tab)
     }
 
     fun createAccount(data: CreateAccountData) {

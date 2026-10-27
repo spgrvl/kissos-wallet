@@ -16,7 +16,7 @@ import com.spgrvl.kissos.onboarding.steps.OnboardingSetCurrency
 import com.spgrvl.kissos.onboarding.steps.OnboardingSplashLogin
 import com.spgrvl.kissos.onboarding.steps.OnboardingType
 import com.spgrvl.kissos.onboarding.viewmodel.OnboardingViewModel
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
 import kotlinx.collections.immutable.ImmutableList
@@ -56,7 +56,7 @@ fun BoxWithConstraintsScope.OnboardingScreen(screen: OnboardingScreen) {
 @Composable
 private fun BoxWithConstraintsScope.UI(
     onboardingState: OnboardingState,
-    currency: IvyCurrency,
+    currency: KissosCurrency,
 
     accountSuggestions: ImmutableList<CreateAccountData>,
     accounts: ImmutableList<AccountBalance>,

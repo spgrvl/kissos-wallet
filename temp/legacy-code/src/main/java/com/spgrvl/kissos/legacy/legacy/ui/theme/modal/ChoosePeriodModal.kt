@@ -36,26 +36,26 @@ import com.spgrvl.kissos.design.api.LocalTimeConverter
 import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.FromToTimeRange
 import com.spgrvl.kissos.legacy.data.model.LastNTimeRange
 import com.spgrvl.kissos.legacy.data.model.Month.Companion.fromMonthValue
 import com.spgrvl.kissos.legacy.data.model.Month.Companion.monthsList
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.KeyboardListener
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
 import com.spgrvl.kissos.legacy.utils.formatDateOnlyWithYear
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilled
 import com.spgrvl.kissos.wallet.ui.theme.components.IntervalPickerRow
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -82,10 +82,10 @@ fun BoxWithConstraintsScope.ChoosePeriodModal(
         mutableStateOf(modal?.period)
     }
 
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
     val modalScrollState = rememberScrollState()
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -95,7 +95,7 @@ fun BoxWithConstraintsScope.ChoosePeriodModal(
                 enabled = period != null && period!!.isValid()
             ) {
                 if (period != null) {
-                    ivyContext.updateSelectedPeriodInMemory(period!!)
+                    kissosContext.updateSelectedPeriodInMemory(period!!)
                     dismiss()
                     onPeriodSelected(period!!)
                 }
@@ -117,7 +117,7 @@ fun BoxWithConstraintsScope.ChoosePeriodModal(
 
         Spacer(Modifier.height(32.dp))
 
-        IvyDividerLine(
+        KissosDividerLine(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
@@ -261,7 +261,7 @@ private fun MonthButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    val background = if (selected) GradientIvy else Gradient.solid(UI.colors.medium)
+    val background = if (selected) GradientKissos else Gradient.solid(UI.colors.medium)
     Text(
         modifier = modifier
             .clip(UI.shapes.rFull)
@@ -352,7 +352,7 @@ private fun IntervalFromToDate(
     otherEndDateTime: LocalDateTime?,
     onSelected: (LocalDateTime?) -> Unit
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     Row(
         modifier = Modifier
@@ -361,7 +361,7 @@ private fun IntervalFromToDate(
             .clip(UI.shapes.rFull)
             .border(2.dp, UI.colors.medium, UI.shapes.rFull)
             .clickable {
-                ivyContext.datePicker(
+                kissosContext.datePicker(
                     minDate = if (border == IntervalBorder.TO) {
                         otherEndDateTime
                             ?.toLocalDate()
@@ -536,7 +536,7 @@ private fun ColumnScope.AllTime(
 @Preview
 @Composable
 private fun Preview_MonthSelected() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         ChoosePeriodModal(
             modal = ChoosePeriodModalData(
                 period = TimePeriod(
@@ -553,7 +553,7 @@ private fun Preview_MonthSelected() {
 @Preview
 @Composable
 private fun Preview_FromTo() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         ChoosePeriodModal(
             modal = ChoosePeriodModalData(
                 period = TimePeriod(
@@ -573,7 +573,7 @@ private fun Preview_FromTo() {
 @Preview
 @Composable
 private fun Preview_LastN() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         ChoosePeriodModal(
             modal = ChoosePeriodModalData(
                 period = TimePeriod(

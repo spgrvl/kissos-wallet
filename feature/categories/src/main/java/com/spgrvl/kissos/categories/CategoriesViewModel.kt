@@ -42,7 +42,7 @@ import javax.inject.Inject
 class CategoriesViewModel @Inject constructor(
     private val categoryCreator: CategoryCreator,
     private val categoryRepository: CategoryRepository,
-    private val ivyContext: com.spgrvl.kissos.legacy.IvyWalletCtx,
+    private val kissosContext: com.spgrvl.kissos.legacy.KissosWalletCtx,
     private val sharedPrefs: SharedPrefs,
     private val baseCurrencyAct: BaseCurrencyAct,
     private val accountsAct: AccountsAct,
@@ -138,9 +138,9 @@ class CategoriesViewModel @Inject constructor(
     private suspend fun initialise() {
         ioThread {
             val range = TimePeriod.currentMonth(
-                startDayOfMonth = ivyContext.startDayOfMonth
+                startDayOfMonth = kissosContext.startDayOfMonth
             ).toRange(
-                ivyContext.startDayOfMonth,
+                kissosContext.startDayOfMonth,
                 timeConverter,
                 timeProvider
             ) // this must be monthly

@@ -18,9 +18,9 @@ interface RootScreen {
      */
     val buildVersionCode: Int
 
-    fun reviewIvyWallet(dismissReviewCard: Boolean)
+    fun reviewKissosWallet(dismissReviewCard: Boolean)
 
-    fun shareIvyWallet()
+    fun shareKissosWallet()
 
     fun openUrlInBrowser(url: String)
 

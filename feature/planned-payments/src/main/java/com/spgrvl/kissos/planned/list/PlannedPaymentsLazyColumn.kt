@@ -33,7 +33,7 @@ import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import kotlinx.collections.immutable.ImmutableList
 import kotlin.math.absoluteValue
 
@@ -208,7 +208,7 @@ private fun LazyItemScope.NoPlannedPaymentsEmptyState() {
     ) {
         Spacer(Modifier.height(64.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_planned_payments,
             tint = Gray
         )

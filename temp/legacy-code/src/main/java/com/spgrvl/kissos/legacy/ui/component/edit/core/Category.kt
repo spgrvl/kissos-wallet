@@ -11,8 +11,8 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyBorderButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosBorderButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 import com.spgrvl.kissos.wallet.ui.theme.components.getCustomIconIdS
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
@@ -28,7 +28,7 @@ fun Category(
             onChooseCategory()
         }
     } else {
-        IvyBorderButton(
+        KissosBorderButton(
             modifier = Modifier.padding(start = 24.dp),
             iconStart = R.drawable.ic_plus,
             iconTint = UI.colors.pureInverse,
@@ -45,7 +45,7 @@ private fun CategoryButton(
     onClick: () -> Unit,
 ) {
     val contrastColor = findContrastTextColor(category.color.value.toComposeColor())
-    IvyButton(
+    KissosButton(
         modifier = Modifier.padding(start = 24.dp),
         text = category.name.value,
         iconStart = getCustomIconIdS(

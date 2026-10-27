@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.Month
 import com.spgrvl.kissos.legacy.data.model.Month.Companion.monthsList
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
@@ -33,7 +33,7 @@ import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.components.WrapContentRow
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import java.time.LocalDate
@@ -54,7 +54,7 @@ fun BoxWithConstraintsScope.MonthPickerModal(
         mutableStateOf(initialDate.monthValue)
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -119,7 +119,7 @@ private fun MonthButton(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val monthColor = Ivy
+    val monthColor = Kissos
 
     val medium = UI.colors.medium
     val rFull = UI.shapes.rFull
@@ -158,7 +158,7 @@ private fun MonthButton(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         MonthPickerModal(
             initialDate = dateNowUTC(),
             visible = true,

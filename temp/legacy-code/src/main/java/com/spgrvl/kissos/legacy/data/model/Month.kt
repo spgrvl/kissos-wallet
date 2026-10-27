@@ -2,7 +2,7 @@ package com.spgrvl.kissos.legacy.data.model
 
 import androidx.compose.runtime.Immutable
 import com.spgrvl.kissos.base.legacy.stringRes
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
 import com.spgrvl.kissos.ui.R
 import java.time.LocalDate
@@ -37,7 +37,7 @@ data class Month(
             .withMonth(monthValue)
 
     fun incrementMonthPeriod(
-        ivyContext: IvyWalletCtx,
+        kissosContext: KissosWalletCtx,
         increment: Long,
         year: Int
     ): TimePeriod {
@@ -46,7 +46,7 @@ data class Month(
             month = fromMonthValue(incrementedMonth.monthValue),
             year = incrementedMonth.year
         )
-        ivyContext.updateSelectedPeriodInMemory(incrementedPeriod)
+        kissosContext.updateSelectedPeriodInMemory(incrementedPeriod)
         return incrementedPeriod
     }
 

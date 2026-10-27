@@ -38,7 +38,7 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.frp.test.TestingContext
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.LoanRecord
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.DateTimeRow
@@ -51,8 +51,8 @@ import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateLoanRecordData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.EditLoanRecordData
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCheckboxWithText
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCheckboxWithText
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AccountModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AccountModalData
@@ -125,7 +125,7 @@ fun BoxWithConstraintsScope.LoanRecordModal(
     var accountModalData: AccountModalData? by remember { mutableStateOf(null) }
     var accountChangeConformationModal by remember { mutableStateOf(false) }
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -267,7 +267,7 @@ fun BoxWithConstraintsScope.LoanRecordModal(
 
         Spacer(Modifier.height(16.dp))
 
-        IvyCheckboxWithText(
+        KissosCheckboxWithText(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.Start),
@@ -278,7 +278,7 @@ fun BoxWithConstraintsScope.LoanRecordModal(
         }
 
         AnimatedVisibility(visible = loanRecordType == LoanRecordType.DECREASE) {
-            IvyCheckboxWithText(
+            KissosCheckboxWithText(
                 modifier = Modifier
                     .padding(start = 16.dp)
                     .align(Alignment.Start),
@@ -290,7 +290,7 @@ fun BoxWithConstraintsScope.LoanRecordModal(
         }
 
         if (reCalculateVisible) {
-            IvyCheckboxWithText(
+            KissosCheckboxWithText(
                 modifier = Modifier
                     .padding(start = 16.dp, end = 8.dp)
                     .align(Alignment.Start),
@@ -638,7 +638,7 @@ private fun AddAccount(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_plus,
             tint = UI.colors.pureInverse
         )
@@ -663,7 +663,7 @@ private fun AddAccount(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LoanRecordModal(
             modal = LoanRecordModalData(
                 loanRecord = null,

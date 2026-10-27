@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.ui.component.edit.PrimaryAttributeColumn
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
 import com.spgrvl.kissos.ui.R
@@ -71,7 +71,7 @@ private fun DescriptionText(
 @Preview
 @Composable
 private fun PreviewDescription_Empty() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Description(
             description = null,
             onAddDescription = {}
@@ -83,7 +83,7 @@ private fun PreviewDescription_Empty() {
 @Preview
 @Composable
 private fun PreviewDescription_withText() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Description(
             description = "This is my sample description.",
             onAddDescription = {}

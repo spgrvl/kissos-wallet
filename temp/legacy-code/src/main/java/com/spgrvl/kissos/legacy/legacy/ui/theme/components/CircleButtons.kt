@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 
@@ -121,7 +121,7 @@ fun BackButton(
 @Preview
 @Composable
 private fun PreviewCloseButton() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         CloseButton {
         }
     }
@@ -130,7 +130,7 @@ private fun PreviewCloseButton() {
 @Preview
 @Composable
 private fun PreviewBackButton() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         BackButton {
         }
     }
@@ -139,7 +139,7 @@ private fun PreviewBackButton() {
 @Preview
 @Composable
 private fun PreviewCircleButtonFilled() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         CircleButtonFilled(
             icon = R.drawable.ic_sort_by_alpha_24,
             onClick = {},
@@ -151,7 +151,7 @@ private fun PreviewCircleButtonFilled() {
 @Preview
 @Composable
 private fun PreviewCircleButtonFilledGradient() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         CircleButtonFilledGradient(
             icon = R.drawable.ic_sort_by_alpha_24,
             onClick = {},

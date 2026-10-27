@@ -16,7 +16,7 @@ import com.spgrvl.kissos.data.DataObserver
 import com.spgrvl.kissos.data.DataWriteEvent
 import com.spgrvl.kissos.data.repository.AccountRepository
 import com.spgrvl.kissos.domain.features.Features
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.AccountData
 import com.spgrvl.kissos.legacy.data.model.toCloseTimeRange
 import com.spgrvl.kissos.legacy.utils.format
@@ -41,7 +41,7 @@ import javax.inject.Inject
 class AccountsViewModel @Inject constructor(
     @ApplicationContext
     private val context: Context,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val sharedPrefs: SharedPrefs,
     private val calcWalletBalanceAct: CalcWalletBalanceAct,
     private val baseCurrencyAct: BaseCurrencyAct,
@@ -167,9 +167,9 @@ class AccountsViewModel @Inject constructor(
 
     private suspend fun startInternally() {
         val period = com.spgrvl.kissos.legacy.data.model.TimePeriod.currentMonth(
-            startDayOfMonth = ivyContext.startDayOfMonth
+            startDayOfMonth = kissosContext.startDayOfMonth
         ) // this must be monthly
-        val range = period.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+        val range = period.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         val baseCurrencyCode = baseCurrencyAct(Unit)
         val accounts = accountRepository.findAll().toImmutableList()

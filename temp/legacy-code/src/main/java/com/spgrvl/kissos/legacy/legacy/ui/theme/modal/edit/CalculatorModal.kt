@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.amountToDoubleOrNull
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.formatInputAmount
@@ -30,7 +30,7 @@ import com.spgrvl.kissos.legacy.utils.normalizeExpression
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Red
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSet
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import com.notkamui.keval.Keval
@@ -51,7 +51,7 @@ fun BoxWithConstraintsScope.CalculatorModal(
         mutableStateOf(initialAmount?.format(currency) ?: "")
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -242,7 +242,7 @@ private fun calculate(expression: String): Double? {
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         CalculatorModal(
             visible = true,
             initialAmount = 50.23,

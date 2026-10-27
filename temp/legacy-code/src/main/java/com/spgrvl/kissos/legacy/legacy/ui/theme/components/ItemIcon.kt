@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.utils.thenWhen
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -291,7 +291,7 @@ fun fallbackToNewIconFormat(
 @Preview
 @Composable
 private fun Preview_L() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         ItemIconL(iconName = "dna")
     }
 }
@@ -299,7 +299,7 @@ private fun Preview_L() {
 @Preview
 @Composable
 private fun Preview_M() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         ItemIconM(iconName = "document")
     }
 }
@@ -307,7 +307,7 @@ private fun Preview_M() {
 @Preview
 @Composable
 private fun Preview_S() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         ItemIconS(iconName = "fooddrink")
     }
 }

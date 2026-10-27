@@ -40,7 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -69,17 +69,17 @@ import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.GreenDark
 import com.spgrvl.kissos.wallet.ui.theme.GreenLight
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilled
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderButton
 import com.spgrvl.kissos.wallet.ui.theme.components.ReorderModalSingleType
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSet
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.CategoryModal
@@ -110,14 +110,14 @@ private fun BoxWithConstraintsScope.UI(
     onEvent: (CategoriesScreenEvent) -> Unit = {}
 ) {
     val nav = navigation()
-    val ivyContext = com.spgrvl.kissos.legacy.ivyWalletCtx()
+    val kissosContext = com.spgrvl.kissos.legacy.kissosWalletCtx()
     var listState = rememberLazyListState()
     if (!state.categories.isEmpty()) {
         listState = rememberScrollPositionListState(
             key = "categories_lazy_column",
-            initialFirstVisibleItemIndex = ivyContext.categoriesListState?.firstVisibleItemIndex
+            initialFirstVisibleItemIndex = kissosContext.categoriesListState?.firstVisibleItemIndex
                 ?: 0,
-            initialFirstVisibleItemScrollOffset = ivyContext.categoriesListState?.firstVisibleItemScrollOffset
+            initialFirstVisibleItemScrollOffset = kissosContext.categoriesListState?.firstVisibleItemScrollOffset
                 ?: 0
         )
     }
@@ -579,7 +579,7 @@ fun BoxWithConstraintsScope.SortModal(
         dismiss()
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -643,7 +643,7 @@ private fun SelectTypeButton(
 
         val textColor = if (selected) textSelectedColor else UI.colors.pureInverse
 
-        IvyIcon(
+        KissosIcon(
             icon = icon,
             tint = textColor,
             modifier = Modifier.fillMaxHeight()
@@ -663,7 +663,7 @@ private fun SelectTypeButton(
         if (selected) {
             Spacer(Modifier.weight(1f))
 
-            IvyIcon(
+            KissosIcon(
                 icon = R.drawable.ic_check,
                 tint = textSelectedColor
             )
@@ -700,7 +700,7 @@ private fun Preview(
     compactModeEnabled: Boolean = false,
     displaySearchBarEnabled: Boolean = false
 ) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         val state = CategoriesScreenState(
             baseCurrency = "BGN",
             compactCategoriesModeEnabled = compactModeEnabled,
@@ -734,7 +734,7 @@ private fun Preview(
                     category = Category(
                         id = CategoryId(UUID.randomUUID()),
                         name = NotBlankTrimmedString.unsafe("Ivy"),
-                        color = ColorInt(IvyDark.toArgb()),
+                        color = ColorInt(KissosDark.toArgb()),
                         icon = IconAsset.unsafe("star"),
                         orderNum = 0.0,
                     ),
@@ -780,7 +780,7 @@ private fun PreviewWithSearchBarEnabled(
     compactModeEnabled: Boolean = false,
     displaySearchBarEnabled: Boolean = true
 ) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         val state = CategoriesScreenState(
             baseCurrency = "BGN",
             compactCategoriesModeEnabled = compactModeEnabled,
@@ -814,7 +814,7 @@ private fun PreviewWithSearchBarEnabled(
                     category = Category(
                         id = CategoryId(UUID.randomUUID()),
                         name = NotBlankTrimmedString.unsafe("Ivy"),
-                        color = ColorInt(IvyDark.toArgb()),
+                        color = ColorInt(KissosDark.toArgb()),
                         icon = IconAsset.unsafe("star"),
                         orderNum = 0.0,
                     ),

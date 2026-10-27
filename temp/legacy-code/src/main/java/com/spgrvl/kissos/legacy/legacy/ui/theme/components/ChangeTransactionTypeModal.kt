@@ -28,13 +28,13 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.base.model.TransactionType
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSet
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import java.util.UUID
@@ -55,7 +55,7 @@ fun BoxWithConstraintsScope.ChangeTransactionTypeModal(
         mutableStateOf(initialType)
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -111,7 +111,7 @@ fun BoxWithConstraintsScope.ChangeTransactionTypeModal(
             TransactionTypeButton(
                 transactionType = TransactionType.TRANSFER,
                 selected = transactionType == TransactionType.TRANSFER,
-                selectedGradient = GradientIvy,
+                selectedGradient = GradientKissos,
                 textSelectedColor = White
             ) {
                 transactionType = TransactionType.TRANSFER
@@ -164,7 +164,7 @@ private fun TransactionTypeButton(
 
         val textColor = if (selected) textSelectedColor else UI.colors.pureInverse
 
-        IvyIcon(
+        KissosIcon(
             icon = when (transactionType) {
                 TransactionType.INCOME -> R.drawable.ic_income
                 TransactionType.EXPENSE -> R.drawable.ic_expense
@@ -189,7 +189,7 @@ private fun TransactionTypeButton(
         if (selected) {
             Spacer(Modifier.weight(1f))
 
-            IvyIcon(
+            KissosIcon(
                 icon = R.drawable.ic_check,
                 tint = textSelectedColor
             )
@@ -210,7 +210,7 @@ private fun TransactionTypeButton(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         ChangeTransactionTypeModal(
             includeTransferType = true,
             visible = true,

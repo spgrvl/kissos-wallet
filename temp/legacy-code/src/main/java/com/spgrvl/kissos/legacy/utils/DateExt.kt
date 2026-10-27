@@ -260,9 +260,9 @@ fun endOfMonth(date: LocalDate, timeConverter: TimeConverter): Instant {
 fun LocalDate.atEndOfDay(): LocalDateTime =
     this.atTime(23, 59, 59)
 
-fun ivyMinTime(): Instant = INSTANT_MIN_SAFE
+fun kissosMinTime(): Instant = INSTANT_MIN_SAFE
 
-fun ivyMaxTime(): Instant = INSTANT_MAX_SAFE
+fun kissosMaxTime(): Instant = INSTANT_MAX_SAFE
 
 fun LocalDate.withDayOfMonthSafe(targetDayOfMonth: Int): LocalDate {
     val maxDayOfMonth = this.lengthOfMonth()

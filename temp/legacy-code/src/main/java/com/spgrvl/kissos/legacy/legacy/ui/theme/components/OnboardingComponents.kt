@@ -21,12 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -99,8 +99,8 @@ fun OnboardingButton(
 @Preview
 @Composable
 private fun PreviewOnboardingTextField() {
-    IvyWalletComponentPreview {
-        IvyOutlinedTextField(
+    KissosWalletComponentPreview {
+        KissosOutlinedTextField(
             modifier = Modifier.padding(horizontal = 24.dp),
             value = TextFieldValue("iliyan.germanov971@gmail.com"),
             hint = "Enter email",
@@ -112,13 +112,13 @@ private fun PreviewOnboardingTextField() {
 @Preview
 @Composable
 private fun PreviewOnboardingButton() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         OnboardingButton(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth(),
             text = "Login",
-            backgroundGradient = GradientIvy,
+            backgroundGradient = GradientKissos,
             hasNext = true,
             textColor = UI.colors.pure,
             iconStart = null,

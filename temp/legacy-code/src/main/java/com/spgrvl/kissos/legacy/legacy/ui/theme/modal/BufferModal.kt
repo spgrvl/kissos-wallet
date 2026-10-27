@@ -36,7 +36,7 @@ fun BoxWithConstraintsScope.BufferModal(
 
     var amountModalVisible by remember { mutableStateOf(false) }
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,

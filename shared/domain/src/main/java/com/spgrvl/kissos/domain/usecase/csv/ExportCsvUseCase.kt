@@ -56,11 +56,11 @@ class ExportCsvUseCase @Inject constructor(
         val categoriesMap = categoryRepository.findAll().associateBy(Category::id)
 
         buildString {
-            append(IvyCsvRow.Columns.joinToString(separator = CSV_SEPARATOR))
+            append(KissosCsvRow.Columns.joinToString(separator = CSV_SEPARATOR))
             append(NEWLINE)
             for (trn in transactions) {
                 append(
-                    trn.toIvyCsvRow().toCsvString(
+                    trn.toKissosCsvRow().toCsvString(
                         accountsMap = accountsMap,
                         categoriesMap = categoriesMap
                     )
@@ -70,7 +70,7 @@ class ExportCsvUseCase @Inject constructor(
         }
     }
 
-    private fun IvyCsvRow.toCsvString(
+    private fun KissosCsvRow.toCsvString(
         accountsMap: Map<AccountId, Account>,
         categoriesMap: Map<CategoryId, Category>,
     ): String = csvRow {
@@ -126,13 +126,13 @@ class ExportCsvUseCase @Inject constructor(
 
     private fun String.escapeSpecialChars(): String = replace("\\", "")
 
-    private fun Transaction.toIvyCsvRow(): IvyCsvRow = when (this) {
+    private fun Transaction.toKissosCsvRow(): KissosCsvRow = when (this) {
         is Expense -> expenseCsvRow()
         is Income -> incomeCsvRow()
         is Transfer -> transferCsvRow()
     }
 
-    private fun Expense.expenseCsvRow(): IvyCsvRow = IvyCsvRow(
+    private fun Expense.expenseCsvRow(): KissosCsvRow = KissosCsvRow(
         date = time.takeIf
         { settled },
         title = title,
@@ -152,7 +152,7 @@ class ExportCsvUseCase @Inject constructor(
         id = id
     )
 
-    private fun Income.incomeCsvRow(): IvyCsvRow = IvyCsvRow(
+    private fun Income.incomeCsvRow(): KissosCsvRow = KissosCsvRow(
         date = time.takeIf { settled },
         title = title,
         category = category,
@@ -170,7 +170,7 @@ class ExportCsvUseCase @Inject constructor(
         id = id
     )
 
-    private fun Transfer.transferCsvRow(): IvyCsvRow = IvyCsvRow(
+    private fun Transfer.transferCsvRow(): KissosCsvRow = KissosCsvRow(
         date = time.takeIf { settled },
         title = title,
         category = category,

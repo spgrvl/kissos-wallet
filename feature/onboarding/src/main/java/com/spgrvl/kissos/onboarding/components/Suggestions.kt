@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.Purple
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.ui.R
@@ -28,7 +28,7 @@ import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Red
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.WrapContentRow
 
 @Composable
@@ -86,7 +86,7 @@ private fun Suggestion(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(icon = R.drawable.ic_plus)
+        KissosIcon(icon = R.drawable.ic_plus)
 
         Spacer(Modifier.width(8.dp))
 
@@ -118,7 +118,7 @@ private fun AddNewButton(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_plus,
             tint = UI.colors.pure,
         )
@@ -143,7 +143,7 @@ private class AddNew
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Suggestions(
             suggestions = listOf(
                 Account("Cash", Green.toArgb()),

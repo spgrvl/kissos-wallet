@@ -26,14 +26,14 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.data.model.IntervalType
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.forDisplay
 import com.spgrvl.kissos.legacy.utils.capitalizeLocal
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.White
 
 private const val RepeatIntervalCharLimit = 5
@@ -58,11 +58,11 @@ fun IntervalPickerRow(
 
         val validInput = intervalN > 0 && interNTextFieldValue.text.isNotNullOrBlank()
 
-        IvyNumberTextField(
+        KissosNumberTextField(
             modifier = Modifier
                 .background(
                     brush = if (validInput) {
-                        GradientIvy.asHorizontalBrush()
+                        GradientKissos.asHorizontalBrush()
                     } else {
                         Gradient
                             .solid(UI.colors.medium)
@@ -113,7 +113,7 @@ private fun RowScope.IntervalTypeSelector(
     ) {
         Spacer(Modifier.width(20.dp))
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier
                 .size(48.dp)
                 .clip(CircleShape)
@@ -145,7 +145,7 @@ private fun RowScope.IntervalTypeSelector(
 
         Spacer(Modifier.weight(1f))
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier
                 .size(48.dp)
                 .clip(CircleShape)
@@ -171,7 +171,7 @@ private fun RowScope.IntervalTypeSelector(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         IntervalPickerRow(
             intervalN = 1,
             intervalType = IntervalType.WEEK,

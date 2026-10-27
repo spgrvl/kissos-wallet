@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
@@ -29,8 +29,8 @@ import com.spgrvl.kissos.legacy.utils.springBounce
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerDot
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerDot
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -88,7 +88,7 @@ fun SectionDivider(
 
         Spacer(Modifier.weight(1f))
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier.rotate(expandIconRotation),
             icon = R.drawable.ic_expandarrow
         )
@@ -128,7 +128,7 @@ private fun SectionDividerIncomeExpenseRow(
         if (income > 0 && expenses > 0) {
             Spacer(Modifier.width(8.dp))
 
-            IvyDividerDot()
+            KissosDividerDot()
 
             Spacer(Modifier.width(8.dp))
         }
@@ -157,7 +157,7 @@ private fun SectionDividerIncomeExpenseRow(
 @Preview
 @Composable
 private fun Preview_Income_Expenses() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         SectionDivider(
             expanded = true,
             title = "Upcoming",
@@ -173,7 +173,7 @@ private fun Preview_Income_Expenses() {
 @Preview
 @Composable
 private fun Preview_Expenses() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         SectionDivider(
             expanded = true,
             title = "Overdue",
@@ -189,7 +189,7 @@ private fun Preview_Expenses() {
 @Preview
 @Composable
 private fun Preview_Income() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         SectionDivider(
             expanded = true,
             title = "Upcoming",

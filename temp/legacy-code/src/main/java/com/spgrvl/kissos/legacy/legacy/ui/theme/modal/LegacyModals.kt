@@ -15,7 +15,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.onScreenStart
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
 
 @Composable
 fun ModalNameInput(
@@ -34,7 +34,7 @@ fun ModalNameInput(
     }
 
     val view = LocalView.current
-    IvyNameTextField(
+    KissosNameTextField(
         modifier = modifier
             .padding(start = 32.dp, end = 36.dp)
             .focusRequester(nameFocus),

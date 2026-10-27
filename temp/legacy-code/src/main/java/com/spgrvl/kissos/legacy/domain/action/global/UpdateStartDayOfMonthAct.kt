@@ -3,13 +3,13 @@ package com.spgrvl.kissos.wallet.domain.action.global
 import com.spgrvl.kissos.frp.action.FPAction
 import com.spgrvl.kissos.frp.monad.Res
 import com.spgrvl.kissos.frp.monad.thenIfSuccess
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.base.legacy.SharedPrefs
 import javax.inject.Inject
 
 class UpdateStartDayOfMonthAct @Inject constructor(
     private val sharedPrefs: SharedPrefs,
-    private val ivyWalletCtx: IvyWalletCtx
+    private val kissosWalletCtx: KissosWalletCtx
 ) : FPAction<Int, Res<String, Int>>() {
 
     override suspend fun Int.compose(): suspend () -> Res<String, Int> = suspend {
@@ -22,10 +22,10 @@ class UpdateStartDayOfMonthAct @Inject constructor(
         }
     } thenIfSuccess { startDay ->
         sharedPrefs.putInt(SharedPrefs.START_DATE_OF_MONTH, startDay)
-        ivyWalletCtx.setStartDayOfMonth(startDay)
+        kissosWalletCtx.setStartDayOfMonth(startDay)
         Res.Ok(startDay)
     } thenIfSuccess { startDay ->
-        ivyWalletCtx.initSelectedPeriodInMemory(
+        kissosWalletCtx.initSelectedPeriodInMemory(
             startDayOfMonth = startDay,
             forceReinitialize = true
         )

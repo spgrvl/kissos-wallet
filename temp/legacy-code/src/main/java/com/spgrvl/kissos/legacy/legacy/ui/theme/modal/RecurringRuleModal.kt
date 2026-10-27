@@ -37,9 +37,9 @@ import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
-import com.spgrvl.kissos.legacy.IvyWalletCtx
-import com.spgrvl.kissos.legacy.IvyWalletPreview
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletPreview
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.KeyboardListener
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.closeDay
@@ -50,12 +50,12 @@ import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.IntervalPickerRow
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -96,7 +96,7 @@ fun BoxWithConstraintsScope.RecurringRuleModal(
 
     val modalScrollState = rememberScrollState()
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -221,7 +221,7 @@ private fun RowScope.TimesSelectorButton(
             }
             .padding(vertical = 8.dp)
             .thenIf(selected) {
-                background(GradientIvy.asHorizontalBrush(), rFull)
+                background(GradientKissos.asHorizontalBrush(), rFull)
             }
             .padding(vertical = 8.dp),
         text = label,
@@ -280,7 +280,7 @@ private fun MultipleTimes(
 
     Spacer(Modifier.height(32.dp))
 
-    IvyDividerLine(
+    KissosDividerLine(
         modifier = Modifier.padding(horizontal = 24.dp)
     )
 
@@ -333,11 +333,11 @@ private fun DateRow(
     ) {
         Spacer(Modifier.width(32.dp))
 
-        val ivyContext = ivyWalletCtx()
+        val kissosContext = kissosWalletCtx()
 
         Column(
             modifier = Modifier.clickableNoIndication(rememberInteractionSource()) {
-                ivyContext.pickDate(dateTime.toLocalDate(), onDatePicked)
+                kissosContext.pickDate(dateTime.toLocalDate(), onDatePicked)
             }
         ) {
             val date = dateTime.toLocalDate()
@@ -369,7 +369,7 @@ private fun DateRow(
         Spacer(Modifier.width(24.dp))
         Spacer(Modifier.weight(1f))
 
-        IvyCircleButton(
+        KissosCircleButton(
             modifier = Modifier
                 .size(48.dp)
                 .testTag("recurring_modal_pick_date"),
@@ -378,14 +378,14 @@ private fun DateRow(
             backgroundGradient = Gradient.solid(UI.colors.pureInverse),
             tint = UI.colors.pure
         ) {
-            ivyContext.pickDate(dateTime.toLocalDate(), onDatePicked)
+            kissosContext.pickDate(dateTime.toLocalDate(), onDatePicked)
         }
 
         Spacer(Modifier.width(32.dp))
     }
 }
 
-private fun IvyWalletCtx.pickDate(
+private fun KissosWalletCtx.pickDate(
     initialDate: LocalDate,
     onDatePicked: (
         LocalDateTime
@@ -401,7 +401,7 @@ private fun IvyWalletCtx.pickDate(
 @Preview
 @Composable
 private fun Preview_oneTime() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         BoxWithConstraints(Modifier.padding(bottom = 48.dp)) {
             RecurringRuleModal(
                 modal = RecurringRuleModalData(
@@ -420,7 +420,7 @@ private fun Preview_oneTime() {
 @Preview
 @Composable
 private fun Preview_multipleTimes() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         BoxWithConstraints(Modifier.padding(bottom = 48.dp)) {
             RecurringRuleModal(
                 modal = RecurringRuleModalData(

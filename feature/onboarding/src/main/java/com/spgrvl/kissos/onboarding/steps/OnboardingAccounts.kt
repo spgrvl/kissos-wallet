@@ -35,7 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.AccountBalance
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
@@ -45,10 +45,10 @@ import com.spgrvl.kissos.onboarding.components.OnboardingToolbar
 import com.spgrvl.kissos.onboarding.components.Suggestions
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.GradientCutBottom
@@ -195,7 +195,7 @@ fun BoxWithConstraintsScope.OnboardingAccounts(
 
             text = stringResource(R.string.next),
             textColor = White,
-            backgroundGradient = GradientIvy,
+            backgroundGradient = GradientKissos,
             hasNext = true,
             enabled = true
         ) {
@@ -290,7 +290,7 @@ private fun AccountCard(
 @Preview
 @Composable
 private fun Preview_Empty() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val baseCurrency = "BGN"
         OnboardingAccounts(
             baseCurrency = baseCurrency,
@@ -305,7 +305,7 @@ private fun Preview_Empty() {
                 CreateAccountData(
                     name = "Bank",
                     currency = baseCurrency,
-                    color = Ivy,
+                    color = Kissos,
                     icon = "bank",
                     balance = 0.0
                 ),
@@ -326,7 +326,7 @@ private fun Preview_Empty() {
 @Preview
 @Composable
 private fun Preview_Accounts() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val baseCurrency = "BGN"
         OnboardingAccounts(
             baseCurrency = baseCurrency,
@@ -341,7 +341,7 @@ private fun Preview_Accounts() {
                 CreateAccountData(
                     name = "Bank",
                     currency = baseCurrency,
-                    color = Ivy,
+                    color = Kissos,
                     icon = "bank",
                     balance = 0.0
                 ),
@@ -371,7 +371,7 @@ private fun Preview_Accounts() {
 @Preview
 @Composable
 private fun Preview_Premium() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val baseCurrency = "BGN"
         OnboardingAccounts(
             baseCurrency = baseCurrency,
@@ -386,7 +386,7 @@ private fun Preview_Premium() {
                 CreateAccountData(
                     name = "Bank",
                     currency = baseCurrency,
-                    color = Ivy,
+                    color = Kissos,
                     icon = "bank",
                     balance = 0.0
                 ),
@@ -410,7 +410,7 @@ private fun Preview_Premium() {
                 AccountBalance(
                     account = Account(
                         name = "Revolut",
-                        color = IvyDark.toArgb(),
+                        color = KissosDark.toArgb(),
                         icon = "cash"
                     ),
                     balance = 0.0

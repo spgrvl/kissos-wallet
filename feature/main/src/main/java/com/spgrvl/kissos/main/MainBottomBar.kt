@@ -45,7 +45,7 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.data.model.MainTab
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.densityScope
 import com.spgrvl.kissos.legacy.utils.lerp
@@ -57,13 +57,13 @@ import com.spgrvl.kissos.legacy.utils.toDensityPx
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 import com.spgrvl.kissos.wallet.ui.theme.gradientExpenses
 import com.spgrvl.kissos.wallet.ui.theme.modal.AddModalBackHandling
 import com.spgrvl.kissos.wallet.ui.theme.pureBlur
@@ -89,7 +89,7 @@ fun BoxWithConstraintsScope.BottomBar(
 
     showAddAccountModal: () -> Unit,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     var expanded by remember { mutableStateOf(false) }
 
@@ -102,7 +102,7 @@ fun BoxWithConstraintsScope.BottomBar(
         expanded = false
     }
 
-    val screenHeightDp = densityScope { ivyContext.screenHeight.toDp() }
+    val screenHeightDp = densityScope { kissosContext.screenHeight.toDp() }
     val expandedBackgroundOffset by animateDpAsState(
         targetValue = if (expanded) 0.dp else screenHeightDp,
         animationSpec = springBounceFast()
@@ -134,7 +134,7 @@ fun BoxWithConstraintsScope.BottomBar(
             icon = R.drawable.ic_home,
             name = stringResource(R.string.home),
             selected = tab == MainTab.HOME,
-            selectedColor = Ivy
+            selectedColor = Kissos
         ) {
             selectTab(MainTab.HOME)
         }
@@ -165,8 +165,8 @@ fun BoxWithConstraintsScope.BottomBar(
     }
 
     // ------------------------------------ BUTTONS--------------------------------------------------
-    val fabStartX = ivyContext.screenWidth / 2 - FAB_BUTTON_SIZE.toDensityPx() / 2
-    val fabStartY = ivyContext.screenHeight - navigationBarInset() -
+    val fabStartX = kissosContext.screenWidth / 2 - FAB_BUTTON_SIZE.toDensityPx() / 2
+    val fabStartY = kissosContext.screenHeight - navigationBarInset() -
             30.dp.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
 
     TransactionButtons(
@@ -186,7 +186,7 @@ fun BoxWithConstraintsScope.BottomBar(
         mutableStateOf(Offset.Zero)
     }
     // + & x button
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
@@ -246,7 +246,7 @@ fun BoxWithConstraintsScope.BottomBar(
         icon = R.drawable.ic_add,
         backgroundGradient = when (tab) {
             MainTab.HOME -> {
-                if (!expanded) GradientIvy else Gradient.solid(UI.colors.gray)
+                if (!expanded) GradientKissos else Gradient.solid(UI.colors.gray)
             }
 
             MainTab.ACCOUNTS -> {
@@ -284,7 +284,7 @@ private fun TransactionButtons(
     onAddPlannedPayment: () -> Unit,
     onScanReceipt: () -> Unit,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     val bH = 48.dp
     val bV = 20.dp // 24.dp
@@ -292,12 +292,12 @@ private fun TransactionButtons(
 
     if (buttonsShownPercent > 0.01f) {
         val buttonLeftX = bH.toDensityPx()
-        val buttonRightX = ivyContext.screenWidth - bH.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
+        val buttonRightX = kissosContext.screenWidth - bH.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
 
         val sideButtonsY = fabStartY - bV.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
         val buttonCenterY = fabStartY - bCenterV.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
 
-        val clickAreaWidth = ivyContext.screenWidth / 3
+        val clickAreaWidth = kissosContext.screenWidth / 3
 
         Column(
             modifier = Modifier
@@ -305,7 +305,7 @@ private fun TransactionButtons(
                     val placealbe = measurable.measure(constraints)
                     layout(placealbe.width, placealbe.height) {
                         placealbe.place(
-                            x = ivyContext.screenWidth / 2 - placealbe.width / 2,
+                            x = kissosContext.screenWidth / 2 - placealbe.width / 2,
                             y = buttonCenterY.roundToInt() - 48.dp.roundToPx() - placealbe.height - FAB_BUTTON_SIZE.roundToPx()
                         )
                     }
@@ -315,7 +315,7 @@ private fun TransactionButtons(
                 .zIndex(200f),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            IvyOutlinedButton(
+            KissosOutlinedButton(
                 iconStart = R.drawable.ic_scan_receipt,
                 text = stringResource(R.string.scan_receipt),
                 solidBackground = true
@@ -325,7 +325,7 @@ private fun TransactionButtons(
 
             Spacer(Modifier.height(12.dp))
 
-            IvyOutlinedButton(
+            KissosOutlinedButton(
                 iconStart = R.drawable.ic_planned_payments,
                 text = stringResource(R.string.add_planned_payment),
                 solidBackground = true
@@ -381,7 +381,7 @@ private fun AddIncomeButton(
     clickAreaWidth: Int,
     onAddIncome: () -> Unit,
 ) {
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
@@ -466,7 +466,7 @@ private fun AddExpenseButton(
     clickAreaWidth: Int,
     onAddExpense: () -> Unit,
 ) {
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
@@ -553,7 +553,7 @@ private fun AddTransferButton(
     clickAreaWidth: Int,
     onAddTransfer: () -> Unit,
 ) {
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
@@ -575,7 +575,7 @@ private fun AddTransferButton(
             .size(FAB_BUTTON_SIZE)
             .zIndex(200f),
         icon = R.drawable.ic_transfer,
-        backgroundGradient = GradientIvy,
+        backgroundGradient = GradientKissos,
         tint = White,
         onClick = onAddTransfer
     )
@@ -647,7 +647,7 @@ private fun RowScope.Tab(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IvyIcon(
+        KissosIcon(
             icon = icon,
             tint = if (selected) selectedColor else UI.colors.pureInverse
         )

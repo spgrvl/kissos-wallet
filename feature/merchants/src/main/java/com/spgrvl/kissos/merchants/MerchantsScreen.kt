@@ -31,14 +31,14 @@ import com.spgrvl.kissos.data.model.CategoryId
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.ColumnRoot
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionsRow
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.components.BackBottomBar
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalDelete
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSave
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
@@ -140,7 +140,7 @@ private fun BoxWithConstraintsScope.EditMerchantModal(
     var categoryId by remember(merchant) { mutableStateOf(merchant?.category?.value) }
     var accountId by remember(merchant) { mutableStateOf(merchant?.account?.value) }
 
-    IvyModal(
+    KissosModal(
         id = remember { UUID.randomUUID() },
         visible = merchant != null,
         dismiss = dismiss,
@@ -169,7 +169,7 @@ private fun BoxWithConstraintsScope.EditMerchantModal(
         Spacer(Modifier.height(32.dp))
         ModalTitle(text = stringResource(R.string.merchant_details, merchant?.afm.orEmpty()))
         Spacer(Modifier.height(24.dp))
-        IvyNameTextField(
+        KissosNameTextField(
             modifier = Modifier.padding(horizontal = 32.dp),
             underlineModifier = Modifier.padding(horizontal = 24.dp),
             value = name,
@@ -198,7 +198,7 @@ private fun BoxWithConstraintsScope.EditMerchantModal(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview(Theme.LIGHT) {
+    KissosWalletPreview(Theme.LIGHT) {
         UI(state = previewState, onEvent = {})
     }
 }

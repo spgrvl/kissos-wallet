@@ -31,12 +31,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.hasLockScreen
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 
 @SuppressLint("ComposeModifierMissing")
 @Composable
@@ -93,7 +93,7 @@ fun BoxWithConstraintsScope.AppLockedScreen(
         val latestOnShowOSBiometricsModal by rememberUpdatedState(onShowOSBiometricsModal)
 
         val context = LocalContext.current
-        IvyButton(
+        KissosButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
@@ -140,7 +140,7 @@ private fun osAuthentication(
 @Composable
 @Suppress("FunctionNaming", "UnusedPrivateMember")
 private fun Preview_Locked() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         AppLockedScreen(
             onContinueWithoutAuthentication = {},
             onShowOSBiometricsModal = {}

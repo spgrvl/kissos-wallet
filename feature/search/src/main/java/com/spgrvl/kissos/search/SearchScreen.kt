@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.base.legacy.Theme
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.ui.SearchInput
 import com.spgrvl.kissos.legacy.ui.component.transaction.transactions
@@ -29,7 +29,7 @@ import com.spgrvl.kissos.legacy.utils.densityScope
 import com.spgrvl.kissos.legacy.utils.keyboardOnlyWindowInsets
 import com.spgrvl.kissos.legacy.utils.keyboardVisibleState
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.SearchScreen
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
@@ -128,7 +128,7 @@ private fun SearchUi(
 @Preview
 @Composable
 private fun Preview(isDark: Boolean = false) {
-    IvyPreview(isDark) {
+    KissosPreview(isDark) {
         SearchUi(
             uiState = SearchState(
                 searchQuery = "",
@@ -148,7 +148,7 @@ private fun Preview(isDark: Boolean = false) {
 @Composable
 fun SearchUiTest(isDark: Boolean) {
     val theme = if (isDark) Theme.DARK else Theme.LIGHT
-    IvyComponentPreview(theme = theme) {
+    KissosComponentPreview(theme = theme) {
         Preview(isDark)
     }
 }

@@ -26,12 +26,12 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.base.model.TransactionType
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.keyboardVisibleState
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.SUGGESTIONS_LIMIT
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyTitleTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosTitleTextField
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -49,7 +49,7 @@ fun ColumnScope.Title(
     scrollState: ScrollState? = null,
     onNext: () -> Unit,
 ) {
-    IvyTitleTextField(
+    KissosTitleTextField(
         modifier = Modifier
             .padding(horizontal = 32.dp)
             .focusRequester(titleFocus),
@@ -131,7 +131,7 @@ private fun Suggestion(
 @Preview
 @Composable
 private fun PreviewTitleWithSuggestions() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         Column {
             Title(
                 type = TransactionType.EXPENSE,

@@ -34,7 +34,7 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.api.LocalTimeConverter
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.PlannedPaymentRule
 import com.spgrvl.kissos.legacy.forDisplay
@@ -51,8 +51,8 @@ import com.spgrvl.kissos.wallet.ui.theme.Blue
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Orange
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.getCustomIconIdS
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
@@ -147,7 +147,7 @@ private fun PlannedPaymentHeaderRow(
         ) {
             Spacer(Modifier.width(20.dp))
 
-            IvyIcon(
+            KissosIcon(
                 modifier = Modifier
                     .background(UI.colors.pure, CircleShape),
                 icon = R.drawable.ic_planned_payments,
@@ -159,7 +159,7 @@ private fun PlannedPaymentHeaderRow(
             val category =
                 plannedPayment.categoryId?.let { targetId -> categories.find { it.id.value == targetId } }
             if (category != null) {
-                IvyButton(
+                KissosButton(
                     iconTint = findContrastTextColor(category.color.value.toComposeColor()),
                     iconStart = getCustomIconIdS(
                         category.icon?.id,
@@ -186,7 +186,7 @@ private fun PlannedPaymentHeaderRow(
             }
 
             val account = accounts.find { it.id == plannedPayment.accountId }
-            IvyButton(
+            KissosButton(
                 backgroundGradient = Gradient.solid(UI.colors.pure),
                 text = account?.name ?: stringResource(R.string.deleted),
                 iconTint = UI.colors.pureInverse,
@@ -272,7 +272,7 @@ private fun RuleTextRow(
 @Preview
 @Composable
 private fun Preview_oneTime() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val cash = Account(name = "Cash", Green.toArgb())
             val food = Category(
@@ -310,7 +310,7 @@ private fun Preview_oneTime() {
 @Preview
 @Composable
 private fun Preview_recurring() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val account = Account(name = "Revolut", Blue.toArgb())
             val shisha = Category(
@@ -348,7 +348,7 @@ private fun Preview_recurring() {
 @Preview
 @Composable
 private fun Preview_recurringError() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LazyColumn(Modifier.fillMaxSize()) {
             val account = Account(name = "Revolut", Blue.toArgb())
             val shisha = Category(

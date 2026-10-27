@@ -144,13 +144,13 @@ private fun ImportUI(
 private fun ImportButton(
     onFilePick: (Uri) -> Unit,
 ) {
-    val ivyContext = com.spgrvl.kissos.legacy.ivyWalletCtx()
+    val kissosContext = com.spgrvl.kissos.legacy.kissosWalletCtx()
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
         onClick = {
-            ivyContext.openFile {
+            kissosContext.openFile {
                 onFilePick(it)
             }
         }
@@ -261,7 +261,7 @@ private fun <M> LazyListScope.mappingRow(
                 .padding(vertical = 8.dp, horizontal = 8.dp)
         ) {
             Text(
-                text = stringResource(mapping.ivyColumn),
+                text = stringResource(mapping.kissosColumn),
                 style = UI.typo.b1.colorAs(UI.colors.primary),
             )
             Spacer(modifier = Modifier.height(4.dp))

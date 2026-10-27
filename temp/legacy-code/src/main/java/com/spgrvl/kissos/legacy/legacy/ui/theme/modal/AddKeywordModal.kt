@@ -19,11 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyTitleTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosTitleTextField
 import java.util.UUID
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -38,7 +38,7 @@ fun BoxWithConstraintsScope.AddKeywordModal(
 ) {
     var modalKeyword by remember { mutableStateOf(selectEndTextFieldValue(keyword)) }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -68,7 +68,7 @@ fun BoxWithConstraintsScope.AddKeywordModal(
             inputFocus.requestFocus()
         }
 
-        IvyTitleTextField(
+        KissosTitleTextField(
             modifier = Modifier
                 .padding(horizontal = 32.dp)
                 .focusRequester(inputFocus),
@@ -86,7 +86,7 @@ fun BoxWithConstraintsScope.AddKeywordModal(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         AddKeywordModal(
             visible = true,
             keyword = "",

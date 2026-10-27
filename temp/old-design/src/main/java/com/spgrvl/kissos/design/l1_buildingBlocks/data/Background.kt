@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.asBrush
-import com.spgrvl.kissos.design.utils.ivyPadding
+import com.spgrvl.kissos.design.utils.kissosPadding
 import com.spgrvl.kissos.design.utils.thenWhen
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -19,12 +19,12 @@ sealed class Background {
     data class Solid(
         val color: Brush,
         val shape: Shape,
-        val padding: IvyPadding
+        val padding: KissosPadding
     ) : Background() {
         constructor(
             color: Color,
             shape: Shape,
-            padding: IvyPadding
+            padding: KissosPadding
         ) : this(
             color = color.asBrush(),
             shape = shape,
@@ -37,13 +37,13 @@ sealed class Background {
         val color: Brush,
         val width: Dp = 1.dp,
         val shape: Shape,
-        val padding: IvyPadding
+        val padding: KissosPadding
     ) : Background() {
         constructor(
             color: Color,
             width: Dp = 1.dp,
             shape: Shape,
-            padding: IvyPadding
+            padding: KissosPadding
         ) : this(
             color = color.asBrush(),
             width = width,
@@ -64,14 +64,14 @@ fun Modifier.background(background: Background): Modifier {
                 background(
                     brush = background.color,
                     shape = background.shape
-                ).ivyPadding(background.padding)
+                ).kissosPadding(background.padding)
             }
             is Background.Outlined -> {
                 border(
                     brush = background.color,
                     width = background.width,
                     shape = background.shape
-                ).ivyPadding(background.padding)
+                ).kissosPadding(background.padding)
             }
             is Background.None -> null
         }

@@ -32,8 +32,8 @@ import com.spgrvl.kissos.data.model.TagId
 import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.components.DeleteButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyTitleTextField
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosTitleTextField
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalPositiveButton
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 
@@ -66,7 +66,7 @@ fun BoxWithConstraintsScope.AddOrEditTagModal(
         mutableStateOf(initialTag?.name?.value ?: "")
     }
 
-    IvyModal(
+    KissosModal(
         id = id.value,
         visible = visible,
         dismiss = onDismiss,
@@ -117,7 +117,7 @@ fun BoxWithConstraintsScope.AddOrEditTagModal(
 
         Spacer(Modifier.height(24.dp))
 
-        IvyTitleTextField(
+        KissosTitleTextField(
             modifier = Modifier
                 .padding(horizontal = 32.dp)
                 .focusRequester(titleFocus),

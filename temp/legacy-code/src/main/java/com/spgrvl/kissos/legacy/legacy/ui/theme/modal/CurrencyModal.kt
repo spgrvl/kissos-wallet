@@ -20,9 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.components.CurrencyPicker
 import java.util.UUID
@@ -31,7 +31,7 @@ import java.util.UUID
 @Composable
 fun BoxWithConstraintsScope.CurrencyModal(
     title: String,
-    initialCurrency: IvyCurrency?,
+    initialCurrency: KissosCurrency?,
     visible: Boolean,
     dismiss: () -> Unit,
     id: UUID = UUID.randomUUID(),
@@ -39,10 +39,10 @@ fun BoxWithConstraintsScope.CurrencyModal(
     onSetCurrency: (String) -> Unit
 ) {
     var currency by remember(id) {
-        mutableStateOf(initialCurrency ?: IvyCurrency.getDefault())
+        mutableStateOf(initialCurrency ?: KissosCurrency.getDefault())
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -104,7 +104,7 @@ fun BoxWithConstraintsScope.CurrencyModal(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         CurrencyModal(
             title = "Set currency",
             initialCurrency = null,

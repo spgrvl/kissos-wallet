@@ -119,7 +119,7 @@ class BackupDataUseCase @Inject constructor(
             val receipts = async { receiptReader.findAll() }
             val merchants = async { merchantReader.findAll() }
 
-            val completeData = IvyWalletCompleteData(
+            val completeData = KissosWalletCompleteData(
                 accounts = accounts.await(),
                 budgets = budgets.await(),
                 categories = categories.await(),
@@ -218,12 +218,12 @@ class BackupDataUseCase @Inject constructor(
         clearCacheDir: Boolean = false,
     ): ImportResult {
         val modifiedJsonString = accommodateExistingAccountsAndCategories(jsonString)
-        val ivyWalletCompleteData = modifiedJsonString?.let {
-            json.decodeFromString<IvyWalletCompleteData>(it)
+        val kissosWalletCompleteData = modifiedJsonString?.let {
+            json.decodeFromString<KissosWalletCompleteData>(it)
         } ?: error("Failed to parse backup JSON.")
 
         onProgress(0.4)
-        insertDataToDb(completeData = ivyWalletCompleteData, onProgress = onProgress)
+        insertDataToDb(completeData = kissosWalletCompleteData, onProgress = onProgress)
         onProgress(1.0)
 
         if (clearCacheDir) {
@@ -231,10 +231,10 @@ class BackupDataUseCase @Inject constructor(
         }
 
         return ImportResult(
-            rowsFound = ivyWalletCompleteData.transactions.size,
-            transactionsImported = ivyWalletCompleteData.transactions.size,
-            accountsImported = ivyWalletCompleteData.accounts.size,
-            categoriesImported = ivyWalletCompleteData.categories.size,
+            rowsFound = kissosWalletCompleteData.transactions.size,
+            transactionsImported = kissosWalletCompleteData.transactions.size,
+            accountsImported = kissosWalletCompleteData.accounts.size,
+            categoriesImported = kissosWalletCompleteData.categories.size,
             failedRows = persistentListOf()
         )
     }
@@ -242,8 +242,8 @@ class BackupDataUseCase @Inject constructor(
     private suspend fun accommodateExistingAccountsAndCategories(jsonString: String?): String? {
         if (jsonString == null) return null
 
-        val ivyWalletCompleteData = json.decodeFromString<IvyWalletCompleteData>(jsonString)
-        val replacementPairs = getReplacementPairs(ivyWalletCompleteData)
+        val kissosWalletCompleteData = json.decodeFromString<KissosWalletCompleteData>(jsonString)
+        val replacementPairs = getReplacementPairs(kissosWalletCompleteData)
 
         var modifiedString = jsonString
         replacementPairs.forEach {
@@ -254,7 +254,7 @@ class BackupDataUseCase @Inject constructor(
     }
 
     private suspend fun insertDataToDb(
-        completeData: IvyWalletCompleteData,
+        completeData: KissosWalletCompleteData,
         onProgress: suspend (progressPercent: Double) -> Unit = {}
     ) {
         withContext(dispatchersProvider.io) {
@@ -339,7 +339,7 @@ class BackupDataUseCase @Inject constructor(
      *  returns a Pair<A,B> of IDs where A is the UUID that needs to be replaced with B
      */
     private suspend fun getReplacementPairs(
-        completeData: IvyWalletCompleteData
+        completeData: KissosWalletCompleteData
     ): List<Pair<UUID, UUID>> {
         return withContext(dispatchersProvider.io) {
             val existingAccountsList = accountDao.findAll()

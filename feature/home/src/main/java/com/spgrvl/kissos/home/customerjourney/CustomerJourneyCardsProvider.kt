@@ -9,10 +9,10 @@ import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.design.l0_system.Gradient
 import com.spgrvl.kissos.design.l0_system.Green
 import com.spgrvl.kissos.design.l0_system.GreenLight
-import com.spgrvl.kissos.design.l0_system.Ivy
+import com.spgrvl.kissos.design.l0_system.Kissos
 import com.spgrvl.kissos.design.l0_system.Orange
 import com.spgrvl.kissos.design.l0_system.Red
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.MainTab
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.PieChartStatisticScreen
@@ -25,7 +25,7 @@ class CustomerJourneyCardsProvider @Inject constructor(
   private val transactionRepository: TransactionRepository,
   private val plannedPaymentRuleDao: PlannedPaymentRuleDao,
   private val sharedPrefs: SharedPrefs,
-  private val ivyContext: IvyWalletCtx,
+  private val kissosContext: KissosWalletCtx,
   private val timeProvider: TimeProvider,
 ) {
 
@@ -41,7 +41,7 @@ class CustomerJourneyCardsProvider @Inject constructor(
         it.condition(
           trnCount,
           plannedPaymentsCount,
-          ivyContext,
+          kissosContext,
           deps
         ) && !isCardDismissed(it)
       }
@@ -76,10 +76,10 @@ class CustomerJourneyCardsProvider @Inject constructor(
       description = stringRes(R.string.adjust_initial_balance_description),
       cta = stringRes(R.string.to_accounts),
       ctaIcon = R.drawable.ic_custom_account_s,
-      background = Gradient.solid(Ivy),
+      background = Gradient.solid(Kissos),
       hasDismiss = false,
-      onAction = { _, ivyContext, _ ->
-        ivyContext.selectMainTab(MainTab.ACCOUNTS)
+      onAction = { _, kissosContext, _ ->
+        kissosContext.selectMainTab(MainTab.ACCOUNTS)
       }
     )
 
@@ -115,8 +115,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
       ctaIcon = R.drawable.ic_custom_atom_s,
       background = Gradient.solid(GreenLight),
       hasDismiss = true,
-      onAction = { _, _, ivyActivity ->
-        ivyActivity.pinWidget(AddTransactionWidgetCompact::class.java)
+      onAction = { _, _, kissosActivity ->
+        kissosActivity.pinWidget(AddTransactionWidgetCompact::class.java)
       }
     )
 
@@ -147,8 +147,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
       ctaIcon = R.drawable.ic_custom_star_s,
       background = Gradient.solid(Green),
       hasDismiss = true,
-      onAction = { _, _, ivyActivity ->
-        ivyActivity.reviewIvyWallet(dismissReviewCard = true)
+      onAction = { _, _, kissosActivity ->
+        kissosActivity.reviewKissosWallet(dismissReviewCard = true)
       }
     )
   }
