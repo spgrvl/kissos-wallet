@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "IvyWallet"
+rootProject.name = "Kissos"
 include(":app")
 include(":feature:accounts")
 include(":feature:attributions")
