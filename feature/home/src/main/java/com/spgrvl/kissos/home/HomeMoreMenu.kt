@@ -331,7 +331,7 @@ private fun ColumnScope.OpenSource() {
                 .padding(start = 16.dp, end = 24.dp)
         ) {
             Text(
-                text = stringResource(R.string.ivy_wallet_open_source),
+                text = stringResource(R.string.kissos_open_source),
                 style = UI.typo.b2.style(
                     fontWeight = FontWeight.ExtraBold
                 )

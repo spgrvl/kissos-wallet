@@ -17,7 +17,7 @@ class KissosDataStore @Inject constructor(
     @ApplicationContext private val appContext: Context
 ) {
     @Deprecated("legacy")
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "ivy_wallet")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "kissos")
 
     @Deprecated("legacy")
     suspend fun <T> insert(pair: Preferences.Pair<T>) {

@@ -10,7 +10,7 @@ import androidx.datastore.preferences.preferencesDataStore
 typealias KissosDataStore = DataStore<Preferences>
 
 val Context.dataStore: KissosDataStore by preferencesDataStore(
-    name = "ivy_wallet_datastore_v1"
+    name = "kissos_datastore_v1"
 )
 
 @Composable

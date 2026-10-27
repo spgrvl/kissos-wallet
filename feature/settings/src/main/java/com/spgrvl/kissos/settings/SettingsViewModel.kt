@@ -269,7 +269,7 @@ class SettingsViewModel @Inject constructor(
 
     private fun exportToCSV(rootScreen: RootScreen) {
         kissosContext.createNewFile(
-            "IvyWalletExport_${
+            "KissosExport_${
                 timeNowUTC().getISOFormattedDateTime()
             }.csv"
         ) { fileUri ->
@@ -287,7 +287,7 @@ class SettingsViewModel @Inject constructor(
 
     private fun exportToZip(rootScreen: RootScreen) {
         kissosContext.createNewFile(
-            "IvyWalletBackup_${
+            "KissosBackup_${
                 timeNowUTC().getISOFormattedDateTime()
             }.zip"
         ) { fileUri ->

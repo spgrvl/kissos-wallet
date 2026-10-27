@@ -44,7 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="ivy.wallet.intent.action.add_transaction" />
+                <action android:name="com.spgrvl.kissos.intent.action.add_transaction" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- Receipt QR links, so a receipt scanned with the camera app can open in Kissos -->

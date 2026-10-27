@@ -1317,7 +1317,7 @@
     <issue
         id="UnusedResources"
         message="The resource `R.color.colorPrimary` appears to be unused"
-        errorLine1="    &lt;color name=&quot;colorPrimary&quot;>@color/ivy&lt;/color>"
+        errorLine1="    &lt;color name=&quot;colorPrimary&quot;>@color/kissos&lt;/color>"
         errorLine2="           ~~~~~~~~~~~~~~~~~~~">
         <location
             file="../ivy-resources/src/main/res/values/colors.xml"

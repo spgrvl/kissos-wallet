@@ -529,7 +529,7 @@ class ReportViewModel @Inject constructor(
         if (!filter.validate()) return
 
         kissosContext.createNewFile(
-            "IvyWalletReport-${
+            "KissosReport-${
                 timeNowUTC().getISOFormattedDateTime()
             }.csv"
         ) { fileUri ->

@@ -47,7 +47,6 @@ import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.rootScreen
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.navigation.AttributionsScreen
-import com.spgrvl.kissos.navigation.ContributorsScreen
 import com.spgrvl.kissos.navigation.ExchangeRatesScreen
 import com.spgrvl.kissos.navigation.FeaturesScreen
 import com.spgrvl.kissos.navigation.ImportScreen
@@ -418,7 +417,7 @@ private fun BoxWithConstraintsScope.UI(
             SettingsPrimaryButton(
                 icon = R.drawable.github_logo,
                 iconPadding = 10.dp,
-                text = stringResource(R.string.ivy_wallet_is_opensource),
+                text = stringResource(R.string.kissos_is_open_source),
                 backgroundGradient = Gradient.solid(MediumBlack)
             ) {
                 rootScreen.openUrlInBrowser(url = Constants.URL_KISSOS_REPO)
@@ -445,7 +444,7 @@ private fun BoxWithConstraintsScope.UI(
 
             Spacer(Modifier.height(12.dp))
 
-            Contributors(nav = nav)
+            Contributors()
 
             Spacer(Modifier.height(12.dp))
 
@@ -654,13 +653,14 @@ private fun Releases(nav: Navigation) {
 }
 
 @Composable
-private fun Contributors(nav: Navigation) {
+private fun Contributors() {
+    val uriHandler = LocalUriHandler.current
     SettingsDefaultButton(
         icon = R.drawable.ic_vue_people_people,
         text = stringResource(R.string.project_contributors),
         iconPadding = 8.dp
     ) {
-        nav.navigateTo(ContributorsScreen)
+        uriHandler.openUri(Constants.URL_KISSOS_CREDITS)
     }
 }
 

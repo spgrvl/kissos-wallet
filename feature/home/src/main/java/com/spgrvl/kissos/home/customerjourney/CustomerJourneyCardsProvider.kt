@@ -141,8 +141,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
       condition = { trnCount, _, _, _ ->
         trnCount >= 10
       },
-      title = stringRes(R.string.review_ivy_wallet),
-      description = stringRes(R.string.review_ivy_wallet_description),
+      title = stringRes(R.string.review_kissos),
+      description = stringRes(R.string.review_kissos_description),
       cta = stringRes(R.string.rate_us_on_google_play),
       ctaIcon = R.drawable.ic_custom_star_s,
       background = Gradient.solid(Green),

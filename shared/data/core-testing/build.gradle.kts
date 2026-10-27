@@ -1,6 +1,6 @@
 plugins {
-    id("ivy.feature")
-    id("ivy.room")
+    id("kissos.feature")
+    id("kissos.room")
 }
 
 android {

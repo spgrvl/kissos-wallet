@@ -8,7 +8,6 @@ import com.spgrvl.kissos.attributions.AttributionsScreenImpl
 import com.spgrvl.kissos.balance.BalanceScreen
 import com.spgrvl.kissos.budgets.BudgetScreen
 import com.spgrvl.kissos.categories.CategoriesScreen
-import com.spgrvl.kissos.contributors.ContributorsScreenImpl
 import com.spgrvl.kissos.disclaimer.DisclaimerScreenImpl
 import com.spgrvl.kissos.exchangerates.ExchangeRatesScreen
 import com.spgrvl.kissos.features.FeaturesScreenImpl
@@ -23,7 +22,6 @@ import com.spgrvl.kissos.navigation.BalanceScreen
 import com.spgrvl.kissos.navigation.BudgetScreen
 import com.spgrvl.kissos.navigation.CSVScreen
 import com.spgrvl.kissos.navigation.CategoriesScreen
-import com.spgrvl.kissos.navigation.ContributorsScreen
 import com.spgrvl.kissos.navigation.DisclaimerScreen
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.EditTransactionScreen
@@ -85,7 +83,6 @@ fun BoxWithConstraintsScope.KissosNavGraph(screen: Screen?) {
         is CSVScreen -> CSVScreen(screen = screen)
         FeaturesScreen -> FeaturesScreenImpl()
         AttributionsScreen -> AttributionsScreenImpl()
-        ContributorsScreen -> ContributorsScreenImpl()
         ReleasesScreen -> ReleasesScreenImpl()
         DisclaimerScreen -> DisclaimerScreenImpl()
     }
