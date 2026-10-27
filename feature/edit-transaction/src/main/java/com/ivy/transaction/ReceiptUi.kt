@@ -1,6 +1,12 @@
 package com.ivy.transaction
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
@@ -276,6 +282,7 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
     dismiss: () -> Unit,
     onEnterManually: () -> Unit,
 ) {
+    val context = LocalContext.current
     val clipboard = LocalClipboardManager.current
     MessageModal(
         visible = dialog != null,
@@ -283,8 +290,17 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
         description = stringResource(R.string.not_aade_receipt_description),
         dismiss = dismiss,
         secondaryActions = {
-            ModalSkip(text = stringResource(R.string.copy_qr_text)) {
-                dialog?.let { clipboard.setText(AnnotatedString(it.qrText)) }
+            ModalSkip(text = stringResource(R.string.report_receipt)) {
+                dialog?.let {
+                    if (!context.emailReceiptReport(it.qrText)) {
+                        clipboard.setText(AnnotatedString(it.qrText))
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.report_receipt_no_email, ReportReceiptEmail),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
             }
         },
     ) {
@@ -293,6 +309,26 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
             iconStart = R.drawable.ic_edit,
             onClick = onEnterManually,
         )
+    }
+}
+
+/** Where unsupported receipts are reported, so their providers can be added. */
+private const val ReportReceiptEmail = "contact.sgsoftware@gmail.com"
+
+/** Opens an email to [ReportReceiptEmail] with the QR text filled in; false when there's no email app. */
+private fun Context.emailReceiptReport(qrText: String): Boolean {
+    val version = packageManager.getPackageInfo(packageName, 0).versionName
+    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")).apply {
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(ReportReceiptEmail))
+        putExtra(Intent.EXTRA_SUBJECT, getString(R.string.report_receipt_subject))
+        putExtra(Intent.EXTRA_TEXT, getString(R.string.report_receipt_body, qrText, version, Build.VERSION.RELEASE))
+    }
+    return try {
+        startActivity(intent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        Timber.w(e, "No email app to report a receipt")
+        false
     }
 }
 
