@@ -28,14 +28,14 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import arrow.core.raise.either
 import com.ivy.data.model.Tag
-import com.ivy.data.model.primitive.NotBlankTrimmedString
 import com.ivy.data.model.TagId
+import com.ivy.data.model.primitive.NotBlankTrimmedString
+import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.components.DeleteButton
 import com.ivy.wallet.ui.theme.components.IvyTitleTextField
 import com.ivy.wallet.ui.theme.modal.IvyModal
 import com.ivy.wallet.ui.theme.modal.ModalPositiveButton
 import com.ivy.wallet.ui.theme.modal.ModalTitle
-import com.ivy.ui.R
 
 @Suppress("DEPRECATION")
 @SuppressLint("ComposeModifierMissing")
@@ -101,7 +101,7 @@ fun BoxWithConstraintsScope.AddOrEditTagModal(
                 .padding(start = 0.dp, end = 32.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ModalTitle(text = if (initialTag == null) "Tag Name" else "Edit Tag Name")
+            ModalTitle(text = stringResource(if (initialTag == null) R.string.new_tag else R.string.edit_tag))
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -124,7 +124,7 @@ fun BoxWithConstraintsScope.AddOrEditTagModal(
             dividerModifier = Modifier
                 .padding(horizontal = 24.dp),
             value = titleTextFieldValue,
-            hint = "Enter TagName",
+            hint = stringResource(R.string.tag_name),
             keyboardOptions = KeyboardOptions(
                 autoCorrect = true,
                 keyboardType = KeyboardType.Text,

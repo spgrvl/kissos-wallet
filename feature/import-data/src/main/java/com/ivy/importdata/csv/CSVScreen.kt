@@ -1,6 +1,7 @@
 package com.ivy.importdata.csv
 
 import android.net.Uri
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -260,13 +261,13 @@ private fun <M> LazyListScope.mappingRow(
                 .padding(vertical = 8.dp, horizontal = 8.dp)
         ) {
             Text(
-                text = mapping.ivyColumn,
+                text = stringResource(mapping.ivyColumn),
                 style = UI.typo.b1.colorAs(UI.colors.primary),
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = mapping.helpInfo, style = UI.typo.c.colorAs(UI.colors.gray))
+            Text(text = stringResource(mapping.helpInfo), style = UI.typo.c.colorAs(UI.colors.gray))
             Spacer8()
-            Text(text = "Choose a matching CSV column:", style = UI.typo.b2)
+            Text(text = stringResource(R.string.csv_choose_column), style = UI.typo.b2)
             Spacer(modifier = Modifier.height(4.dp))
             Row(
                 modifier = Modifier
@@ -303,15 +304,12 @@ private fun <M> LazyListScope.mappingRow(
     }
 }
 
-fun LazyListScope.sectionDivider(text: String) {
+fun LazyListScope.sectionDivider(@StringRes text: Int) {
     item {
         Spacer(modifier = Modifier.height(24.dp))
-        Text(text = text, style = UI.typo.b1)
+        Text(text = stringResource(text), style = UI.typo.b1)
         Text(
-            text = """
-                Match the CSV column with the appropriate Ivy type.
-                If the parsing is successful the border will turn green.
-            """.trimIndent(),
+            text = stringResource(R.string.csv_section_hint),
             style = UI.typo.nB2,
             color = UI.colors.gray
         )
@@ -325,7 +323,7 @@ fun LazyListScope.importantFields(
     importantFields: ImportantFields,
     onEvent: (CSVEvent) -> Unit,
 ) {
-    sectionDivider("Important")
+    sectionDivider(R.string.csv_section_important)
     mappingRow(
         columns = columns,
         mapping = importantFields.amount,
@@ -395,7 +393,7 @@ private fun AmountMetadata(
     multiplier: Int,
     onMetaChange: (Int) -> Unit,
 ) {
-    Text(text = "Multiplier", style = UI.typo.nB2)
+    Text(text = stringResource(R.string.csv_multiplier), style = UI.typo.nB2)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Button(onClick = {
             onMetaChange(
@@ -413,7 +411,7 @@ private fun AmountMetadata(
             text = when {
                 multiplier < 0 -> "/${abs(multiplier)}"
                 multiplier > 1 -> "*${abs(multiplier)}"
-                else -> "None"
+                else -> stringResource(R.string.none)
             },
             style = UI.typo.nB2,
             color = UI.colors.primary,
@@ -445,7 +443,7 @@ private fun TypeMetadata(
     }
 
     LabelContainsField(
-        label = "Income",
+        label = stringResource(R.string.csv_income),
         value = metadata.income,
         onValueChange = {
             onTypeMetaEvent(metadata.copy(income = it))
@@ -453,7 +451,7 @@ private fun TypeMetadata(
     )
     Spacer8()
     LabelContainsField(
-        label = "Expense",
+        label = stringResource(R.string.expense),
         value = metadata.expense,
         onValueChange = {
             onTypeMetaEvent(metadata.copy(expense = it))
@@ -462,7 +460,7 @@ private fun TypeMetadata(
     Spacer8()
     Text(text = "(optional)", style = UI.typo.c)
     LabelContainsField(
-        label = "Transfer",
+        label = stringResource(R.string.transfer),
         value = metadata.transfer ?: "",
         onValueChange = {
             onTypeMetaEvent(metadata.copy(transfer = it))
@@ -478,7 +476,7 @@ fun LabelContainsField(
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(text = label, color = UI.colors.primary, style = UI.typo.nB1)
-        Text(text = " contains ", style = UI.typo.c)
+        Text(text = stringResource(R.string.csv_contains), style = UI.typo.c)
         Spacer8(horizontal = true)
         var textField by remember {
             // move the cursor at the end of the text
@@ -501,11 +499,11 @@ private fun DateMetadataUI(
     metadata: DateMetadata,
     onEvent: (CSVEvent) -> Unit,
 ) {
-    Text(text = "Which is first in the format?")
+    Text(text = stringResource(R.string.csv_date_order))
     Row {
         EnabledButton(
             enabled = metadata == DateMetadata.DateFirst,
-            text = "Date/Day (1,2,3...31)",
+            text = stringResource(R.string.csv_day_first),
             onClick = {
                 onEvent(CSVEvent.DataMetaChange(DateMetadata.DateFirst))
             }
@@ -513,7 +511,7 @@ private fun DateMetadataUI(
         Spacer8(horizontal = true)
         EnabledButton(
             enabled = metadata == DateMetadata.MonthFirst,
-            text = "Month (1,2..12 / Jan, Feb..Dec)",
+            text = stringResource(R.string.csv_month_first),
             onClick = {
                 onEvent(CSVEvent.DataMetaChange(DateMetadata.MonthFirst))
             }
@@ -545,7 +543,7 @@ fun LazyListScope.transferFields(
     transferFields: TransferFields,
     onEvent: (CSVEvent) -> Unit,
 ) {
-    sectionDivider("Transfer fields")
+    sectionDivider(R.string.csv_section_transfer)
     mappingRow(
         columns = columns,
         mapping = transferFields.toAccount,
@@ -600,7 +598,7 @@ fun LazyListScope.optionalFields(
     optionalFields: OptionalFields,
     onEvent: (CSVEvent) -> Unit,
 ) {
-    sectionDivider("Optional fields")
+    sectionDivider(R.string.csv_section_optional)
     mappingRow(
         columns = columns,
         mapping = optionalFields.category,

@@ -2,11 +2,13 @@ package com.ivy.legacy.data.model
 
 import androidx.compose.runtime.Immutable
 import com.ivy.base.legacy.Transaction
+import com.ivy.base.legacy.stringRes
 import com.ivy.base.time.TimeConverter
 import com.ivy.base.time.TimeProvider
-import com.ivy.legacy.utils.ivyMinTime
 import com.ivy.legacy.utils.dateNowUTC
 import com.ivy.legacy.utils.ivyMaxTime
+import com.ivy.legacy.utils.ivyMinTime
+import com.ivy.ui.R
 import com.ivy.ui.time.TimeFormatter
 import com.ivy.wallet.domain.pure.data.ClosedTimeRange
 import java.time.Instant
@@ -51,15 +53,15 @@ data class FromToTimeRange(
             }
 
             from != null && to == null -> {
-                "From ${from.formatLocal(style)}"
+                stringRes(R.string.from_date, from.formatLocal(style))
             }
 
             from == null && to != null -> {
-                "To ${to.formatLocal(style)}"
+                stringRes(R.string.to_date, to.formatLocal(style))
             }
 
             else -> {
-                "Range"
+                stringRes(R.string.range)
             }
         }
     }

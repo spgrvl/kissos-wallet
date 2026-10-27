@@ -3,6 +3,7 @@ package com.ivy.wallet.domain.deprecated.logic
 import arrow.core.getOrElse
 import com.ivy.base.legacy.SharedPrefs
 import com.ivy.base.legacy.Transaction
+import com.ivy.base.legacy.stringRes
 import com.ivy.base.model.TransactionType
 import com.ivy.base.time.TimeProvider
 import com.ivy.data.model.AccountId
@@ -16,6 +17,7 @@ import com.ivy.legacy.data.model.filterOverdue
 import com.ivy.legacy.data.model.filterUpcoming
 import com.ivy.legacy.datamodel.Account
 import com.ivy.legacy.datamodel.temp.toDomain
+import com.ivy.ui.R
 import com.ivy.wallet.domain.action.viewmodel.account.AccountDataAct
 import com.ivy.wallet.domain.pure.data.ClosedTimeRange
 import kotlinx.collections.immutable.toImmutableList
@@ -38,7 +40,7 @@ class WalletAccountLogic @Inject constructor(
         actualBalance: Double? = null,
         newBalance: Double,
 
-        adjustTransactionTitle: String = "Adjust balance",
+        adjustTransactionTitle: String = stringRes(R.string.adjust_balance),
 
         isFiat: Boolean? = null,
         trnIsSyncedFlag: Boolean = false, // TODO: Remove this once Bank Integration trn sync is properly implemented

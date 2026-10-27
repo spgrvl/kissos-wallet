@@ -169,7 +169,7 @@
     <string name="offline_account">Offline account</string>
     <string name="data_integrity_protection_warning">Data integrity and protection are not guaranteed!</string>
     <string name="or_enter_with_offline_account">OR ENTER WITH OFFLINE ACCOUNT</string>
-    <string name="offline_warning">Your data will be saved only on your device and won\'t sync with the cloud. Uninstalling the app or changing devices may result in data loss. You can enable sync later if needed.</string>
+    <string name="offline_warning">Your data will be saved only on your device. Uninstalling the app or changing devices may result in data loss, so back up your data regularly.</string>
     <string name="import_csv_file">Import CSV file</string>
     <string name="from_ivy_or_another_app">from Ivy Wallet / Kissos or another app</string>
     <string name="importing_another_time_warning">Importing a backup file from another app may take up to 5 minutes. You can always import your data later if you wish.</string>
@@ -244,7 +244,7 @@
     <string name="hide_income_description">Tap on the hidden income to reveal it for 5s</string>
     <string name="other">Other</string>
     <string name="rate_us_on_google_play">Rate us on Google Play</string>
-    <string name="product">Product</string>
+    <string name="product">About</string>
     <string name="danger_zone">Danger zone</string>
     <string name="delete_all_user_data">Delete all user data</string>
     <string name="delete_all_user_data_question">Delete all user data?</string>
@@ -431,7 +431,7 @@
     <string name="wallet_balance">Wallet balance</string>
     <string name="total_exclusive">Total (exclusive): %1$s %2$s</string>
     <string name="total_balance">Total Balance</string>
-    <string name="total_balance_excluded">Total Balance (excluded)</string>
+    <string name="total_balance_excluded">Incl. excluded accounts</string>
     <string name="initial_loan_record">Starting record</string>
     <string name="loan_record_type">Record type</string>
     <string name="increase_loan">Increase</string>
@@ -443,10 +443,10 @@
     <string name="search_tags">Search Tags</string>
     <string name="exchange_rates">Exchange rates</string>
     <string name="add_tags">Add Tags</string>
-    <string name="this_transaction_is_associated_with_loan">* This transaction is associated with Loan : %1$s</string>
-    <string name="this_transaction_is_associated_with_loan_record">* This transaction is associated with a Loan Record of Loan : %1$s</string>
-    <string name="note_transaction_associated_with_loan_record_of_loan">Note: This transaction is associated with a Loan Record of Loan : %1$s\nYou are trying to change the account associated with the loan record to an account of different currency\n The Loan Record will be re-calculated based on today\'s currency exchanges rates</string>
-    <string name="note_you_are_trying_to_change_the_account_associated_with_the_loan">Note: You are trying to change the account associated with the loan: %1$s with an account of different currency, \nAll the loan records will be re-calculated based on today\'s currency exchanges rates</string>
+    <string name="this_transaction_is_associated_with_loan">* This transaction is associated with the loan: %1$s</string>
+    <string name="this_transaction_is_associated_with_loan_record">* This transaction is associated with a record of the loan: %1$s</string>
+    <string name="note_transaction_associated_with_loan_record_of_loan">Note: This transaction is associated with a record of the loan: %1$s\nYou’re changing the account of the loan record to an account in a different currency.\nThe loan record will be recalculated using today’s exchange rates.</string>
+    <string name="note_you_are_trying_to_change_the_account_associated_with_the_loan">Note: You’re changing the account of the loan %1$s to an account in a different currency.\nAll loan records will be recalculated using today’s exchange rates.</string>
     <string name="attributions">Attributions</string>
     <string name="icons">Icons</string>
     <string name="fonts">Fonts</string>
@@ -511,4 +511,133 @@
     <string name="merchant_details">ΑΦΜ %1$s</string>
     <string name="category">Category</string>
     <string name="none">None</string>
+
+    <!-- Moved out of code -->
+    <string name="manual_rates">Manual</string>
+    <string name="automatic_rates">Automatic</string>
+    <string name="search_currency_hint">Search currency</string>
+    <string name="rate_sell">Sell</string>
+    <string name="rate_buy">Buy</string>
+    <string name="currency">Currency</string>
+    <string name="search_categories">Search categories</string>
+    <string name="new_tag">New tag</string>
+    <string name="edit_tag">Edit tag</string>
+    <string name="tag_name">Tag name</string>
+    <string name="delete_tag_confirmation">Are you sure you want to delete the tag “%1$s”?</string>
+    <string name="tags_label">Tags:</string>
+    <string name="select">Select</string>
+    <string name="back">Back</string>
+    <string name="loans_pending">Pending</string>
+    <string name="loans_completed">Completed</string>
+    <string name="no_browser_app">No browser app found. Visit manually: %1$s</string>
+    <string name="reminder_channel_name">Transaction reminder</string>
+    <string name="reminder_channel_description">Reminds you to record your transactions every day.</string>
+    <string name="ivy_backup_step">%1$s &gt; “%2$s” (don’t use “%3$s”!)</string>
+    <string name="upload_backup_step">Upload the backup file (ZIP/CSV/JSON)</string>
+    <string name="upload_backup_button">Upload backup file</string>
+    <string name="sort_default">Default</string>
+    <string name="sort_balance_amount">Balance amount</string>
+    <string name="sort_alphabetical">Alphabetical</string>
+    <string name="custom_period">Custom</string>
+    <string name="features">Advanced features</string>
+    <string name="feature_sort_categories">Sort categories alphabetically</string>
+    <string name="feature_sort_categories_description">Show categories in A–Z order when adding a transaction</string>
+    <string name="feature_compact_accounts">Compact account cards</string>
+    <string name="feature_compact_accounts_description">Make the Accounts tab more compact</string>
+    <string name="feature_compact_categories">Compact category cards</string>
+    <string name="feature_compact_categories_description">A simpler design for the Categories screen</string>
+    <string name="feature_title_suggestions">Suggest previous titles</string>
+    <string name="feature_title_suggestions_description">Suggest titles of past transactions when adding a new one</string>
+    <string name="feature_search_categories">Search categories</string>
+    <string name="feature_search_categories_description">Show a search bar on the Categories screen</string>
+    <string name="feature_hide_total_balance">Hide total balance</string>
+    <string name="feature_hide_total_balance_description">Hide the total balance summary on the Accounts screen</string>
+    <string name="feature_show_decimals">Show decimals</string>
+    <string name="feature_show_decimals_description">Show the decimal part of amounts</string>
+    <string name="feature_standard_keypad">Phone keypad layout</string>
+    <string name="feature_standard_keypad_description">Put 1-2-3 at the top of the amount keypad, like a phone, instead of 7-8-9 like a calculator</string>
+    <string name="feature_account_colors">Colorful account labels</string>
+    <string name="feature_account_colors_description">Show each account’s color in transactions</string>
+    <string name="csv_choose_column">Choose the matching CSV column:</string>
+    <string name="csv_section_important">Main fields</string>
+    <string name="csv_section_hint">Match each CSV column with the right Kissos field. When a column is read successfully, its border turns green.</string>
+    <string name="csv_section_transfer">Transfer fields</string>
+    <string name="csv_section_optional">Optional fields</string>
+    <string name="csv_multiplier">Multiplier</string>
+    <string name="csv_income">Income</string>
+    <string name="csv_contains"> contains </string>
+    <string name="csv_date_order">Which comes first in the dates?</string>
+    <string name="csv_day_first">Day (1, 2, 3…31)</string>
+    <string name="csv_month_first">Month (1, 2…12 / Jan, Feb…Dec)</string>
+    <string name="csv_amount">Amount</string>
+    <string name="csv_amount_help">The amount of the transaction, a positive number. Negative numbers are made positive.</string>
+    <string name="csv_type">Transaction type</string>
+    <string name="csv_type_help">The column that tells whether a transaction is income, an expense or a transfer. If the amount’s sign tells it, choose the amount column and Kissos will try to match it automatically.</string>
+    <string name="csv_date">Date</string>
+    <string name="csv_date_help">The date of the transaction. To help read it, tell Kissos whether the day or the month comes first.</string>
+    <string name="csv_account_help">The account of the transaction.</string>
+    <string name="csv_account_currency">Account currency</string>
+    <string name="csv_account_currency_help">The currency of the account that made the transaction. In Kissos, transactions use their account’s currency.</string>
+    <string name="csv_to_account">To account</string>
+    <string name="csv_to_account_help">The account receiving the transfer. If you skip it, transfers won’t be imported.</string>
+    <string name="csv_to_account_currency">To account currency</string>
+    <string name="csv_to_account_currency_help">The currency of the account receiving the transfer. Skip it if there’s no such column.</string>
+    <string name="csv_to_amount">To amount</string>
+    <string name="csv_to_amount_help">The amount the receiving account gets. Skip it if there’s no such column.</string>
+    <string name="csv_category_help">The category of the transaction.</string>
+    <string name="csv_title">Title</string>
+    <string name="csv_title_help">The title of the transaction.</string>
+    <string name="csv_description_help">The description of the transaction.</string>
+
+    <string name="range_to">To</string>
+
+    <!-- Time periods, e.g. "Last 3 months" -->
+    <plurals name="last_n_days">
+        <item quantity="one">Last %d day</item>
+        <item quantity="other">Last %d days</item>
+    </plurals>
+    <plurals name="last_n_weeks">
+        <item quantity="one">Last %d week</item>
+        <item quantity="other">Last %d weeks</item>
+    </plurals>
+    <plurals name="last_n_months">
+        <item quantity="one">Last %d month</item>
+        <item quantity="other">Last %d months</item>
+    </plurals>
+    <plurals name="last_n_years">
+        <item quantity="one">Last %d year</item>
+        <item quantity="other">Last %d years</item>
+    </plurals>
+    <plurals name="the_last_n_days">
+        <item quantity="one">the last %d day</item>
+        <item quantity="other">the last %d days</item>
+    </plurals>
+    <plurals name="the_last_n_weeks">
+        <item quantity="one">the last %d week</item>
+        <item quantity="other">the last %d weeks</item>
+    </plurals>
+    <plurals name="the_last_n_months">
+        <item quantity="one">the last %d month</item>
+        <item quantity="other">the last %d months</item>
+    </plurals>
+    <plurals name="the_last_n_years">
+        <item quantity="one">the last %d year</item>
+        <item quantity="other">the last %d years</item>
+    </plurals>
+    <plurals name="imported_transactions">
+        <item quantity="one">%d transaction</item>
+        <item quantity="other">%d transactions</item>
+    </plurals>
+    <plurals name="imported_accounts">
+        <item quantity="one">%d account</item>
+        <item quantity="other">%d accounts</item>
+    </plurals>
+    <plurals name="imported_categories">
+        <item quantity="one">%d category</item>
+        <item quantity="other">%d categories</item>
+    </plurals>
+    <plurals name="csv_rows_not_recognized">
+        <item quantity="one">%d row from the CSV file wasn’t recognized</item>
+        <item quantity="other">%d rows from the CSV file weren’t recognized</item>
+    </plurals>
 </resources>

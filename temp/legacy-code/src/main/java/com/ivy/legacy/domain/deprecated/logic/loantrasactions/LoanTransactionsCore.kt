@@ -2,6 +2,7 @@ package com.ivy.legacy.domain.deprecated.logic.loantrasactions
 
 import androidx.compose.ui.graphics.toArgb
 import com.ivy.base.legacy.Transaction
+import com.ivy.base.legacy.stringRes
 import com.ivy.base.model.LoanRecordType
 import com.ivy.base.model.TransactionType
 import com.ivy.base.time.TimeProvider
@@ -31,6 +32,7 @@ import com.ivy.legacy.datamodel.temp.toDomain
 import com.ivy.legacy.datamodel.temp.toLegacyDomain
 import com.ivy.legacy.utils.computationThread
 import com.ivy.legacy.utils.ioThread
+import com.ivy.ui.R
 import com.ivy.wallet.domain.deprecated.logic.currency.ExchangeRatesLogic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -225,13 +227,15 @@ class LoanTransactionsCore @Inject constructor(
 
         var addCategoryToDb = false
 
+        val loansName = stringRes(R.string.loans)
         val loanCategory = categoryList.find { category ->
-            category.name.value.lowercase(Locale.ENGLISH).contains("loan")
+            category.name.value.equals(loansName, ignoreCase = true) ||
+                category.name.value.lowercase(Locale.ENGLISH).contains("loan")
         } ?: if (ivyContext.isPremium || categoryList.size < 12) {
             addCategoryToDb = true
 
             Category(
-                name = NotBlankTrimmedString.unsafe("Loans"),
+                name = NotBlankTrimmedString.unsafe(loansName),
                 color = ColorInt(IVY_COLOR_PICKER_COLORS_FREE[DEFAULT_COLOR_INDEX].toArgb()),
                 icon = IconAsset.unsafe("loan"),
                 id = CategoryId(UUID.randomUUID()),

@@ -885,7 +885,7 @@ private fun AmountFilter(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = stringResource(R.string.to),
+                text = stringResource(R.string.range_to),
                 style = UI.typo.b2.style(
                     fontWeight = FontWeight.ExtraBold
                 )

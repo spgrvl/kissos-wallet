@@ -3,6 +3,7 @@ package com.ivy.ui.time.impl
 import com.ivy.base.resource.ResourceProvider
 import com.ivy.base.time.TimeConverter
 import com.ivy.base.time.TimeProvider
+import com.ivy.base.time.writesDayBeforeMonth
 import com.ivy.ui.R
 import com.ivy.ui.time.DevicePreferences
 import com.ivy.ui.time.TimeFormatter
@@ -33,7 +34,7 @@ class IvyTimeFormatter @Inject constructor(
             if (relativeDay == null && style.includeWeekDay) {
                 append("EEE, ")
             }
-            append("MMM d")
+            append(if (devicePreferences.locale().writesDayBeforeMonth()) "d MMM" else "MMM d")
             if (dateTime.year != today.year) {
                 append(" yyyy")
             }
