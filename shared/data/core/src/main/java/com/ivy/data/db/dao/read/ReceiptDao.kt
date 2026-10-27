@@ -14,8 +14,11 @@ interface ReceiptDao {
     @Query("SELECT * FROM receipts WHERE transactionId = :transactionId")
     suspend fun findByTransactionId(transactionId: UUID): ReceiptEntity?
 
-    @Query("SELECT * FROM receipts WHERE registerId = :registerId AND receiptNumber = :receiptNumber")
-    suspend fun findByRegisterAndNumber(registerId: String, receiptNumber: Long): ReceiptEntity?
+    @Query("SELECT * FROM receipts WHERE sig = :sig")
+    suspend fun findBySig(sig: String): ReceiptEntity?
+
+    @Query("SELECT * FROM receipts WHERE mark = :mark LIMIT 1")
+    suspend fun findByMark(mark: Long): ReceiptEntity?
 
     @Query("SELECT * FROM receipts WHERE status = :status")
     suspend fun findAllByStatus(status: ReceiptStatus): List<ReceiptEntity>

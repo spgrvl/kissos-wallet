@@ -24,7 +24,6 @@ import com.ivy.data.model.Category
 import com.ivy.data.model.CategoryId
 import com.ivy.data.model.Merchant
 import com.ivy.data.model.Receipt
-import com.ivy.data.model.ReceiptId
 import com.ivy.data.model.ReceiptStatus
 import com.ivy.data.model.Tag
 import com.ivy.data.model.TagId
@@ -32,7 +31,7 @@ import com.ivy.data.model.TransactionId
 import com.ivy.data.model.primitive.AssociationId
 import com.ivy.data.model.primitive.NotBlankTrimmedString
 import com.ivy.data.receipt.AadeDataSource
-import com.ivy.data.receipt.AadeQr
+import com.ivy.data.receipt.ReceiptCode
 import com.ivy.data.receipt.toPendingReceipt
 import com.ivy.data.receipt.toReceiptMoney
 import com.ivy.data.receipt.withLookup
@@ -126,6 +125,7 @@ class EditTransactionViewModel @Inject constructor(
     private val receiptRepository: ReceiptRepository,
     private val merchantRepository: MerchantRepository,
     private val aadeDataSource: AadeDataSource,
+    private val providerPageResolver: ProviderPageResolver,
     private val receiptLookupScheduler: ReceiptLookupScheduler,
 ) : ComposeViewModel<EditTransactionViewState, EditTransactionViewEvent>() {
 
@@ -797,7 +797,8 @@ class EditTransactionViewModel @Inject constructor(
         viewModelScope.launch {
             if (shouldAskToRememberMerchant()) {
                 receiptDialog = ReceiptDialog.RememberMerchant(
-                    merchantName = receipt?.merchantName.orEmpty(),
+                    merchantName = receipt?.merchantName
+                        ?: receipt?.merchantAfm?.let { "ΑΦΜ ${it.value}" }.orEmpty(),
                     suggestedName = title?.takeIf { it.isNotBlank() } ?: receipt?.merchantName.orEmpty(),
                     category = category?.id,
                 )
@@ -1120,47 +1121,81 @@ class EditTransactionViewModel @Inject constructor(
             return
         }
         viewModelScope.launch {
-            val qr = AadeQr.parse(qrText)
-            val existing = qr?.let { receiptRepository.findById(ReceiptId(it.registerId, it.receiptNumber)) }
-            when {
-                qr == null -> receiptDialog = ReceiptDialog.NotAadeReceipt(qrText)
-                existing != null && existing.transactionId.value != loadedTransaction().id ->
-                    receiptDialog = ReceiptDialog.Duplicate(existing.transactionId)
+            when (val code = ReceiptCode.parse(qrText)) {
+                null -> receiptDialog = ReceiptDialog.NotAadeReceipt(qrText)
+                is ReceiptCode.Provider -> openProviderPage(code)
+                is ReceiptCode.OnAade -> onAadeCodeScanned(code)
+            }
+        }
+    }
 
-                else -> applyScannedReceipt(qr)
+    private suspend fun onAadeCodeScanned(code: ReceiptCode.OnAade) {
+        val existing = receiptRepository.findBySig(code.key)
+        if (existing != null && existing.isOfAnotherTransaction()) {
+            receiptDialog = ReceiptDialog.Duplicate(existing.transactionId)
+        } else {
+            applyScannedReceipt(code)
+        }
+    }
+
+    private fun Receipt.isOfAnotherTransaction(): Boolean = transactionId.value != loadedTransaction().id
+
+    /** A provider's page only links to the document on myDATA, and finding the link takes a few seconds. */
+    private fun openProviderPage(code: ReceiptCode.Provider) {
+        onSetTransactionType(TransactionType.EXPENSE)
+        receiptLookupJob?.cancel()
+        receiptLookup = ReceiptLookupState.OPENING_PROVIDER
+        receiptLookupJob = viewModelScope.launch {
+            val myData = providerPageResolver.findMyDataLink(code)
+            if (myData == null) {
+                receiptLookup = ReceiptLookupState.PROVIDER_FAILED
+            } else {
+                onAadeCodeScanned(myData)
             }
         }
     }
 
     /** Prefills the expense from the QR code right away, then asks AADE for the rest. */
-    private fun applyScannedReceipt(qr: AadeQr) {
-        val scanned = qr.toPendingReceipt(TransactionId(loadedTransaction().id), timeProvider.utcNow())
+    private fun applyScannedReceipt(code: ReceiptCode.OnAade) {
+        val scanned = code.toPendingReceipt(TransactionId(loadedTransaction().id), timeProvider.utcNow())
         receipt = scanned
         receiptIsNew = true
         onSetTransactionType(TransactionType.EXPENSE)
-        onAmountChanged(qr.total.toDouble())
+        scanned.total?.let { onAmountChanged(it.toDouble()) }
         if (EditedField.DATE !in editedFields) {
             setDateTimeFromReceipt(scanned.issuedAt ?: timeProvider.utcNow())
         }
-        lookUpReceipt(qr)
+        lookUpReceipt(code)
     }
 
-    private fun lookUpReceipt(qr: AadeQr) {
+    private fun lookUpReceipt(code: ReceiptCode.OnAade) {
         receiptLookupJob?.cancel()
         receiptLookup = ReceiptLookupState.CHECKING
         receiptLookupJob = viewModelScope.launch {
-            val result = aadeDataSource.lookup(qr)
+            val result = aadeDataSource.lookup(code)
             val current = receipt ?: return@launch
             receiptLookup = result.fold(
                 ifLeft = { ReceiptLookupState.OFFLINE },
                 ifRight = { lookup ->
-                    val updated = current.withLookup(lookup, checkedAt = timeProvider.utcNow())
-                    receipt = updated
-                    fillFromReceipt(updated)
+                    onLookedUp(current.withLookup(lookup, checkedAt = timeProvider.utcNow()))
                     ReceiptLookupState.DONE
                 }
             )
         }
+    }
+
+    private suspend fun onLookedUp(updated: Receipt) {
+        // A provider's page can link to the same document with a different myDATA link
+        val sameDocument = updated.mark?.let { receiptRepository.findByMark(it) }
+        if (sameDocument != null && sameDocument.isOfAnotherTransaction()) {
+            receipt = null
+            receiptDialog = ReceiptDialog.Duplicate(sameDocument.transactionId)
+            return
+        }
+        receipt = updated
+        // myDATA codes don't hold the amount, so it's only known now
+        if (amount == 0.0) updated.total?.let { onAmountChanged(it.toDouble()) }
+        fillFromReceipt(updated)
     }
 
     /** Fills in what the user hasn't set themselves: the time, then the shop's title, category and account. */
@@ -1238,19 +1273,29 @@ class EditTransactionViewModel @Inject constructor(
         )
     }
 
-    private fun receiptCaption(): ReceiptCaption? {
-        val receipt = receipt ?: return null
+    private fun receiptCaption(): ReceiptCaption? = when (receiptLookup) {
+        ReceiptLookupState.OPENING_PROVIDER -> info(context.getString(R.string.receipt_opening_provider))
+        ReceiptLookupState.PROVIDER_FAILED -> warning(context.getString(R.string.receipt_provider_failed))
+        else -> receipt?.let(::receiptCaption)
+    }
+
+    private fun info(text: String): ReceiptCaption = ReceiptCaption(text, isWarning = false)
+
+    private fun warning(text: String): ReceiptCaption = ReceiptCaption(text, isWarning = true)
+
+    private fun receiptCaption(receipt: Receipt): ReceiptCaption {
         val merchant = receipt.merchantName
-        fun info(text: String) = ReceiptCaption(text, isWarning = false)
-        fun warning(text: String) = ReceiptCaption(text, isWarning = true)
+        val total = receipt.total
+        val afm = receipt.merchantAfm?.value.orEmpty()
         return when {
             receiptLookup == ReceiptLookupState.CHECKING -> info(context.getString(R.string.receipt_checking))
-            receipt.status == ReceiptStatus.FOUND && receipt.total.compareTo(amount.toReceiptMoney()) != 0 ->
-                warning(context.getString(R.string.receipt_total_mismatch, formatEuros(receipt.total)))
+            receipt.status == ReceiptStatus.FOUND && total != null && total.compareTo(amount.toReceiptMoney()) != 0 ->
+                warning(context.getString(R.string.receipt_total_mismatch, formatEuros(total)))
 
-            receipt.status == ReceiptStatus.FOUND -> info(
-                context.getString(R.string.receipt_found, merchant.orEmpty(), receipt.merchantAfm?.value.orEmpty())
-            )
+            receipt.status == ReceiptStatus.FOUND && merchant == null ->
+                info(context.getString(R.string.receipt_found_afm, afm))
+
+            receipt.status == ReceiptStatus.FOUND -> info(context.getString(R.string.receipt_found, merchant, afm))
 
             receipt.status == ReceiptStatus.PENDING && receiptLookup == ReceiptLookupState.OFFLINE ->
                 info(context.getString(R.string.receipt_offline))
@@ -1271,5 +1316,5 @@ class EditTransactionViewModel @Inject constructor(
 
     private enum class EditedField { TITLE, CATEGORY, ACCOUNT, DATE }
 
-    private enum class ReceiptLookupState { CHECKING, OFFLINE, DONE }
+    private enum class ReceiptLookupState { OPENING_PROVIDER, PROVIDER_FAILED, CHECKING, OFFLINE, DONE }
 }

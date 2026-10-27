@@ -12,7 +12,11 @@ import com.ivy.data.model.primitive.NotBlankTrimmedString
 import com.ivy.data.receipt.AadePage
 import com.ivy.data.receipt.AadeQr
 import com.ivy.data.receipt.AadeTestReceipt
+import com.ivy.data.receipt.MyDataPage
+import com.ivy.data.receipt.ReceiptCode
+import com.ivy.data.receipt.ShellMyDataUrl
 import com.ivy.data.receipt.aadePage
+import com.ivy.data.receipt.myDataPage
 import com.ivy.data.receipt.toPendingReceipt
 import com.ivy.data.receipt.withLookup
 import io.kotest.matchers.shouldBe
@@ -41,8 +45,23 @@ class ReceiptRepositoryTest {
 
         // then
         receiptRepository.findByTransactionId(receipt.transactionId) shouldBe receipt
-        receiptRepository.findById(receipt.id) shouldBe receipt
+        receiptRepository.findBySig(receipt.sig) shouldBe receipt
         receiptRepository.findPending() shouldBe emptyList()
+    }
+
+    @Test
+    fun `a myDATA receipt is found by its mark`() = runTest {
+        // given
+        val receipt = ReceiptCode.MyData(ShellMyDataUrl)
+            .toPendingReceipt(TransactionId(UUID.randomUUID()), Instant.parse("2026-10-26T19:00:00Z"))
+            .withLookup(MyDataPage.parse(myDataPage("shell")), Instant.parse("2026-10-26T19:00:05Z"))
+
+        // when
+        receiptRepository.save(receipt)
+
+        // then
+        receiptRepository.findByMark(400015809661515) shouldBe receipt
+        receiptRepository.findBySig(ShellMyDataUrl) shouldBe receipt
     }
 
     @Test

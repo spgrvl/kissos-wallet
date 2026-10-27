@@ -6,7 +6,7 @@ import com.ivy.data.db.dao.write.WriteTransactionDao
 import com.ivy.data.model.Receipt
 import com.ivy.data.model.ReceiptStatus
 import com.ivy.data.receipt.AadeDataSource
-import com.ivy.data.receipt.AadeQr
+import com.ivy.data.receipt.ReceiptCode
 import com.ivy.data.receipt.withLookup
 import com.ivy.data.repository.MerchantRepository
 import com.ivy.data.repository.ReceiptRepository
@@ -37,8 +37,8 @@ class CheckPendingReceiptsUseCase @Inject constructor(
         receiptRepository.findPending()
             .filter { it.scannedAt.plus(GIVE_UP_AFTER).isAfter(now) }
             .forEach { receipt ->
-                val qr = AadeQr.parse(receipt.sig) ?: return@forEach
-                aadeDataSource.lookup(qr).fold(
+                val code = ReceiptCode.fromKey(receipt.sig) ?: return@forEach
+                aadeDataSource.lookup(code).fold(
                     ifLeft = { checkAgain = true },
                     ifRight = { lookup ->
                         val updated = receipt.withLookup(lookup, checkedAt = now)

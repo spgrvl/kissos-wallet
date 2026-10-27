@@ -1,11 +1,12 @@
 package com.ivy.data.receipt
 
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-/** Outcome of looking a receipt up on AADE's verification page (the URL in the QR). */
+/** Outcome of looking a receipt up on AADE's page for it (the URL in the QR). */
 sealed interface AadeLookup {
     /** The receipt has reached AADE; full details are known. */
     data class Found(val receipt: AadeReceipt) : AadeLookup
@@ -32,18 +33,26 @@ sealed interface AadeLookup {
 
 @Suppress("DataClassTypedIDs")
 data class AadeReceipt(
-    val registerId: String,
+    /** The cash register, or the series of a myDATA document. */
+    val registerId: String?,
     val receiptNumber: Long?,
+    /** myDATA's unique number (ΜΑΡΚ). Null for cash-register receipts. */
+    val mark: Long?,
     val total: BigDecimal,
     /**
-     * What the register reported as paid by card. Not fully reliable: a supermarket
-     * receipt paid by card ("EFT" on the paper) reports 0.00.
+     * What the register reported as paid by card, null for myDATA documents. Not fully reliable:
+     * a supermarket receipt paid by card ("EFT" on the paper) reports 0.00.
      */
-    val cardAmount: BigDecimal,
-    val issuedAt: LocalDateTime,
+    val cardAmount: BigDecimal?,
+    /** Null when AADE only shows the date, as for myDATA documents. */
+    val issuedAt: LocalDateTime?,
+    val issuedOn: LocalDate,
     val merchantAfm: String,
-    /** Legal name, truncated by AADE (e.g. "ΠΑΝΑΓΟΠΟΥΛΟΣ ΧΡΗΣΤ"), not the shop's trading name. */
-    val merchantName: String,
+    /**
+     * Legal name, truncated by AADE (e.g. "ΠΑΝΑΓΟΠΟΥΛΟΣ ΧΡΗΣΤ"), not the shop's trading name.
+     * myDATA pages leave it empty.
+     */
+    val merchantName: String?,
     val address: String?,
     val documentType: String?,
     /** Keyed by VAT category letter. Observed: Α = 6%, Β = 13%, Γ = 24%, Ε = 0%. */
@@ -52,8 +61,9 @@ data class AadeReceipt(
 ) {
     enum class Payment { CARD, NOT_CARD, SPLIT }
 
-    val payment: Payment
+    val payment: Payment?
         get() = when {
+            cardAmount == null -> null
             cardAmount.signum() == 0 -> Payment.NOT_CARD
             cardAmount >= total -> Payment.CARD
             else -> Payment.SPLIT
@@ -132,9 +142,11 @@ object AadePage {
             AadeReceipt(
                 registerId = register,
                 receiptNumber = row("Προοδευτικός α/α")?.toLongOrNull(),
+                mark = null,
                 total = total,
                 cardAmount = card,
                 issuedAt = issuedAt,
+                issuedOn = issuedAt.toLocalDate(),
                 merchantAfm = afm,
                 merchantName = name,
                 address = row("Διεύθυνση"),
@@ -150,7 +162,7 @@ object AadePage {
             row("$prefix $letter")?.let(::money)?.let { letter to it }
         }.toMap()
 
-    private fun text(fragment: String): String =
+    internal fun text(fragment: String): String =
         decodeEntities(fragment.replace(TAG, " ")).replace(SPACES, " ").trim()
 
     private fun decodeEntities(s: String): String = s
@@ -162,7 +174,7 @@ object AadePage {
         .replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
 
     /** "€ 12.00" → 12.00. Also copes with "1,234.56" and "12,00" in case AADE ever uses them. */
-    private fun money(value: String): BigDecimal? {
+    internal fun money(value: String): BigDecimal? {
         var s = value.filter { it.isDigit() || it == '.' || it == ',' || it == '-' }
         if (s.isEmpty()) return null
         if ('.' in s && ',' in s) {

@@ -10,6 +10,7 @@ import com.ivy.data.db.migration.Migration124to125_LoanEditDateTime
 import com.ivy.data.db.migration.Migration126to127_LoanRecordType
 import com.ivy.data.db.migration.Migration129to130_LoanIncludeNote
 import com.ivy.data.db.migration.Migration130to131_Receipts
+import com.ivy.data.db.migration.Migration131to132_MyDataReceipts
 import com.ivy.data.model.LoanType
 import io.kotest.matchers.shouldBe
 import org.junit.Rule
@@ -27,6 +28,67 @@ class IvyRoomDatabaseMigrationTest {
         listOf(IvyRoomDatabase.DeleteSEMigration()),
         FrameworkSQLiteOpenHelperFactory()
     )
+
+    @Test
+    fun migrate131to132_MyDataReceipts() {
+        // given
+        val transactionId = UUID.randomUUID().toString()
+        val myDataTransactionId = UUID.randomUUID().toString()
+        helper.createDatabase(TestDb, 131).apply {
+            listOf(transactionId, myDataTransactionId).forEach { id ->
+                execSQL(
+                    "INSERT INTO transactions (accountId, type, amount, isSynced, isDeleted, id) " +
+                        "VALUES ('${UUID.randomUUID()}', 'EXPENSE', 12.0, 0, 0, '$id')"
+                )
+            }
+            execSQL(
+                "INSERT INTO receipts (transactionId, sig, registerId, receiptNumber, total, merchantAfm, " +
+                    "netE, status, scannedAt) " +
+                    "VALUES ('$transactionId', 'SIG', 'DNX25002295', 595, 12.0, '067022059', 12.0, 'FOUND', 7)"
+            )
+            close()
+        }
+
+        // when
+        val newDb = helper.runMigrationsAndValidate(
+            TestDb,
+            132,
+            true,
+            Migration131to132_MyDataReceipts()
+        )
+
+        // then: existing receipts are kept
+        newDb.query(
+            "SELECT sig, registerId, receiptNumber, mark, total, merchantAfm, netE, status, scannedAt FROM receipts"
+        ).apply {
+            moveToFirst() shouldBe true
+            getString(0) shouldBe "SIG"
+            getString(1) shouldBe "DNX25002295"
+            getLong(2) shouldBe 595
+            isNull(3) shouldBe true
+            getDouble(4) shouldBe 12.0
+            getString(5) shouldBe "067022059"
+            getDouble(6) shouldBe 12.0
+            getString(7) shouldBe "FOUND"
+            getLong(8) shouldBe 7
+        }
+
+        // and: a myDATA receipt needs only its link until AADE is asked
+        newDb.execSQL(
+            "INSERT INTO receipts (transactionId, sig, status, scannedAt) " +
+                "VALUES ('$myDataTransactionId', 'https://mydatapi.aade.gr/myDATA/TimologioQR/QRInfo?q=1', " +
+                "'PENDING', 0)"
+        )
+
+        // and: receipts are still deleted together with their transaction
+        newDb.execSQL("PRAGMA foreign_keys = ON")
+        newDb.execSQL("DELETE FROM transactions WHERE id = '$transactionId'")
+        newDb.query("SELECT COUNT(*) FROM receipts").apply {
+            moveToFirst()
+            getInt(0) shouldBe 1
+        }
+        newDb.close()
+    }
 
     @Test
     fun migrate130to131_Receipts() {

@@ -487,10 +487,13 @@
     <string name="receipt_pending">Απόδειξη · δεν έχει φτάσει ακόμα στην ΑΑΔΕ, θα ελεγχθεί ξανά</string>
     <string name="receipt_pending_merchant">Απόδειξη · %1$s · δεν έχει φτάσει ακόμα στην ΑΑΔΕ</string>
     <string name="receipt_rejected">Η ΑΑΔΕ απέρριψε την απόδειξη: %1$s</string>
-    <string name="receipt_unrecognized">Η σελίδα της ΑΑΔΕ δεν διαβάστηκε. Το ποσό είναι από το QR code.</string>
+    <string name="receipt_unrecognized">Η σελίδα της ΑΑΔΕ για την απόδειξη δεν διαβάστηκε.</string>
+    <string name="receipt_found_afm">Απόδειξη · ΑΦΜ %1$s</string>
+    <string name="receipt_opening_provider">Απόδειξη · άνοιγμα της σελίδας του παρόχου…</string>
+    <string name="receipt_provider_failed">Η απόδειξη δεν άνοιξε στη σελίδα του παρόχου. Καταχωρίστε το έξοδο χειροκίνητα.</string>
     <string name="receipt_total_mismatch">Σύμφωνα με την ΑΑΔΕ το σύνολο είναι %1$s, όχι το παραπάνω ποσό</string>
-    <string name="not_aade_receipt_title">Δεν είναι απόδειξη ταμειακής μηχανής</string>
-    <string name="not_aade_receipt_description">Οι αποδείξεις από παρόχους ηλεκτρονικής τιμολόγησης δεν υποστηρίζονται ακόμα. Καταχωρίστε το έξοδο χειροκίνητα.</string>
+    <string name="not_aade_receipt_title">Η απόδειξη δεν υποστηρίζεται</string>
+    <string name="not_aade_receipt_description">Το Kissos δεν μπορεί να διαβάσει αυτό το QR code. Οι αποδείξεις ορισμένων παρόχων ηλεκτρονικής τιμολόγησης δεν υποστηρίζονται ακόμα. Καταχωρίστε το έξοδο χειροκίνητα.</string>
     <string name="copy_qr_text">Αντιγραφή κειμένου QR</string>
     <string name="enter_manually">Χειροκίνητα</string>
     <string name="duplicate_receipt_title">Έχει ήδη σαρωθεί</string>

@@ -6,7 +6,6 @@ import com.ivy.data.db.dao.write.WriteReceiptDao
 import com.ivy.data.db.entity.ReceiptEntity
 import com.ivy.data.model.Afm
 import com.ivy.data.model.Receipt
-import com.ivy.data.model.ReceiptId
 import com.ivy.data.model.ReceiptStatus
 import com.ivy.data.model.TransactionId
 import com.ivy.data.model.VatAmount
@@ -23,8 +22,12 @@ class ReceiptRepository @Inject constructor(
         receiptDao.findByTransactionId(id.value)?.toDomain()
     }
 
-    suspend fun findById(id: ReceiptId): Receipt? = withContext(dispatchers.io) {
-        receiptDao.findByRegisterAndNumber(id.registerId, id.receiptNumber)?.toDomain()
+    suspend fun findBySig(sig: String): Receipt? = withContext(dispatchers.io) {
+        receiptDao.findBySig(sig)?.toDomain()
+    }
+
+    suspend fun findByMark(mark: Long): Receipt? = withContext(dispatchers.io) {
+        receiptDao.findByMark(mark)?.toDomain()
     }
 
     suspend fun findPending(): List<Receipt> = withContext(dispatchers.io) {
@@ -42,7 +45,8 @@ class ReceiptRepository @Inject constructor(
         sig = sig,
         registerId = registerId,
         receiptNumber = receiptNumber,
-        total = total.toReceiptMoney(),
+        mark = mark,
+        total = total?.toReceiptMoney(),
         issuedAt = issuedAt,
         merchantAfm = merchantAfm?.let { Afm.from(it).getOrNull() },
         merchantName = merchantName,
@@ -77,7 +81,8 @@ class ReceiptRepository @Inject constructor(
         sig = sig,
         registerId = registerId,
         receiptNumber = receiptNumber,
-        total = total.toDouble(),
+        mark = mark,
+        total = total?.toDouble(),
         issuedAt = issuedAt,
         merchantAfm = merchantAfm?.value,
         merchantName = merchantName,

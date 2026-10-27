@@ -18,6 +18,7 @@ import com.ivy.data.receipt.AadeDataSource
 import com.ivy.data.receipt.AadeLookup
 import com.ivy.data.receipt.AadeQr
 import com.ivy.data.receipt.AadeReceipt
+import com.ivy.data.receipt.ReceiptCode
 import com.ivy.data.receipt.toPendingReceipt
 import com.ivy.data.repository.MerchantRepository
 import com.ivy.data.repository.ReceiptRepository
@@ -30,6 +31,7 @@ import org.junit.Test
 import java.math.BigDecimal
 import java.time.Duration
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -43,9 +45,11 @@ class CheckPendingReceiptsUseCaseTest {
         AadeReceipt(
             registerId = "DNX25002295",
             receiptNumber = 595,
+            mark = null,
             total = BigDecimal("12.00"),
             cardAmount = BigDecimal("0.00"),
             issuedAt = LocalDateTime.parse("2026-10-22T18:59"),
+            issuedOn = LocalDate.parse("2026-10-22"),
             merchantAfm = "067022059",
             merchantName = "ΚΟΥΜΑΝΤΟΣ ΓΕΩΡΓ",
             address = null,
@@ -125,6 +129,21 @@ class CheckPendingReceiptsUseCaseTest {
 
         // then
         transactionDao.findById(id.value)?.title shouldBe "Haircut"
+    }
+
+    @Test
+    fun `a myDATA receipt is looked up with its link`() = runTest {
+        // given
+        val myData = ReceiptCode.MyData("https://mydatapi.aade.gr/myDATA/TimologioQR/QRInfo?q=abc")
+        val id = UUID.randomUUID()
+        receiptRepository.save(myData.toPendingReceipt(TransactionId(id), now))
+        coEvery { aade.lookup(myData) } returns Either.Right(found)
+
+        // when
+        useCase.check()
+
+        // then
+        receiptRepository.findByTransactionId(TransactionId(id))?.status shouldBe ReceiptStatus.FOUND
     }
 
     @Test

@@ -9,7 +9,7 @@ import com.ivy.base.legacy.Theme
 import com.ivy.base.legacy.stringRes
 import com.ivy.base.model.TransactionType
 import com.ivy.data.db.dao.read.SettingsDao
-import com.ivy.data.receipt.AadeQr
+import com.ivy.data.receipt.ReceiptCode
 import com.ivy.data.repository.LegalRepository
 import com.ivy.domain.receipt.ReceiptLookupScheduler
 import com.ivy.frp.test.TestIdlingResource
@@ -122,10 +122,10 @@ class RootViewModel @Inject constructor(
         return screen != null
     }
 
-    /** A receipt's AADE link, opened from the phone's camera app or a QR scanner. */
+    /** A receipt's link, opened from the phone's camera app or a QR scanner. */
     private fun scannedReceiptScreen(intent: Intent): EditTransactionScreen? =
         intent.dataString
-            ?.takeIf { intent.action == Intent.ACTION_VIEW && AadeQr.parse(it) != null }
+            ?.takeIf { intent.action == Intent.ACTION_VIEW && ReceiptCode.parse(it) != null }
             ?.let {
                 EditTransactionScreen(
                     initialTransactionId = null,

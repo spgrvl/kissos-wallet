@@ -69,6 +69,40 @@ class ReceiptLookupsTest {
     }
 
     @Test
+    fun `myDATA - the amount, mark and merchant come from AADE`() {
+        // given
+        val scannedAt = Instant.parse("2026-10-26T19:00:00Z")
+        val pending = ReceiptCode.MyData(ShellMyDataUrl).toPendingReceipt(transactionId, scannedAt)
+
+        // when
+        val receipt = pending.withLookup(MyDataPage.parse(myDataPage("shell")), checkedAt)
+
+        // then
+        pending.total shouldBe null
+        receipt.status shouldBe ReceiptStatus.FOUND
+        receipt.sig shouldBe ShellMyDataUrl
+        receipt.total shouldBe money("74.00")
+        receipt.mark shouldBe 400015809661515
+        receipt.registerId shouldBe "Υ257"
+        receipt.receiptNumber shouldBe 2180986
+        receipt.merchantAfm shouldBe Afm.unsafe("094025320")
+        receipt.merchantName shouldBe null
+        // AADE only has the date; scanned the same evening, so the time of scanning is closest
+        receipt.issuedAt shouldBe scannedAt
+    }
+
+    @Test
+    fun `myDATA - scanned on a later day, the time is midday`() {
+        // when
+        val receipt = ReceiptCode.MyData(ShellMyDataUrl)
+            .toPendingReceipt(transactionId, Instant.parse("2026-10-28T08:00:00Z"))
+            .withLookup(MyDataPage.parse(myDataPage("shell")), checkedAt)
+
+        // then: 12:00 in Athens is 10:00 UTC after summer time ends
+        receipt.issuedAt shouldBe Instant.parse("2026-10-26T10:00:00Z")
+    }
+
+    @Test
     fun `rejected - keeps the message from AADE`() {
         // when
         val receipt = pending(AadeTestReceipt.BARBER).withLookup(AadeLookup.Rejected("Λάθος QR code"), checkedAt)
