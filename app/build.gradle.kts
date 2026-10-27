@@ -23,6 +23,8 @@ android {
 
     androidResources {
         generateLocaleConfig = true
+        // Kissos ships in English and Greek only; drop libraries' other translations too
+        localeFilters += listOf("en", "el")
     }
 
     signingConfigs {
