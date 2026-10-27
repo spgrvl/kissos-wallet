@@ -249,7 +249,7 @@
     <string name="delete_all_user_data">Delete all user data</string>
     <string name="delete_all_user_data_question">Delete all user data?</string>
     <string name="delete_all_user_data_warning">WARNING! This action will PERMANENTLY delete all data associated with %1$s. It cannot be recovered.</string>
-    <string name="your_account">your account</string>
+    <string name="your_account">Kissos</string>
     <string name="confirm_all_userd_data_deletion">Confirm permanent deletion for %1$s</string>
     <string name="all_of_your_data">all of your data</string>
     <string name="final_deletion_warning">FINAL WARNING! After tapping "Delete" your data will be lost forever.</string>
