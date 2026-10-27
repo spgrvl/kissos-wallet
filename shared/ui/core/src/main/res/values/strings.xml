@@ -487,10 +487,13 @@
     <string name="receipt_pending">Receipt · not on AADE yet, will be checked again</string>
     <string name="receipt_pending_merchant">Receipt · %1$s · not on AADE yet</string>
     <string name="receipt_rejected">AADE rejected this receipt: %1$s</string>
-    <string name="receipt_unrecognized">Couldn’t read AADE’s page. The amount comes from the QR code.</string>
+    <string name="receipt_unrecognized">Couldn’t read AADE’s page for this receipt.</string>
+    <string name="receipt_found_afm">Receipt · ΑΦΜ %1$s</string>
+    <string name="receipt_opening_provider">Receipt · opening the provider’s page…</string>
+    <string name="receipt_provider_failed">Couldn’t open the receipt on the provider’s page. Enter the expense manually.</string>
     <string name="receipt_total_mismatch">AADE says the total is %1$s, not the amount above</string>
-    <string name="not_aade_receipt_title">Not an AADE cash-register receipt</string>
-    <string name="not_aade_receipt_description">Receipts from e-invoicing providers aren’t supported yet. Enter this expense manually.</string>
+    <string name="not_aade_receipt_title">Receipt not supported</string>
+    <string name="not_aade_receipt_description">Kissos can’t read this QR code. Receipts from some e-invoicing providers aren’t supported yet. Enter this expense manually.</string>
     <string name="copy_qr_text">Copy QR text</string>
     <string name="enter_manually">Enter manually</string>
     <string name="duplicate_receipt_title">Already scanned</string>

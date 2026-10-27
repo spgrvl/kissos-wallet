@@ -15,8 +15,9 @@ class FakeReceiptDao : ReceiptDao, WriteReceiptDao {
 
     override suspend fun findByTransactionId(transactionId: UUID): ReceiptEntity? = items[transactionId]
 
-    override suspend fun findByRegisterAndNumber(registerId: String, receiptNumber: Long): ReceiptEntity? =
-        items.values.find { it.registerId == registerId && it.receiptNumber == receiptNumber }
+    override suspend fun findBySig(sig: String): ReceiptEntity? = items.values.find { it.sig == sig }
+
+    override suspend fun findByMark(mark: Long): ReceiptEntity? = items.values.find { it.mark == mark }
 
     override suspend fun findAllByStatus(status: ReceiptStatus): List<ReceiptEntity> =
         items.values.filter { it.status == status }

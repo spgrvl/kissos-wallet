@@ -3,15 +3,22 @@ package com.ivy.data.model
 import java.math.BigDecimal
 import java.time.Instant
 
-/** A scanned Greek cash-register receipt, attached to the transaction it was saved as. */
+/**
+ * A scanned Greek receipt, attached to the transaction it was saved as. Either a cash-register (ΦΗΜ)
+ * receipt or a document sent to myDATA, e.g. through an e-invoicing provider.
+ */
 @Suppress("DataClassTypedIDs")
 data class Receipt(
     val transactionId: TransactionId,
-    /** The raw SIG value from the QR code. */
+    /** What it's looked up with: the SIG value of a cash-register receipt, or the myDATA link. */
     val sig: String,
-    val registerId: String,
-    val receiptNumber: Long,
-    val total: BigDecimal,
+    /** The cash register, or the series of a myDATA document. */
+    val registerId: String?,
+    val receiptNumber: Long?,
+    /** myDATA's unique number (ΜΑΡΚ). Null for cash-register receipts. */
+    val mark: Long?,
+    /** In a cash-register receipt's QR code; only known from AADE for myDATA documents. */
+    val total: BigDecimal?,
     /** AADE's issue time once fetched, otherwise the QR code's time hint. */
     val issuedAt: Instant?,
     val merchantAfm: Afm?,
@@ -28,13 +35,7 @@ data class Receipt(
     val aadeMessage: String?,
     val scannedAt: Instant,
     val lastCheckedAt: Instant?,
-) {
-    val id: ReceiptId get() = ReceiptId(registerId, receiptNumber)
-}
-
-/** What makes a receipt unique: the cash register and its receipt counter. */
-@Suppress("DataClassTypedIDs")
-data class ReceiptId(val registerId: String, val receiptNumber: Long)
+)
 
 data class VatAmount(val net: BigDecimal, val vat: BigDecimal)
 

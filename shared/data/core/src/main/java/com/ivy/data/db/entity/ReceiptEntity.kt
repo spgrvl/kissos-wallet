@@ -14,7 +14,7 @@ import java.time.Instant
 import java.util.UUID
 
 /**
- * A scanned AADE cash-register receipt. Deleted together with its transaction.
+ * A scanned receipt, see [com.ivy.data.model.Receipt]. Deleted together with its transaction.
  * VAT columns are per VAT category: A = Α, B = Β, C = Γ, D = Δ, E = Ε.
  */
 @Suppress("DataClassDefaultValues", "DataClassTypedIDs")
@@ -30,7 +30,7 @@ import java.util.UUID
             onDelete = ForeignKey.CASCADE,
         )
     ],
-    indices = [Index(value = ["registerId", "receiptNumber"], unique = true)],
+    indices = [Index(value = ["sig"], unique = true), Index(value = ["mark"])],
 )
 data class ReceiptEntity(
     @PrimaryKey
@@ -40,11 +40,13 @@ data class ReceiptEntity(
     @SerialName("sig")
     val sig: String,
     @SerialName("registerId")
-    val registerId: String,
+    val registerId: String? = null,
     @SerialName("receiptNumber")
-    val receiptNumber: Long,
+    val receiptNumber: Long? = null,
+    @SerialName("mark")
+    val mark: Long? = null,
     @SerialName("total")
-    val total: Double,
+    val total: Double? = null,
     @SerialName("issuedAt")
     @Serializable(with = KSerializerInstant::class)
     val issuedAt: Instant? = null,

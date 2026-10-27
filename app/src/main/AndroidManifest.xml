@@ -57,6 +57,26 @@
                 <data android:host="www1.gsis.gr" />
                 <data android:path="/tameiakes/myweb/q1.php" />
             </intent-filter>
+            <!-- Documents sent to myDATA, e.g. by a shop's invoicing software -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="mydatapi.aade.gr" />
+                <data android:path="/myDATA/TimologioQR/QRInfo" />
+            </intent-filter>
+            <!-- E-invoicing providers' receipt pages, see ReceiptCode.Provider -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="*.epsilonnet.gr" />
+                <data android:pathPrefix="/fd/" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.shortcuts"

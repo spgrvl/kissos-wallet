@@ -98,6 +98,13 @@ fun money(value: String): BigDecimal = BigDecimal(value)
 
 fun at(value: String): LocalDateTime = LocalDateTime.parse(value)
 
+/** A real myDATA link, from an Epsilon Digital fuel receipt. Its page is `mydata/shell.html`. */
+const val ShellMyDataUrl = "https://mydatapi.aade.gr/myDATA/TimologioQR/QRInfo" +
+    "?q=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+    "%2FBBBBB%2FCCCCC%2FDDDDDDDDDDDDDDDD%3D"
+
+fun myDataPage(name: String): String = testResource("mydata/$name.html").readText()
+
 /** A real AADE page: the shared head and tail around one `body_*.html`. */
 fun aadePage(body: String, crlf: Boolean = false): String {
     val html = listOf("head.html", "body_$body.html", "tail.html")
