@@ -121,6 +121,9 @@ android {
     }
 }
 
+// APKs and bundles are named kissos-<version>-<build type>, e.g. kissos-2026.10.22-release.apk
+base.archivesName = "kissos-${libs.versions.version.name.get()}"
+
 dependencies {
     implementation(projects.feature.attributions)
     implementation(projects.feature.balance)
