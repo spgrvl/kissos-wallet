@@ -22,7 +22,7 @@ import com.spgrvl.kissos.frp.then
 import com.spgrvl.kissos.frp.thenInvokeAfter
 import com.spgrvl.kissos.home.customerjourney.CustomerJourneyCardModel
 import com.spgrvl.kissos.home.customerjourney.CustomerJourneyCardsProvider
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.data.BufferInfo
 import com.spgrvl.kissos.legacy.data.LegacyDueSection
@@ -68,7 +68,7 @@ import javax.inject.Inject
 @Stable
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val nav: Navigation,
     private val plannedPaymentsLogic: PlannedPaymentsLogic,
     private val customerJourneyLogic: CustomerJourneyCardsProvider,
@@ -96,7 +96,7 @@ class HomeViewModel @Inject constructor(
 ) : ComposeViewModel<HomeState, HomeEvent>() {
     private var currentTheme by mutableStateOf(Theme.AUTO)
     private var name by mutableStateOf("")
-    private var period by mutableStateOf(ivyContext.selectedPeriod)
+    private var period by mutableStateOf(kissosContext.selectedPeriod)
     private var baseData by mutableStateOf(
         AppBaseData(
             baseCurrency = "",
@@ -259,7 +259,7 @@ class HomeViewModel @Inject constructor(
     private suspend fun start() {
         suspend {
             val startDay = startDayOfMonthAct(Unit)
-            ivyContext.initSelectedPeriodInMemory(
+            kissosContext.initSelectedPeriodInMemory(
                 startDayOfMonth = startDay
             )
         } thenInvokeAfter ::reload
@@ -267,7 +267,7 @@ class HomeViewModel @Inject constructor(
 
     // -----------------------------------------------------------------------------------
     private suspend fun reload(
-        timePeriod: TimePeriod = ivyContext.selectedPeriod
+        timePeriod: TimePeriod = kissosContext.selectedPeriod
     ) = suspend {
         val settings = settingsAct(Unit)
         val hideBalance = shouldHideBalanceAct(Unit)
@@ -280,12 +280,12 @@ class HomeViewModel @Inject constructor(
         this.hideIncome = hideIncome
 
         // This method is used to restore the theme when user imports locally backed up data
-        ivyContext.switchTheme(theme = settings.theme)
+        kissosContext.switchTheme(theme = settings.theme)
 
         Pair(
             settings,
             period.toRange(
-                startDateOfMonth = ivyContext.startDayOfMonth,
+                startDateOfMonth = kissosContext.startDayOfMonth,
                 timeConverter = timeConverter,
                 timeProvider = timeProvider
             ).toUTCCloseTimeRange()
@@ -421,7 +421,7 @@ class HomeViewModel @Inject constructor(
             nav.navigateTo(BalanceScreen)
         } else {
             // doesn't have transactions lead him to adjust balance
-            ivyContext.selectMainTab(MainTab.ACCOUNTS)
+            kissosContext.selectMainTab(MainTab.ACCOUNTS)
             nav.navigateTo(MainScreen)
         }
     }
@@ -448,7 +448,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             settingsAct.getSettingsWithNextTheme().run {
                 updateSettingsAct(this)
-                ivyContext.switchTheme(this.theme)
+                kissosContext.switchTheme(this.theme)
                 currentTheme = this.theme
             }
         }
@@ -512,7 +512,7 @@ class HomeViewModel @Inject constructor(
     private suspend fun onSelectNextMonth() {
         val month = period.month
         val year = period.year ?: dateNowUTC().year
-        val period = month?.incrementMonthPeriod(ivyContext, 1L, year = year)
+        val period = month?.incrementMonthPeriod(kissosContext, 1L, year = year)
         if (period != null) {
             setPeriod(period)
         }
@@ -521,7 +521,7 @@ class HomeViewModel @Inject constructor(
     private suspend fun onSelectPreviousMonth() {
         val month = period.month
         val year = period.year ?: dateNowUTC().year
-        val period = month?.incrementMonthPeriod(ivyContext, -1L, year = year)
+        val period = month?.incrementMonthPeriod(kissosContext, -1L, year = year)
         if (period != null) {
             setPeriod(period)
         }

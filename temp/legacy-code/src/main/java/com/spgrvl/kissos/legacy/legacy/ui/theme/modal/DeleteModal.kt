@@ -27,7 +27,7 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Red
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
 import java.util.UUID
 
 @SuppressLint("ComposeModifierMissing")
@@ -43,7 +43,7 @@ fun BoxWithConstraintsScope.DeleteModal(
     iconStart: Int = R.drawable.ic_delete,
     onDelete: () -> Unit,
 ) {
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -100,7 +100,7 @@ fun BoxWithConstraintsScope.DeleteConfirmationModal(
     var deletionTextFieldValue by remember(this) {
         mutableStateOf(TextFieldValue(""))
     }
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -140,7 +140,7 @@ fun BoxWithConstraintsScope.DeleteConfirmationModal(
 
         val view = LocalView.current
 
-        IvyNameTextField(
+        KissosNameTextField(
             modifier = Modifier
                 .padding(start = 28.dp, end = 36.dp),
             underlineModifier = Modifier.padding(start = 24.dp, end = 32.dp),

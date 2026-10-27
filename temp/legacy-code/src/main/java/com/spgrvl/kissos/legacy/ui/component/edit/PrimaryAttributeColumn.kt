@@ -22,11 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -51,7 +51,7 @@ fun PrimaryAttributeColumn(
             modifier = Modifier.padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IvyIcon(icon = icon)
+            KissosIcon(icon = icon)
 
             Spacer(Modifier.width(8.dp))
 
@@ -73,7 +73,7 @@ fun PrimaryAttributeColumn(
 @Preview
 @Composable
 private fun PreviewPrimaryAttributeColumn() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         PrimaryAttributeColumn(
             icon = R.drawable.ic_description,
             title = stringResource(R.string.description),

@@ -23,12 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.setStatusBarDarkTextCompat
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.BackButton
 import com.spgrvl.kissos.wallet.ui.theme.components.CurrencyPicker
@@ -37,8 +37,8 @@ import com.spgrvl.kissos.wallet.ui.theme.components.OnboardingButton
 
 @Composable
 fun BoxWithConstraintsScope.OnboardingSetCurrency(
-    preselectedCurrency: IvyCurrency,
-    onSetCurrency: (IvyCurrency) -> Unit
+    preselectedCurrency: KissosCurrency,
+    onSetCurrency: (KissosCurrency) -> Unit
 ) {
     setStatusBarDarkTextCompat(darkText = UI.colors.isLight)
 
@@ -106,7 +106,7 @@ fun BoxWithConstraintsScope.OnboardingSetCurrency(
 
         text = stringResource(R.string.set),
         textColor = White,
-        backgroundGradient = GradientIvy,
+        backgroundGradient = GradientKissos,
         hasNext = true,
         enabled = true
     ) {
@@ -117,9 +117,9 @@ fun BoxWithConstraintsScope.OnboardingSetCurrency(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         OnboardingSetCurrency(
-            preselectedCurrency = IvyCurrency.getDefault()
+            preselectedCurrency = KissosCurrency.getDefault()
         ) {
         }
     }

@@ -31,16 +31,16 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.spgrvl.kissos.IvyNavGraph
+import com.spgrvl.kissos.KissosNavGraph
 import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.base.time.TimeConverter
 import com.spgrvl.kissos.base.time.TimeProvider
-import com.spgrvl.kissos.design.api.IvyDesign
-import com.spgrvl.kissos.design.api.IvyUI
-import com.spgrvl.kissos.design.system.IvyMaterial3Theme
+import com.spgrvl.kissos.design.api.KissosDesign
+import com.spgrvl.kissos.design.api.KissosUI
+import com.spgrvl.kissos.design.system.KissosMaterial3Theme
 import com.spgrvl.kissos.domain.RootScreen
 import com.spgrvl.kissos.home.customerjourney.CustomerJourneyCardsProvider
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.appDesign
 import com.spgrvl.kissos.legacy.utils.activityForResultLauncher
 import com.spgrvl.kissos.legacy.utils.simpleActivityForResultLauncher
@@ -62,7 +62,7 @@ import javax.inject.Inject
 @Suppress("TooManyFunctions")
 class RootActivity : AppCompatActivity(), RootScreen {
     @Inject
-    lateinit var ivyContext: IvyWalletCtx
+    lateinit var kissosContext: KissosWalletCtx
 
     @Inject
     lateinit var navigation: Navigation
@@ -108,8 +108,8 @@ class RootActivity : AppCompatActivity(), RootScreen {
                 null -> { // display nothing
                 }
                 true -> {
-                    IvyUI(
-                        design = appDesign(ivyContext),
+                    KissosUI(
+                        design = appDesign(kissosContext),
                         timeConverter = timeConverter,
                         timeProvider = timeProvider,
                         timeFormatter = timeFormatter,
@@ -129,25 +129,25 @@ class RootActivity : AppCompatActivity(), RootScreen {
 
                 false -> {
                     NavigationRoot(navigation = navigation) { screen ->
-                        IvyUI(
-                            design = appDesign(ivyContext),
+                        KissosUI(
+                            design = appDesign(kissosContext),
                             includeSurface = screen?.isLegacy ?: true,
                             timeConverter = timeConverter,
                             timeProvider = timeProvider,
                             timeFormatter = timeFormatter,
                         ) {
-                            IvyNavGraph(screen)
+                            KissosNavGraph(screen)
                         }
                     }
                 }
             }
 
-            IvyMaterial3Theme(
+            KissosMaterial3Theme(
                 dark = isDarkThemeEnabled(
-                    ivyDesign = appDesign(ivyContext),
+                    kissosDesign = appDesign(kissosContext),
                     systemDarkTheme = isSystemInDarkTheme
                 ),
-                isTrueBlack = appDesign(ivyContext).context().theme == Theme.AMOLED_DARK
+                isTrueBlack = appDesign(kissosContext).context().theme == Theme.AMOLED_DARK
             ) {
                 dateTimePicker.Content()
             }
@@ -192,7 +192,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
     }
 
     private fun setupDatePicker() {
-        ivyContext.onShowDatePicker = { minDate,
+        kissosContext.onShowDatePicker = { minDate,
                                         maxDate,
                                         initialDate,
                                         onDatePicked ->
@@ -232,7 +232,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
     }
 
     private fun setupTimePicker() {
-        ivyContext.onShowTimePicker = { initialTime,
+        kissosContext.onShowTimePicker = { initialTime,
                                         onTimePicked ->
             val nowLocal = initialTime ?: timeProvider.localTimeNow()
             val is24Hour = android.text.format.DateFormat.is24HourFormat(this)
@@ -253,8 +253,8 @@ class RootActivity : AppCompatActivity(), RootScreen {
         }
     }
 
-    private fun isDarkThemeEnabled(ivyDesign: IvyDesign, systemDarkTheme: Boolean): Boolean {
-        return when (ivyDesign.context().theme) {
+    private fun isDarkThemeEnabled(kissosDesign: KissosDesign, systemDarkTheme: Boolean): Boolean {
+        return when (kissosDesign.context().theme) {
             Theme.LIGHT -> false
             Theme.DARK -> true
             Theme.AMOLED_DARK -> true
@@ -291,7 +291,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
             }
         }
 
-        ivyContext.createNewFile = { fileName, onFileCreatedCallback ->
+        kissosContext.createNewFile = { fileName, onFileCreatedCallback ->
             onFileCreated = onFileCreatedCallback
 
             createFileLauncher.launch(fileName)
@@ -310,7 +310,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
             }
         }
 
-        ivyContext.openFile = { onFileOpenedCallback ->
+        kissosContext.openFile = { onFileOpenedCallback ->
             onFileOpened = onFileOpenedCallback
 
             openFileLauncher.launch(Unit)
@@ -392,7 +392,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
         }
     }
 
-    override fun shareIvyWallet() {
+    override fun shareKissosWallet() {
         val share = Intent.createChooser(
             Intent().apply {
                 action = Intent.ACTION_SEND
@@ -449,7 +449,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
     override val buildVersionCode: Int
         get() = BuildConfig.VERSION_CODE
 
-    override fun reviewIvyWallet(dismissReviewCard: Boolean) {
+    override fun reviewKissosWallet(dismissReviewCard: Boolean) {
         val manager = ReviewManagerFactory.create(this)
         val request = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->

@@ -16,7 +16,7 @@ val Black = Color(0xFF111114)
 
 // Primary
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-val Ivy = Color(0xFF6B4DFF)
+val Kissos = Color(0xFF6B4DFF)
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 val Purple = Color(0xFF6B4DFF)
@@ -71,7 +71,7 @@ val Red3 = Color(0xFFFF4CA6)
 
 // Light
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-val IvyLight = Color(0xFFD5CCFF)
+val KissosLight = Color(0xFFD5CCFF)
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 val Purple1Light = Color(0xFFEECCFF)
@@ -123,7 +123,7 @@ val Red3Light = Color(0xFFFFCCE6)
 
 // Dark
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-val IvyDark = Color(0xFF352680)
+val KissosDark = Color(0xFF352680)
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 val Purple1Dark = Color(0xFF622680)

@@ -45,5 +45,5 @@ class BoolFeature(
     }
 
     private val featureKey: Preferences.Key<Boolean>
-        get() = DatastoreKeys.ivyFeature(key)
+        get() = DatastoreKeys.kissosFeature(key)
 }

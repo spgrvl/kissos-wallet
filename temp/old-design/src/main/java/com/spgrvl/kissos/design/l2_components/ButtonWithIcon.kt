@@ -21,12 +21,12 @@ import com.spgrvl.kissos.design.l0_system.Transparent
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.White
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyIcon
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIcon
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.Background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.clipBackground
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.padding
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -66,7 +66,7 @@ fun Button(
         val icon = iconLeft ?: iconRight ?: error("If you don't add icon, use Button()")
 
         if (mode != Mode.WRAP_CONTENT || iconLeft != null) {
-            IvyIcon(
+            KissosIcon(
                 icon = icon,
                 tint = if (iconLeft != null) iconTint else Transparent
             )
@@ -82,7 +82,7 @@ fun Button(
         if (mode != Mode.WRAP_CONTENT || iconRight != null) {
             SpacerHor(width = iconPadding)
 
-            IvyIcon(
+            KissosIcon(
                 icon = icon,
                 tint = if (iconRight != null) iconTint else Transparent
             )
@@ -98,7 +98,7 @@ enum class Mode {
 @Preview
 @Composable
 private fun Preview_IconLeft_Wrap() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             text = "Button",
             mode = Mode.WRAP_CONTENT,
@@ -111,7 +111,7 @@ private fun Preview_IconLeft_Wrap() {
 @Preview
 @Composable
 private fun Preview_IconRight_Wrap() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             text = "Button",
             mode = Mode.WRAP_CONTENT,
@@ -124,7 +124,7 @@ private fun Preview_IconRight_Wrap() {
 @Preview
 @Composable
 private fun Preview_IconLeft_FillMax() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             modifier = Modifier
                 .fillMaxWidth()
@@ -140,7 +140,7 @@ private fun Preview_IconLeft_FillMax() {
 @Preview
 @Composable
 private fun Preview_IconRight_FillMax() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Button(
             modifier = Modifier
                 .fillMaxWidth()

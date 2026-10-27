@@ -78,7 +78,7 @@ class ExportCsvUseCasePropertyTest {
             rows.size shouldBe trns.size + 1 // +1 for the header
             rows.forEach { row ->
                 // Matches the expected # of columns
-                val hasExpectedNumOfColumns = row.size == IvyCsvRow.Columns.size
+                val hasExpectedNumOfColumns = row.size == KissosCsvRow.Columns.size
                 if (!hasExpectedNumOfColumns) {
                     println("(${row.size} cols) $row")
                 }

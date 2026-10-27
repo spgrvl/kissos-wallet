@@ -25,14 +25,14 @@ import javax.inject.Inject
 @HiltViewModel
 class BalanceViewModel @Inject constructor(
     private val plannedPaymentsLogic: PlannedPaymentsLogic,
-    private val ivyContext: com.spgrvl.kissos.legacy.IvyWalletCtx,
+    private val kissosContext: com.spgrvl.kissos.legacy.KissosWalletCtx,
     private val baseCurrencyAct: BaseCurrencyAct,
     private val calcWalletBalanceAct: CalcWalletBalanceAct,
     private val timeProvider: TimeProvider,
     private val timeConverter: TimeConverter,
 ) : ComposeViewModel<BalanceState, BalanceEvent>() {
 
-    private var period by mutableStateOf(ivyContext.selectedPeriod)
+    private var period by mutableStateOf(kissosContext.selectedPeriod)
     private var baseCurrencyCode by mutableStateOf("")
     private var currentBalance by mutableDoubleStateOf(0.0)
     private var plannedPaymentsAmount by mutableDoubleStateOf(0.0)
@@ -63,7 +63,7 @@ class BalanceViewModel @Inject constructor(
     }
 
     private fun start(
-        timePeriod: TimePeriod = ivyContext.selectedPeriod
+        timePeriod: TimePeriod = kissosContext.selectedPeriod
     ) {
         viewModelScope.launch {
             baseCurrencyCode = baseCurrencyAct(Unit)
@@ -75,7 +75,7 @@ class BalanceViewModel @Inject constructor(
 
             plannedPaymentsAmount = ioThread {
                 plannedPaymentsLogic.plannedPaymentsAmountFor(
-                    timePeriod.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+                    timePeriod.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
                     // + positive if Income > Expenses else - negative
                 ) * if (numberOfMonthsAhead >= 0) {
                     numberOfMonthsAhead.toDouble()
@@ -98,7 +98,7 @@ class BalanceViewModel @Inject constructor(
         numberOfMonthsAhead += 1
         if (month != null) {
             start(
-                timePeriod = month.incrementMonthPeriod(ivyContext, 1L, year = year)
+                timePeriod = month.incrementMonthPeriod(kissosContext, 1L, year = year)
             )
         }
     }
@@ -109,7 +109,7 @@ class BalanceViewModel @Inject constructor(
         numberOfMonthsAhead -= 1
         if (month != null) {
             start(
-                timePeriod = month.incrementMonthPeriod(ivyContext, -1L, year = year)
+                timePeriod = month.incrementMonthPeriod(kissosContext, -1L, year = year)
             )
         }
     }

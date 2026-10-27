@@ -24,7 +24,7 @@ import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.ActionsRow
 import com.spgrvl.kissos.wallet.ui.theme.components.CloseButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 import com.spgrvl.kissos.wallet.ui.theme.gradientCutBackgroundTop
 
 @Composable
@@ -51,7 +51,7 @@ fun BoxWithConstraintsScope.PieChartStatisticBottomBar(
         Spacer(Modifier.weight(1f))
 
         val isIncome = type == TransactionType.INCOME
-        IvyButton(
+        KissosButton(
             iconStart = R.drawable.ic_plus,
             text = if (isIncome) {
                 stringResource(
@@ -77,7 +77,7 @@ fun BoxWithConstraintsScope.PieChartStatisticBottomBar(
 @Preview
 @Composable
 private fun PreviewBottomBar() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         PieChartStatisticBottomBar(
             type = TransactionType.INCOME,
             bottomInset = 16.dp,

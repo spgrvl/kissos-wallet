@@ -11,11 +11,11 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.R
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.White
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyIcon
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIcon
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.Background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.background
 import com.spgrvl.kissos.design.l1_buildingBlocks.data.clipBackground
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.padding
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -31,7 +31,7 @@ fun IconButton(
     ),
     onClick: () -> Unit
 ) {
-    IvyIcon(
+    KissosIcon(
         modifier = modifier
             .clipBackground(background)
             .clickable {
@@ -46,7 +46,7 @@ fun IconButton(
 @Preview
 @Composable
 private fun Preview() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         IconButton(
             icon = R.drawable.ic_baseline_add_24
         ) {

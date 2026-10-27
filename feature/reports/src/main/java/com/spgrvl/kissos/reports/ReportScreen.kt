@@ -36,7 +36,7 @@ import com.spgrvl.kissos.data.model.primitive.IconAsset
 import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.data.LegacyDueSection
 import com.spgrvl.kissos.legacy.datamodel.Account
@@ -55,18 +55,18 @@ import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.GreenDark
 import com.spgrvl.kissos.wallet.ui.theme.GreenLight
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Purple1Dark
 import com.spgrvl.kissos.wallet.ui.theme.Red3Light
 import com.spgrvl.kissos.wallet.ui.theme.components.BackButtonType
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilled
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCheckboxWithText
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyToolbar
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCheckboxWithText
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosToolbar
 import com.spgrvl.kissos.wallet.ui.theme.pureBlur
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -201,7 +201,7 @@ private fun BoxWithConstraintsScope.UI(
             )
 
             if (state.showTransfersAsIncExpCheckbox) {
-                IvyCheckboxWithText(
+                KissosCheckboxWithText(
                     modifier = Modifier
                         .padding(16.dp),
                     text = stringResource(R.string.transfers_as_income_expense),
@@ -321,7 +321,7 @@ private fun NoFilterEmptyState(
     ) {
         Spacer(Modifier.height(16.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_filter_l,
             tint = Gray
         )
@@ -350,7 +350,7 @@ private fun NoFilterEmptyState(
 
         Spacer(Modifier.height(32.dp))
 
-        IvyButton(
+        KissosButton(
             iconStart = R.drawable.ic_filter_xs,
             text = stringResource(R.string.set_filter)
         ) {
@@ -367,7 +367,7 @@ private fun Toolbar(
     onFilter: () -> Unit
 ) {
     val nav = navigation()
-    IvyToolbar(
+    KissosToolbar(
         backButtonType = BackButtonType.CLOSE,
         onBack = {
             nav.back()
@@ -376,7 +376,7 @@ private fun Toolbar(
         Spacer(Modifier.weight(1f))
 
         // Export CSV
-        IvyOutlinedButton(
+        KissosOutlinedButton(
             text = stringResource(R.string.export),
             iconTint = Green,
             textColor = Green,
@@ -404,7 +404,7 @@ private fun Toolbar(
 @Preview
 @Composable
 private fun Preview(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         val acc1 = Account("Cash", color = Green.toArgb())
         val acc2 = Account("DSK", color = GreenDark.toArgb())
         val cat1 = Category(
@@ -436,7 +436,7 @@ private fun Preview(theme: Theme = Theme.LIGHT) {
                 acc1,
                 acc2,
                 Account("phyre", color = GreenLight.toArgb(), icon = "cash"),
-                Account("Revolut", color = IvyDark.toArgb()),
+                Account("Revolut", color = KissosDark.toArgb()),
             ),
             categories = persistentListOf(
                 cat1,
@@ -465,7 +465,7 @@ private fun Preview(theme: Theme = Theme.LIGHT) {
 @Preview
 @Composable
 private fun Preview_NO_FILTER(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         val acc1 = Account("Cash", color = Green.toArgb())
         val acc2 = Account("DSK", color = GreenDark.toArgb())
         val cat1 = Category(
@@ -499,7 +499,7 @@ private fun Preview_NO_FILTER(theme: Theme = Theme.LIGHT) {
                 acc1,
                 acc2,
                 Account("phyre", color = GreenLight.toArgb(), icon = "cash"),
-                Account("Revolut", color = IvyDark.toArgb()),
+                Account("Revolut", color = KissosDark.toArgb()),
             ),
             categories = persistentListOf(
                 cat1,

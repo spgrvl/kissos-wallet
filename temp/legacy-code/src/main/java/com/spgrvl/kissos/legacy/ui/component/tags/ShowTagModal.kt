@@ -41,12 +41,12 @@ import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyBorderButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosBorderButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
 import com.spgrvl.kissos.wallet.ui.theme.components.WrapContentRow
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.modal.DeleteModal
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalPositiveButton
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import kotlinx.collections.immutable.ImmutableList
@@ -90,7 +90,7 @@ fun BoxWithConstraintsScope.ShowTagModal(
         mutableStateOf(selectEndTextFieldValue(""))
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = onDismiss,
@@ -292,7 +292,7 @@ private fun ExistingTag(
 
         if (selected) {
             val deselectBtnBackground = findContrastTextColor(tagColor)
-            IvyCircleButton(
+            KissosCircleButton(
                 modifier = Modifier.size(32.dp),
                 icon = R.drawable.ic_remove,
                 backgroundGradient = Gradient.solid(deselectBtnBackground),
@@ -317,7 +317,7 @@ private fun AddNewTagButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    IvyBorderButton(
+    KissosBorderButton(
         modifier = modifier,
         text = stringResource(R.string.add_new),
         backgroundGradient = Gradient.solid(UI.colors.mediumInverse),

@@ -26,13 +26,13 @@ import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.navigation.CSVScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.BackButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
 import com.spgrvl.kissos.wallet.ui.theme.components.OnboardingButton
 import kotlinx.collections.immutable.persistentListOf
 
@@ -85,7 +85,7 @@ fun ImportResultUI(
             successPercent = successPercent,
         )
 
-        IvyDividerLine(
+        KissosDividerLine(
             modifier = Modifier.padding(horizontal = 24.dp)
         )
 
@@ -138,7 +138,7 @@ fun ImportResultUI(
                 .padding(horizontal = 16.dp),
             text = stringResource(R.string.finish),
             textColor = White,
-            backgroundGradient = GradientIvy,
+            backgroundGradient = GradientKissos,
             hasNext = true,
             enabled = true
         ) {
@@ -266,7 +266,7 @@ private fun FailedSectionUI(
 @Preview(device = "id:pixel_3", showBackground = true, showSystemUi = true)
 @Composable
 private fun Preview() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         ImportResultUI(
             result = ImportResult(
                 rowsFound = 356,

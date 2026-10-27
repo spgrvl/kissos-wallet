@@ -32,7 +32,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.Month
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
 import com.spgrvl.kissos.legacy.utils.format
@@ -44,8 +44,8 @@ import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChoosePeriodModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChoosePeriodModalData
 import com.spgrvl.kissos.wallet.ui.theme.wallet.PeriodSelector
@@ -98,7 +98,7 @@ private fun BoxWithConstraintsScope.UI(
 
         Spacer(Modifier.height(32.dp))
 
-        IvyDividerLine(
+        KissosDividerLine(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
         )
@@ -222,7 +222,7 @@ private fun ColumnScope.BalanceAfterPlannedPayments(
 @Composable
 private fun ColumnScope.CloseButton() {
     val nav = navigation()
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .align(Alignment.CenterHorizontally)
             .size(FAB_BUTTON_SIZE)
@@ -241,7 +241,7 @@ private fun ColumnScope.CloseButton() {
 @Preview
 @Composable
 private fun Preview(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         UI(
             state = BalanceState(
                 period = TimePeriod(month = Month.monthsList().first()),

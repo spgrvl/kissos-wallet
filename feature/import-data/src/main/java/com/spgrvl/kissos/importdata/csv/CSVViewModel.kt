@@ -53,7 +53,7 @@ class CSVViewModel @Inject constructor(
     // region Important fields
     private var amount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_amount,
+            kissosColumn = R.string.csv_amount,
             helpInfo = R.string.csv_amount_help,
             name = "",
             index = -1,
@@ -63,7 +63,7 @@ class CSVViewModel @Inject constructor(
     )
     private var type by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_type,
+            kissosColumn = R.string.csv_type,
             helpInfo = R.string.csv_type_help,
             name = "",
             index = -1,
@@ -77,7 +77,7 @@ class CSVViewModel @Inject constructor(
     )
     private var date by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_date,
+            kissosColumn = R.string.csv_date,
             helpInfo = R.string.csv_date_help,
             name = "",
             index = -1,
@@ -87,7 +87,7 @@ class CSVViewModel @Inject constructor(
     )
     private var account by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.account,
+            kissosColumn = R.string.account,
             helpInfo = R.string.csv_account_help,
             name = "",
             index = -1,
@@ -97,7 +97,7 @@ class CSVViewModel @Inject constructor(
     )
     private var accountCurrency by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_account_currency,
+            kissosColumn = R.string.csv_account_currency,
             helpInfo = R.string.csv_account_currency_help,
             name = "",
             index = -1,
@@ -110,7 +110,7 @@ class CSVViewModel @Inject constructor(
     // region Transfer fields
     private var toAccount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_to_account,
+            kissosColumn = R.string.csv_to_account,
             helpInfo = R.string.csv_to_account_help,
             name = "",
             index = -1,
@@ -120,7 +120,7 @@ class CSVViewModel @Inject constructor(
     )
     private var toAccountCurrency by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_to_account_currency,
+            kissosColumn = R.string.csv_to_account_currency,
             helpInfo = R.string.csv_to_account_currency_help,
             name = "",
             index = -1,
@@ -130,7 +130,7 @@ class CSVViewModel @Inject constructor(
     )
     private var toAmount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_to_amount,
+            kissosColumn = R.string.csv_to_amount,
             helpInfo = R.string.csv_to_amount_help,
             name = "",
             index = -1,
@@ -143,7 +143,7 @@ class CSVViewModel @Inject constructor(
     // region Optional fields
     private var category by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.category,
+            kissosColumn = R.string.category,
             helpInfo = R.string.csv_category_help,
             name = "",
             index = -1,
@@ -153,7 +153,7 @@ class CSVViewModel @Inject constructor(
     )
     private var title by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.csv_title,
+            kissosColumn = R.string.csv_title,
             helpInfo = R.string.csv_title_help,
             name = "",
             index = -1,
@@ -163,7 +163,7 @@ class CSVViewModel @Inject constructor(
     )
     private var description by mutableStateOf(
         ColumnMapping(
-            ivyColumn = R.string.description,
+            kissosColumn = R.string.description,
             helpInfo = R.string.csv_description_help,
             name = "",
             index = -1,

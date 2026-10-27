@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.base.time.writesDayBeforeMonth
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.dateNowLocal
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
 import com.spgrvl.kissos.legacy.utils.format
@@ -108,7 +108,7 @@ fun HistoryDateDivider(
 @Preview
 @Composable
 private fun Preview_Today() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         HistoryDateDivider(
             date = dateNowUTC(),
             spacerTop = 32.dp,
@@ -122,7 +122,7 @@ private fun Preview_Today() {
 @Preview
 @Composable
 private fun Preview_Yesterday() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         HistoryDateDivider(
             date = dateNowUTC().minusDays(1),
             spacerTop = 32.dp,
@@ -136,7 +136,7 @@ private fun Preview_Yesterday() {
 @Preview
 @Composable
 private fun Preview_OneYear_Ago() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         HistoryDateDivider(
             date = dateNowUTC().minusYears(1),
             spacerTop = 32.dp,

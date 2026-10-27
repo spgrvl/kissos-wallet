@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.spgrvl.kissos.base.TestDispatchersProvider
 import com.spgrvl.kissos.base.di.KotlinxSerializationModule
-import com.spgrvl.kissos.data.db.IvyRoomDatabase
+import com.spgrvl.kissos.data.db.KissosRoomDatabase
 import com.spgrvl.kissos.data.di.KtorClientModule
 import com.spgrvl.kissos.data.model.primitive.AssetCode
 import com.spgrvl.kissos.data.remote.impl.RemoteExchangeRatesDataSourceImpl
@@ -28,12 +28,12 @@ import org.junit.runner.RunWith
 class SyncExchangeRatesUseCaseTest {
     private lateinit var useCase: SyncExchangeRatesUseCase
     private lateinit var repository: ExchangeRatesRepository
-    private lateinit var db: IvyRoomDatabase
+    private lateinit var db: KissosRoomDatabase
 
     @Before
     fun setup() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, IvyRoomDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(context, KissosRoomDatabase::class.java).build()
 
         repository = ExchangeRatesRepository(
             exchangeRatesDao = db.exchangeRatesDao,

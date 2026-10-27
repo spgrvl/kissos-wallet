@@ -14,10 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyToolbar
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosToolbar
 
 @Composable
 fun OnboardingToolbar(
@@ -26,7 +26,7 @@ fun OnboardingToolbar(
     onBack: () -> Unit,
     onSkip: () -> Unit
 ) {
-    IvyToolbar(onBack = onBack) {
+    KissosToolbar(onBack = onBack) {
         if (hasSkip) {
             Spacer(Modifier.weight(1f))
 
@@ -52,7 +52,7 @@ fun OnboardingToolbar(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         OnboardingToolbar(
             hasSkip = true,
             onBack = {}

@@ -2,7 +2,7 @@ package com.spgrvl.kissos.onboarding
 
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
 
@@ -13,7 +13,7 @@ sealed interface OnboardingEvent {
     data object ImportSkip : OnboardingEvent
     data class ImportFinished(val success: Boolean) : OnboardingEvent
     data object StartFresh : OnboardingEvent
-    data class SetBaseCurrency(val baseCurrency: IvyCurrency) : OnboardingEvent
+    data class SetBaseCurrency(val baseCurrency: KissosCurrency) : OnboardingEvent
     data class EditAccount(val account: Account, val newBalance: Double) : OnboardingEvent
     data class CreateAccount(val data: CreateAccountData) : OnboardingEvent
     data object OnAddAccountsDone : OnboardingEvent

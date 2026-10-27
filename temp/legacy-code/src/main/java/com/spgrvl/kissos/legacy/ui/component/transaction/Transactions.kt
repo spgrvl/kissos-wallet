@@ -34,8 +34,8 @@ import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 fun LazyListScope.transactions(
@@ -176,7 +176,7 @@ private fun LazyListScope.overdueSection(
         if (overdue.expanded) {
             item {
                 val isLightTheme = UI.colors.pure == White
-                IvyButton(
+                KissosButton(
                     modifier = Modifier.padding(horizontal = 24.dp),
                     text = stringRes(R.string.skip_all),
                     wrapContentMode = false,
@@ -314,7 +314,7 @@ private fun LazyItemScope.NoTransactionsEmptyState(
     ) {
         Spacer(Modifier.height(32.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_notransactions,
             tint = Gray
         )

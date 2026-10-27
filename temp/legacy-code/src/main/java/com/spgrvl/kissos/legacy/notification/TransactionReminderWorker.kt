@@ -14,7 +14,7 @@ import com.spgrvl.kissos.data.db.dao.read.TransactionDao
 import com.spgrvl.kissos.domain.AppStarter
 import com.spgrvl.kissos.legacy.utils.atEndOfDay
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.android.notification.IvyNotificationChannel
+import com.spgrvl.kissos.wallet.android.notification.KissosNotificationChannel
 import com.spgrvl.kissos.wallet.android.notification.NotificationService
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -52,8 +52,8 @@ class TransactionReminderWorker @AssistedInject constructor(
             // Have less than 1 two transactions today, remind them
 
             val notification = notificationService
-                .defaultIvyNotification(
-                    channel = IvyNotificationChannel.TRANSACTION_REMINDER,
+                .defaultKissosNotification(
+                    channel = KissosNotificationChannel.TRANSACTION_REMINDER,
                     priority = NotificationCompat.PRIORITY_HIGH
                 )
                 .setContentTitle("Kissos")

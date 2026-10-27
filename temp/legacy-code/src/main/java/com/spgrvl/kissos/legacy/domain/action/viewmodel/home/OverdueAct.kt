@@ -2,7 +2,7 @@ package com.spgrvl.kissos.wallet.domain.action.viewmodel.home
 
 import com.spgrvl.kissos.frp.action.FPAction
 import com.spgrvl.kissos.frp.then
-import com.spgrvl.kissos.legacy.utils.ivyMinTime
+import com.spgrvl.kissos.legacy.utils.kissosMinTime
 import com.spgrvl.kissos.wallet.domain.pure.data.ClosedTimeRange
 import com.spgrvl.kissos.wallet.domain.pure.data.IncomeExpensePair
 import com.spgrvl.kissos.wallet.domain.pure.transaction.isOverdue
@@ -16,7 +16,7 @@ class OverdueAct @Inject constructor(
     override suspend fun Input.compose(): suspend () -> Output = suspend {
         DueTrnsInfoAct.Input(
             range = ClosedTimeRange(
-                from = ivyMinTime(),
+                from = kissosMinTime(),
                 to = toRange
             ),
             baseCurrency = baseCurrency,

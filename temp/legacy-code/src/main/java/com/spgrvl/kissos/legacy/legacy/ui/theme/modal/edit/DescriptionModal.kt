@@ -27,15 +27,15 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.hideKeyboard
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.rootView
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDescriptionTextField
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDescriptionTextField
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalDynamicPrimaryAction
 import java.util.UUID
 
@@ -55,7 +55,7 @@ fun BoxWithConstraintsScope.DescriptionModal(
     }
     val view = rootView()
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
@@ -98,7 +98,7 @@ fun BoxWithConstraintsScope.DescriptionModal(
             focus.requestFocus()
         }
 
-        IvyDescriptionTextField(
+        KissosDescriptionTextField(
             modifier = Modifier
                 .padding(horizontal = 32.dp)
                 .fillMaxWidth()
@@ -140,7 +140,7 @@ fun BoxWithConstraintsScope.DescriptionModal(
 @Preview
 @Composable
 private fun PreviewDescriptionModal_emptyText() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         DescriptionModal(
             visible = true,
             description = "",

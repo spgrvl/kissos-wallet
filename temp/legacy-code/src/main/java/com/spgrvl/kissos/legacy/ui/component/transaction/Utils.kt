@@ -3,7 +3,7 @@ package com.spgrvl.kissos.legacy.ui.component.transaction
 import androidx.compose.runtime.Composable
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import java.util.UUID
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -13,7 +13,7 @@ fun category(
     categories: List<Category>
 ): Category? {
     val targetId = categoryId ?: return null
-    return ivyWalletCtx().categoryMap[targetId] ?: categories.find { it.id.value == targetId }
+    return kissosWalletCtx().categoryMap[targetId] ?: categories.find { it.id.value == targetId }
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -23,5 +23,5 @@ fun account(
     accounts: List<Account>
 ): Account? {
     val targetId = accountId ?: return null
-    return ivyWalletCtx().accountMap[targetId] ?: accounts.find { it.id == targetId }
+    return kissosWalletCtx().accountMap[targetId] ?: accounts.find { it.id == targetId }
 }

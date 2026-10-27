@@ -27,7 +27,7 @@ import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.components.CloseButton
 import com.spgrvl.kissos.wallet.ui.theme.components.DeleteButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 import java.util.UUID
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -57,7 +57,7 @@ fun Toolbar(
 
         when (type) {
             TransactionType.INCOME -> {
-                IvyOutlinedButton(
+                KissosOutlinedButton(
                     text = stringResource(R.string.income),
                     iconStart = R.drawable.ic_income
                 ) {
@@ -68,7 +68,7 @@ fun Toolbar(
             }
 
             TransactionType.EXPENSE -> {
-                IvyOutlinedButton(
+                KissosOutlinedButton(
                     text = stringResource(R.string.expense),
                     iconStart = R.drawable.ic_expense
                 ) {

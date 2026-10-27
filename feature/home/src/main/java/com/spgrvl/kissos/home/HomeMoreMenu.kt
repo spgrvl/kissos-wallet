@@ -51,7 +51,7 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.Constants
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.colorLerp
 import com.spgrvl.kissos.legacy.utils.lerp
@@ -65,7 +65,7 @@ import com.spgrvl.kissos.legacy.utils.toDensityPx
 import com.spgrvl.kissos.legacy.utils.verticalSwipeListener
 import com.spgrvl.kissos.navigation.BudgetScreen
 import com.spgrvl.kissos.navigation.CategoriesScreen
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.LoansScreen
 import com.spgrvl.kissos.navigation.PlannedPaymentsScreen
 import com.spgrvl.kissos.navigation.ReportScreen
@@ -77,7 +77,7 @@ import com.spgrvl.kissos.wallet.ui.theme.Blue
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.components.BufferBattery
 import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilled
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.modal.AddModalBackHandling
 import com.spgrvl.kissos.wallet.ui.theme.wallet.AmountCurrencyB1
 import java.util.UUID
@@ -100,7 +100,7 @@ fun BoxWithConstraintsScope.MoreMenu(
     onCurrencyClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     val percentExpanded by animateFloatAsState(
         targetValue = if (expanded) 1f else 0f,
@@ -115,9 +115,9 @@ fun BoxWithConstraintsScope.MoreMenu(
 
     val buttonSizePx = 40.dp.toDensityPx()
 
-    val xBase = ivyContext.screenWidth - 24.dp.toDensityPx()
+    val xBase = kissosContext.screenWidth - 24.dp.toDensityPx()
     val yBaseCollapsed = 20.dp.toDensityPx() + statusBarInset()
-    val yBaseExpanded = ivyContext.screenHeight - 48.dp.toDensityPx() - navigationBarInset()
+    val yBaseExpanded = kissosContext.screenHeight - 48.dp.toDensityPx() - navigationBarInset()
 
     val yButton = lerp(
         start = yBaseCollapsed,
@@ -137,7 +137,7 @@ fun BoxWithConstraintsScope.MoreMenu(
                 .zIndex(500f)
         ) {
             val radiusCollapsed = buttonSizePx / 2f
-            val radiusExpanded = ivyContext.screenHeight * 1.5f
+            val radiusExpanded = kissosContext.screenHeight * 1.5f
             val radius = lerp(radiusCollapsed, radiusExpanded, percentExpanded)
 
             val yBackground = lerp(
@@ -282,7 +282,7 @@ private fun SearchButton(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIcon(icon = R.drawable.ic_search)
+        KissosIcon(icon = R.drawable.ic_search)
 
         Spacer(Modifier.width(12.dp))
 
@@ -321,7 +321,7 @@ private fun ColumnScope.OpenSource() {
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.github_logo
         )
 
@@ -496,7 +496,7 @@ private fun QuickAccess(
 //            icon = R.drawable.home_more_menu_reports,
 //            label = "Charts"
 //        ) {
-//            ivyContext.navigateTo(Screen.Charts)
+//            kissosContext.navigateTo(Screen.Charts)
 //        }
 
             MoreMenuButton(
@@ -572,7 +572,7 @@ private fun MoreMenuButton(
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview_Expanded() {
-    IvyPreview {
+    KissosPreview {
         MoreMenu(
             expanded = true,
             balance = 7523.43,
@@ -591,7 +591,7 @@ private fun BoxWithConstraintsScope.Preview_Expanded() {
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview() {
-    IvyPreview {
+    KissosPreview {
         var expanded by remember { mutableStateOf(false) }
 
         MoreMenu(

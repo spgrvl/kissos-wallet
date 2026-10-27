@@ -23,8 +23,8 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.data.repository.CategoryRepository
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.data.repository.mapper.TransactionMapper
-import com.spgrvl.kissos.design.IVY_COLOR_PICKER_COLORS_FREE
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.design.KISSOS_COLOR_PICKER_COLORS_FREE
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.Loan
 import com.spgrvl.kissos.legacy.datamodel.LoanRecord
@@ -45,7 +45,7 @@ import javax.inject.Inject
 class LoanTransactionsCore @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val transactionDao: TransactionDao,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val loanRecordDao: LoanRecordDao,
     private val loanDao: LoanDao,
     private val settingsDao: SettingsDao,
@@ -231,12 +231,12 @@ class LoanTransactionsCore @Inject constructor(
         val loanCategory = categoryList.find { category ->
             category.name.value.equals(loansName, ignoreCase = true) ||
                 category.name.value.lowercase(Locale.ENGLISH).contains("loan")
-        } ?: if (ivyContext.isPremium || categoryList.size < 12) {
+        } ?: if (kissosContext.isPremium || categoryList.size < 12) {
             addCategoryToDb = true
 
             Category(
                 name = NotBlankTrimmedString.unsafe(loansName),
-                color = ColorInt(IVY_COLOR_PICKER_COLORS_FREE[DEFAULT_COLOR_INDEX].toArgb()),
+                color = ColorInt(KISSOS_COLOR_PICKER_COLORS_FREE[DEFAULT_COLOR_INDEX].toArgb()),
                 icon = IconAsset.unsafe("loan"),
                 id = CategoryId(UUID.randomUUID()),
                 orderNum = 0.0,

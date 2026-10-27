@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.base.model.TransactionType
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.data.model.IntervalType
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.navigation.EditPlannedScreen
@@ -425,7 +425,7 @@ private fun shouldFocusAmount(amount: Double) = amount == 0.0
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         UI(
             screen = EditPlannedScreen(null, TransactionType.EXPENSE),
             EditPlannedScreenState(

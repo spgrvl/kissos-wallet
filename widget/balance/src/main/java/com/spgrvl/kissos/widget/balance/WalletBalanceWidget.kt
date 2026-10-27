@@ -124,7 +124,7 @@ class WalletBalanceWidgetReceiver : GlanceAppWidgetReceiver() {
     lateinit var calcIncomeExpenseAct: CalcIncomeExpenseAct
 
     @Inject
-    lateinit var ivyContext: com.spgrvl.kissos.legacy.IvyWalletCtx
+    lateinit var kissosContext: com.spgrvl.kissos.legacy.KissosWalletCtx
 
     @Inject
     lateinit var sharedPrefs: SharedPrefs
@@ -156,13 +156,13 @@ class WalletBalanceWidgetReceiver : GlanceAppWidgetReceiver() {
             val currency = settings.baseCurrency
             val balance = walletBalanceAct(CalcWalletBalanceAct.Input(baseCurrency = currency))
             val accounts = accountsAct(Unit)
-            val period = ivyContext.selectedPeriod
+            val period = kissosContext.selectedPeriod
             val incomeExpense = calcIncomeExpenseAct(
                 CalcIncomeExpenseAct.Input(
                     baseCurrency = settings.baseCurrency,
                     accounts = accounts,
                     range = period.toRange(
-                        startDateOfMonth = ivyContext.startDayOfMonth,
+                        startDateOfMonth = kissosContext.startDayOfMonth,
                         timeConverter = timeConverter,
                         timeProvider = timeProvider,
 

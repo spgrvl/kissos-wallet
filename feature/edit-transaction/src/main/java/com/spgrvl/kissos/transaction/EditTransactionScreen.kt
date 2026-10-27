@@ -40,10 +40,10 @@ import com.spgrvl.kissos.design.l0_system.Orange
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.hideKeyboard
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.EditTransactionDisplayLoan
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.ui.component.edit.TransactionDateTime
 import com.spgrvl.kissos.legacy.ui.component.edit.core.Description
 import com.spgrvl.kissos.legacy.ui.component.tags.AddTagButton
@@ -51,12 +51,12 @@ import com.spgrvl.kissos.legacy.ui.component.tags.ShowTagModal
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.EditTransactionScreen
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.data.CustomExchangeRateState
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
 import com.spgrvl.kissos.wallet.ui.edit.core.Category
@@ -385,12 +385,12 @@ private fun BoxWithConstraintsScope.UI(
 
         Spacer(Modifier.height(32.dp))
 
-        val ivyContext = ivyWalletCtx()
+        val kissosContext = kissosWalletCtx()
 
         val timeConverter = LocalTimeConverter.current
         if (dueDate != null) {
             DueDate(dueDate = dueDate) {
-                ivyContext.datePicker(
+                kissosContext.datePicker(
                     initialDate = with(timeConverter) {
                         dueDate.toLocalDate()
                     }
@@ -653,7 +653,7 @@ private fun BoxWithConstraintsScope.UI(
         currency = "",
         initialAmount = customExchangeRateState.exchangeRate,
         dismiss = { exchangeRateAmountModalShown = false },
-        decimalCountMax = IvyCurrency.getDecimalPlaces(
+        decimalCountMax = KissosCurrency.getDecimalPlaces(
             customExchangeRateState.toCurrencyCode ?: baseCurrency
         ),
         onAmountChanged = {
@@ -717,7 +717,7 @@ private val testDateTime = LocalDateTime.of(2023, 4, 27, 0, 35)
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview(isDark: Boolean = false) {
-    IvyPreview(isDark) {
+    KissosPreview(isDark) {
         UI(
             screen = EditTransactionScreen(null, TransactionType.EXPENSE),
             initialTitle = "",
@@ -769,7 +769,7 @@ fun EditTransactionScreenUiTest(isDark: Boolean) {
         true -> Theme.DARK
         false -> Theme.LIGHT
     }
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         Preview(isDark)
     }
 }

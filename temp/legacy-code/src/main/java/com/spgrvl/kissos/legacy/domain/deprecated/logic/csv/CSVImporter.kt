@@ -19,15 +19,15 @@ import com.spgrvl.kissos.data.repository.CategoryRepository
 import com.spgrvl.kissos.data.repository.CurrencyRepository
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.data.repository.mapper.TransactionMapper
-import com.spgrvl.kissos.design.IVY_COLOR_PICKER_COLORS_FREE
+import com.spgrvl.kissos.design.KISSOS_COLOR_PICKER_COLORS_FREE
 import com.spgrvl.kissos.design.l0_system.Green
-import com.spgrvl.kissos.design.l0_system.IvyDark
+import com.spgrvl.kissos.design.l0_system.KissosDark
 import com.spgrvl.kissos.legacy.datamodel.temp.toLegacyDomain
 import com.spgrvl.kissos.legacy.datamodel.toEntity
 import com.spgrvl.kissos.legacy.utils.convertLocalToUTC
 import com.spgrvl.kissos.legacy.utils.timeNowUTC
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.csv.model.RowMapping
 import com.spgrvl.kissos.wallet.domain.pure.util.nextOrderNum
 import com.opencsv.CSVReaderBuilder
@@ -457,12 +457,12 @@ class CSVImporter @Inject constructor(
             }
 
             accountNameString.toLowerCaseLocal().contains("revolut") -> {
-                IvyDark
+                KissosDark
             }
 
-            else -> IVY_COLOR_PICKER_COLORS_FREE.getOrElse(newAccountColorIndex++) {
+            else -> KISSOS_COLOR_PICKER_COLORS_FREE.getOrElse(newAccountColorIndex++) {
                 newAccountColorIndex = 0
-                IVY_COLOR_PICKER_COLORS_FREE.first()
+                KISSOS_COLOR_PICKER_COLORS_FREE.first()
             }
         }.toArgb()
 
@@ -490,7 +490,7 @@ class CSVImporter @Inject constructor(
     ): String {
         return try {
             if (currencyCode != null && currencyCode.isNotBlank()) {
-                IvyCurrency.fromCode(currencyCode)?.code ?: baseCurrency
+                KissosCurrency.fromCode(currencyCode)?.code ?: baseCurrency
             } else {
                 baseCurrency
             }
@@ -515,9 +515,9 @@ class CSVImporter @Inject constructor(
         }
 
         // create new category
-        val colorArgb = color ?: IVY_COLOR_PICKER_COLORS_FREE.getOrElse(newCategoryColorIndex++) {
+        val colorArgb = color ?: KISSOS_COLOR_PICKER_COLORS_FREE.getOrElse(newCategoryColorIndex++) {
             newCategoryColorIndex = 0
-            IVY_COLOR_PICKER_COLORS_FREE.first()
+            KISSOS_COLOR_PICKER_COLORS_FREE.first()
         }.toArgb()
 
         val newCategory: Category? = either {

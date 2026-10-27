@@ -30,7 +30,7 @@ import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.data.Reorderable
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import java.util.*
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -111,13 +111,13 @@ fun <T : Reorderable> BoxScope.ReorderModal(
         )
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         scrollState = null,
         dismiss = dismiss,
         PrimaryAction = {
-            IvyCircleButton(
+            KissosCircleButton(
                 modifier = Modifier
                     .size(48.dp)
                     .testTag("reorder_done"),
@@ -245,7 +245,7 @@ private class Adapter<T : Reorderable>(
                     if (item as? T != null) {
                         Spacer(Modifier.width(24.dp))
 
-                        IvyIcon(
+                        KissosIcon(
                             modifier = Modifier
                                 .pointerInput(Unit) {
                                     detectTapGestures(

@@ -13,7 +13,7 @@ import com.spgrvl.kissos.data.receipt.ReceiptCode
 import com.spgrvl.kissos.data.repository.LegalRepository
 import com.spgrvl.kissos.domain.receipt.ReceiptLookupScheduler
 import com.spgrvl.kissos.frp.test.TestIdlingResource
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.ioThread
 import com.spgrvl.kissos.legacy.utils.readOnly
 import com.spgrvl.kissos.navigation.DisclaimerScreen
@@ -38,7 +38,7 @@ import javax.inject.Inject
 @HiltViewModel
 @Suppress("LongParameterList", "TooManyFunctions")
 class RootViewModel @Inject constructor(
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val nav: Navigation,
     private val settingsDao: SettingsDao,
     private val sharedPrefs: SharedPrefs,
@@ -66,9 +66,9 @@ class RootViewModel @Inject constructor(
             ioThread {
                 val theme = settingsDao.findAll().firstOrNull()?.theme
                     ?: if (systemDarkMode) Theme.DARK else Theme.LIGHT
-                ivyContext.switchTheme(theme)
+                kissosContext.switchTheme(theme)
 
-                ivyContext.initStartDayOfMonthInMemory(sharedPrefs = sharedPrefs)
+                kissosContext.initStartDayOfMonthInMemory(sharedPrefs = sharedPrefs)
             }
 
             TestIdlingResource.decrement()

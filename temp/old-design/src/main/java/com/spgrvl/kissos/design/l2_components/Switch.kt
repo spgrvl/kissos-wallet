@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerHor
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerWeight
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.springBounce
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -77,8 +77,8 @@ fun Switch(
 
 @Preview
 @Composable
-private fun PreviewIvySwitch() {
-    IvyComponentPreview {
+private fun PreviewKissosSwitch() {
+    KissosComponentPreview {
         var enabled by remember {
             mutableStateOf(false)
         }

@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.domain.di.FeaturesEntryPoint
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.amountToDouble
 import com.spgrvl.kissos.legacy.utils.amountToDoubleOrNull
 import com.spgrvl.kissos.legacy.utils.format
@@ -52,8 +52,8 @@ import com.spgrvl.kissos.legacy.utils.localDecimalSeparator
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Red
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalPositiveButton
 import com.spgrvl.kissos.wallet.ui.theme.modal.modalPreviewActionRowHeight
 import dagger.hilt.android.EntryPointAccessors
@@ -92,12 +92,12 @@ fun BoxWithConstraintsScope.AmountModal(
         mutableStateOf(false)
     }
 
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,
         PrimaryAction = {
-            IvyIcon(
+            KissosIcon(
                 modifier = circleButtonModifier(
                     size = 52.dp,
                     onClick = {
@@ -416,7 +416,7 @@ fun AmountKeyboard(
             onNumberPressed = onNumberPressed
         )
 
-        IvyIcon(
+        KissosIcon(
             modifier = circleButtonModifier(onClick = onBackspace)
                 .padding(all = 24.dp)
                 .testTag("key_del"),
@@ -492,7 +492,7 @@ private fun circleButtonModifier(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         BoxWithConstraints(
             modifier = Modifier.padding(bottom = modalPreviewActionRowHeight())
         ) {

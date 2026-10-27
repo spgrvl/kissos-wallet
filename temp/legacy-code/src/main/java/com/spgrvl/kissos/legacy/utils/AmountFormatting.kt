@@ -1,6 +1,6 @@
 package com.spgrvl.kissos.legacy.utils
 
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import kotlin.math.abs
@@ -49,10 +49,10 @@ fun localGroupingSeparator(): String {
 fun Double.format(digits: Int) = "%.${digits}f".format(this)
 
 fun Double.format(currencyCode: String): String {
-    return this.format(IvyCurrency.fromCode(currencyCode))
+    return this.format(KissosCurrency.fromCode(currencyCode))
 }
 
-fun Double.format(currency: IvyCurrency?): String {
+fun Double.format(currency: KissosCurrency?): String {
     return if (currency?.isCrypto == true) {
         val result = this.formatCrypto()
         return when {
@@ -135,7 +135,7 @@ fun formatInt(number: Int): String {
 }
 
 fun decimalPartFormatted(currency: String, value: Double): String {
-    return if (IvyCurrency.fromCode(currency)?.isCrypto == true) {
+    return if (KissosCurrency.fromCode(currency)?.isCrypto == true) {
         val decimalPartFormatted = value.formatCrypto()
             .split(localDecimalSeparator())
             .getOrNull(1) ?: "null"
@@ -179,7 +179,7 @@ fun formatInputAmount(
 
     val amountDouble = newlyEnteredNumberString.amountToDoubleOrNull()
 
-    val decimalCountOkay = IvyCurrency.fromCode(currency)?.isCrypto == true ||
+    val decimalCountOkay = KissosCurrency.fromCode(currency)?.isCrypto == true ||
             decimalCount <= decimalCountMax
     if (amountDouble != null && decimalCountOkay) {
         val intPart = truncate(amountDouble).toInt()

@@ -35,7 +35,7 @@ import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.onboarding.components.OnboardingToolbar
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.components.GradientCutBottom
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 
 @ExperimentalFoundationApi
 @Composable
@@ -138,7 +138,7 @@ private fun ImportOption(
     ) {
         Spacer(Modifier.width(20.dp))
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier.size(32.dp),
             icon = importType.logo(),
             tint = Color.Unspecified
@@ -161,7 +161,7 @@ private fun ImportOption(
 @Preview
 @Composable
 private fun Preview() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         ImportFrom(
             hasSkip = true,
             launchedFromOnboarding = false,

@@ -1,7 +1,7 @@
 package com.spgrvl.kissos.data.di
 
 import android.content.Context
-import com.spgrvl.kissos.data.db.IvyRoomDatabase
+import com.spgrvl.kissos.data.db.KissosRoomDatabase
 import com.spgrvl.kissos.data.db.dao.read.AccountDao
 import com.spgrvl.kissos.data.db.dao.read.BudgetDao
 import com.spgrvl.kissos.data.db.dao.read.CategoryDao
@@ -42,148 +42,148 @@ object RoomDbModule {
 
     @Provides
     @Singleton
-    fun provideIvyRoomDatabase(
+    fun provideKissosRoomDatabase(
         @ApplicationContext appContext: Context,
-    ): IvyRoomDatabase {
-        return IvyRoomDatabase.create(
+    ): KissosRoomDatabase {
+        return KissosRoomDatabase.create(
             applicationContext = appContext,
         )
     }
 
     @Provides
-    fun provideUserDao(db: IvyRoomDatabase): UserDao {
+    fun provideUserDao(db: KissosRoomDatabase): UserDao {
         return db.userDao
     }
 
     @Provides
-    fun provideAccountDao(db: IvyRoomDatabase): AccountDao {
+    fun provideAccountDao(db: KissosRoomDatabase): AccountDao {
         return db.accountDao
     }
 
     @Provides
-    fun provideTransactionDao(db: IvyRoomDatabase): TransactionDao {
+    fun provideTransactionDao(db: KissosRoomDatabase): TransactionDao {
         return db.transactionDao
     }
 
     @Provides
-    fun provideCategoryDao(db: IvyRoomDatabase): CategoryDao {
+    fun provideCategoryDao(db: KissosRoomDatabase): CategoryDao {
         return db.categoryDao
     }
 
     @Provides
-    fun provideBudgetDao(db: IvyRoomDatabase): BudgetDao {
+    fun provideBudgetDao(db: KissosRoomDatabase): BudgetDao {
         return db.budgetDao
     }
 
     @Provides
-    fun provideSettingsDao(db: IvyRoomDatabase): SettingsDao {
+    fun provideSettingsDao(db: KissosRoomDatabase): SettingsDao {
         return db.settingsDao
     }
 
     @Provides
-    fun provideLoanDao(db: IvyRoomDatabase): LoanDao {
+    fun provideLoanDao(db: KissosRoomDatabase): LoanDao {
         return db.loanDao
     }
 
     @Provides
-    fun provideLoanRecordDao(db: IvyRoomDatabase): LoanRecordDao {
+    fun provideLoanRecordDao(db: KissosRoomDatabase): LoanRecordDao {
         return db.loanRecordDao
     }
 
     @Provides
-    fun providePlannedPaymentRuleDao(db: IvyRoomDatabase): PlannedPaymentRuleDao {
+    fun providePlannedPaymentRuleDao(db: KissosRoomDatabase): PlannedPaymentRuleDao {
         return db.plannedPaymentRuleDao
     }
 
     @Provides
-    fun provideTagDao(db: IvyRoomDatabase): TagDao {
+    fun provideTagDao(db: KissosRoomDatabase): TagDao {
         return db.tagDao
     }
 
     @Provides
-    fun provideTagAssociationDao(db: IvyRoomDatabase): TagAssociationDao {
+    fun provideTagAssociationDao(db: KissosRoomDatabase): TagAssociationDao {
         return db.tagAssociationDao
     }
 
     @Provides
     fun provideExchangeRatesDao(
-        roomDatabase: IvyRoomDatabase
+        roomDatabase: KissosRoomDatabase
     ): ExchangeRatesDao {
         return roomDatabase.exchangeRatesDao
     }
 
     @Provides
-    fun provideWriteAccountDao(db: IvyRoomDatabase): WriteAccountDao {
+    fun provideWriteAccountDao(db: KissosRoomDatabase): WriteAccountDao {
         return db.writeAccountDao
     }
 
     @Provides
-    fun provideWriteTransactionDao(db: IvyRoomDatabase): WriteTransactionDao {
+    fun provideWriteTransactionDao(db: KissosRoomDatabase): WriteTransactionDao {
         return db.writeTransactionDao
     }
 
     @Provides
-    fun provideWriteCategoryDao(db: IvyRoomDatabase): WriteCategoryDao {
+    fun provideWriteCategoryDao(db: KissosRoomDatabase): WriteCategoryDao {
         return db.writeCategoryDao
     }
 
     @Provides
-    fun provideWriteBudgetDao(db: IvyRoomDatabase): WriteBudgetDao {
+    fun provideWriteBudgetDao(db: KissosRoomDatabase): WriteBudgetDao {
         return db.writeBudgetDao
     }
 
     @Provides
-    fun provideWriteSettingsDao(db: IvyRoomDatabase): WriteSettingsDao {
+    fun provideWriteSettingsDao(db: KissosRoomDatabase): WriteSettingsDao {
         return db.writeSettingsDao
     }
 
     @Provides
-    fun provideWriteLoanDao(db: IvyRoomDatabase): WriteLoanDao {
+    fun provideWriteLoanDao(db: KissosRoomDatabase): WriteLoanDao {
         return db.writeLoanDao
     }
 
     @Provides
-    fun provideWriteLoanRecordDao(db: IvyRoomDatabase): WriteLoanRecordDao {
+    fun provideWriteLoanRecordDao(db: KissosRoomDatabase): WriteLoanRecordDao {
         return db.writeLoanRecordDao
     }
 
     @Provides
-    fun provideWritePlannedPaymentRuleDao(db: IvyRoomDatabase): WritePlannedPaymentRuleDao {
+    fun provideWritePlannedPaymentRuleDao(db: KissosRoomDatabase): WritePlannedPaymentRuleDao {
         return db.writePlannedPaymentRuleDao
     }
 
     @Provides
-    fun provideWriteExchangeRatesDao(db: IvyRoomDatabase): WriteExchangeRatesDao {
+    fun provideWriteExchangeRatesDao(db: KissosRoomDatabase): WriteExchangeRatesDao {
         return db.writeExchangeRatesDao
     }
 
     @Provides
-    fun provideWriteTagDao(db: IvyRoomDatabase): WriteTagDao {
+    fun provideWriteTagDao(db: KissosRoomDatabase): WriteTagDao {
         return db.writeTagDao
     }
 
     @Provides
-    fun provideWriteTagAssociationDao(db: IvyRoomDatabase): WriteTagAssociationDao {
+    fun provideWriteTagAssociationDao(db: KissosRoomDatabase): WriteTagAssociationDao {
         return db.writeTagAssociationDao
     }
 
     @Provides
-    fun provideReceiptDao(db: IvyRoomDatabase): ReceiptDao {
+    fun provideReceiptDao(db: KissosRoomDatabase): ReceiptDao {
         return db.receiptDao
     }
 
     @Provides
-    fun provideMerchantDao(db: IvyRoomDatabase): MerchantDao {
+    fun provideMerchantDao(db: KissosRoomDatabase): MerchantDao {
         return db.merchantDao
     }
 
     @Provides
-    fun provideWriteReceiptDao(db: IvyRoomDatabase): WriteReceiptDao {
+    fun provideWriteReceiptDao(db: KissosRoomDatabase): WriteReceiptDao {
         return db.writeReceiptDao
     }
 
     @Provides
-    fun provideWriteMerchantDao(db: IvyRoomDatabase): WriteMerchantDao {
+    fun provideWriteMerchantDao(db: KissosRoomDatabase): WriteMerchantDao {
         return db.writeMerchantDao
     }
 }

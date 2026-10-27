@@ -28,12 +28,12 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.MediumBlack
 import com.spgrvl.kissos.wallet.ui.theme.MediumWhite
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.isDarkColor
 
@@ -154,7 +154,7 @@ private fun RowScope.HeaderCard(
         )
         Text(
             modifier = Modifier.padding(horizontal = 24.dp),
-            text = IvyCurrency.fromCode(currencyCode)?.name ?: "",
+            text = KissosCurrency.fromCode(currencyCode)?.name ?: "",
             style = UI.typo.b2.style(
                 color = contrastColor,
                 fontWeight = FontWeight.Normal
@@ -184,7 +184,7 @@ private fun RowScope.HeaderCard(
 
         if (addButtonText != null) {
             val addButtonBackground = if (isIncome) Green else contrastColor
-            IvyButton(
+            KissosButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)

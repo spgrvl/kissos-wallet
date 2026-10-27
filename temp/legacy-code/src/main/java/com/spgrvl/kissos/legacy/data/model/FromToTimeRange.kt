@@ -6,8 +6,8 @@ import com.spgrvl.kissos.base.legacy.stringRes
 import com.spgrvl.kissos.base.time.TimeConverter
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.legacy.utils.dateNowUTC
-import com.spgrvl.kissos.legacy.utils.ivyMaxTime
-import com.spgrvl.kissos.legacy.utils.ivyMinTime
+import com.spgrvl.kissos.legacy.utils.kissosMaxTime
+import com.spgrvl.kissos.legacy.utils.kissosMinTime
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.ui.time.TimeFormatter
 import com.spgrvl.kissos.wallet.domain.pure.data.ClosedTimeRange
@@ -21,10 +21,10 @@ data class FromToTimeRange(
     val to: Instant?,
 ) {
     fun from(): Instant =
-        from ?: ivyMinTime()
+        from ?: kissosMinTime()
 
     fun to(): Instant =
-        to ?: ivyMaxTime()
+        to ?: kissosMaxTime()
 
     fun upcomingFrom(
         timeProvider: TimeProvider
@@ -130,14 +130,14 @@ fun FromToTimeRange.toCloseTimeRangeUnsafe(): ClosedTimeRange {
 
 fun FromToTimeRange.toCloseTimeRange(): ClosedTimeRange {
     return ClosedTimeRange(
-        from = from ?: ivyMinTime(),
-        to = to ?: ivyMaxTime()
+        from = from ?: kissosMinTime(),
+        to = to ?: kissosMaxTime()
     )
 }
 
 fun FromToTimeRange.toUTCCloseTimeRange(): ClosedTimeRange {
     return ClosedTimeRange(
-        from = from ?: ivyMinTime(),
-        to = to ?: ivyMaxTime()
+        from = from ?: kissosMinTime(),
+        to = to ?: kissosMaxTime()
     )
 }

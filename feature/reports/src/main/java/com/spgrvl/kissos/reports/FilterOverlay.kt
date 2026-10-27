@@ -52,9 +52,9 @@ import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.domain.legacy.ui.theme.components.ListItem
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.ui.component.tags.AddTagButton
 import com.spgrvl.kissos.legacy.ui.component.tags.ShowTagModal
 import com.spgrvl.kissos.legacy.utils.capitalizeLocal
@@ -64,17 +64,17 @@ import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.GreenDark
 import com.spgrvl.kissos.wallet.ui.theme.GreenLight
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Purple1Dark
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.Red3Light
 import com.spgrvl.kissos.wallet.ui.theme.components.CloseButton
 import com.spgrvl.kissos.wallet.ui.theme.components.GradientCutBottom
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCheckboxWithText
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButtonFillMaxWidth
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCheckboxWithText
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButtonFillMaxWidth
 import com.spgrvl.kissos.wallet.ui.theme.components.WrapContentRow
 import com.spgrvl.kissos.wallet.ui.theme.modal.AddKeywordModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.AddModalBackHandling
@@ -221,12 +221,12 @@ fun BoxWithConstraintsScope.FilterOverlay(
 
             FilterDivider()
 
-            val ivyContext = ivyWalletCtx()
+            val kissosContext = kissosWalletCtx()
             PeriodFilter(
                 filter = localFilter,
                 onShowPeriodChooserModal = {
                     choosePeriodModal = ChoosePeriodModalData(
-                        period = filter?.period ?: ivyContext.selectedPeriod
+                        period = filter?.period ?: kissosContext.selectedPeriod
                     )
                 }
             )
@@ -308,7 +308,7 @@ fun BoxWithConstraintsScope.FilterOverlay(
 
         Spacer(Modifier.weight(1f))
 
-        IvyButton(
+        KissosButton(
             text = stringResource(R.string.apply_filter),
             iconStart = R.drawable.ic_filter_xs,
             backgroundGradient = GradientGreen,
@@ -595,7 +595,7 @@ private fun TypeFilterCheckbox(
     nonFilter: (ReportFilter?) -> ReportFilter,
     onSetFilter: (ReportFilter) -> Unit
 ) {
-    IvyCheckboxWithText(
+    KissosCheckboxWithText(
         modifier = modifier,
         text = when (trnType) {
             TransactionType.INCOME -> stringResource(R.string.incomes)
@@ -636,13 +636,13 @@ private fun PeriodFilter(
 
     Spacer(Modifier.height(16.dp))
 
-    IvyOutlinedButtonFillMaxWidth(
+    KissosOutlinedButtonFillMaxWidth(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 24.dp),
         iconStart = R.drawable.ic_calendar,
         text = filter?.period?.toDisplayLong(
-            startDateOfMonth = ivyWalletCtx().startDayOfMonth,
+            startDateOfMonth = kissosWalletCtx().startDayOfMonth,
             timeProvider = LocalTimeProvider.current,
             timeConverter = LocalTimeConverter.current,
             timeFormatter = LocalTimeFormatter.current,
@@ -1005,7 +1005,7 @@ private fun Keyword(
     borderColor: Color,
     onClick: () -> Unit,
 ) {
-    IvyOutlinedButton(
+    KissosOutlinedButton(
         text = keyword,
         iconStart = R.drawable.ic_remove,
         iconTint = Red,
@@ -1018,7 +1018,7 @@ private fun Keyword(
 
 @Composable
 private fun AddKeywordButton(text: String, modifier: Modifier = Modifier, onCLick: () -> Unit) {
-    IvyOutlinedButton(
+    KissosOutlinedButton(
         modifier = modifier,
         text = text,
         iconStart = R.drawable.ic_plus,
@@ -1035,7 +1035,7 @@ private class AddKeywordButton
 private fun FilterDivider() {
     Spacer(modifier = Modifier.height(24.dp))
 
-    IvyDividerLine(
+    KissosDividerLine(
         modifier = Modifier.fillMaxWidth()
     )
 
@@ -1061,7 +1061,7 @@ private fun FilterTitleText(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         val acc1 = Account("Cash", color = Green.toArgb())
         val acc2 = Account("DSK", color = GreenDark.toArgb())
         val cat1 = Category(
@@ -1080,7 +1080,7 @@ private fun Preview() {
                 acc1,
                 acc2,
                 Account("phyre", color = GreenLight.toArgb(), icon = "cash"),
-                Account("Revolut", color = IvyDark.toArgb()),
+                Account("Revolut", color = KissosDark.toArgb()),
             ),
             categories = listOf(
                 cat1,

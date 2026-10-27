@@ -39,9 +39,9 @@ import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.api.LocalTimeConverter
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.domain.legacy.ui.IvyColorPicker
+import com.spgrvl.kissos.domain.legacy.ui.KissosColorPicker
 import com.spgrvl.kissos.frp.test.TestingContext
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.Loan
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.DateTimeRow
@@ -52,16 +52,16 @@ import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.legacy.ui.theme.modal.ModalNameInput
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateLoanData
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Gray
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconSDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCheckboxWithText
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCheckboxWithText
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AccountModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AccountModalData
@@ -115,7 +115,7 @@ fun BoxWithConstraintsScope.LoanModal(
         mutableStateOf(modal?.loan?.amount ?: 0.0)
     }
     var color by remember(modal) {
-        mutableStateOf(loan?.color?.let { Color(it) } ?: Ivy)
+        mutableStateOf(loan?.color?.let { Color(it) } ?: Kissos)
     }
     var icon by remember(modal) {
         mutableStateOf(loan?.icon)
@@ -144,7 +144,7 @@ fun BoxWithConstraintsScope.LoanModal(
 
     var accountModalData: AccountModalData? by remember { mutableStateOf(null) }
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -228,7 +228,7 @@ fun BoxWithConstraintsScope.LoanModal(
 
         Spacer(Modifier.height(24.dp))
 
-        IvyColorPicker(
+        KissosColorPicker(
             selectedColor = color,
             onColorSelected = { color = it }
         )
@@ -287,7 +287,7 @@ fun BoxWithConstraintsScope.LoanModal(
 
         Spacer(Modifier.height(16.dp))
 
-        IvyCheckboxWithText(
+        KissosCheckboxWithText(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.Start),
@@ -325,7 +325,7 @@ fun BoxWithConstraintsScope.LoanModal(
 
     CurrencyModal(
         title = stringResource(R.string.choose_currency),
-        initialCurrency = IvyCurrency.fromCode(currencyCode),
+        initialCurrency = KissosCurrency.fromCode(currencyCode),
         visible = currencyModalVisible,
         dismiss = { currencyModalVisible = false }
     ) {
@@ -505,7 +505,7 @@ private fun AddAccount(
     ) {
         Spacer(Modifier.width(12.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_plus,
             tint = UI.colors.pureInverse
         )
@@ -589,7 +589,7 @@ private fun RowScope.SelectorButton(
             }
             .padding(vertical = 8.dp)
             .thenIf(selected) {
-                background(GradientIvy.asHorizontalBrush(), rFull)
+                background(GradientKissos.asHorizontalBrush(), rFull)
             }
             .padding(vertical = 8.dp),
         text = label,
@@ -653,7 +653,7 @@ private fun save(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         LoanModal(
             modal = LoanModalData(
                 loan = null,

@@ -34,7 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.KeyboardListener
 import com.spgrvl.kissos.legacy.utils.densityScope
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
@@ -42,9 +42,9 @@ import com.spgrvl.kissos.legacy.utils.keyboardOnlyWindowInsets
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.springBounceSlow
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedTextField
 import com.spgrvl.kissos.wallet.ui.theme.components.OnboardingButton
 
 @Composable
@@ -104,7 +104,7 @@ fun OnboardingSetName(
             nameFocus.requestFocus()
         }
 
-        IvyOutlinedTextField(
+        KissosOutlinedTextField(
             Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth()
@@ -136,7 +136,7 @@ fun OnboardingSetName(
                 .fillMaxWidth(),
             text = stringResource(R.string.enter),
             textColor = White,
-            backgroundGradient = GradientIvy,
+            backgroundGradient = GradientKissos,
             hasNext = true,
             enabled = nameTextField.text.trim().isNotNullOrBlank()
         ) {
@@ -154,7 +154,7 @@ fun OnboardingSetName(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         OnboardingSetName {
         }
     }

@@ -46,8 +46,8 @@ fun InputField(
         color = Color.Gray,
         textAlign = TextAlign.Start
     ),
-    inputType: IvyInputType = IvyInputType.SHORT_TEXT,
-    imeAction: IvyImeAction = IvyImeAction.DONE,
+    inputType: KissosInputType = KissosInputType.SHORT_TEXT,
+    imeAction: KissosImeAction = KissosImeAction.DONE,
     onImeActionListener: ((EditText) -> Unit)? = null,
     cursorColor: Color = UI.colors.pureInverse,
     highlightColor: Color = if (UI.colors.isLight) Purple1Light else Purple1Dark,
@@ -96,8 +96,8 @@ fun InputField(
             )
 
             when (inputType) {
-                IvyInputType.PASSWORD, IvyInputType.PASSWORD_NUMBER,
-                IvyInputType.PASSWORD_VISIBLE, IvyInputType.PASSWORD_NUMBER_VISIBLE -> {
+                KissosInputType.PASSWORD, KissosInputType.PASSWORD_NUMBER,
+                KissosInputType.PASSWORD_VISIBLE, KissosInputType.PASSWORD_NUMBER_VISIBLE -> {
                     it.setupInputType(
                         inputType = inputType,
                         imeAction = imeAction,
@@ -110,7 +110,7 @@ fun InputField(
             }
 
             // Log focus.triggerRecomposition so recomposition can be triggered
-            Log.d("ivyInputField", "Triggering recomposition: ${focus?.triggerRecomposition}")
+            Log.d("kissosInputField", "Triggering recomposition: ${focus?.triggerRecomposition}")
             if (focus?.consumeFocus() == true) {
                 it.requestFocus()
                 it.selectTextEnd()
@@ -153,49 +153,49 @@ private fun EditText.dynamicStyle(
 }
 
 fun EditText.setupInputType(
-    inputType: IvyInputType,
-    imeAction: IvyImeAction,
+    inputType: KissosInputType,
+    imeAction: KissosImeAction,
     onImeActionListener: ((EditText) -> Unit)?
 ) {
     this.inputType = when (inputType) {
-        IvyInputType.SHORT_TEXT -> {
+        KissosInputType.SHORT_TEXT -> {
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
-        IvyInputType.LONG_TEXT -> {
+        KissosInputType.LONG_TEXT -> {
             InputType.TYPE_CLASS_TEXT or
                 InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
-        IvyInputType.NAMES -> {
+        KissosInputType.NAMES -> {
             InputType.TYPE_TEXT_VARIATION_PERSON_NAME or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
-        IvyInputType.EMAIL -> {
+        KissosInputType.EMAIL -> {
             InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
-        IvyInputType.PHONE -> {
+        KissosInputType.PHONE -> {
             InputType.TYPE_CLASS_PHONE or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
         }
-        IvyInputType.NUMBER -> {
+        KissosInputType.NUMBER -> {
             InputType.TYPE_CLASS_NUMBER
         }
-        IvyInputType.PASSWORD -> {
+        KissosInputType.PASSWORD -> {
             InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
-        IvyInputType.PASSWORD_NUMBER -> {
+        KissosInputType.PASSWORD_NUMBER -> {
             InputType.TYPE_NUMBER_VARIATION_PASSWORD
         }
-        IvyInputType.PASSWORD_VISIBLE -> {
+        KissosInputType.PASSWORD_VISIBLE -> {
             InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
         }
-        IvyInputType.PASSWORD_NUMBER_VISIBLE -> {
+        KissosInputType.PASSWORD_NUMBER_VISIBLE -> {
             InputType.TYPE_CLASS_NUMBER
         }
     }
 
-    if (inputType != IvyInputType.LONG_TEXT) {
+    if (inputType != KissosInputType.LONG_TEXT) {
         // Make sure we don't break the default new line action
         imeOptions = when (imeAction) {
-            IvyImeAction.DONE -> EditorInfo.IME_ACTION_DONE
-            IvyImeAction.NEXT -> EditorInfo.IME_ACTION_NEXT
+            KissosImeAction.DONE -> EditorInfo.IME_ACTION_DONE
+            KissosImeAction.NEXT -> EditorInfo.IME_ACTION_NEXT
         }
 
         setOnEditorActionListener { _, _, _ ->
@@ -208,7 +208,7 @@ fun EditText.setupInputType(
         }
     }
     when (inputType) {
-        IvyInputType.LONG_TEXT -> {
+        KissosInputType.LONG_TEXT -> {
             isSingleLine = false
             imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION
         }
@@ -224,7 +224,7 @@ fun EditText.selectTextEnd() {
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-enum class IvyInputType {
+enum class KissosInputType {
     SHORT_TEXT,
     LONG_TEXT,
     NAMES,
@@ -238,7 +238,7 @@ enum class IvyInputType {
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-enum class IvyImeAction {
+enum class KissosImeAction {
     DONE,
     NEXT
 }
@@ -289,7 +289,7 @@ private fun cursorDrawable(
 @Preview
 @Composable
 private fun Preview() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         InputField(
             initialText = "Test"
         ) {

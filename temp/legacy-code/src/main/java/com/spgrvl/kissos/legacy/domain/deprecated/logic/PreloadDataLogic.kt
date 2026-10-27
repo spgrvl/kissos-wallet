@@ -21,9 +21,9 @@ import com.spgrvl.kissos.design.l0_system.Green
 import com.spgrvl.kissos.design.l0_system.Green2
 import com.spgrvl.kissos.design.l0_system.Green2Light
 import com.spgrvl.kissos.design.l0_system.GreenLight
-import com.spgrvl.kissos.design.l0_system.Ivy
-import com.spgrvl.kissos.design.l0_system.IvyDark
-import com.spgrvl.kissos.design.l0_system.IvyLight
+import com.spgrvl.kissos.design.l0_system.Kissos
+import com.spgrvl.kissos.design.l0_system.KissosDark
+import com.spgrvl.kissos.design.l0_system.KissosLight
 import com.spgrvl.kissos.design.l0_system.Orange
 import com.spgrvl.kissos.design.l0_system.Orange2
 import com.spgrvl.kissos.design.l0_system.Orange3
@@ -67,7 +67,7 @@ class PreloadDataLogic @Inject constructor(
         val bank = Account(
             name = stringRes(R.string.bank),
             currency = null,
-            color = IvyDark.toArgb(),
+            color = KissosDark.toArgb(),
             icon = "bank",
             orderNum = 1.0,
             isSynced = false
@@ -91,7 +91,7 @@ class PreloadDataLogic @Inject constructor(
             CreateAccountData(
                 name = stringRes(R.string.bank),
                 currency = baseCurrency,
-                color = IvyDark,
+                color = KissosDark,
                 icon = "bank",
                 balance = 0.0
             ),
@@ -147,7 +147,7 @@ class PreloadDataLogic @Inject constructor(
 
         CreateCategoryData(
             name = stringRes(R.string.shopping),
-            color = Ivy,
+            color = Kissos,
             icon = "shopping"
         ),
 
@@ -159,13 +159,13 @@ class PreloadDataLogic @Inject constructor(
 
         CreateCategoryData(
             name = stringRes(R.string.health),
-            color = IvyLight,
+            color = KissosLight,
             icon = "health"
         ),
 
         CreateCategoryData(
             name = stringRes(R.string.investments),
-            color = IvyDark,
+            color = KissosDark,
             icon = "leaf"
         ),
 

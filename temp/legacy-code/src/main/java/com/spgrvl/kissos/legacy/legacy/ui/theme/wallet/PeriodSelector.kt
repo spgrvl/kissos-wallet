@@ -26,11 +26,11 @@ import com.spgrvl.kissos.design.api.LocalTimeFormatter
 import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -51,7 +51,7 @@ fun PeriodSelector(
         Spacer(Modifier.width(20.dp))
 
         if (period.month != null) {
-            IvyIcon(
+            KissosIcon(
                 modifier = Modifier
                     .size(48.dp)
                     .clip(CircleShape)
@@ -77,7 +77,7 @@ fun PeriodSelector(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            IvyIcon(
+            KissosIcon(
                 icon = R.drawable.ic_calendar,
                 tint = UI.colors.pureInverse
             )
@@ -86,7 +86,7 @@ fun PeriodSelector(
 
             Text(
                 text = period.toDisplayShort(
-                    startDateOfMonth = ivyWalletCtx().startDayOfMonth,
+                    startDateOfMonth = kissosWalletCtx().startDayOfMonth,
                     timeConverter = LocalTimeConverter.current,
                     timeProvider = LocalTimeProvider.current,
                     timeFormatter = LocalTimeFormatter.current,
@@ -101,7 +101,7 @@ fun PeriodSelector(
         Spacer(Modifier.weight(1f))
 
         if (period.month != null) {
-            IvyIcon(
+            KissosIcon(
                 modifier = Modifier
                     .size(48.dp)
                     .clip(CircleShape)
@@ -120,7 +120,7 @@ fun PeriodSelector(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         PeriodSelector(
             period = TimePeriod.currentMonth(
                 startDayOfMonth = 1

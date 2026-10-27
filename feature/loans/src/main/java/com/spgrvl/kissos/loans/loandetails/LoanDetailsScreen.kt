@@ -41,7 +41,7 @@ import com.spgrvl.kissos.data.model.LoanType
 import com.spgrvl.kissos.design.api.LocalTimeFormatter
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.Loan
 import com.spgrvl.kissos.legacy.datamodel.LoanRecord
@@ -65,15 +65,15 @@ import com.spgrvl.kissos.navigation.TransactionsScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.ui.time.TimeFormatter
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.MediumBlack
 import com.spgrvl.kissos.wallet.ui.theme.MediumWhite
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconMDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.ProgressBar
 import com.spgrvl.kissos.wallet.ui.theme.components.getCustomIconIdS
 import com.spgrvl.kissos.wallet.ui.theme.dynamicContrast
@@ -435,7 +435,7 @@ private fun LoanInfoCard(
                 )
             )
             if (selectedLoanAccount != null) {
-                IvyButton(
+                KissosButton(
                     modifier = Modifier.padding(end = 16.dp, top = 12.dp),
                     backgroundGradient = Gradient.solid(loan.color.toComposeColor()),
                     hasGlow = false,
@@ -479,7 +479,7 @@ private fun LoanInfoCard(
         )
         Text(
             modifier = Modifier.padding(horizontal = 24.dp),
-            text = IvyCurrency.fromCode(baseCurrency)?.name ?: "",
+            text = KissosCurrency.fromCode(baseCurrency)?.name ?: "",
             style = UI.typo.b2.style(
                 color = contrastColor,
                 fontWeight = FontWeight.Normal
@@ -595,7 +595,7 @@ private fun LoanInfoCard(
 
         Spacer(Modifier.height(24.dp))
 
-        IvyButton(
+        KissosButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
@@ -660,7 +660,7 @@ private fun LoanRecordItem(
         if (account != null || loanRecord.interest) {
             Row(Modifier.padding(16.dp)) {
                 if (account != null) {
-                    IvyButton(
+                    KissosButton(
                         backgroundGradient = Gradient.solid(UI.colors.pure),
                         hasGlow = false,
                         iconTint = UI.colors.pureInverse,
@@ -690,7 +690,7 @@ private fun LoanRecordItem(
 
                     val textIconColor = if (isDarkColor(loan.color)) MediumWhite else MediumBlack
 
-                    IvyButton(
+                    KissosButton(
                         modifier = Modifier.padding(start = 8.dp),
                         backgroundGradient = Gradient.solid(loan.color.toComposeColor()),
                         hasGlow = false,
@@ -794,7 +794,7 @@ private fun InitialRecordItem(
             .background(UI.colors.medium, UI.shapes.r4)
             .testTag("loan_record_item")
     ) {
-        IvyButton(
+        KissosButton(
             modifier = Modifier.padding(16.dp),
             backgroundGradient = Gradient.solid(UI.colors.pure),
             text = stringResource(id = R.string.initial_loan_record),
@@ -860,7 +860,7 @@ private fun NoLoanRecordsEmptyState() {
     ) {
         Spacer(Modifier.height(32.dp))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_notransactions,
             tint = Gray
         )
@@ -892,7 +892,7 @@ private fun NoLoanRecordsEmptyState() {
 @Preview
 @Composable
 private fun Preview_Empty() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         UI(
             LoanDetailsScreenState(
                 baseCurrency = "BGN",
@@ -926,7 +926,7 @@ private val testDateTime = LocalDateTime.of(2023, 4, 27, 0, 35)
 @Preview
 @Composable
 private fun Preview_Records(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         UI(
             LoanDetailsScreenState(
                 baseCurrency = "BGN",

@@ -40,7 +40,7 @@ import com.spgrvl.kissos.data.model.primitive.IconAsset
 import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.onboarding.components.OnboardingProgressSlider
@@ -48,10 +48,10 @@ import com.spgrvl.kissos.onboarding.components.OnboardingToolbar
 import com.spgrvl.kissos.onboarding.components.Suggestions
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.OrangeLight
 import com.spgrvl.kissos.wallet.ui.theme.Red
@@ -126,7 +126,7 @@ fun BoxWithConstraintsScope.OnboardingCategories(
                         modifier = Modifier.align(Alignment.CenterHorizontally),
                         selectedStep = 3,
                         stepsCount = 4,
-                        selectedColor = IvyDark
+                        selectedColor = KissosDark
                     )
 
                     Spacer(Modifier.height(48.dp))
@@ -192,7 +192,7 @@ fun BoxWithConstraintsScope.OnboardingCategories(
 
             text = stringResource(R.string.finish),
             textColor = White,
-            backgroundGradient = GradientIvy,
+            backgroundGradient = GradientKissos,
             hasNext = false,
             enabled = true
         ) {
@@ -274,7 +274,7 @@ private fun CategoryCard(
 @Preview
 @Composable
 private fun Preview_Empty() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         OnboardingCategories(
             suggestions = listOf(
                 CreateCategoryData(
@@ -309,7 +309,7 @@ private fun Preview_Empty() {
 
                 CreateCategoryData(
                     name = "Shopping",
-                    color = Ivy,
+                    color = Kissos,
                     icon = "shopping"
                 ),
 
@@ -340,7 +340,7 @@ private fun Preview_Empty() {
 @Preview
 @Composable
 private fun Preview_Categories() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         OnboardingCategories(
             suggestions = listOf(
                 CreateCategoryData(
@@ -375,7 +375,7 @@ private fun Preview_Categories() {
 
                 CreateCategoryData(
                     name = "Shopping",
-                    color = Ivy,
+                    color = Kissos,
                     icon = "shopping"
                 ),
 
@@ -414,7 +414,7 @@ private fun Preview_Categories() {
 @Preview
 @Composable
 private fun Preview_Premium() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         OnboardingCategories(
             suggestions = listOf(
                 CreateCategoryData(
@@ -449,7 +449,7 @@ private fun Preview_Premium() {
 
                 CreateCategoryData(
                     name = "Shopping",
-                    color = Ivy,
+                    color = Kissos,
                     icon = "shopping"
                 ),
 

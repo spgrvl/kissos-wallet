@@ -29,9 +29,9 @@ class WidgetBase {
             appWidgetManager: AppWidgetManager,
             widget: Class<T>
         ): IntArray? {
-            val ivyWidgetComponent =
+            val kissosWidgetComponent =
                 ComponentName(context, widget)
-            return appWidgetManager.getAppWidgetIds(ivyWidgetComponent)
+            return appWidgetManager.getAppWidgetIds(kissosWidgetComponent)
         }
     }
 }

@@ -36,24 +36,24 @@ import com.spgrvl.kissos.frp.then2
 import com.spgrvl.kissos.home.Constants.SWIPE_HORIZONTAL_THRESHOLD
 import com.spgrvl.kissos.home.customerjourney.CustomerJourney
 import com.spgrvl.kissos.home.customerjourney.CustomerJourneyCardModel
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.data.BufferInfo
 import com.spgrvl.kissos.legacy.data.LegacyDueSection
 import com.spgrvl.kissos.legacy.data.model.MainTab
 import com.spgrvl.kissos.legacy.data.model.Month
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.ui.component.transaction.TransactionsDividerLine
 import com.spgrvl.kissos.legacy.ui.component.transaction.transactions
 import com.spgrvl.kissos.legacy.utils.horizontalSwipeListener
 import com.spgrvl.kissos.legacy.utils.rememberSwipeListenerState
 import com.spgrvl.kissos.legacy.utils.verticalSwipeListener
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.ui.rememberScrollPositionListState
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.pure.data.IncomeExpensePair
 import com.spgrvl.kissos.wallet.ui.theme.modal.BufferModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.BufferModalData
@@ -84,18 +84,18 @@ fun BoxWithConstraintsScope.HomeUi(
     onEvent: (HomeEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     var bufferModalData: BufferModalData? by remember { mutableStateOf(null) }
     var currencyModalVisible by remember { mutableStateOf(false) }
     var choosePeriodModal: ChoosePeriodModalData? by remember {
         mutableStateOf(null)
     }
-    var moreMenuExpanded by remember { mutableStateOf(ivyContext.moreMenuExpanded) }
+    var moreMenuExpanded by remember { mutableStateOf(kissosContext.moreMenuExpanded) }
     var skipAllModalVisible by remember { mutableStateOf(false) }
     val setMoreMenuExpanded = { expanded: Boolean ->
         moreMenuExpanded = expanded
-        ivyContext.setMoreMenuExpanded(expanded)
+        kissosContext.setMoreMenuExpanded(expanded)
     }
 
     val baseCurrency = uiState.baseData.baseCurrency
@@ -115,18 +115,18 @@ fun BoxWithConstraintsScope.HomeUi(
                 sensitivity = SWIPE_HORIZONTAL_THRESHOLD,
                 state = rememberSwipeListenerState(),
                 onSwipeLeft = {
-                    ivyContext.selectMainTab(MainTab.ACCOUNTS)
+                    kissosContext.selectMainTab(MainTab.ACCOUNTS)
                 },
                 onSwipeRight = {
-                    ivyContext.selectMainTab(MainTab.ACCOUNTS)
+                    kissosContext.selectMainTab(MainTab.ACCOUNTS)
                 }
             )
     ) {
         val listState = rememberScrollPositionListState(
             key = "home_lazy_column",
-            initialFirstVisibleItemIndex = ivyContext.transactionsListState
+            initialFirstVisibleItemIndex = kissosContext.transactionsListState
                 ?.firstVisibleItemIndex ?: 0,
-            initialFirstVisibleItemScrollOffset = ivyContext.transactionsListState
+            initialFirstVisibleItemScrollOffset = kissosContext.transactionsListState
                 ?.firstVisibleItemScrollOffset ?: 0
         )
 
@@ -246,7 +246,7 @@ fun BoxWithConstraintsScope.HomeUi(
 
     CurrencyModal(
         title = stringResource(R.string.set_currency),
-        initialCurrency = IvyCurrency.fromCode(baseCurrency),
+        initialCurrency = KissosCurrency.fromCode(baseCurrency),
         visible = currencyModalVisible,
         dismiss = {
             currencyModalVisible = false
@@ -314,7 +314,7 @@ fun HomeLazyColumn(
     onSkipAllTransactions: (List<Transaction>) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
 
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
@@ -382,7 +382,7 @@ fun HomeLazyColumn(
             emptyStateText = stringRes(
                 R.string.no_transactions_description,
                 period.toDisplayLong(
-                    startDateOfMonth = ivyContext.startDayOfMonth,
+                    startDateOfMonth = kissosContext.startDayOfMonth,
                     timeProvider = timeProvider,
                     timeConverter = timeConverter,
                     timeFormatter = timeFormatter,
@@ -400,7 +400,7 @@ fun HomeLazyColumn(
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.PreviewHomeTab(isDark: Boolean = false) {
-    IvyPreview(isDark) {
+    KissosPreview(isDark) {
         HomeUi(
             uiState = HomeState(
                 theme = Theme.AUTO,
@@ -447,7 +447,7 @@ fun HomeUiTest(isDark: Boolean) {
         true -> Theme.DARK
         false -> Theme.LIGHT
     }
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         PreviewHomeTab(isDark)
     }
 }

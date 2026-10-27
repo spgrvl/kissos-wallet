@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 import com.spgrvl.kissos.design.l0_system.Blue
 import com.spgrvl.kissos.design.l0_system.Green
 import com.spgrvl.kissos.design.l0_system.Green2Light
-import com.spgrvl.kissos.design.l0_system.Ivy
+import com.spgrvl.kissos.design.l0_system.Kissos
 import com.spgrvl.kissos.design.l0_system.Red
 import com.spgrvl.kissos.design.l0_system.Red3
 import com.spgrvl.kissos.design.l0_system.RedLight
@@ -28,7 +28,7 @@ enum class ImportType {
     FINANCISTO;
 
     fun color(): Color = when (this) {
-        IVY -> Ivy
+        IVY -> Kissos
         MONEY_MANAGER -> Red
         WALLET_BY_BUDGET_BAKERS -> Green
         SPENDEE -> RedLight
@@ -41,7 +41,7 @@ enum class ImportType {
     }
 
     fun appId(): String = when (this) {
-        IVY -> "com.spgrvl.kissos.wallet"
+        IVY -> "com.ivy.wallet"
         MONEY_MANAGER -> "com.realbyteapps.moneymanagerfree"
         WALLET_BY_BUDGET_BAKERS -> "com.droid4you.application.wallet"
         SPENDEE -> "com.cleevio.spendee"

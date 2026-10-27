@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.shortenAmount
 import com.spgrvl.kissos.legacy.utils.shouldShortAmount
@@ -204,7 +204,7 @@ private fun Currency(
 @Preview
 @Composable
 private fun Preview_Default() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         BalanceRow(
             textColor = UI.colors.pureInverse,
             currency = "BGN",
@@ -218,7 +218,7 @@ private fun Preview_Default() {
 @Preview
 @Composable
 private fun Preview_Medium() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         BalanceRowMedium(
             textColor = UI.colors.pureInverse,
             currency = "BGN",
@@ -231,7 +231,7 @@ private fun Preview_Medium() {
 @Preview
 @Composable
 private fun Preview_Mini() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         BalanceRowMini(
             textColor = UI.colors.pureInverse,
             currency = "BGN",

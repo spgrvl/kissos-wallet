@@ -209,7 +209,7 @@
     <issue
         id="LogNotTimber"
         message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
-        errorLine1="            Log.d(&quot;ivyInputField&quot;, &quot;Triggering recomposition: ${focus?.triggerRecomposition}&quot;)"
+        errorLine1="            Log.d(&quot;kissosInputField&quot;, &quot;Triggering recomposition: ${focus?.triggerRecomposition}&quot;)"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/spgrvl/kissos/design/l2_components/InputField.kt"
@@ -8733,7 +8733,7 @@
         errorLine1="@Deprecated(&quot;Old design system. Use `:ivy-design` and Material3&quot;)"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l0_system/IvyTheme.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l0_system/KissosTheme.kt"
             line="18"
             column="1"/>
     </issue>
@@ -8744,7 +8744,7 @@
         errorLine1="@Deprecated(&quot;Old design system. Use `:ivy-design` and Material3&quot;)"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l0_system/IvyTheme.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l0_system/KissosTheme.kt"
             line="21"
             column="1"/>
     </issue>
@@ -8755,7 +8755,7 @@
         errorLine1="@Deprecated(&quot;Old design system. Use `:ivy-design` and Material3&quot;)"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l0_system/IvyTheme.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l0_system/KissosTheme.kt"
             line="24"
             column="1"/>
     </issue>
@@ -8763,10 +8763,10 @@
     <issue
         id="ComposeCompositionLocalUsage"
         message="`CompositionLocal`s are implicit dependencies and creating new ones should be avoided. See https://slackhq.github.io/compose-lints/rules/#compositionlocals for more information."
-        errorLine1="val LocalIvyContext = compositionLocalOf&lt;IvyContext> { error(&quot;No LocalIvyContext&quot;) }"
+        errorLine1="val LocalKissosContext = compositionLocalOf&lt;KissosContext> { error(&quot;No LocalKissosContext&quot;) }"
         errorLine2="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/api/IvyUI.kt"
+            file="src/main/java/com/spgrvl/kissos/design/api/KissosUI.kt"
             line="15"
             column="1"/>
     </issue>
@@ -9074,7 +9074,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBorderButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBorderButton.kt"
             line="118"
             column="1"/>
     </issue>
@@ -9085,7 +9085,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBorderButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBorderButton.kt"
             line="135"
             column="1"/>
     </issue>
@@ -9096,7 +9096,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosButton.kt"
             line="145"
             column="1"/>
     </issue>
@@ -9107,7 +9107,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosButton.kt"
             line="164"
             column="1"/>
     </issue>
@@ -9118,7 +9118,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/IvyColorPicker.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/KissosColorPicker.kt"
             line="128"
             column="1"/>
     </issue>
@@ -9874,10 +9874,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun ColumnScope.IvyColorPicker("
+        errorLine1="fun ColumnScope.KissosColorPicker("
         errorLine2="                ~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/IvyColorPicker.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/KissosColorPicker.kt"
             line="51"
             column="17"/>
     </issue>
@@ -9885,10 +9885,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun IvyWalletComponentPreview("
+        errorLine1="fun KissosWalletComponentPreview("
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/IvyComposeApp.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/KissosComposeApp.kt"
             line="44"
             column="5"/>
     </issue>
@@ -9896,10 +9896,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun IvyDividerDot() {"
+        errorLine1="fun KissosDividerDot() {"
         errorLine2="    ~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyDividerDot.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosDividerDot.kt"
             line="16"
             column="5"/>
     </issue>
@@ -9907,10 +9907,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun BoxScope.IvyModal("
+        errorLine1="fun BoxScope.KissosModal("
         errorLine2="             ~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModal.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModal.kt"
             line="71"
             column="14"/>
     </issue>
@@ -9921,7 +9921,7 @@
         errorLine1="fun ModalActionsRow("
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModal.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModal.kt"
             line="260"
             column="5"/>
     </issue>
@@ -9932,7 +9932,7 @@
         errorLine1="fun ModalPreviewActionRowSpacer() {"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModal.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModal.kt"
             line="346"
             column="5"/>
     </issue>
@@ -9943,7 +9943,7 @@
         errorLine1="fun ModalDynamicPrimaryAction("
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="25"
             column="5"/>
     </issue>
@@ -9954,7 +9954,7 @@
         errorLine1="fun ModalAdd("
         errorLine2="    ~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="136"
             column="5"/>
     </issue>
@@ -9965,7 +9965,7 @@
         errorLine1="fun ModalDelete("
         errorLine2="    ~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="188"
             column="5"/>
     </issue>
@@ -9976,7 +9976,7 @@
         errorLine1="fun ModalTitle("
         errorLine2="    ~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="207"
             column="5"/>
     </issue>
@@ -9984,10 +9984,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun IvyToolbar("
+        errorLine1="fun KissosToolbar("
         errorLine2="    ~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyToolbar.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosToolbar.kt"
             line="20"
             column="5"/>
     </issue>
@@ -9995,10 +9995,10 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun IvyUI("
+        errorLine1="fun KissosUI("
         errorLine2="    ~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/api/IvyUI.kt"
+            file="src/main/java/com/spgrvl/kissos/design/api/KissosUI.kt"
             line="19"
             column="5"/>
     </issue>
@@ -10226,7 +10226,7 @@
     <issue
         id="ComposeModifierMissing"
         message="This @Composable function emits content but doesn&apos;t have a modifier parameter.See https://slackhq.github.io/compose-lints/rules/#when-should-i-expose-modifier-parameters for more information."
-        errorLine1="fun IvyComponentPreview("
+        errorLine1="fun KissosComponentPreview("
         errorLine2="    ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/spgrvl/kissos/design/utils/Preview.kt"
@@ -10306,7 +10306,7 @@
         errorLine1="fun ScreenTitleLarge("
         errorLine2="    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l3_ivyComponents/ScreenTitle.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l3_kissosComponents/ScreenTitle.kt"
             line="18"
             column="5"/>
     </issue>
@@ -10317,7 +10317,7 @@
         errorLine1="fun ScreenTitle("
         errorLine2="    ~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l3_ivyComponents/ScreenTitle.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l3_kissosComponents/ScreenTitle.kt"
             line="33"
             column="5"/>
     </issue>
@@ -10493,7 +10493,7 @@
         errorLine1="    modifier: Modifier,"
         errorLine2="    ~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/IvyLineChart.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/KissosLineChart.kt"
             line="334"
             column="5"/>
     </issue>
@@ -10812,7 +10812,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBorderButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBorderButton.kt"
             line="118"
             column="1"/>
     </issue>
@@ -10823,7 +10823,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBorderButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBorderButton.kt"
             line="135"
             column="1"/>
     </issue>
@@ -10834,7 +10834,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosButton.kt"
             line="145"
             column="1"/>
     </issue>
@@ -10845,7 +10845,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosButton.kt"
             line="164"
             column="1"/>
     </issue>
@@ -10856,7 +10856,7 @@
         errorLine1="@Composable"
         errorLine2="^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/IvyColorPicker.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/KissosColorPicker.kt"
             line="128"
             column="1"/>
     </issue>
@@ -11325,7 +11325,7 @@
 
     <issue
         id="ComposeParameterOrder"
-        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, initialSelectedCurrency: IvyCurrency?, preselectedCurrency: IvyCurrency = IvyCurrency.getDefault(), includeKeyboardShownInsetSpacer: Boolean, lastItemSpacer: Dp = 0.dp, onKeyboardShown: (keyboardVisible: Boolean) -> Unit = {}, onSelectedCurrencyChanged: (IvyCurrency) -> Unit] but should be [initialSelectedCurrency: IvyCurrency?, includeKeyboardShownInsetSpacer: Boolean, modifier: Modifier = Modifier, preselectedCurrency: IvyCurrency = IvyCurrency.getDefault(), lastItemSpacer: Dp = 0.dp, onKeyboardShown: (keyboardVisible: Boolean) -> Unit = {}, onSelectedCurrencyChanged: (IvyCurrency) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, initialSelectedCurrency: KissosCurrency?, preselectedCurrency: KissosCurrency = KissosCurrency.getDefault(), includeKeyboardShownInsetSpacer: Boolean, lastItemSpacer: Dp = 0.dp, onKeyboardShown: (keyboardVisible: Boolean) -> Unit = {}, onSelectedCurrencyChanged: (KissosCurrency) -> Unit] but should be [initialSelectedCurrency: KissosCurrency?, includeKeyboardShownInsetSpacer: Boolean, modifier: Modifier = Modifier, preselectedCurrency: KissosCurrency = KissosCurrency.getDefault(), lastItemSpacer: Dp = 0.dp, onKeyboardShown: (keyboardVisible: Boolean) -> Unit = {}, onSelectedCurrencyChanged: (KissosCurrency) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
         errorLine1="fun CurrencyPicker("
         errorLine2="                  ^">
         <location
@@ -11480,10 +11480,10 @@
     <issue
         id="ComposeParameterOrder"
         message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, value: TextFieldValue, textColor: Color = UI.colors.pureInverse, hint: String?, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, textColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyBasicTextField("
+        errorLine1="fun KissosBasicTextField("
         errorLine2="                     ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBasicTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBasicTextField.kt"
             line="32"
             column="22"/>
     </issue>
@@ -11491,21 +11491,21 @@
     <issue
         id="ComposeParameterOrder"
         message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, text: String, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = UI.colors.pureInverse,&#xA;    fontWeight = FontWeight.Bold&#xA;), backgroundGradient: Gradient = Gradient.solid(UI.colors.mediumInverse), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = UI.colors.pureInverse, enabled: Boolean = true, wrapContentMode: Boolean = true, padding: Dp = 12.dp, onClick: () -> Unit] but should be [text: String, modifier: Modifier = Modifier, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = UI.colors.pureInverse,&#xA;    fontWeight = FontWeight.Bold&#xA;), backgroundGradient: Gradient = Gradient.solid(UI.colors.mediumInverse), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = UI.colors.pureInverse, enabled: Boolean = true, wrapContentMode: Boolean = true, padding: Dp = 12.dp, onClick: () -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyBorderButton("
+        errorLine1="fun KissosBorderButton("
         errorLine2="                   ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyBorderButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosBorderButton.kt"
             line="32"
             column="20"/>
     </issue>
 
     <issue
         id="ComposeParameterOrder"
-        message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, text: String, backgroundGradient: Gradient = GradientIvy, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = White,&#xA;    fontWeight = FontWeight.Bold&#xA;), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = White, enabled: Boolean = true, shadowAlpha: Float = 0.15f, wrapContentMode: Boolean = true, hasGlow: Boolean = true, padding: Dp = 12.dp, iconEdgePadding: Dp = 12.dp, iconTextPadding: Dp = 4.dp, onClick: () -> Unit] but should be [text: String, modifier: Modifier = Modifier, backgroundGradient: Gradient = GradientIvy, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = White,&#xA;    fontWeight = FontWeight.Bold&#xA;), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = White, enabled: Boolean = true, shadowAlpha: Float = 0.15f, wrapContentMode: Boolean = true, hasGlow: Boolean = true, padding: Dp = 12.dp, iconEdgePadding: Dp = 12.dp, iconTextPadding: Dp = 4.dp, onClick: () -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyButton("
+        message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, text: String, backgroundGradient: Gradient = GradientKissos, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = White,&#xA;    fontWeight = FontWeight.Bold&#xA;), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = White, enabled: Boolean = true, shadowAlpha: Float = 0.15f, wrapContentMode: Boolean = true, hasGlow: Boolean = true, padding: Dp = 12.dp, iconEdgePadding: Dp = 12.dp, iconTextPadding: Dp = 4.dp, onClick: () -> Unit] but should be [text: String, modifier: Modifier = Modifier, backgroundGradient: Gradient = GradientKissos, textStyle: TextStyle = UI.typo.b2.style(&#xA;    color = White,&#xA;    fontWeight = FontWeight.Bold&#xA;), @DrawableRes iconStart: Int? = null, @DrawableRes iconEnd: Int? = null, iconTint: Color = White, enabled: Boolean = true, shadowAlpha: Float = 0.15f, wrapContentMode: Boolean = true, hasGlow: Boolean = true, padding: Dp = 12.dp, iconEdgePadding: Dp = 12.dp, iconTextPadding: Dp = 4.dp, onClick: () -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun KissosButton("
         errorLine2="             ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosButton.kt"
             line="39"
             column="14"/>
     </issue>
@@ -11513,10 +11513,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, checked: Boolean, onCheckedChange: (checked: Boolean) -> Unit] but should be [checked: Boolean, modifier: Modifier = Modifier, onCheckedChange: (checked: Boolean) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyCheckbox("
+        errorLine1="fun KissosCheckbox("
         errorLine2="               ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyCheckbox.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosCheckbox.kt"
             line="30"
             column="16"/>
     </issue>
@@ -11524,10 +11524,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, text: String, checked: Boolean, onCheckedChange: (checked: Boolean) -> Unit] but should be [text: String, checked: Boolean, modifier: Modifier = Modifier, onCheckedChange: (checked: Boolean) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyCheckboxWithText("
+        errorLine1="fun KissosCheckboxWithText("
         errorLine2="                       ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyCheckbox.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosCheckbox.kt"
             line="54"
             column="24"/>
     </issue>
@@ -11535,21 +11535,21 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, textModifier: Modifier = Modifier, value: TextFieldValue, hint: String?, readOnly: Boolean = false, fontWeight: FontWeight = FontWeight.Medium, hintFontWeight: FontWeight = FontWeight.Medium, textColor: Color = UI.colors.pureInverse, hintColor: Color = UI.colors.mediumInverse, textAlign: TextAlign = TextAlign.Start, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = KeyboardOptions.Default, keyboardActions: KeyboardActions? = KeyboardActions.Default, paddingVertical: Dp = 16.dp, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, textModifier: Modifier = Modifier, readOnly: Boolean = false, fontWeight: FontWeight = FontWeight.Medium, hintFontWeight: FontWeight = FontWeight.Medium, textColor: Color = UI.colors.pureInverse, hintColor: Color = UI.colors.mediumInverse, textAlign: TextAlign = TextAlign.Start, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = KeyboardOptions.Default, keyboardActions: KeyboardActions? = KeyboardActions.Default, paddingVertical: Dp = 16.dp, onValueChanged: (TextFieldValue) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyChecklistTextField("
+        errorLine1="fun KissosChecklistTextField("
         errorLine2="                         ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyChecklistTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosChecklistTextField.kt"
             line="38"
             column="26"/>
     </issue>
 
     <issue
         id="ComposeParameterOrder"
-        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, backgroundPadding: Dp = 0.dp, backgroundGradient: Gradient = GradientIvy, horizontalGradient: Boolean = true, @DrawableRes icon: Int, tint: Color = White, enabled: Boolean = true, hasShadow: Boolean = true, onClick: () -> Unit] but should be [@DrawableRes icon: Int, modifier: Modifier = Modifier, backgroundPadding: Dp = 0.dp, backgroundGradient: Gradient = GradientIvy, horizontalGradient: Boolean = true, tint: Color = White, enabled: Boolean = true, hasShadow: Boolean = true, onClick: () -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyCircleButton("
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, backgroundPadding: Dp = 0.dp, backgroundGradient: Gradient = GradientKissos, horizontalGradient: Boolean = true, @DrawableRes icon: Int, tint: Color = White, enabled: Boolean = true, hasShadow: Boolean = true, onClick: () -> Unit] but should be [@DrawableRes icon: Int, modifier: Modifier = Modifier, backgroundPadding: Dp = 0.dp, backgroundGradient: Gradient = GradientKissos, horizontalGradient: Boolean = true, tint: Color = White, enabled: Boolean = true, hasShadow: Boolean = true, onClick: () -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun KissosCircleButton("
         errorLine2="                   ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyCircleButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosCircleButton.kt"
             line="27"
             column="20"/>
     </issue>
@@ -11557,10 +11557,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, textModifier: Modifier = Modifier, testTag: String = &quot;desc_input&quot;, value: TextFieldValue, hint: String?, fontWeight: FontWeight = FontWeight.Medium, textColor: Color = UI.colors.pureInverse, hintColor: Color = UI.colors.mediumInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = KeyboardOptions.Default, keyboardActions: KeyboardActions? = KeyboardActions.Default, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, textModifier: Modifier = Modifier, testTag: String = &quot;desc_input&quot;, fontWeight: FontWeight = FontWeight.Medium, textColor: Color = UI.colors.pureInverse, hintColor: Color = UI.colors.mediumInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = KeyboardOptions.Default, keyboardActions: KeyboardActions? = KeyboardActions.Default, onValueChanged: (TextFieldValue) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyDescriptionTextField("
+        errorLine1="fun KissosDescriptionTextField("
         errorLine2="                           ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyDescriptionTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosDescriptionTextField.kt"
             line="34"
             column="28"/>
     </issue>
@@ -11568,10 +11568,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, @DrawableRes icon: Int, tint: Color = UI.colors.pureInverse, contentDescription: String = &quot;icon&quot;] but should be [@DrawableRes icon: Int, modifier: Modifier = Modifier, tint: Color = UI.colors.pureInverse, contentDescription: String = &quot;icon&quot;].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyIcon("
+        errorLine1="fun KissosIcon("
         errorLine2="           ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyIcon.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosIcon.kt"
             line="13"
             column="12"/>
     </issue>
@@ -11579,10 +11579,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, @DrawableRes icon: Int, tint: Color = UI.colors.pureInverse, contentDescription: String = &quot;icon&quot;] but should be [@DrawableRes icon: Int, modifier: Modifier = Modifier, tint: Color = UI.colors.pureInverse, contentDescription: String = &quot;icon&quot;].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyIcon("
+        errorLine1="fun KissosIcon("
         errorLine2="           ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/IvyIcon.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/KissosIcon.kt"
             line="22"
             column="12"/>
     </issue>
@@ -11590,10 +11590,10 @@
     <issue
         id="ComposeParameterOrder"
         message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, @DrawableRes icon: Int, tint: Color = UI.colors.pureInverse, iconScale: IconScale, padding: Dp = when (iconScale) {&#xA;    IconScale.S -> 4.dp&#xA;    IconScale.M -> 4.dp&#xA;    IconScale.L -> 4.dp&#xA;}, contentDescription: String = &quot;icon&quot;] but should be [@DrawableRes icon: Int, iconScale: IconScale, modifier: Modifier = Modifier, tint: Color = UI.colors.pureInverse, padding: Dp = when (iconScale) {&#xA;    IconScale.S -> 4.dp&#xA;    IconScale.M -> 4.dp&#xA;    IconScale.L -> 4.dp&#xA;}, contentDescription: String = &quot;icon&quot;].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyIconScaled("
+        errorLine1="fun KissosIconScaled("
         errorLine2="                 ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/IvyIcon.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/KissosIcon.kt"
             line="38"
             column="18"/>
     </issue>
@@ -11601,10 +11601,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, height: Dp = 300.dp, functions: List&lt;Function>, title: String, xLabel: (x: Double) -> String, yLabel: (y: Double) -> String, onTap: (TapEvent) -> Unit = {}] but should be [functions: List&lt;Function>, title: String, xLabel: (x: Double) -> String, yLabel: (y: Double) -> String, modifier: Modifier = Modifier, height: Dp = 300.dp, onTap: (TapEvent) -> Unit = {}].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyLineChart("
+        errorLine1="fun KissosLineChart("
         errorLine2="                ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/IvyLineChart.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/KissosLineChart.kt"
             line="290"
             column="17"/>
     </issue>
@@ -11612,10 +11612,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [BoxScope, id: UUID?, visible: Boolean, dismiss: () -> Unit, SecondaryActions: (@Composable () -> Unit)? = null, PrimaryAction: @Composable () -> Unit, scrollState: ScrollState? = rememberScrollState(), shiftIfKeyboardShown: Boolean = true, includeActionsRowPadding: Boolean = true, Content: @Composable ColumnScope.() -> Unit] but should be [BoxScope, id: UUID?, visible: Boolean, dismiss: () -> Unit, PrimaryAction: @Composable () -> Unit, SecondaryActions: (@Composable () -> Unit)? = null, scrollState: ScrollState? = rememberScrollState(), shiftIfKeyboardShown: Boolean = true, includeActionsRowPadding: Boolean = true, Content: @Composable ColumnScope.() -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun BoxScope.IvyModal("
+        errorLine1="fun BoxScope.KissosModal("
         errorLine2="                     ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModal.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModal.kt"
             line="72"
             column="22"/>
     </issue>
@@ -11626,7 +11626,7 @@
         errorLine1="fun ModalDynamicPrimaryAction("
         errorLine2="                             ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="25"
             column="30"/>
     </issue>
@@ -11637,7 +11637,7 @@
         errorLine1="fun ModalCheck("
         errorLine2="              ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="83"
             column="15"/>
     </issue>
@@ -11648,7 +11648,7 @@
         errorLine1="fun ModalPositiveButton("
         errorLine2="                       ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/IvyModalComponents.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModalComponents.kt"
             line="169"
             column="24"/>
     </issue>
@@ -11656,10 +11656,10 @@
     <issue
         id="ComposeParameterOrder"
         message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [modifier: Modifier = Modifier, underlineModifier: Modifier = Modifier, value: TextFieldValue, textColor: Color = UI.colors.pureInverse, hint: String?, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), focusRequester: FocusRequester = remember { FocusRequester() }, keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, underlineModifier: Modifier = Modifier, textColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), focusRequester: FocusRequester = remember { FocusRequester() }, keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyNameTextField("
+        errorLine1="fun KissosNameTextField("
         errorLine2="                    ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyNameTextFieldValue.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosNameTextFieldValue.kt"
             line="40"
             column="21"/>
     </issue>
@@ -11667,10 +11667,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, textModifier: Modifier = Modifier, value: TextFieldValue, hint: String?, fontWeight: FontWeight = FontWeight.ExtraBold, textColor: Color = UI.colors.pureInverse, hintColor: Color = Color.Gray, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = null, keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, textModifier: Modifier = Modifier, fontWeight: FontWeight = FontWeight.ExtraBold, textColor: Color = UI.colors.pureInverse, hintColor: Color = Color.Gray, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions? = null, keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyNumberTextField("
+        errorLine1="fun KissosNumberTextField("
         errorLine2="                      ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyNumberTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosNumberTextField.kt"
             line="31"
             column="23"/>
     </issue>
@@ -11678,10 +11678,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, text: String, @DrawableRes iconStart: Int?, solidBackground: Boolean = false, minWidth: Dp = Dp.Unspecified, minHeight: Dp = Dp.Unspecified, iconTint: Color = UI.colors.pureInverse, borderColor: Color = UI.colors.medium, textColor: Color = UI.colors.pureInverse, padding: Dp = 12.dp, onClick: () -> Unit] but should be [text: String, @DrawableRes iconStart: Int?, modifier: Modifier = Modifier, solidBackground: Boolean = false, minWidth: Dp = Dp.Unspecified, minHeight: Dp = Dp.Unspecified, iconTint: Color = UI.colors.pureInverse, borderColor: Color = UI.colors.medium, textColor: Color = UI.colors.pureInverse, padding: Dp = 12.dp, onClick: () -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyOutlinedButton("
+        errorLine1="fun KissosOutlinedButton("
         errorLine2="                     ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyOutlinedButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosOutlinedButton.kt"
             line="33"
             column="22"/>
     </issue>
@@ -11689,10 +11689,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, text: String, @DrawableRes iconStart: Int?, solidBackground: Boolean = false, iconTint: Color = UI.colors.pureInverse, borderColor: Color = UI.colors.medium, textColor: Color = UI.colors.pureInverse, padding: Dp = 16.dp, onClick: () -> Unit] but should be [text: String, @DrawableRes iconStart: Int?, modifier: Modifier = Modifier, solidBackground: Boolean = false, iconTint: Color = UI.colors.pureInverse, borderColor: Color = UI.colors.medium, textColor: Color = UI.colors.pureInverse, padding: Dp = 16.dp, onClick: () -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyOutlinedButtonFillMaxWidth("
+        errorLine1="fun KissosOutlinedButtonFillMaxWidth("
         errorLine2="                                 ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyOutlinedButton.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosOutlinedButton.kt"
             line="88"
             column="34"/>
     </issue>
@@ -11700,10 +11700,10 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, value: TextFieldValue, hint: String?, hintColor: Color = UI.colors.gray, backgroundColor: Color = UI.colors.primary, emptyBorderColor: Color = UI.colors.gray, textColor: Color = UI.colors.pureInverse, cursorColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions.Default, keyboardActions: KeyboardActions = KeyboardActions.Default, validateInput: (TextFieldValue) -> Boolean = { it.text.isNotNullOrBlank() }, onValueChanged: (TextFieldValue) -> Unit] but should be [value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, hintColor: Color = UI.colors.gray, backgroundColor: Color = UI.colors.primary, emptyBorderColor: Color = UI.colors.gray, textColor: Color = UI.colors.pureInverse, cursorColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions.Default, keyboardActions: KeyboardActions = KeyboardActions.Default, validateInput: (TextFieldValue) -> Boolean = { it.text.isNotNullOrBlank() }, onValueChanged: (TextFieldValue) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyOutlinedTextField("
+        errorLine1="fun KissosOutlinedTextField("
         errorLine2="                        ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyOutlinedTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosOutlinedTextField.kt"
             line="35"
             column="25"/>
     </issue>
@@ -11711,21 +11711,21 @@
     <issue
         id="ComposeParameterOrder"
         message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, enabled: Boolean, onEnabledChange: (checked: Boolean) -> Unit] but should be [enabled: Boolean, modifier: Modifier = Modifier, onEnabledChange: (checked: Boolean) -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvySwitch("
+        errorLine1="fun KissosSwitch("
         errorLine2="             ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvySwitch.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosSwitch.kt"
             line="24"
             column="14"/>
     </issue>
 
     <issue
         id="ComposeParameterOrder"
-        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, text: String, typo: TextStyle, padding: IvyPadding? = null] but should be [text: String, typo: TextStyle, modifier: Modifier = Modifier, padding: IvyPadding? = null].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyText("
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [modifier: Modifier = Modifier, text: String, typo: TextStyle, padding: KissosPadding? = null] but should be [text: String, typo: TextStyle, modifier: Modifier = Modifier, padding: KissosPadding? = null].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun KissosText("
         errorLine2="           ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/IvyText.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l1_buildingBlocks/KissosText.kt"
             line="13"
             column="12"/>
     </issue>
@@ -11733,10 +11733,10 @@
     <issue
         id="ComposeParameterOrder"
         message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;    Current params are: [ColumnScope, modifier: Modifier = Modifier, dividerModifier: Modifier = Modifier, value: TextFieldValue, textColor: Color = UI.colors.pureInverse, hint: String?, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit] but should be [ColumnScope, value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, dividerModifier: Modifier = Modifier, textColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#xA;    autoCorrect = true,&#xA;    keyboardType = KeyboardType.Text,&#xA;    imeAction = ImeAction.Done,&#xA;    capitalization = KeyboardCapitalization.Sentences&#xA;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -> Unit].&#xA;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun ColumnScope.IvyTitleTextField("
+        errorLine1="fun ColumnScope.KissosTitleTextField("
         errorLine2="                                 ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/IvyTitleTextField.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosTitleTextField.kt"
             line="41"
             column="34"/>
     </issue>
@@ -11853,8 +11853,8 @@
 
     <issue
         id="ComposeParameterOrder"
-        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [theme: Theme = Theme.LIGHT, design: IvyDesign, Content: @Composable BoxWithConstraintsScope.() -> Unit] but should be [design: IvyDesign, theme: Theme = Theme.LIGHT, Content: @Composable BoxWithConstraintsScope.() -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
-        errorLine1="fun IvyPreview("
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#xA;Current params are: [theme: Theme = Theme.LIGHT, design: KissosDesign, Content: @Composable BoxWithConstraintsScope.() -> Unit] but should be [design: KissosDesign, theme: Theme = Theme.LIGHT, Content: @Composable BoxWithConstraintsScope.() -> Unit].&#xA;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun KissosPreview("
         errorLine2="              ^">
         <location
             file="src/main/java/com/spgrvl/kissos/design/utils/Preview.kt"
@@ -11923,7 +11923,7 @@
         errorLine1="fun ScreenTitle("
         errorLine2="               ^">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/l3_ivyComponents/ScreenTitle.kt"
+            file="src/main/java/com/spgrvl/kissos/design/l3_kissosComponents/ScreenTitle.kt"
             line="48"
             column="16"/>
     </issue>
@@ -12176,7 +12176,7 @@
         errorLine1="    functions: List&lt;Function>,"
         errorLine2="               ~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/IvyLineChart.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/KissosLineChart.kt"
             line="293"
             column="16"/>
     </issue>
@@ -12187,7 +12187,7 @@
         errorLine1="    allValues: List&lt;Value>,"
         errorLine2="               ~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/IvyLineChart.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/KissosLineChart.kt"
             line="336"
             column="16"/>
     </issue>
@@ -12198,7 +12198,7 @@
         errorLine1="    functions: List&lt;Function>,"
         errorLine2="               ~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/IvyLineChart.kt"
+            file="src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/charts/linechart/KissosLineChart.kt"
             line="341"
             column="16"/>
     </issue>
@@ -14354,7 +14354,7 @@
         errorLine1="    content: @Composable () -> Unit,"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/spgrvl/kissos/design/api/IvyUI.kt"
+            file="src/main/java/com/spgrvl/kissos/design/api/KissosUI.kt"
             line="75"
             column="5"/>
     </issue>

@@ -23,7 +23,7 @@ import com.spgrvl.kissos.domain.RootScreen
 import com.spgrvl.kissos.domain.usecase.csv.ExportCsvUseCase
 import com.spgrvl.kissos.domain.usecase.exchange.SyncExchangeRatesUseCase
 import com.spgrvl.kissos.frp.monad.Res
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.LogoutLogic
 import com.spgrvl.kissos.legacy.domain.action.settings.UpdateSettingsAct
 import com.spgrvl.kissos.legacy.utils.getISOFormattedDateTime
@@ -46,7 +46,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val settingsDao: SettingsDao,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val logoutLogic: LogoutLogic,
     private val sharedPrefs: SharedPrefs,
     private val backupDataUseCase: BackupDataUseCase,
@@ -268,7 +268,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     private fun exportToCSV(rootScreen: RootScreen) {
-        ivyContext.createNewFile(
+        kissosContext.createNewFile(
             "IvyWalletExport_${
                 timeNowUTC().getISOFormattedDateTime()
             }.csv"
@@ -286,7 +286,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     private fun exportToZip(rootScreen: RootScreen) {
-        ivyContext.createNewFile(
+        kissosContext.createNewFile(
             "IvyWalletBackup_${
                 timeNowUTC().getISOFormattedDateTime()
             }.zip"
@@ -297,7 +297,7 @@ class SettingsViewModel @Inject constructor(
                 progressState.value = false
 
                 sharedPrefs.putBoolean(SharedPrefs.DATA_BACKUP_COMPLETED, true)
-                ivyContext.dataBackupCompleted = true
+                kissosContext.dataBackupCompleted = true
 
                 uiThread {
                     rootScreen.shareZipFile(
@@ -312,7 +312,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             settingsAct.getSettingsWithNextTheme().run {
                 updateSettingsAct(this)
-                ivyContext.switchTheme(this.theme)
+                kissosContext.switchTheme(this.theme)
                 currentTheme.value = this.theme
             }
         }

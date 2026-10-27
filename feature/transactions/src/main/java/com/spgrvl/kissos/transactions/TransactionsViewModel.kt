@@ -30,7 +30,7 @@ import com.spgrvl.kissos.data.repository.mapper.TransactionMapper
 import com.spgrvl.kissos.design.l0_system.RedLight
 import com.spgrvl.kissos.domain.features.Features
 import com.spgrvl.kissos.frp.then
-import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
 import com.spgrvl.kissos.legacy.data.model.toCloseTimeRange
 import com.spgrvl.kissos.legacy.datamodel.temp.toImmutableLegacyTags
@@ -74,7 +74,7 @@ class TransactionsViewModel @Inject constructor(
     private val accountRepository: AccountRepository,
     private val accountDao: AccountDao,
     private val categoryRepository: CategoryRepository,
-    private val ivyContext: IvyWalletCtx,
+    private val kissosContext: KissosWalletCtx,
     private val nav: Navigation,
     private val accountLogic: WalletAccountLogic,
     private val categoryLogic: WalletCategoryLogic,
@@ -99,7 +99,7 @@ class TransactionsViewModel @Inject constructor(
     private val features: Features
 ) : ComposeViewModel<TransactionsState, TransactionsEvent>() {
 
-    private val period = mutableStateOf(ivyContext.selectedPeriod)
+    private val period = mutableStateOf(kissosContext.selectedPeriod)
     private val categories = mutableStateOf<ImmutableList<Category>>(persistentListOf())
     private val accounts = mutableStateOf<ImmutableList<LegacyAccount>>(persistentListOf())
     private val baseCurrency = mutableStateOf("")
@@ -340,7 +340,7 @@ class TransactionsViewModel @Inject constructor(
             accountDao.findById(accountId)?.toLegacyDomain() ?: error("account not found")
         }
         account.value = initialAccount
-        val range = period.value.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+        val range = period.value.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         if (initialAccount.currency.isNotNullOrBlank()) {
             currency.value = initialAccount.currency!!
@@ -440,7 +440,7 @@ class TransactionsViewModel @Inject constructor(
             categoryRepository.findById(CategoryId(categoryId)) ?: error("category not found")
         }
         category.value = initialCategory
-        val range = period.value.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+        val range = period.value.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         balance.doubleValue = ioThread {
             categoryLogic.calculateCategoryBalance(initialCategory, range, accountFilterSet)
@@ -510,7 +510,7 @@ class TransactionsViewModel @Inject constructor(
             }
             category.value = initialCategory
             val range =
-                period.value.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+                period.value.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
             val incomeTrans = transactions.filter {
                 it.categoryId == categoryId && it.type == TransactionType.INCOME
@@ -584,7 +584,7 @@ class TransactionsViewModel @Inject constructor(
     }
 
     private suspend fun initForUnspecifiedCategory() {
-        val range = period.value.toRange(ivyContext.startDayOfMonth, timeConverter, timeProvider)
+        val range = period.value.toRange(kissosContext.startDayOfMonth, timeConverter, timeProvider)
 
         balance.doubleValue = ioThread {
             categoryLogic.calculateUnspecifiedBalance(range)
@@ -702,7 +702,7 @@ class TransactionsViewModel @Inject constructor(
         if (month != null) {
             start(
                 screen = screen,
-                timePeriod = month.incrementMonthPeriod(ivyContext, 1L, year),
+                timePeriod = month.incrementMonthPeriod(kissosContext, 1L, year),
                 reset = false
             )
         }
@@ -714,7 +714,7 @@ class TransactionsViewModel @Inject constructor(
         if (month != null) {
             start(
                 screen = screen,
-                timePeriod = month.incrementMonthPeriod(ivyContext, -1L, year),
+                timePeriod = month.incrementMonthPeriod(kissosContext, -1L, year),
                 reset = false
             )
         }
@@ -831,7 +831,7 @@ class TransactionsViewModel @Inject constructor(
 
     fun start(
         screen: TransactionsScreen,
-        timePeriod: TimePeriod? = ivyContext.selectedPeriod,
+        timePeriod: TimePeriod? = kissosContext.selectedPeriod,
         reset: Boolean = true,
     ) {
         if (reset) {
@@ -839,7 +839,7 @@ class TransactionsViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            period.value = timePeriod ?: ivyContext.selectedPeriod
+            period.value = timePeriod ?: kissosContext.selectedPeriod
 
             val baseCurrencyValue = baseCurrencyAct(Unit)
             baseCurrency.value = baseCurrencyValue

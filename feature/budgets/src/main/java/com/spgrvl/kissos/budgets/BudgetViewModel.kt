@@ -52,7 +52,7 @@ class BudgetViewModel @Inject constructor(
     private val sharedPrefs: SharedPrefs,
     private val budgetWriter: WriteBudgetDao,
     private val budgetCreator: BudgetCreator,
-    private val ivyContext: com.spgrvl.kissos.legacy.IvyWalletCtx,
+    private val kissosContext: com.spgrvl.kissos.legacy.KissosWalletCtx,
     private val accountsAct: AccountsAct,
     private val categoryRepository: CategoryRepository,
     private val budgetsAct: BudgetsAct,
@@ -186,7 +186,7 @@ class BudgetViewModel @Inject constructor(
             categories.value = categoryRepository.findAll().toImmutableList()
             val accounts = accountsAct(Unit)
             val baseCurrency = baseCurrencyAct(Unit)
-            val startDateOfMonth = ivyContext.initStartDayOfMonthInMemory(sharedPrefs = sharedPrefs)
+            val startDateOfMonth = kissosContext.initStartDayOfMonthInMemory(sharedPrefs = sharedPrefs)
             val timeRange = com.spgrvl.kissos.legacy.data.model.TimePeriod.currentMonth(
                 startDayOfMonth = startDateOfMonth
             ).toRange(startDateOfMonth = startDateOfMonth, timeConverter, timeProvider)

@@ -21,10 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -51,7 +51,7 @@ fun CustomExchangeRateCard(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(icon = R.drawable.ic_currency)
+        KissosIcon(icon = R.drawable.ic_currency)
 
         Spacer(Modifier.width(8.dp))
         Column(
@@ -79,7 +79,7 @@ fun CustomExchangeRateCard(
                         color = Orange
                     )
                 )
-                IvyIcon(icon = R.drawable.ic_arrow_right, tint = Orange)
+                KissosIcon(icon = R.drawable.ic_arrow_right, tint = Orange)
                 Text(
                     text = toCurrencyCode,
                     style = UI.typo.nB2.style(
@@ -101,9 +101,9 @@ fun CustomExchangeRateCard(
                         color = Orange
                     )
                 )
-                IvyIcon(icon = R.drawable.ic_arrow_right, tint = Orange)
+                KissosIcon(icon = R.drawable.ic_arrow_right, tint = Orange)
                 Text(
-                    text = exchangeRate.format(IvyCurrency.getDecimalPlaces(toCurrencyCode)),
+                    text = exchangeRate.format(KissosCurrency.getDecimalPlaces(toCurrencyCode)),
                     style = UI.typo.nB2.style(
                         fontWeight = FontWeight.ExtraBold,
                         color = Orange
@@ -111,7 +111,7 @@ fun CustomExchangeRateCard(
                 )
             }
         }
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_refresh,
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -125,7 +125,7 @@ fun CustomExchangeRateCard(
 @Preview
 @Composable
 private fun Preview_OneTime() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         CustomExchangeRateCard(
             fromCurrencyCode = "INR",
             toCurrencyCode = "EUR",

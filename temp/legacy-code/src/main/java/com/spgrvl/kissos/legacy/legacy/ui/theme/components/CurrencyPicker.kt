@@ -45,17 +45,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.KeyboardListener
 import com.spgrvl.kissos.legacy.utils.densityScope
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.keyboardOnlyWindowInsets
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.modal.DURATION_MODAL_ANIM
 import java.util.Locale
@@ -65,15 +65,15 @@ import java.util.Locale
 @Composable
 fun CurrencyPicker(
     modifier: Modifier = Modifier,
-    initialSelectedCurrency: IvyCurrency?,
-    preselectedCurrency: IvyCurrency = IvyCurrency.getDefault(),
+    initialSelectedCurrency: KissosCurrency?,
+    preselectedCurrency: KissosCurrency = KissosCurrency.getDefault(),
 
     includeKeyboardShownInsetSpacer: Boolean,
     lastItemSpacer: Dp = 0.dp,
 
     onKeyboardShown: (keyboardVisible: Boolean) -> Unit = {},
 
-    onSelectedCurrencyChanged: (IvyCurrency) -> Unit
+    onSelectedCurrencyChanged: (KissosCurrency) -> Unit
 ) {
     var keyboardShown by remember { mutableStateOf(false) }
 
@@ -153,7 +153,7 @@ private fun SearchInput(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier.padding(vertical = 8.dp),
             icon = R.drawable.ic_search
         )
@@ -207,7 +207,7 @@ private fun SearchInput(
 
 @Composable
 private fun SelectedCurrencyCard(
-    currency: IvyCurrency,
+    currency: KissosCurrency,
     preselected: Boolean,
 ) {
     Row(
@@ -216,7 +216,7 @@ private fun SelectedCurrencyCard(
             .fillMaxWidth()
             .clip(UI.shapes.r3)
             .background(
-                brush = (if (preselected) GradientGreen else GradientIvy).asHorizontalBrush(),
+                brush = (if (preselected) GradientGreen else GradientKissos).asHorizontalBrush(),
                 shape = UI.shapes.r3
             )
             .padding(vertical = 20.dp),
@@ -246,7 +246,7 @@ private fun SelectedCurrencyCard(
 
         Spacer(Modifier.weight(1f))
 
-        IvyIcon(
+        KissosIcon(
             icon = R.drawable.ic_check,
             tint = White
         )
@@ -267,11 +267,11 @@ private fun SelectedCurrencyCard(
 @Suppress("ParameterNaming")
 private fun CurrencyList(
     searchQueryLowercase: String,
-    selectedCurrency: IvyCurrency,
+    selectedCurrency: KissosCurrency,
     lastItemSpacer: Dp,
-    onCurrencySelected: (IvyCurrency) -> Unit
+    onCurrencySelected: (KissosCurrency) -> Unit
 ) {
-    val currencies = IvyCurrency.getAvailable()
+    val currencies = KissosCurrency.getAvailable()
         .filter {
             searchQueryLowercase.isBlank() ||
                 it.code.toLowerCaseLocal().startsWith(searchQueryLowercase) ||
@@ -309,7 +309,7 @@ private fun CurrencyList(
     ) {
         itemsIndexed(currenciesWithLetters) { index, item ->
             when (item) {
-                is IvyCurrency -> {
+                is KissosCurrency -> {
                     CurrencyItemCard(
                         currency = item,
                         selected = item == selectedCurrency
@@ -336,7 +336,7 @@ private fun CurrencyList(
 
 @Composable
 private fun CurrencyItemCard(
-    currency: IvyCurrency,
+    currency: KissosCurrency,
     selected: Boolean,
 
     onClick: () -> Unit,
@@ -349,7 +349,7 @@ private fun CurrencyItemCard(
             .fillMaxWidth()
             .clip(UI.shapes.r4)
             .background(
-                color = if (selected) Ivy else UI.colors.medium,
+                color = if (selected) Kissos else UI.colors.medium,
                 shape = UI.shapes.r4
             )
             .clickable {
@@ -406,7 +406,7 @@ private fun LetterDividerItem(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         CurrencyPicker(
             initialSelectedCurrency = null,
             includeKeyboardShownInsetSpacer = true

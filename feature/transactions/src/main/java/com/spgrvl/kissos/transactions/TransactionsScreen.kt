@@ -47,13 +47,13 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.Constants
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.AppBaseData
 import com.spgrvl.kissos.legacy.data.LegacyDueSection
 import com.spgrvl.kissos.legacy.data.model.Month
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
 import com.spgrvl.kissos.legacy.datamodel.Account
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.ui.component.IncomeExpensesCards
 import com.spgrvl.kissos.legacy.ui.component.ItemStatisticToolbar
 import com.spgrvl.kissos.legacy.ui.component.transaction.transactions
@@ -64,7 +64,7 @@ import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.legacy.utils.rememberSwipeListenerState
 import com.spgrvl.kissos.legacy.utils.setStatusBarDarkTextCompat
 import com.spgrvl.kissos.navigation.EditTransactionScreen
-import com.spgrvl.kissos.navigation.IvyPreview
+import com.spgrvl.kissos.navigation.KissosPreview
 import com.spgrvl.kissos.navigation.PieChartStatisticScreen
 import com.spgrvl.kissos.navigation.TransactionsScreen
 import com.spgrvl.kissos.navigation.navigation
@@ -99,7 +99,7 @@ import java.util.UUID
 fun BoxWithConstraintsScope.TransactionsScreen(screen: TransactionsScreen) {
     val viewModel: TransactionsViewModel = screenScopedViewModel()
 
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
     val nav = navigation()
     val uiState = viewModel.uiState()
 
@@ -110,7 +110,7 @@ fun BoxWithConstraintsScope.TransactionsScreen(screen: TransactionsScreen) {
         nav.onBackPressed[screen] = {
             setStatusBarDarkTextCompat(
                 view = view,
-                darkText = ivyContext.theme == Theme.LIGHT
+                darkText = kissosContext.theme == Theme.LIGHT
             )
             false
         }
@@ -262,7 +262,7 @@ private fun BoxWithConstraintsScope.UI(
     onSkipAllTransactions: (List<Transaction>) -> Unit = {},
     onChoosePeriodModal: (ChoosePeriodModalData?) -> Unit,
 ) {
-    val ivyContext = ivyWalletCtx()
+    val kissosContext = kissosWalletCtx()
     val itemColor = (account?.color ?: category?.color?.value)?.toComposeColor() ?: Gray
 
     var categoryModalData: CategoryModalData? by remember { mutableStateOf(null) }
@@ -410,7 +410,7 @@ private fun BoxWithConstraintsScope.UI(
 
                 history = history,
                 lastItemSpacer = with(density) {
-                    (ivyContext.screenHeight * 0.7f).toDp()
+                    (kissosContext.screenHeight * 0.7f).toDp()
                 },
 
                 onPayOrGet = onPayOrGet,
@@ -422,7 +422,7 @@ private fun BoxWithConstraintsScope.UI(
                 emptyStateText = stringRes(
                     R.string.no_transactions_for_period,
                     period.toDisplayLong(
-                        startDateOfMonth = ivyContext.startDayOfMonth,
+                        startDateOfMonth = kissosContext.startDayOfMonth,
                         timeProvider = timeProvider,
                         timeConverter = timeConverter,
                         timeFormatter = timeFormatter,
@@ -826,7 +826,7 @@ private fun Item(
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview_empty() {
-    IvyPreview {
+    KissosPreview {
         UI(
             period = TimePeriod.currentMonth(
                 startDayOfMonth = 1
@@ -868,7 +868,7 @@ private fun BoxWithConstraintsScope.Preview_empty() {
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview_crypto() {
-    IvyPreview {
+    KissosPreview {
         UI(
             period = TimePeriod.currentMonth(
                 startDayOfMonth = 1
@@ -915,7 +915,7 @@ private fun BoxWithConstraintsScope.Preview_crypto() {
 @Preview
 @Composable
 private fun BoxWithConstraintsScope.Preview_empty_upcoming() {
-    IvyPreview {
+    KissosPreview {
         UI(
             period = TimePeriod(month = Month.monthsList().first(), year = 2023),
             baseCurrency = "BGN",
@@ -967,7 +967,7 @@ fun TransactionsUiTest(isDark: Boolean) {
         true -> Theme.DARK
         false -> Theme.LIGHT
     }
-    IvyWalletPreview(theme) {
+    KissosWalletPreview(theme) {
         Preview_empty_upcoming()
     }
 }

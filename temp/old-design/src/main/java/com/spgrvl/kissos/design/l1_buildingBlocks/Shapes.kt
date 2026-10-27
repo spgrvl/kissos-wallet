@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -55,7 +55,7 @@ fun ShapeOutlined(
 @Preview
 @Composable
 private fun Preview_Circle() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Shape(
             size = 32.dp,
             shape = UI.shapes.circle,
@@ -67,7 +67,7 @@ private fun Preview_Circle() {
 @Preview
 @Composable
 private fun PreviewOutlined() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         ShapeOutlined(
             size = 64.dp,
             shape = UI.shapes.r3,

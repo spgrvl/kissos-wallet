@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.design.utils.IvyComponentPreview
+import com.spgrvl.kissos.design.utils.KissosComponentPreview
 import com.spgrvl.kissos.design.utils.thenWhen
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -111,7 +111,7 @@ sealed class DividerSize {
 @Preview
 @Composable
 private fun PreviewHorizontalDivider_fillMax() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         DividerH(
             size = DividerSize.FillMax(
                 padding = 16.dp
@@ -123,7 +123,7 @@ private fun PreviewHorizontalDivider_fillMax() {
 @Preview
 @Composable
 private fun PreviewHorizontalDivider_fixed() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         DividerH(
             size = DividerSize.Fixed(
                 size = 32.dp
@@ -135,7 +135,7 @@ private fun PreviewHorizontalDivider_fixed() {
 @Preview
 @Composable
 private fun PreviewVerticalDivider_fillMax() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         DividerV(
             size = DividerSize.FillMax(
                 padding = 16.dp
@@ -147,7 +147,7 @@ private fun PreviewVerticalDivider_fillMax() {
 @Preview
 @Composable
 private fun PreviewVerticalDivider_fixed() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         DividerV(
             size = DividerSize.Fixed(
                 size = 16.dp
@@ -159,7 +159,7 @@ private fun PreviewVerticalDivider_fixed() {
 @Preview
 @Composable
 private fun PreviewDivider() {
-    IvyComponentPreview {
+    KissosComponentPreview {
         Row {
             SpacerHor(16.dp)
 

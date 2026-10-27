@@ -11,7 +11,7 @@ import com.spgrvl.kissos.base.TestDispatchersProvider
 import com.spgrvl.kissos.base.di.KotlinxSerializationModule
 import com.spgrvl.kissos.base.legacy.SharedPrefs
 import com.spgrvl.kissos.data.DataObserver
-import com.spgrvl.kissos.data.db.IvyRoomDatabase
+import com.spgrvl.kissos.data.db.KissosRoomDatabase
 import com.spgrvl.kissos.data.file.FileSystem
 import com.spgrvl.kissos.data.repository.AccountRepository
 import com.spgrvl.kissos.data.repository.CurrencyRepository
@@ -29,13 +29,13 @@ import java.io.File
 @RunWith(AndroidJUnit4::class)
 class BackupDataUseCaseAndroidTest {
 
-    private lateinit var db: IvyRoomDatabase
+    private lateinit var db: KissosRoomDatabase
     private lateinit var useCase: BackupDataUseCase
 
     @Before
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, IvyRoomDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(context, KissosRoomDatabase::class.java).build()
         val appContext = InstrumentationRegistry.getInstrumentation().context
         val accountMapper = AccountMapper(
             currencyRepository = CurrencyRepository(

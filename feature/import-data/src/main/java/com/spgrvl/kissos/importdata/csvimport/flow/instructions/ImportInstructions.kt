@@ -38,12 +38,12 @@ import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.onboarding.components.OnboardingToolbar
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.GradientIvy
+import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.GradientCutBottom
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyDividerLine
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosDividerLine
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.components.OnboardingButton
 
 @ExperimentalFoundationApi
@@ -101,7 +101,7 @@ fun BoxWithConstraintsScope.ImportInstructions(
 
             Spacer(Modifier.height(24.dp))
 
-            IvyDividerLine(
+            KissosDividerLine(
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
@@ -219,7 +219,7 @@ fun InstructionButton(
         Spacer(Modifier.width(16.dp))
 
         if (icon != null) {
-            IvyIcon(
+            KissosIcon(
                 modifier = Modifier.background(UI.colors.pure, CircleShape),
                 icon = icon,
                 tint = Color.Unspecified
@@ -269,7 +269,7 @@ fun UploadFileStep(
             .padding(horizontal = 16.dp),
         text = btnTitle,
         textColor = White,
-        backgroundGradient = GradientIvy,
+        backgroundGradient = GradientKissos,
         hasNext = false,
         iconStart = R.drawable.ic_upload
     ) {
@@ -341,7 +341,7 @@ private fun App(
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier
                 .drawColoredShadow(importType.color())
                 .size(48.dp),
@@ -364,7 +364,7 @@ private fun App(
 @Preview
 @Composable
 private fun Preview() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         ImportInstructions(
             hasSkip = true,
             importType = ImportType.MONEY_MANAGER,

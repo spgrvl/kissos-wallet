@@ -22,10 +22,10 @@ import com.spgrvl.kissos.design.api.LocalTimeFormatter
 import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.ui.time.TimeFormatter
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import java.time.Instant
 
 @Suppress("MultipleEmitters")
@@ -52,7 +52,7 @@ fun TransactionDateTime(
         ) {
             Spacer(Modifier.width(16.dp))
 
-            IvyIcon(icon = R.drawable.ic_calendar)
+            KissosIcon(icon = R.drawable.ic_calendar)
 
             Spacer(Modifier.width(8.dp))
 
@@ -104,7 +104,7 @@ fun TransactionDateTime(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         TransactionDateTime(
             dateTime = LocalTimeProvider.current.utcNow(),
             dueDateTime = null,

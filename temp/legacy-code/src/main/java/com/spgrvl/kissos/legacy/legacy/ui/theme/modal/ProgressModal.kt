@@ -28,7 +28,7 @@ fun BoxWithConstraintsScope.ProgressModal(
     color: Color = UI.colors.orange,
     dismiss: () -> Unit = {},
 ) {
-    IvyModal(
+    KissosModal(
         id = id,
         visible = visible,
         dismiss = dismiss,

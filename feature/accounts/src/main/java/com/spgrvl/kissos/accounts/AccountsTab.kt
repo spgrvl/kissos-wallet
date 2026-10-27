@@ -39,7 +39,7 @@ import com.spgrvl.kissos.data.model.primitive.IconAsset
 import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.data.model.AccountData
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.horizontalSwipeListener
@@ -80,13 +80,13 @@ private fun BoxWithConstraintsScope.UI(
     onEvent: (AccountsEvent) -> Unit = {}
 ) {
     val nav = navigation()
-    val ivyContext = com.spgrvl.kissos.legacy.ivyWalletCtx()
+    val kissosContext = com.spgrvl.kissos.legacy.kissosWalletCtx()
     var listState = rememberLazyListState()
     if (!state.accountsData.isEmpty()) {
         listState = rememberScrollPositionListState(
             key = "accounts_lazy_column",
-            initialFirstVisibleItemIndex = ivyContext.accountsListState?.firstVisibleItemIndex ?: 0,
-            initialFirstVisibleItemScrollOffset = ivyContext.accountsListState?.firstVisibleItemScrollOffset
+            initialFirstVisibleItemIndex = kissosContext.accountsListState?.firstVisibleItemIndex ?: 0,
+            initialFirstVisibleItemScrollOffset = kissosContext.accountsListState?.firstVisibleItemScrollOffset
                 ?: 0
         )
     }
@@ -99,10 +99,10 @@ private fun BoxWithConstraintsScope.UI(
                 sensitivity = 200,
                 state = rememberSwipeListenerState(),
                 onSwipeLeft = {
-                    ivyContext.selectMainTab(com.spgrvl.kissos.legacy.data.model.MainTab.HOME)
+                    kissosContext.selectMainTab(com.spgrvl.kissos.legacy.data.model.MainTab.HOME)
                 },
                 onSwipeRight = {
-                    ivyContext.selectMainTab(com.spgrvl.kissos.legacy.data.model.MainTab.HOME)
+                    kissosContext.selectMainTab(com.spgrvl.kissos.legacy.data.model.MainTab.HOME)
                 }
             ),
         state = listState
@@ -338,7 +338,7 @@ private fun AccountHeader(
 @Preview
 @Composable
 private fun PreviewAccountsTabCompactModeDisabled(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme = theme) {
+    KissosWalletPreview(theme = theme) {
         val acc1 = Account(
             id = AccountId(UUID.randomUUID()),
             name = NotBlankTrimmedString.unsafe("Phyre"),
@@ -425,7 +425,7 @@ private fun PreviewAccountsTabCompactModeDisabled(theme: Theme = Theme.LIGHT) {
 @Preview
 @Composable
 private fun PreviewAccountsTabCompactModeEnabled(theme: Theme = Theme.LIGHT) {
-    IvyWalletPreview(theme = theme) {
+    KissosWalletPreview(theme = theme) {
         val acc1 = Account(
             id = AccountId(UUID.randomUUID()),
             name = NotBlankTrimmedString.unsafe("Phyre"),

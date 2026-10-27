@@ -39,9 +39,9 @@ import com.spgrvl.kissos.wallet.ui.theme.Black
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
 import com.spgrvl.kissos.wallet.ui.theme.RedLight
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -95,7 +95,7 @@ fun PieChart(
             }
         )
 
-        IvyIcon(
+        KissosIcon(
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
@@ -280,7 +280,7 @@ private class PieChartView(context: Context) : View(context) {
 @Preview
 @Composable
 private fun Preview() {
-    com.spgrvl.kissos.legacy.IvyWalletComponentPreview {
+    com.spgrvl.kissos.legacy.KissosWalletComponentPreview {
         Column(
             Modifier.fillMaxSize()
         ) {
@@ -312,7 +312,7 @@ private fun Preview() {
                     CategoryAmount(
                         category = Category(
                             name = NotBlankTrimmedString.unsafe("Food & Drink"),
-                            color = ColorInt(IvyDark.toArgb()),
+                            color = ColorInt(KissosDark.toArgb()),
                             icon = null,
                             id = CategoryId(UUID.randomUUID()),
                             orderNum = 0.0,

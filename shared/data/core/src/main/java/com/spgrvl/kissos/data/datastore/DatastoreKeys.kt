@@ -19,7 +19,7 @@ object DatastoreKeys {
     val GITHUB_LAST_BACKUP_EPOCH_SEC =
         longPreferencesKey("github_backup_last_backup_time_epoch_sec")
 
-    fun ivyFeature(key: String): Preferences.Key<Boolean> {
+    fun kissosFeature(key: String): Preferences.Key<Boolean> {
         return booleanPreferencesKey("feature_$key")
     }
 }

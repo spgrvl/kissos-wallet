@@ -49,7 +49,7 @@ import com.spgrvl.kissos.design.api.LocalTimeProvider
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.horizontalSwipeListener
@@ -64,8 +64,8 @@ import com.spgrvl.kissos.ui.rememberScrollPositionListState
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
-import com.spgrvl.kissos.wallet.ui.theme.IvyDark
-import com.spgrvl.kissos.wallet.ui.theme.IvyLight
+import com.spgrvl.kissos.wallet.ui.theme.KissosDark
+import com.spgrvl.kissos.wallet.ui.theme.KissosLight
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.Red
 import com.spgrvl.kissos.wallet.ui.theme.RedLight
@@ -76,7 +76,7 @@ import com.spgrvl.kissos.wallet.ui.theme.components.CircleButtonFilledGradient
 import com.spgrvl.kissos.wallet.ui.theme.components.CloseButton
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconM
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconMDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 import com.spgrvl.kissos.wallet.ui.theme.findContrastTextColor
 import com.spgrvl.kissos.wallet.ui.theme.gradientExpenses
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChoosePeriodModal
@@ -289,7 +289,7 @@ private fun Header(
         if (!showCloseButtonOnly) {
             Spacer(Modifier.weight(1f))
 
-            IvyOutlinedButton(
+            KissosOutlinedButton(
                 modifier = Modifier.horizontalSwipeListener(
                     sensitivity = 75,
                     state = rememberSwipeListenerState(),
@@ -302,7 +302,7 @@ private fun Header(
                 ),
                 iconStart = R.drawable.ic_calendar,
                 text = period.toDisplayShort(
-                    startDateOfMonth = ivyWalletCtx().startDayOfMonth,
+                    startDateOfMonth = kissosWalletCtx().startDayOfMonth,
                     timeConverter = LocalTimeConverter.current,
                     timeProvider = LocalTimeProvider.current,
                     timeFormatter = LocalTimeFormatter.current,
@@ -478,7 +478,7 @@ private fun PercentText(
 @Preview
 @Composable
 private fun Preview_Expense() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         val state = PieChartStatisticState(
             transactionType = TransactionType.EXPENSE,
             period = com.spgrvl.kissos.legacy.data.model.TimePeriod.currentMonth(
@@ -515,7 +515,7 @@ private fun Preview_Expense() {
                 CategoryAmount(
                     category = Category(
                         name = NotBlankTrimmedString.unsafe("Food & Drink"),
-                        color = ColorInt(IvyDark.toArgb()),
+                        color = ColorInt(KissosDark.toArgb()),
                         icon = null,
                         id = CategoryId(UUID.randomUUID()),
                         orderNum = 0.0,
@@ -545,7 +545,7 @@ private fun Preview_Expense() {
                 CategoryAmount(
                     category = Category(
                         name = NotBlankTrimmedString.unsafe("Finances, Burocracy & Governance"),
-                        color = ColorInt(IvyLight.toArgb()),
+                        color = ColorInt(KissosLight.toArgb()),
                         icon = IconAsset.unsafe("work"),
                         id = CategoryId(UUID.randomUUID()),
                         orderNum = 0.0,
@@ -569,7 +569,7 @@ private fun Preview_Expense() {
 @Preview
 @Composable
 private fun Preview_Income() {
-    com.spgrvl.kissos.legacy.IvyWalletPreview {
+    com.spgrvl.kissos.legacy.KissosWalletPreview {
         val state = PieChartStatisticState(
             transactionType = TransactionType.INCOME,
             period = com.spgrvl.kissos.legacy.data.model.TimePeriod.currentMonth(
@@ -606,7 +606,7 @@ private fun Preview_Income() {
                 CategoryAmount(
                     category = Category(
                         name = NotBlankTrimmedString.unsafe("Food & Drink"),
-                        color = ColorInt(IvyDark.toArgb()),
+                        color = ColorInt(KissosDark.toArgb()),
                         icon = null,
                         id = CategoryId(UUID.randomUUID()),
                         orderNum = 0.0,
@@ -636,7 +636,7 @@ private fun Preview_Income() {
                 CategoryAmount(
                     category = Category(
                         name = NotBlankTrimmedString.unsafe("Finances, Burocracy & Governance"),
-                        color = ColorInt(IvyLight.toArgb()),
+                        color = ColorInt(KissosLight.toArgb()),
                         icon = IconAsset.unsafe("work"),
                         id = CategoryId(UUID.randomUUID()),
                         orderNum = 0.0,

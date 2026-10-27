@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.legacy.IvyWalletComponentPreview
+import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.wallet.ui.theme.*
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -35,10 +35,10 @@ fun ProgressBar(
                             if (positiveProgress) Red else Green
                         }
                         percent <= 0.50 -> {
-                            if (positiveProgress) Orange else Ivy
+                            if (positiveProgress) Orange else Kissos
                         }
                         percent <= 0.75 -> {
-                            if (positiveProgress) Ivy else Orange
+                            if (positiveProgress) Kissos else Orange
                         }
                         else -> if (positiveProgress) Green else Red
                     },
@@ -53,7 +53,7 @@ fun ProgressBar(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletComponentPreview {
+    KissosWalletComponentPreview {
         ProgressBar(
             modifier = Modifier
                 .fillMaxWidth()

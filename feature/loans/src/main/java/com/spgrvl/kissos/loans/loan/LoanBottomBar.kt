@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.legacy.IvyWalletPreview
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.KissosWalletPreview
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.utils.navigationBarInset
 import com.spgrvl.kissos.legacy.utils.toDensityPx
 import com.spgrvl.kissos.ui.R
@@ -40,8 +40,8 @@ import com.spgrvl.kissos.wallet.ui.theme.GradientPurple
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Purple
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCircleButton
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCircleButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
 import com.spgrvl.kissos.wallet.ui.theme.pureBlur
 import kotlin.math.roundToInt
 
@@ -83,12 +83,12 @@ internal fun BoxWithConstraintsScope.LoanBottomBar(
         }
     }
 
-    val ivyContext = ivyWalletCtx()
-    val fabStartX = ivyContext.screenWidth / 2 - FAB_BUTTON_SIZE.toDensityPx() / 2
-    val fabStartY = ivyContext.screenHeight - navigationBarInset() -
+    val kissosContext = kissosWalletCtx()
+    val fabStartX = kissosContext.screenWidth / 2 - FAB_BUTTON_SIZE.toDensityPx() / 2
+    val fabStartY = kissosContext.screenHeight - navigationBarInset() -
             30.dp.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
 
-    IvyCircleButton(
+    KissosCircleButton(
         modifier = Modifier
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
@@ -129,7 +129,7 @@ private fun RowScope.Tab(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IvyIcon(
+        KissosIcon(
             icon = icon,
             tint = if (selected) selectedColor else UI.colors.pureInverse
         )
@@ -151,7 +151,7 @@ private fun RowScope.Tab(
 @Preview
 @Composable
 private fun PreviewTabularBottomBar() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         Column(
             Modifier
                 .fillMaxSize()

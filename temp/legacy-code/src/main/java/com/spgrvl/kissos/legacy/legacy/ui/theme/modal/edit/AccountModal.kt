@@ -28,8 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.domain.legacy.ui.IvyColorPicker
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.domain.legacy.ui.KissosColorPicker
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
 import com.spgrvl.kissos.legacy.utils.onScreenStart
@@ -37,14 +37,14 @@ import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
 import com.spgrvl.kissos.legacy.utils.toUpperCaseLocal
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.domain.data.IvyCurrency
+import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.spgrvl.kissos.wallet.ui.theme.Gray
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyCheckboxWithText
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosCheckboxWithText
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChooseIconModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.CurrencyModal
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAddSave
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAmountSection
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
@@ -74,7 +74,7 @@ fun BoxWithConstraintsScope.AccountModal(
         mutableStateOf(selectEndTextFieldValue(account?.name))
     }
     var color by remember(modal) {
-        mutableStateOf(account?.color?.let { Color(it) } ?: Ivy)
+        mutableStateOf(account?.color?.let { Color(it) } ?: Kissos)
     }
     var amount by remember(modal) {
         mutableStateOf(modal?.balance ?: 0.0)
@@ -97,7 +97,7 @@ fun BoxWithConstraintsScope.AccountModal(
 
     val forceNonZeroBalance = modal?.forceNonZeroBalance ?: false
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -160,7 +160,7 @@ fun BoxWithConstraintsScope.AccountModal(
 
         Spacer(Modifier.height(24.dp))
 
-        IvyColorPicker(
+        KissosColorPicker(
             selectedColor = color,
             onColorSelected = { color = it }
         )
@@ -179,7 +179,7 @@ fun BoxWithConstraintsScope.AccountModal(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                IvyCheckboxWithText(
+                KissosCheckboxWithText(
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.Start),
@@ -232,13 +232,13 @@ fun BoxWithConstraintsScope.AccountModal(
     val context = LocalContext.current
     CurrencyModal(
         title = stringResource(R.string.choose_currency),
-        initialCurrency = IvyCurrency.fromCode(currencyCode),
+        initialCurrency = KissosCurrency.fromCode(currencyCode),
         visible = currencyModalVisible,
         dismiss = { currencyModalVisible = false }
     ) {
         currencyCode = it
 
-//        if (IvyCurrency.fromCode(it)?.isCrypto == true) {
+//        if (KissosCurrency.fromCode(it)?.isCrypto == true) {
 //            if (getCustomIconId(context = context, iconName = it, size = "m") != null) {
 //                icon = it
 //            }
@@ -324,7 +324,7 @@ private fun AccountCurrency(
 
         Spacer(Modifier.weight(1f))
 
-        val currencyName = IvyCurrency.fromCode(currencyCode)?.name ?: ""
+        val currencyName = KissosCurrency.fromCode(currencyCode)?.name ?: ""
         Text(
             text = "-$currencyName".toLowerCaseLocal(),
             style = UI.typo.b2.style(
@@ -340,7 +340,7 @@ private fun AccountCurrency(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         AccountModal(
             modal = AccountModalData(
                 account = null,

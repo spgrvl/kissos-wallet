@@ -38,20 +38,20 @@ import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.data.model.primitive.ColorInt
 import com.spgrvl.kissos.data.model.primitive.IconAsset
 import com.spgrvl.kissos.data.model.primitive.NotBlankTrimmedString
-import com.spgrvl.kissos.domain.legacy.ui.IvyColorPicker
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.domain.legacy.ui.KissosColorPicker
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.hideKeyboard
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
-import com.spgrvl.kissos.wallet.ui.theme.Ivy
+import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.components.ItemIconMDefaultIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
 import com.spgrvl.kissos.wallet.ui.theme.dynamicContrast
 import com.spgrvl.kissos.wallet.ui.theme.modal.ChooseIconModal
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAddSave
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import java.util.UUID
@@ -76,7 +76,7 @@ fun BoxWithConstraintsScope.CategoryModal(
         mutableStateOf(selectEndTextFieldValue(initialCategory?.name?.value))
     }
     var color by remember(modal) {
-        mutableStateOf(initialCategory?.color?.let { Color(it.value) } ?: Ivy)
+        mutableStateOf(initialCategory?.color?.let { Color(it.value) } ?: Kissos)
     }
     var icon by remember(modal) {
         mutableStateOf(initialCategory?.icon)
@@ -86,7 +86,7 @@ fun BoxWithConstraintsScope.CategoryModal(
         mutableStateOf(false)
     }
 
-    IvyModal(
+    KissosModal(
         id = modal?.id,
         visible = modal != null,
         dismiss = dismiss,
@@ -152,7 +152,7 @@ fun BoxWithConstraintsScope.CategoryModal(
 
         Spacer(Modifier.height(40.dp))
 
-        IvyColorPicker(
+        KissosColorPicker(
             selectedColor = color,
             onColorSelected = { color = it }
         )
@@ -211,7 +211,7 @@ fun IconNameRow(
         )
 
         val view = LocalView.current
-        IvyNameTextField(
+        KissosNameTextField(
             modifier = Modifier
                 .padding(start = 28.dp, end = 36.dp)
                 .focusRequester(nameFocus),
@@ -238,7 +238,7 @@ fun IconNameRow(
 @Preview
 @Composable
 private fun PreviewCategoryModal() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         CategoryModal(
             modal = CategoryModalData(null),
             onCreateCategory = { },

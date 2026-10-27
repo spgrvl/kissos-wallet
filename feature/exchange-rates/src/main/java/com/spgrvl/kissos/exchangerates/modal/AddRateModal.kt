@@ -21,11 +21,11 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.l1_buildingBlocks.SpacerVer
 import com.spgrvl.kissos.exchangerates.RatesEvent
 import com.spgrvl.kissos.exchangerates.data.RateUi
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyNameTextField
-import com.spgrvl.kissos.wallet.ui.theme.modal.IvyModal
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
+import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalAdd
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalTitle
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AmountModal
@@ -42,7 +42,7 @@ fun BoxWithConstraintsScope.AddRateModal(
     var amountModalVisible by remember { mutableStateOf(false) }
     var rate by remember { mutableStateOf<Double?>(null) }
 
-    IvyModal(
+    KissosModal(
         id = null,
         visible = visible,
         dismiss = dismiss,
@@ -67,7 +67,7 @@ fun BoxWithConstraintsScope.AddRateModal(
         ModalTitle(text = stringResource(R.string.add_manual_exchange_rate))
         SpacerVer(height = 24.dp)
 
-        IvyNameTextField(
+        KissosNameTextField(
             modifier = Modifier.padding(horizontal = 32.dp),
             underlineModifier = Modifier.padding(horizontal = 24.dp),
             value = toCurrency,
@@ -109,7 +109,7 @@ fun BoxWithConstraintsScope.AddRateModal(
 @Preview
 @Composable
 private fun Preview() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         AddRateModal(
             visible = true,
             baseCurrency = "USD",

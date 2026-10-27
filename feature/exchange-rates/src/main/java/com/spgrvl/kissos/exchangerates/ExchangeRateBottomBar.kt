@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.spgrvl.kissos.legacy.IvyWalletPreview
+import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Blue
 import com.spgrvl.kissos.wallet.ui.theme.components.BackBottomBar
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosButton
 
 @Composable
 internal fun BoxWithConstraintsScope.ExchangeRatesBottomBar(
@@ -20,7 +20,7 @@ internal fun BoxWithConstraintsScope.ExchangeRatesBottomBar(
     onAddRate: () -> Unit
 ) {
     BackBottomBar(onBack = onClose) {
-        IvyButton(
+        KissosButton(
             text = stringResource(R.string.add_manual_exchange_rate),
             iconStart = R.drawable.ic_plus
         ) {
@@ -32,7 +32,7 @@ internal fun BoxWithConstraintsScope.ExchangeRatesBottomBar(
 @Preview
 @Composable
 private fun PreviewBottomBar() {
-    IvyWalletPreview {
+    KissosWalletPreview {
         Column(
             Modifier
                 .fillMaxSize()

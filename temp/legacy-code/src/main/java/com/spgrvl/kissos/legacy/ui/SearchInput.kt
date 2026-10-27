@@ -16,11 +16,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.Gray
 import com.spgrvl.kissos.design.l0_system.UI
-import com.spgrvl.kissos.design.l1_buildingBlocks.IvyIcon
+import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIcon
 import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyBasicTextField
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosBasicTextField
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Suppress("MagicNumber")
@@ -41,10 +41,10 @@ fun SearchInput(
             .border(1.dp, Gray, UI.shapes.rFull),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IvyIcon(icon = R.drawable.ic_search, modifier = Modifier.weight(1f))
+        KissosIcon(icon = R.drawable.ic_search, modifier = Modifier.weight(1f))
 
         val searchFocus = FocusRequester()
-        IvyBasicTextField(
+        KissosBasicTextField(
             modifier = Modifier
                 .weight(5f)
                 .padding(vertical = 12.dp)
@@ -63,7 +63,7 @@ fun SearchInput(
         }
 
         if (showClearIcon) {
-            IvyIcon(
+            KissosIcon(
                 modifier = Modifier
                     .weight(1f)
                     .clickable {

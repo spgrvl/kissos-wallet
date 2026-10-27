@@ -62,7 +62,7 @@ data class OptionalFields(
 )
 
 data class ColumnMapping<M>(
-    @StringRes val ivyColumn: Int,
+    @StringRes val kissosColumn: Int,
     @StringRes val helpInfo: Int,
     val name: String,
     val index: Int,

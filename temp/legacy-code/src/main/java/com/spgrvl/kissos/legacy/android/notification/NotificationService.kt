@@ -13,20 +13,20 @@ class NotificationService @Inject constructor(
     private val context: Context
 ) {
 
-    fun defaultIvyNotification(
-        channel: IvyNotificationChannel,
+    fun defaultKissosNotification(
+        channel: KissosNotificationChannel,
         autoCancel: Boolean = true,
         priority: Int = NotificationCompat.PRIORITY_HIGH
-    ): IvyNotification {
-        val ivyNotification = IvyNotification(context, channel)
+    ): KissosNotification {
+        val kissosNotification = KissosNotification(context, channel)
         val color = ContextCompat.getColor(context, R.color.green)
-        ivyNotification.setSmallIcon(R.drawable.ic_notification)
+        kissosNotification.setSmallIcon(R.drawable.ic_notification)
             .setColor(color)
             .setPriority(priority)
             .setColorized(true)
             .setLights(color, 1000, 200)
             .setAutoCancel(autoCancel)
-        return ivyNotification
+        return kissosNotification
     }
 
     fun showNotification(
@@ -38,7 +38,7 @@ class NotificationService @Inject constructor(
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                     ?: return
             // Register the channel with the system
-            val channel = (notification as IvyNotification).ivyChannel.create(context)
+            val channel = (notification as KissosNotification).kissosChannel.create(context)
 
             notificationManager.createNotificationChannel(channel)
             notificationManager.notify(notificationId, notification.build())

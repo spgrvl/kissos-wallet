@@ -37,7 +37,7 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.data.model.TimePeriod
-import com.spgrvl.kissos.legacy.ivyWalletCtx
+import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.legacy.ui.component.transaction.TransactionsDividerLine
 import com.spgrvl.kissos.legacy.utils.clickableNoIndication
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
@@ -58,8 +58,8 @@ import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRow
 import com.spgrvl.kissos.wallet.ui.theme.components.BalanceRowMini
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyIcon
-import com.spgrvl.kissos.wallet.ui.theme.components.IvyOutlinedButton
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosIcon
+import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButton
 import com.spgrvl.kissos.wallet.ui.theme.wallet.AmountCurrencyB1
 import kotlin.math.absoluteValue
 
@@ -181,7 +181,7 @@ private fun HeaderStickyRow(
             }
         }
 
-        IvyOutlinedButton(
+        KissosOutlinedButton(
             modifier = Modifier.horizontalSwipeListener(
                 sensitivity = 75,
                 state = rememberSwipeListenerState(),
@@ -194,7 +194,7 @@ private fun HeaderStickyRow(
             ),
             iconStart = R.drawable.ic_calendar,
             text = period.toDisplayShort(
-                startDateOfMonth = ivyWalletCtx().startDayOfMonth,
+                startDateOfMonth = kissosWalletCtx().startDayOfMonth,
                 timeConverter = LocalTimeConverter.current,
                 timeProvider = LocalTimeProvider.current,
                 timeFormatter = LocalTimeFormatter.current,
@@ -383,7 +383,7 @@ private fun RowScope.HeaderCard(
         ) {
             Spacer(Modifier.width(16.dp))
 
-            IvyIcon(
+            KissosIcon(
                 icon = icon,
                 tint = textColor,
             )
