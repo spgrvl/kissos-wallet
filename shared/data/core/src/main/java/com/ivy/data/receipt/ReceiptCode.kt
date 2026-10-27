@@ -5,15 +5,15 @@ import java.net.URISyntaxException
 
 /** A scanned receipt QR code, recognised offline. */
 sealed interface ReceiptCode {
-    /** A code that AADE can be asked about directly. */
-    sealed interface OnAade : ReceiptCode {
+    /** A code whose details can be fetched directly, from AADE or the provider. */
+    sealed interface Fetchable : ReceiptCode {
         /** Unique per receipt, stored as the receipt's `sig`. */
         val key: String
         val lookupUrl: String
     }
 
     /** A cash-register (ΦΗΜ) receipt. Its code holds the amount. */
-    data class CashRegister(val qr: AadeQr) : OnAade {
+    data class CashRegister(val qr: AadeQr) : Fetchable {
         override val key: String get() = qr.sig
         override val lookupUrl: String get() = qr.lookupUrl
     }
@@ -22,7 +22,16 @@ sealed interface ReceiptCode {
      * A document sent to myDATA, e.g. by a shop's invoicing software. Its code is a link to
      * AADE's page for it, `https://mydatapi.aade.gr/myDATA/TimologioQR/QRInfo?q=…`, and holds nothing else.
      */
-    data class MyData(val url: String) : OnAade {
+    data class MyData(val url: String) : Fetchable {
+        override val key: String get() = url
+        override val lookupUrl: String get() = url
+    }
+
+    /**
+     * A Fiscal Sign receipt. Its code downloads the document as a PDF, which has all the details,
+     * e.g. `https://fiscalsign.gr/api/PrintInvoice/download/<id>`.
+     */
+    data class FiscalSign(val url: String) : Fetchable {
         override val key: String get() = url
         override val lookupUrl: String get() = url
     }
@@ -35,6 +44,7 @@ sealed interface ReceiptCode {
 
     companion object {
         private const val MYDATA_PATH = "/TimologioQR/QRInfo"
+        private const val FISCAL_SIGN_PATH = "/api/PrintInvoice/download/"
         private val ESCAPE = Regex("%[0-9a-fA-F]{2}")
 
         /** Hosts of the e-invoicing providers whose pages are known to link to myDATA. */
@@ -49,8 +59,8 @@ sealed interface ReceiptCode {
             return AadeQr.parse(text)?.let(::CashRegister) ?: parseUrl(text)
         }
 
-        /** Recognises a stored receipt's [OnAade.key]. */
-        fun fromKey(key: String): OnAade? = parse(key) as? OnAade
+        /** Recognises a stored receipt's [Fetchable.key]. */
+        fun fromKey(key: String): Fetchable? = parse(key) as? Fetchable
 
         @Suppress("ReturnCount")
         private fun parseUrl(text: String): ReceiptCode? {
@@ -66,6 +76,9 @@ sealed interface ReceiptCode {
                 host.isDomain("aade.gr") && path.endsWith(MYDATA_PATH, ignoreCase = true) &&
                     uri.rawQuery?.contains("q=") == true ->
                     MyData("https://${uri.rawAuthority}$path?${uri.rawQuery.upperCaseEscapes()}")
+
+                host.isDomain("fiscalsign.gr") && path.startsWith(FISCAL_SIGN_PATH, ignoreCase = true) ->
+                    FiscalSign(text)
 
                 PROVIDER_HOSTS.any { host.isDomain(it) } -> Provider(text)
                 else -> null

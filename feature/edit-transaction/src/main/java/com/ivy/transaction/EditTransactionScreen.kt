@@ -186,6 +186,7 @@ fun BoxWithConstraintsScope.EditTransactionScreen(screen: EditTransactionScreen)
             viewModel.onEvent(it)
         },
         receiptCaption = uiState.receiptCaption,
+        receiptProgress = uiState.receiptProgress,
         receiptDialog = uiState.receiptDialog,
         onReceiptEvent = {
             viewModel.onEvent(it)
@@ -240,6 +241,7 @@ private fun BoxWithConstraintsScope.UI(
     backgroundProcessing: Boolean = false,
     hasChanges: Boolean = false,
     receiptCaption: ReceiptCaption? = null,
+    receiptProgress: ReceiptProgress? = null,
     receiptDialog: ReceiptDialog? = null,
     onReceiptEvent: (EditTransactionViewEvent.ReceiptEvent) -> Unit = {},
 ) {
@@ -361,7 +363,10 @@ private fun BoxWithConstraintsScope.UI(
             )
         }
 
-        if (receiptCaption != null) {
+        if (receiptProgress != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            ReceiptProgressView(progress = receiptProgress)
+        } else if (receiptCaption != null) {
             Spacer(modifier = Modifier.height(8.dp))
             ReceiptCaptionText(caption = receiptCaption)
         }
