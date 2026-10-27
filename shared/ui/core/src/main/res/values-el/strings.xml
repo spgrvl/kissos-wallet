@@ -174,7 +174,7 @@
     <string name="from_ivy_or_another_app">από το Ivy Wallet / Kissos ή άλλη εφαρμογή</string>
     <string name="importing_another_time_warning">Η εισαγωγή αντιγράφου ασφαλείας από άλλη εφαρμογή μπορεί να πάρει έως 5 λεπτά. Μπορείτε πάντα να εισαγάγετε τα δεδομένα σας αργότερα.</string>
     <string name="import_backup_file">Εισαγωγή αντιγράφου ασφαλείας</string>
-    <string name="start_fresh">Ξεκινήστε από το μηδέν</string>
+    <string name="start_fresh">Συνέχεια χωρίς εισαγωγή</string>
     <string name="planned_payment_confirm_deletion_description">Η διαγραφή της προγραμματισμένης πληρωμής θα αφαιρέσει όλες τις σχετικές απλήρωτες συναλλαγές, μελλοντικές ή εκπρόθεσμες.</string>
     <string name="set_payment_type">Επιλογή τύπου πληρωμής</string>
     <string name="planned_start_at">Προγραμματισμένη έναρξη</string>
@@ -291,7 +291,7 @@
     <string name="choose_icon">Επιλογή εικονιδίου</string>
     <string name="choose_month">Επιλογή μήνα</string>
     <string name="or_custom_range">ή προσαρμοσμένο διάστημα</string>
-    <string name="add_date">Προσθήκη ημερομηνίας</string>
+    <string name="add_date">Επιλογή ημερομηνίας</string>
     <string name="or_in_the_last">ή τελευταίο διάστημα</string>
     <string name="or_all_time">ή όλο το διάστημα</string>
     <string name="unselect_all_time">Αποεπιλογή «όλο το διάστημα»</string>
