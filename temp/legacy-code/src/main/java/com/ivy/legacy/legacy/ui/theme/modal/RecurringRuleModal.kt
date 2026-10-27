@@ -36,17 +36,17 @@ import com.ivy.data.model.IntervalType
 import com.ivy.design.api.LocalTimeProvider
 import com.ivy.design.l0_system.UI
 import com.ivy.design.l0_system.style
+import com.ivy.design.utils.thenIf
 import com.ivy.legacy.IvyWalletCtx
 import com.ivy.legacy.IvyWalletPreview
 import com.ivy.legacy.ivyWalletCtx
-import com.ivy.legacy.utils.addKeyboardListener
+import com.ivy.legacy.utils.KeyboardListener
 import com.ivy.legacy.utils.clickableNoIndication
 import com.ivy.legacy.utils.closeDay
 import com.ivy.legacy.utils.formatDateWeekDayLong
 import com.ivy.legacy.utils.formatNicely
 import com.ivy.legacy.utils.hideKeyboard
 import com.ivy.legacy.utils.onScreenStart
-import com.ivy.design.utils.thenIf
 import com.ivy.legacy.utils.rememberInteractionSource
 import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.Gradient
@@ -301,13 +301,11 @@ private fun MultipleTimes(
     val rootView = LocalView.current
     val coroutineScope = rememberCoroutineScope()
 
-    onScreenStart {
-        rootView.addKeyboardListener { keyboardShown ->
-            if (keyboardShown) {
-                coroutineScope.launch {
-                    delay(200)
-                    modalScrollState.animateScrollTo(modalScrollState.maxValue)
-                }
+    KeyboardListener { keyboardShown ->
+        if (keyboardShown) {
+            coroutineScope.launch {
+                delay(200)
+                modalScrollState.animateScrollTo(modalScrollState.maxValue)
             }
         }
     }

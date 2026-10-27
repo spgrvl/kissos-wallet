@@ -46,11 +46,10 @@ import androidx.compose.ui.unit.dp
 import com.ivy.design.l0_system.UI
 import com.ivy.design.l0_system.style
 import com.ivy.legacy.IvyWalletComponentPreview
-import com.ivy.legacy.utils.addKeyboardListener
+import com.ivy.legacy.utils.KeyboardListener
 import com.ivy.legacy.utils.densityScope
 import com.ivy.legacy.utils.hideKeyboard
 import com.ivy.legacy.utils.keyboardOnlyWindowInsets
-import com.ivy.legacy.utils.onScreenStart
 import com.ivy.legacy.utils.toLowerCaseLocal
 import com.ivy.ui.R
 import com.ivy.wallet.domain.data.IvyCurrency
@@ -76,14 +75,11 @@ fun CurrencyPicker(
 
     onSelectedCurrencyChanged: (IvyCurrency) -> Unit
 ) {
-    val rootView = LocalView.current
     var keyboardShown by remember { mutableStateOf(false) }
 
-    onScreenStart {
-        rootView.addKeyboardListener {
-            keyboardShown = it
-            onKeyboardShown(it)
-        }
+    KeyboardListener {
+        keyboardShown = it
+        onKeyboardShown(it)
     }
 
     val keyboardShownInsetDp by animateDpAsState(
