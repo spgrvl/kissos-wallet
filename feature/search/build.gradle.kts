@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.search"
+    namespace = "com.spgrvl.kissos.search"
 }
 
 dependencies {

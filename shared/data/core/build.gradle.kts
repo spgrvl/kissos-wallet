@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.data"
+    namespace = "com.spgrvl.kissos.data"
 }
 
 dependencies {

@@ -1,0 +1,19 @@
+package com.spgrvl.kissos.wallet.domain.action.viewmodel.home
+
+import com.spgrvl.kissos.frp.action.FPAction
+import com.spgrvl.kissos.legacy.IvyWalletCtx
+import com.spgrvl.kissos.legacy.datamodel.Account
+import javax.inject.Inject
+
+class UpdateAccCacheAct @Inject constructor(
+    private val ivyWalletCtx: IvyWalletCtx
+) : FPAction<List<Account>, List<Account>>() {
+    override suspend fun List<Account>.compose(): suspend () -> List<Account> = suspend {
+        val accounts = this
+
+        ivyWalletCtx.accountMap.clear()
+        ivyWalletCtx.accountMap.putAll(accounts.map { it.id to it })
+
+        accounts
+    }
+}

@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.data.model"
+    namespace = "com.spgrvl.kissos.data.model"
 }

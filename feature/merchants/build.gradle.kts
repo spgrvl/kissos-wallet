@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.merchants"
+    namespace = "com.spgrvl.kissos.merchants"
 }
 
 dependencies {

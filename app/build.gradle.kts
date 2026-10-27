@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.wallet"
+    namespace = "com.spgrvl.kissos.wallet"
     compileSdk = libs.versions.target.sdk.get().toInt()
 
     defaultConfig {

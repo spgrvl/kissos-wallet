@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.data.model.testing"
+    namespace = "com.spgrvl.kissos.data.model.testing"
 }
 
 dependencies {
