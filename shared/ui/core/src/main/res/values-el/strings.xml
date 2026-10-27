@@ -495,8 +495,11 @@
     <string name="receipt_provider_failed">Η απόδειξη δεν άνοιξε στη σελίδα του παρόχου. Καταχωρίστε το έξοδο χειροκίνητα.</string>
     <string name="receipt_total_mismatch">Σύμφωνα με την ΑΑΔΕ το σύνολο είναι %1$s, όχι το παραπάνω ποσό</string>
     <string name="not_aade_receipt_title">Η απόδειξη δεν υποστηρίζεται</string>
-    <string name="not_aade_receipt_description">Το Kissos δεν μπορεί να διαβάσει αυτό το QR code. Οι αποδείξεις ορισμένων παρόχων ηλεκτρονικής τιμολόγησης δεν υποστηρίζονται ακόμα. Καταχωρίστε το έξοδο χειροκίνητα.</string>
-    <string name="copy_qr_text">Αντιγραφή κειμένου QR</string>
+    <string name="not_aade_receipt_description">Το Kissos δεν μπορεί να διαβάσει αυτό το QR code. Οι αποδείξεις ορισμένων παρόχων ηλεκτρονικής τιμολόγησης δεν υποστηρίζονται ακόμα. Στείλτε μας την απόδειξη για να προστεθεί η υποστήριξη και καταχωρίστε το έξοδο χειροκίνητα.</string>
+    <string name="report_receipt">Αναφορά απόδειξης</string>
+    <string name="report_receipt_subject">Μη υποστηριζόμενη απόδειξη</string>
+    <string name="report_receipt_body">Το Kissos δεν μπόρεσε να διαβάσει το QR code αυτής της απόδειξης:\n\n%1$s\n\nKissos %2$s · Android %3$s\n\nΌνομα καταστήματος (προαιρετικά):</string>
+    <string name="report_receipt_no_email">Δεν βρέθηκε εφαρμογή email. Το QR code αντιγράφηκε για να το στείλετε στο %1$s.</string>
     <string name="enter_manually">Χειροκίνητη καταχώριση</string>
     <string name="duplicate_receipt_title">Έχει ήδη σαρωθεί</string>
     <string name="duplicate_receipt_description">Έχετε ήδη προσθέσει έξοδο για αυτή την απόδειξη.</string>

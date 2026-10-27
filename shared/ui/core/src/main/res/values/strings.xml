@@ -495,8 +495,11 @@
     <string name="receipt_provider_failed">Couldn’t open the receipt on the provider’s page. Enter the expense manually.</string>
     <string name="receipt_total_mismatch">AADE says the total is %1$s, not the amount above</string>
     <string name="not_aade_receipt_title">Receipt not supported</string>
-    <string name="not_aade_receipt_description">Kissos can’t read this QR code. Receipts from some e-invoicing providers aren’t supported yet. Enter this expense manually.</string>
-    <string name="copy_qr_text">Copy QR text</string>
+    <string name="not_aade_receipt_description">Kissos can’t read this QR code. Receipts from some e-invoicing providers aren’t supported yet. Report it so support can be added, and enter this expense manually.</string>
+    <string name="report_receipt">Report receipt</string>
+    <string name="report_receipt_subject">Unsupported receipt</string>
+    <string name="report_receipt_body">Kissos couldn’t read this receipt’s QR code:\n\n%1$s\n\nKissos %2$s · Android %3$s\n\nShop name (optional):</string>
+    <string name="report_receipt_no_email">No email app found. The QR code was copied, so you can send it to %1$s.</string>
     <string name="enter_manually">Enter manually</string>
     <string name="duplicate_receipt_title">Already scanned</string>
     <string name="duplicate_receipt_description">You’ve already added an expense for this receipt.</string>
