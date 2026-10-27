@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.ivy.data.repository.LegalRepository
 import com.ivy.navigation.Navigation
+import com.ivy.ui.R
 import com.ivy.ui.ComposeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
@@ -56,37 +57,12 @@ class DisclaimerViewModel @Inject constructor(
     }
 
     companion object {
-        // LEGAL text - do NOT extract or translate
         val LegalCheckboxes = listOf(
-            CheckboxViewState(
-                text = "I recognize this app is open-source and provided 'as-is' " +
-                        "with no warranties, explicit or implied. " +
-                        "I fully accept all risks of errors, defects, or failures, " +
-                        "using the app solely at my own risk.",
-                checked = false,
-            ),
-            CheckboxViewState(
-                text = "I understand there is no warranty for the accuracy, " +
-                        "reliability, or completeness of my data. " +
-                        "Manual data backup is my responsibility, and I agree to not hold " +
-                        "the app liable for any data loss.",
-                checked = false,
-            ),
-            CheckboxViewState(
-                text = "I hereby release the app developers, contributors, " +
-                        "and distributing company from any liability for " +
-                        "claims, damages, legal fees, or losses, including those resulting " +
-                        "from security breaches or data inaccuracies.",
-                checked = false,
-            ),
-            CheckboxViewState(
-                text = "I am aware and accept that the app may display misleading information " +
-                        "or contain inaccuracies. " +
-                        "I assume full responsibility for verifying the integrity " +
-                        "of financial data and calculations before making " +
-                        "any decisions based on app data.",
-                checked = false,
-            ),
-        ).toImmutableList()
+            R.string.agreement_as_is,
+            R.string.agreement_data,
+            R.string.agreement_accuracy,
+            R.string.agreement_liability,
+        ).map { CheckboxViewState(text = it, checked = false) }
+            .toImmutableList()
     }
 }

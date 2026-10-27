@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ivy.disclaimer.CheckboxViewState
 
@@ -24,6 +25,6 @@ fun AgreementCheckBox(
     ) {
         Checkbox(checked = viewState.checked, onCheckedChange = { onClick() })
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = viewState.text)
+        Text(text = stringResource(viewState.text))
     }
 }

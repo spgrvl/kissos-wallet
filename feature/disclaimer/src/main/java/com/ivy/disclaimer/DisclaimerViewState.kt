@@ -1,5 +1,6 @@
 package com.ivy.disclaimer
 
+import androidx.annotation.StringRes
 import kotlinx.collections.immutable.ImmutableList
 
 data class DisclaimerViewState(
@@ -8,7 +9,7 @@ data class DisclaimerViewState(
 )
 
 data class CheckboxViewState(
-    val text: String,
+    @StringRes val text: Int,
     val checked: Boolean
 )
 
