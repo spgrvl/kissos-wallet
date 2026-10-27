@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.ivy.base.model.TransactionType
 import com.ivy.design.l0_system.UI
 import com.ivy.design.l0_system.asBrush
+import com.ivy.navigation.MainScreen
 import com.ivy.navigation.navigation
 import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.components.CloseButton
@@ -48,7 +49,8 @@ fun Toolbar(
 
         val nav = navigation()
         CloseButton {
-            nav.back()
+            // Nothing to go back to when the app was opened on this screen
+            if (!nav.back()) nav.navigateTo(MainScreen)
         }
 
         Spacer(Modifier.weight(1f))

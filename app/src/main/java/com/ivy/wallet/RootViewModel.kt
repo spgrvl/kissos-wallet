@@ -108,18 +108,16 @@ class RootViewModel @Inject constructor(
     }
 
     private fun navigateOnboardedUser(intent: Intent) {
-        if (!handleSpecialStart(intent)) {
-            nav.navigateTo(MainScreen)
-            transactionReminderLogic.scheduleReminder()
-            // Picks up receipts still waiting for AADE
-            receiptLookupScheduler.schedule(restart = false)
-        }
+        nav.navigateTo(MainScreen)
+        // A receipt link or widget action opens on top, so closing it leads home
+        handleSpecialStart(intent)
+        transactionReminderLogic.scheduleReminder()
+        // Picks up receipts still waiting for AADE
+        receiptLookupScheduler.schedule(restart = false)
     }
 
-    private fun handleSpecialStart(intent: Intent): Boolean {
-        val screen = scannedReceiptScreen(intent) ?: addTransactionScreen(intent)
-        screen?.let(nav::navigateTo)
-        return screen != null
+    private fun handleSpecialStart(intent: Intent) {
+        (scannedReceiptScreen(intent) ?: addTransactionScreen(intent))?.let(nav::navigateTo)
     }
 
     /** A receipt's link, opened from the phone's camera app or a QR scanner. */
