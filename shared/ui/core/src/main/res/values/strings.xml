@@ -648,5 +648,5 @@
     <string name="agreement_data">I understand that Kissos keeps my data only on this device, with no account or cloud sync. Making backups is my responsibility, and the developers aren’t liable for any lost data.</string>
     <string name="agreement_accuracy">I understand that Kissos may show wrong or incomplete information, including amounts, dates and shops read from receipts, AADE or e-invoicing providers, and I will check my figures before relying on them. Kissos isn’t made or endorsed by AADE and isn’t an official record for tax purposes.</string>
     <string name="agreement_liability">To the extent permitted by law, I release the developers and contributors of Kissos from any liability for claims, damages or losses arising from its use, including security breaches or inaccurate data.</string>
-    <string name="agreement_accept">I accept and agree</string>
+    <string name="agreement_accept">I accept the terms</string>
 </resources>
