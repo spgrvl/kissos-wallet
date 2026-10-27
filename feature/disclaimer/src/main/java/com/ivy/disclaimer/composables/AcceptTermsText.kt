@@ -4,7 +4,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.ivy.ui.R
 
 @Composable
 fun AcceptTermsText(
@@ -12,7 +14,7 @@ fun AcceptTermsText(
 ) {
     Text(
         modifier = modifier,
-        text = "Please read and agree to the following terms before using the app:",
+        text = stringResource(R.string.agreement_intro),
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Bold,
     )
