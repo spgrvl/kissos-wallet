@@ -39,16 +39,16 @@ import com.ivy.legacy.utils.drawColoredShadow
 import com.ivy.legacy.utils.hideKeyboard
 import com.ivy.legacy.utils.onScreenStart
 import com.ivy.legacy.utils.selectEndTextFieldValue
+import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.Gradient
 import com.ivy.wallet.ui.theme.components.IvyBorderButton
 import com.ivy.wallet.ui.theme.components.IvyCircleButton
+import com.ivy.wallet.ui.theme.components.WrapContentRow
 import com.ivy.wallet.ui.theme.findContrastTextColor
 import com.ivy.wallet.ui.theme.modal.DeleteModal
 import com.ivy.wallet.ui.theme.modal.IvyModal
 import com.ivy.wallet.ui.theme.modal.ModalPositiveButton
 import com.ivy.wallet.ui.theme.modal.ModalTitle
-import com.ivy.ui.R
-import com.ivy.wallet.ui.theme.components.WrapContentRow
 import kotlinx.collections.immutable.ImmutableList
 import java.util.UUID
 
@@ -171,7 +171,7 @@ fun BoxWithConstraintsScope.ShowTagModal(
     DeleteModal(
         visible = deleteTagModalVisible,
         title = stringResource(R.string.confirm_deletion),
-        description = "Are you sure you want to delete the following tag:\t'${selectedTag?.name?.value}' ?",
+        description = stringResource(R.string.delete_tag_confirmation, selectedTag?.name?.value.orEmpty()),
         dismiss = { deleteTagModalVisible = false }
     ) {
         if (selectedTag != null) {

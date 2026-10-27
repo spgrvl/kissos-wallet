@@ -53,7 +53,6 @@ import com.ivy.design.l1_buildingBlocks.SpacerHor
 import com.ivy.legacy.IvyWalletPreview
 import com.ivy.legacy.data.AppBaseData
 import com.ivy.legacy.datamodel.Account
-import com.ivy.legacy.utils.capitalizeLocal
 import com.ivy.legacy.utils.dateNowUTC
 import com.ivy.legacy.utils.format
 import com.ivy.legacy.utils.isNotNullOrBlank
@@ -89,6 +88,8 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.format.TextStyle
+import java.util.Locale
 import java.util.UUID
 
 @Suppress("CyclomaticComplexMethod", "LongMethod")
@@ -279,7 +280,7 @@ private fun ColumnScope.TransactionTags(tags: ImmutableList<LegacyTag>) {
         item {
             // Tag Text
             Text(
-                text = "Tags:",
+                text = stringResource(R.string.tags_label),
                 style = UI.typo.nC.style(
                     color = UI.colors.gray,
                     fontWeight = FontWeight.Normal
@@ -404,7 +405,7 @@ private fun getTransactionDescription(transaction: Transaction): String? {
                 paidFor != null -> {
             stringResource(
                 R.string.bill_paid,
-                paidFor.month.name.lowercase().capitalizeLocal(),
+                paidFor.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()),
                 paidFor.year.toString()
             )
         }

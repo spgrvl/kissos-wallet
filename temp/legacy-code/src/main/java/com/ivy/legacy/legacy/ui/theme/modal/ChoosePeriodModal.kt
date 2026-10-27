@@ -393,9 +393,7 @@ private fun IntervalFromToDate(
             text = if (border == IntervalBorder.FROM) {
                 stringResource(R.string.from)
             } else {
-                stringResource(
-                    R.string.to
-                )
+                stringResource(R.string.range_to)
             },
             style = UI.typo.b2.style(
                 fontWeight = FontWeight.ExtraBold,

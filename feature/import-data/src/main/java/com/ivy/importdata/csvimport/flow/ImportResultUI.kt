@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -189,7 +190,7 @@ private fun SuccessSectionUI(
 
         Text(
             modifier = Modifier.padding(horizontal = 32.dp),
-            text = stringResource(R.string.transactions_imported, result.transactionsImported),
+            text = result.transactionsImported.let { pluralStringResource(R.plurals.imported_transactions, it, it) },
             style = UI.typo.nB2.style(
                 fontWeight = FontWeight.Bold,
                 color = Gray
@@ -200,7 +201,7 @@ private fun SuccessSectionUI(
 
         Text(
             modifier = Modifier.padding(horizontal = 32.dp),
-            text = stringResource(R.string.accounts_imported, result.accountsImported),
+            text = result.accountsImported.let { pluralStringResource(R.plurals.imported_accounts, it, it) },
             style = UI.typo.nB2.style(
                 fontWeight = FontWeight.Bold,
                 color = Gray
@@ -211,7 +212,7 @@ private fun SuccessSectionUI(
 
         Text(
             modifier = Modifier.padding(horizontal = 32.dp),
-            text = stringResource(R.string.categories_imported, result.categoriesImported),
+            text = result.categoriesImported.let { pluralStringResource(R.plurals.imported_categories, it, it) },
             style = UI.typo.nB2.style(
                 fontWeight = FontWeight.Bold,
                 color = Gray
@@ -251,10 +252,9 @@ private fun FailedSectionUI(
 
         Text(
             modifier = Modifier.padding(horizontal = 32.dp),
-            text = stringResource(
-                R.string.rows_from_csv_not_recognized,
-                result.rowsFound - result.transactionsImported
-            ),
+            text = (result.rowsFound - result.transactionsImported).let { rows ->
+                pluralStringResource(R.plurals.csv_rows_not_recognized, rows, rows)
+            },
             style = UI.typo.nB2.style(
                 fontWeight = FontWeight.Bold,
                 color = Gray

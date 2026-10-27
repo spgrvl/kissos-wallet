@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ivy.data.file.FileSystem
 import com.ivy.importdata.csv.domain.CSVImporterV2
 import com.ivy.importdata.csv.domain.SAMPLE_SIZE
 import com.ivy.importdata.csv.domain.parseAccount
@@ -23,7 +24,7 @@ import com.ivy.importdata.csv.domain.parseToAccount
 import com.ivy.importdata.csv.domain.parseToAccountCurrency
 import com.ivy.importdata.csv.domain.parseTransactionType
 import com.ivy.navigation.Navigation
-import com.ivy.data.file.FileSystem
+import com.ivy.ui.R
 import com.opencsv.CSVReaderBuilder
 import com.opencsv.validators.LineValidator
 import com.opencsv.validators.RowValidator
@@ -52,8 +53,8 @@ class CSVViewModel @Inject constructor(
     // region Important fields
     private var amount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Amount",
-            helpInfo = "The amount of the transactions, a positive number. Negative numbers will be made positive.",
+            ivyColumn = R.string.csv_amount,
+            helpInfo = R.string.csv_amount_help,
             name = "",
             index = -1,
             metadata = 1,
@@ -62,13 +63,8 @@ class CSVViewModel @Inject constructor(
     )
     private var type by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Transaction Type",
-            helpInfo = """
-                Select the column that determines the transaction type.
-                The type of the transaction. Can be Income, Expense or a Transfer.
-                If the type is determined by the transaction's amount -> simply select the
-                amount column and we'll do our best to match it automatically.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_type,
+            helpInfo = R.string.csv_type_help,
             name = "",
             index = -1,
             required = true,
@@ -81,11 +77,8 @@ class CSVViewModel @Inject constructor(
     )
     private var date by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Date",
-            helpInfo = """
-                The date of the transaction. To help us parse it just tell us
-                whether the Date or the Month comes first.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_date,
+            helpInfo = R.string.csv_date_help,
             name = "",
             index = -1,
             required = true,
@@ -94,10 +87,8 @@ class CSVViewModel @Inject constructor(
     )
     private var account by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Account",
-            helpInfo = """
-                The account of the transaction.
-            """.trimIndent(),
+            ivyColumn = R.string.account,
+            helpInfo = R.string.csv_account_help,
             name = "",
             index = -1,
             required = true,
@@ -106,12 +97,8 @@ class CSVViewModel @Inject constructor(
     )
     private var accountCurrency by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Account Currency",
-            helpInfo = """
-                The currency of the account that made the transaction.
-                In Ivy Wallet, transactions don't have a currency but inherit
-                the ones from their account.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_account_currency,
+            helpInfo = R.string.csv_account_currency_help,
             name = "",
             index = -1,
             required = false,
@@ -123,11 +110,8 @@ class CSVViewModel @Inject constructor(
     // region Transfer fields
     private var toAccount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "To Account",
-            helpInfo = """
-                The account receiving the transfer.
-                If you skip it, transfers won't be imported.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_to_account,
+            helpInfo = R.string.csv_to_account_help,
             name = "",
             index = -1,
             required = false,
@@ -136,11 +120,8 @@ class CSVViewModel @Inject constructor(
     )
     private var toAccountCurrency by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "To Account Currency",
-            helpInfo = """
-                The currency of the account that receives the transfer.
-                Skip it if there's no such.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_to_account_currency,
+            helpInfo = R.string.csv_to_account_currency_help,
             name = "",
             index = -1,
             required = false,
@@ -149,11 +130,8 @@ class CSVViewModel @Inject constructor(
     )
     private var toAmount by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "To Amount",
-            helpInfo = """
-                The amount that the "To Account" will receive".
-                Skip it if there's no such.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_to_amount,
+            helpInfo = R.string.csv_to_amount_help,
             name = "",
             index = -1,
             required = false,
@@ -165,10 +143,8 @@ class CSVViewModel @Inject constructor(
     // region Optional fields
     private var category by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Category",
-            helpInfo = """
-                The category of the transaction.
-            """.trimIndent(),
+            ivyColumn = R.string.category,
+            helpInfo = R.string.csv_category_help,
             name = "",
             index = -1,
             required = false,
@@ -177,10 +153,8 @@ class CSVViewModel @Inject constructor(
     )
     private var title by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Title",
-            helpInfo = """
-                The title of the transaction.
-            """.trimIndent(),
+            ivyColumn = R.string.csv_title,
+            helpInfo = R.string.csv_title_help,
             name = "",
             index = -1,
             required = false,
@@ -189,10 +163,8 @@ class CSVViewModel @Inject constructor(
     )
     private var description by mutableStateOf(
         ColumnMapping(
-            ivyColumn = "Description",
-            helpInfo = """
-                The description of the transaction.
-            """.trimIndent(),
+            ivyColumn = R.string.description,
+            helpInfo = R.string.csv_description_help,
             name = "",
             index = -1,
             required = false,

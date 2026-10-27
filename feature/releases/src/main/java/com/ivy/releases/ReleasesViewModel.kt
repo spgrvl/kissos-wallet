@@ -5,7 +5,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
+import com.ivy.base.resource.ResourceProvider
 import com.ivy.ui.ComposeViewModel
+import com.ivy.ui.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
@@ -15,9 +17,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ReleasesViewModel @Inject constructor(
     private val releasesDataSource: ReleasesDataSource,
-    private val releasesContentParser: ReleasesContentParser
+    private val releasesContentParser: ReleasesContentParser,
+    private val resourceProvider: ResourceProvider,
 ) : ComposeViewModel<ReleasesState, ReleasesEvent>() {
-    private val loadingMessage = "Loading..."
+    private val loadingMessage = resourceProvider.getString(R.string.loading)
     private val releaseState = mutableStateOf<ReleasesState>(
         ReleasesState.Loading(loadingMessage)
     )
@@ -49,7 +52,7 @@ class ReleasesViewModel @Inject constructor(
         val response = releasesDataSource.fetchReleaseInfo()
 
         if (response == null) {
-            releaseState.value = ReleasesState.Error("Error")
+            releaseState.value = ReleasesState.Error(resourceProvider.getString(R.string.error))
             return
         }
 

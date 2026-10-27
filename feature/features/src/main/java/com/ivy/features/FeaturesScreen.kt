@@ -26,12 +26,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ivy.design.system.colors.IvyColors.Gray
 import com.ivy.navigation.navigation
 import com.ivy.navigation.screenScopedViewModel
+import com.ivy.ui.R
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -97,7 +99,7 @@ private fun Title(
 ) {
     Text(
         modifier = modifier,
-        text = "Features",
+        text = stringResource(R.string.features),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )

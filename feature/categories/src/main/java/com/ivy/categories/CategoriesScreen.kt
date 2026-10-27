@@ -597,7 +597,7 @@ fun BoxWithConstraintsScope.SortModal(
 
         items.forEach {
             SelectTypeButton(
-                text = it.displayName,
+                text = stringResource(it.displayName),
                 icon = when (it) {
                     SortOrder.DEFAULT -> R.drawable.ic_custom_star_s
                     SortOrder.BALANCE_AMOUNT -> R.drawable.ic_vue_money_coins
@@ -863,7 +863,7 @@ private fun SearchField(
 
     SearchInput(
         searchQueryTextFieldValue = searchQueryTextFieldValue,
-        hint = "Search categories",
+        hint = stringResource(R.string.search_categories),
         focus = false,
         showClearIcon = searchQueryTextFieldValue.text.isNotEmpty(),
         onSetSearchQueryTextField = {

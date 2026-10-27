@@ -6,6 +6,7 @@ import com.ivy.base.legacy.stringRes
 import com.ivy.base.time.INSTANT_MAX_SAFE
 import com.ivy.base.time.INSTANT_MIN_SAFE
 import com.ivy.base.time.TimeConverter
+import com.ivy.base.time.writesDayBeforeMonth
 import com.ivy.frp.Total
 import com.ivy.ui.R
 import java.time.Instant
@@ -134,7 +135,10 @@ fun LocalDateTime.formatLocalTime(): String {
 }
 
 @Deprecated("Use the TimeConverter interface via DI")
-fun LocalDate.formatDateOnly(): String = this.formatLocal("MMM. dd", ZoneOffset.systemDefault())
+fun LocalDate.formatDateOnly(): String = this.formatLocal(
+    if (Locale.getDefault().writesDayBeforeMonth()) "d MMM" else "MMM. dd",
+    ZoneOffset.systemDefault()
+)
 
 @Deprecated("Use the TimeConverter interface via DI")
 fun LocalDate.formatDateOnlyWithYear(): String =

@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 
 @Deprecated("Legacy. Will be removed.")
@@ -17,6 +18,12 @@ fun stringRes(
     // I don't want strings.xml to handle something different than String at this point
     return appContext.getString(id, *args)
 }
+
+fun pluralsRes(
+    @PluralsRes id: Int,
+    quantity: Int,
+    vararg args: Any
+): String = appContext.resources.getQuantityString(id, quantity, *args)
 
 @Deprecated("Legacy. Will be removed.")
 fun refreshWidget(widgetReceiver: Class<*>) {

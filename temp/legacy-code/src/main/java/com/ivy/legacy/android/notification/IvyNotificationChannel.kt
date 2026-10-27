@@ -4,20 +4,21 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.ivy.ui.R
 
 enum class IvyNotificationChannel(
     val channelId: String,
-    val channelName: String,
-    val description: String,
+    @StringRes val channelName: Int,
+    @StringRes val description: Int,
     val importance: Int = NotificationManager.IMPORTANCE_MAX,
     val bypassDnd: Boolean = true
 ) {
     TRANSACTION_REMINDER(
         channelId = "transaction_reminder",
-        channelName = "Transaction reminder",
-        description = "Reminding you to record your transactions on a daily basis.",
+        channelName = R.string.reminder_channel_name,
+        description = R.string.reminder_channel_description,
         importance = NotificationManager.IMPORTANCE_HIGH,
         bypassDnd = false
     );
@@ -29,10 +30,10 @@ enum class IvyNotificationChannel(
         val colorPurple = ContextCompat.getColor(context, R.color.green)
         val channel = NotificationChannel(
             channelId,
-            channelName,
+            context.getString(channelName),
             importance
         )
-        channel.description = description
+        channel.description = context.getString(description)
         channel.lightColor = colorPurple
         channel.enableLights(true)
         channel.enableVibration(true)

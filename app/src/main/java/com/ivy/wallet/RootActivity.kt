@@ -386,7 +386,7 @@ class RootActivity : AppCompatActivity(), RootScreen {
             e.printStackTrace()
             Toast.makeText(
                 this,
-                "No browser app found. Visit manually: $url",
+                getString(R.string.no_browser_app, url),
                 Toast.LENGTH_LONG
             ).show()
         }

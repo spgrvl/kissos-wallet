@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ivy.base.time.writesDayBeforeMonth
 import com.ivy.design.l0_system.UI
 import com.ivy.design.l0_system.style
 import com.ivy.legacy.IvyWalletComponentPreview
@@ -26,6 +27,7 @@ import com.ivy.ui.R
 import com.ivy.wallet.ui.theme.Gray
 import com.ivy.wallet.ui.theme.Green
 import java.time.LocalDate
+import java.util.Locale
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -50,7 +52,13 @@ fun HistoryDateDivider(
         Column {
             Text(
                 text = date.formatLocal(
-                    if (today.year == date.year) "MMMM dd." else "MMM dd. yyy"
+                    when {
+                        !Locale.getDefault().writesDayBeforeMonth() ->
+                            if (today.year == date.year) "MMMM dd." else "MMM dd. yyy"
+
+                        today.year == date.year -> "d MMMM"
+                        else -> "d MMM yyyy"
+                    }
                 ),
                 style = UI.typo.b1.style(
                     fontWeight = FontWeight.ExtraBold

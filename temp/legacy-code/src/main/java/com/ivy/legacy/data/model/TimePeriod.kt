@@ -1,6 +1,7 @@
 package com.ivy.legacy.data.model
 
 import androidx.compose.runtime.Immutable
+import com.ivy.base.legacy.stringRes
 import com.ivy.base.time.TimeConverter
 import com.ivy.base.time.TimeProvider
 import com.ivy.legacy.utils.atEndOfDay
@@ -8,6 +9,7 @@ import com.ivy.legacy.utils.dateNowUTC
 import com.ivy.legacy.utils.endOfMonth
 import com.ivy.legacy.utils.startOfMonth
 import com.ivy.legacy.utils.withDayOfMonthSafe
+import com.ivy.ui.R
 import com.ivy.ui.time.TimeFormatter
 import java.time.Instant
 import java.time.LocalDate
@@ -155,10 +157,10 @@ data class TimePeriod(
             }
 
             lastNRange != null -> {
-                "Last ${lastNRange.forDisplay()}"
+                lastNRange.forDisplay()
             }
 
-            else -> "Custom"
+            else -> stringRes(R.string.custom_period)
         }
     }
 
@@ -186,7 +188,7 @@ data class TimePeriod(
             }
 
             lastNRange != null -> {
-                "the last ${lastNRange.forDisplay()}"
+                lastNRange.forDisplay(inSentence = true)
             }
 
             else -> {
