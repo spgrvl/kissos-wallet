@@ -27,7 +27,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,7 +43,7 @@ import com.ivy.legacy.data.model.Month.Companion.fromMonthValue
 import com.ivy.legacy.data.model.Month.Companion.monthsList
 import com.ivy.legacy.data.model.TimePeriod
 import com.ivy.legacy.ivyWalletCtx
-import com.ivy.legacy.utils.addKeyboardListener
+import com.ivy.legacy.utils.KeyboardListener
 import com.ivy.legacy.utils.dateNowUTC
 import com.ivy.legacy.utils.formatDateOnlyWithYear
 import com.ivy.legacy.utils.onScreenStart
@@ -447,16 +446,13 @@ private fun ColumnScope.LastNPeriod(
 
     onSelected: (LastNTimeRange) -> Unit
 ) {
-    val rootView = LocalView.current
     val coroutineScope = rememberCoroutineScope()
 
-    onScreenStart {
-        rootView.addKeyboardListener { keyboardShown ->
-            if (keyboardShown) {
-                coroutineScope.launch {
-                    delay(200)
-                    modalScrollState.animateScrollTo(modalScrollState.maxValue)
-                }
+    KeyboardListener { keyboardShown ->
+        if (keyboardShown) {
+            coroutineScope.launch {
+                delay(200)
+                modalScrollState.animateScrollTo(modalScrollState.maxValue)
             }
         }
     }

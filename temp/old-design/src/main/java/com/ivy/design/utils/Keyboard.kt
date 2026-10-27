@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalView
@@ -32,39 +33,50 @@ fun View.hideKeyboard() {
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
 fun keyboardVisibleState(): State<Boolean> {
-    val rootView = LocalView.current
-
     val keyboardVisible = remember {
         mutableStateOf(false)
     }
 
-    onEvent {
-        rootView.addKeyboardListener {
-            keyboardVisible.value = it
-        }
+    KeyboardListener {
+        keyboardVisible.value = it
     }
 
     return keyboardVisible
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
-fun View.addKeyboardListener(keyboardCallback: (visible: Boolean) -> Unit) {
-    doOnLayout {
-        // get init state of keyboard
-        var keyboardVisible = isKeyboardOpen(this)
-
-        // callback as soon as the layout is set with whether the keyboard is open or not
-        keyboardCallback(keyboardVisible)
-
-        // whenever the layout resizes/changes, callback with the state of the keyboard.
-        viewTreeObserver.addOnGlobalLayoutListener {
-            val keyboardUpdateCheck = isKeyboardOpen(this)
-            // since the observer is hit quite often, only callback when there is a change.
-            if (keyboardUpdateCheck != keyboardVisible) {
-                keyboardCallback(keyboardUpdateCheck)
-                keyboardVisible = keyboardUpdateCheck
-            }
+fun View.addKeyboardListener(keyboardCallback: (visible: Boolean) -> Unit): () -> Unit {
+    var removed = false
+    var keyboardVisible: Boolean? = null
+    val listener = ViewTreeObserver.OnGlobalLayoutListener {
+        val visible = isKeyboardOpen(this)
+        // The observer is hit quite often, so only call back when there is a change
+        if (visible != keyboardVisible) {
+            keyboardVisible = visible
+            keyboardCallback(visible)
         }
+    }
+    // The initial state, as soon as the layout is set
+    doOnLayout { if (!removed) listener.onGlobalLayout() }
+    viewTreeObserver.addOnGlobalLayoutListener(listener)
+    return {
+        removed = true
+        viewTreeObserver.removeOnGlobalLayoutListener(listener)
+    }
+}
+
+/**
+ * Calls [onChange] when the keyboard shows or hides, for as long as this is composed.
+ * Unlike registering with [addKeyboardListener] on every screen start, this doesn't pile up listeners
+ * that run on every layout for the rest of the app's life.
+ */
+@Composable
+fun KeyboardListener(onChange: (visible: Boolean) -> Unit) {
+    val rootView = LocalView.current
+    val latestOnChange by rememberUpdatedState(onChange)
+    DisposableEffect(rootView) {
+        val remove = rootView.addKeyboardListener { latestOnChange(it) }
+        onDispose { remove() }
     }
 }
 
