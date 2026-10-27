@@ -63,7 +63,7 @@ private fun OpenSourceTexts(modifier: Modifier = Modifier) {
         modifier = modifier,
     ) {
         Text(
-            text = stringResource(R.string.ivy_wallet_open_source),
+            text = stringResource(R.string.kissos_open_source),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold
         )

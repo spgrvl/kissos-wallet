@@ -10,7 +10,7 @@ class SharedPrefs @Inject constructor(
     appContext: Context
 ) {
     companion object {
-        private const val PREFS_FILENAME = "ivy_wallet_prefs"
+        private const val PREFS_FILENAME = "kissos_prefs"
 
         const val ONBOARDING_COMPLETED = "onboarding_completed"
 

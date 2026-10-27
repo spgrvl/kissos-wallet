@@ -1,5 +1,5 @@
 plugins {
-    id("ivy.module")
+    id("kissos.module")
     org.jetbrains.kotlin.plugin.compose
 }
 

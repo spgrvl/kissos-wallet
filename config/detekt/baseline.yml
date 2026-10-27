@@ -212,14 +212,14 @@
     <ID>ArgumentListWrapping:TestRuntimeOnlyConfigurationAccessors.kt$( this, "testRuntimeOnly", dependencyNotation, dependencyConfiguration )</ID>
     <ID>ArgumentListWrapping:TestWearAppConfigurationAccessors.kt$( this, "testWearApp", dependencyNotation, dependencyConfiguration )</ID>
     <ID>ArgumentListWrapping:WearAppConfigurationAccessors.kt$( this, "wearApp", dependencyNotation, dependencyConfiguration )</ID>
-    <ID>ClassNaming:Kissos_composePlugin.kt$Ivy_composePlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_detektPlugin.kt$Ivy_detektPlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_featurePlugin.kt$Ivy_featurePlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_integration_testingPlugin.kt$Ivy_integration_testingPlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_modulePlugin.kt$Ivy_modulePlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_roomPlugin.kt$Ivy_roomPlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_scriptPlugin.kt$Ivy_scriptPlugin : Plugin</ID>
-    <ID>ClassNaming:Kissos_widgetPlugin.kt$Ivy_widgetPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_composePlugin.kt$Kissos_composePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_detektPlugin.kt$Kissos_detektPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_featurePlugin.kt$Kissos_featurePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_integration_testingPlugin.kt$Kissos_integration_testingPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_modulePlugin.kt$Kissos_modulePlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_roomPlugin.kt$Kissos_roomPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_scriptPlugin.kt$Kissos_scriptPlugin : Plugin</ID>
+    <ID>ClassNaming:Kissos_widgetPlugin.kt$Kissos_widgetPlugin : Plugin</ID>
     <ID>ClassNaming:Migration105to106_TrnRecurringRules.kt$Migration105to106_TrnRecurringRules : Migration</ID>
     <ID>ClassNaming:Migration106to107_Wishlist.kt$Migration106to107_Wishlist : Migration</ID>
     <ID>ClassNaming:Migration107to108_Sync.kt$Migration107to108_Sync : Migration</ID>
@@ -4219,14 +4219,14 @@
     <ID>ModifierListSpacing:ImplementationConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:ImplementationDependenciesMetadataConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:IntransitiveDependenciesMetadataConfigurationAccessors.kt$internal</ID>
-    <ID>ModifierListSpacing:Kissos_composePlugin.kt$Ivy_composePlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_detektPlugin.kt$Ivy_detektPlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_featurePlugin.kt$Ivy_featurePlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_integration_testingPlugin.kt$Ivy_integration_testingPlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_modulePlugin.kt$Ivy_modulePlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_roomPlugin.kt$Ivy_roomPlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_scriptPlugin.kt$Ivy_scriptPlugin$public</ID>
-    <ID>ModifierListSpacing:Kissos_widgetPlugin.kt$Ivy_widgetPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_composePlugin.kt$Kissos_composePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_detektPlugin.kt$Kissos_detektPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_featurePlugin.kt$Kissos_featurePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_integration_testingPlugin.kt$Kissos_integration_testingPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_modulePlugin.kt$Kissos_modulePlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_roomPlugin.kt$Kissos_roomPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_scriptPlugin.kt$Kissos_scriptPlugin$public</ID>
+    <ID>ModifierListSpacing:Kissos_widgetPlugin.kt$Kissos_widgetPlugin$public</ID>
     <ID>ModifierListSpacing:KotlinBuildToolsApiClasspathConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:KotlinCompilerClasspathConfigurationAccessors.kt$internal</ID>
     <ID>ModifierListSpacing:KotlinCompilerPluginClasspathConfigurationAccessors.kt$internal</ID>

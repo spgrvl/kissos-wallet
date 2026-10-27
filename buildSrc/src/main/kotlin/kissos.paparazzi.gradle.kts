@@ -1,5 +1,5 @@
 plugins {
-    id("ivy.compose")
+    id("kissos.compose")
     id("app.cash.paparazzi")
 }
 

@@ -1,5 +1,5 @@
 plugins {
-    id("ivy.widget")
+    id("kissos.widget")
 }
 
 android {

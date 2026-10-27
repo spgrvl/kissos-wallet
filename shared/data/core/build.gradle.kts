@@ -1,7 +1,7 @@
 plugins {
-    id("ivy.feature")
-    id("ivy.room")
-    id("ivy.integration.testing")
+    id("kissos.feature")
+    id("kissos.room")
+    id("kissos.integration.testing")
 }
 
 android {

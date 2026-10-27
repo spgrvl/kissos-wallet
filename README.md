@@ -23,7 +23,7 @@ Kissos (κισσός, Greek for *ivy*) is a personal money manager forked from [
 
 ## Privacy
 
-Your data stays on your device. Kissos has no accounts, analytics or tracking. Its only network calls are for exchange rates, the receipt lookups on AADE's site, and the in-app release notes and contributor list from GitHub.
+Your data stays on your device. Kissos has no accounts, analytics or tracking. Its only network calls are for exchange rates, the receipt lookups on AADE's site, and the in-app release notes from GitHub.
 
 ## Moving from Ivy Wallet
 
@@ -57,7 +57,7 @@ Kissos is built on [Ivy Wallet](https://github.com/Ivy-Apps/ivy-wallet), created
 
 Special thanks to Stefan Ilijev, co-founder and designer of Ivy Wallet, who created the [Ivy design system](https://www.figma.com/file/kSwIa07jcHEHZXo6rzx7dn/Design-System?node-id=0%3A1&mode=dev), and to [Aditya](https://github.com/adx69) and [Shymom](https://github.com/SHYMOM) for their creative contributions.
 
-The app's contributors screen also credits Ivy Wallet's contributors.
+The app's Contributors button opens this section.
 
 ## License
 
