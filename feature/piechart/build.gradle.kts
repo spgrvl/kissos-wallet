@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.piechart"
+    namespace = "com.spgrvl.kissos.piechart"
 }
 
 dependencies {

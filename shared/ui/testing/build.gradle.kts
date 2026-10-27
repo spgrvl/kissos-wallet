@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.ui.testing"
+    namespace = "com.spgrvl.kissos.ui.testing"
 }
 
 dependencies {

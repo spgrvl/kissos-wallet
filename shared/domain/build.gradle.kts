@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.domain"
+    namespace = "com.spgrvl.kissos.domain"
 }
 
 dependencies {

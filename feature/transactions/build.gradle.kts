@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.transactions"
+    namespace = "com.spgrvl.kissos.transactions"
 }
 
 dependencies {

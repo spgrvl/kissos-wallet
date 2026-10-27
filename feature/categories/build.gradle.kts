@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.categories"
+    namespace = "com.spgrvl.kissos.categories"
 }
 
 dependencies {

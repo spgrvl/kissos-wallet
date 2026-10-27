@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ivy.contributors"
+    namespace = "com.spgrvl.kissos.contributors"
 }
 
 dependencies {
