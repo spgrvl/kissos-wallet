@@ -22,7 +22,7 @@ import kotlin.coroutines.resume
 
 /**
  * Opens an e-invoicing provider's receipt page in a hidden WebView and finds its link to the document
- * on myDATA. Providers build these pages with JavaScript behind bot checks, so plain HTTP can't read them.
+ * on myDATA. Most providers build these pages with JavaScript behind bot checks, so plain HTTP can't read them.
  * Some only open the link from a button, e.g. Epsilon Digital's "Go to AADE", so it's pressed once ready.
  */
 class ProviderPageResolver @Inject constructor(

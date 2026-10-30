@@ -12,7 +12,7 @@ Kissos (κισσός, Greek for *ivy*) is a personal money manager forked from [
 ## Made for Greece
 
 - **Scan Greek receipts.** Add an expense by scanning the QR code on a cash-register (ΦΗΜ) receipt, from the add-expense screen, the quick-add menu, or by opening the receipt's link from your camera app. The amount is read offline, and the merchant, date and VAT are filled in from AADE. Receipts scanned offline, or not yet sent to AADE, are checked again in the background.
-- **E-invoicing receipts too.** Receipts sent to myDATA are read from AADE when their QR code links there, and from the provider for Epsilon Digital and Fiscal Sign receipts. These need a connection when scanning, since their code holds no amount.
+- **E-invoicing receipts too.** Receipts sent to myDATA are read from AADE when their QR code links there, and from the provider for Epsilon Digital, EntersoftOne and Fiscal Sign receipts. These need a connection when scanning, since their code holds no amount.
 - **Merchant memory.** Remembers your name, category and account for each shop (by ΑΦΜ), so repeat scans take one tap. Manage them under *Settings → Merchants*.
 - **In Greek.** The whole app is translated to Greek.
 
