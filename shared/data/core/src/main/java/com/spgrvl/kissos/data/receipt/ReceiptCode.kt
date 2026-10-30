@@ -38,7 +38,7 @@ sealed interface ReceiptCode {
 
     /**
      * A page of an e-invoicing provider, which links to the document's [MyData] page.
-     * Providers build these pages in the browser behind bot checks, so only a WebView can open them.
+     * Most providers build these pages in the browser behind bot checks, so only a WebView can open them.
      */
     data class Provider(val url: String) : ReceiptCode
 
@@ -51,6 +51,8 @@ sealed interface ReceiptCode {
         private val PROVIDER_HOSTS = listOf(
             // Epsilon Digital, e.g. https://epsilondigital6.epsilonnet.gr/fd/<id>
             "epsilonnet.gr",
+            // EntersoftOne, e.g. https://e-invoicing.gr/edocuments/ViewInvoice/-1/<id>
+            "e-invoicing.gr",
         )
 
         /** @return null for anything that isn't a supported receipt code. */

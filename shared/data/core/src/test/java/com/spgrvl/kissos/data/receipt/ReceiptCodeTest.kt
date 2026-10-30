@@ -65,6 +65,19 @@ class ReceiptCodeTest {
     }
 
     @Test
+    fun `an EntersoftOne page is a provider page`() {
+        // given
+        val url = "https://e-invoicing.gr/edocuments/ViewInvoice/-1/00000000-0000-0000-0000-000000000000_abcd1234"
+
+        // when
+        val code = ReceiptCode.parse(url)
+
+        // then
+        code shouldBe ReceiptCode.Provider(url)
+        ReceiptCode.fromKey(url) shouldBe null
+    }
+
+    @Test
     fun `a Fiscal Sign receipt is downloaded from its link`() {
         // given
         val url = "https://fiscalsign.gr/api/PrintInvoice/download/3f431961-dc73-4878-bf1d-ef17c2c1dbd6"
