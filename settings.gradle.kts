@@ -10,19 +10,13 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "IvyWallet"
+rootProject.name = "Kissos"
 include(":app")
-include(":ci-actions:base")
-include(":ci-actions:compose-stability")
-include(":ci-actions:issue-assign")
-include(":ci-actions:issue-create-comment")
-include(":ci-actions:pr-description-check")
 include(":feature:accounts")
 include(":feature:attributions")
 include(":feature:balance")
 include(":feature:budgets")
 include(":feature:categories")
-include(":feature:contributors")
 include(":feature:disclaimer")
 include(":feature:edit-transaction")
 include(":feature:exchange-rates")
@@ -31,11 +25,10 @@ include(":feature:home")
 include(":feature:import-data")
 include(":feature:loans")
 include(":feature:main")
+include(":feature:merchants")
 include(":feature:onboarding")
 include(":feature:piechart")
 include(":feature:planned-payments")
-include(":feature:poll:impl")
-include(":feature:poll:public")
 include(":feature:releases")
 include(":feature:reports")
 include(":feature:search")

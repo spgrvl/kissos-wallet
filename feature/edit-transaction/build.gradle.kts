@@ -1,9 +1,9 @@
 plugins {
-    id("ivy.feature")
+    id("kissos.feature")
 }
 
 android {
-    namespace = "com.ivy.transaction"
+    namespace = "com.spgrvl.kissos.transaction"
 }
 
 dependencies {
@@ -15,6 +15,9 @@ dependencies {
     implementation(projects.temp.legacyCode)
     implementation(projects.temp.oldDesign)
     implementation(projects.widget.balance)
+
+    implementation(libs.google.code.scanner)
+    implementation(libs.google.play.services.base)
 
     testImplementation(projects.shared.ui.testing)
 }

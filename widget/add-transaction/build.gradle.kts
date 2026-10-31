@@ -1,9 +1,9 @@
 plugins {
-    id("ivy.widget")
+    id("kissos.widget")
 }
 
 android {
-    namespace = "com.ivy.widget.transaction"
+    namespace = "com.spgrvl.kissos.widget.transaction"
 }
 
 dependencies {

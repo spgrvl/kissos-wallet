@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="68dp"
+    android:viewportWidth="80"
+    android:viewportHeight="68">
+    <!-- Same leaf as the launcher icon, centered in the splash logo's 1.18:1 box -->
+    <group
+        android:translateX="-14"
+        android:translateY="-19.5">
+        <!-- Stem -->
+        <path
+            android:pathData="M54,67 Q55.5,77 52.5,85"
+            android:strokeWidth="3"
+            android:strokeColor="#2E7D32"
+            android:strokeLineCap="round" />
+        <!-- Leaf -->
+        <path
+            android:fillColor="#2E7D32"
+            android:pathData="M54,21 Q57.5,30.5 63,39 Q74.5,36 86,44.5 Q80.5,53 71,57 Q76,65 74,74 Q64,76 57,69 Q54,67 54,67 Q54,67 51,69 Q44,76 34,74 Q32,65 37,57 Q27.5,53 22,44.5 Q33.5,36 45,39 Q50.5,30.5 54,21 Z"
+            android:strokeWidth="1"
+            android:strokeColor="#2E7D32"
+            android:strokeLineJoin="round" />
+        <!-- Veins -->
+        <path
+            android:pathData="M54,67 L54,27 M54,67 L81,45.5 M54,67 L27,45.5 M54,67 L70,72 M54,67 L38,72"
+            android:strokeWidth="1.6"
+            android:strokeColor="#A5D6A7"
+            android:strokeLineCap="round" />
+    </group>
+</vector>

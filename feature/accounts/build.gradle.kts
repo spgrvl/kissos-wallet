@@ -1,9 +1,9 @@
 plugins {
-    id("ivy.feature")
+    id("kissos.feature")
 }
 
 android {
-    namespace = "com.ivy.accounts"
+    namespace = "com.spgrvl.kissos.accounts"
 }
 
 dependencies {

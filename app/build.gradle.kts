@@ -6,17 +6,15 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
 }
 
 android {
-    namespace = "com.ivy.wallet"
+    namespace = "com.spgrvl.kissos.wallet"
     compileSdk = libs.versions.target.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.ivy.wallet"
+        applicationId = "com.spgrvl.kissos"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionName = libs.versions.version.name.get()
@@ -25,6 +23,8 @@ android {
 
     androidResources {
         generateLocaleConfig = true
+        // Kissos ships in English and Greek only; drop libraries' other translations too
+        localeFilters += listOf("en", "el")
     }
 
     signingConfigs {
@@ -57,7 +57,7 @@ android {
 
             signingConfig = signingConfigs.getByName("release")
 
-            resValue("string", "app_name", "Ivy Wallet")
+            resValue("string", "app_name", "Kissos")
         }
 
         debug {
@@ -70,7 +70,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
 
             applicationIdSuffix = ".debug"
-            resValue("string", "app_name", "Ivy Wallet Debug")
+            resValue("string", "app_name", "Kissos Debug")
         }
 
         create("demo") {
@@ -89,7 +89,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
 
             applicationIdSuffix = ".debug"
-            resValue("string", "app_name", "Ivy Wallet")
+            resValue("string", "app_name", "Kissos")
         }
     }
 
@@ -121,12 +121,14 @@ android {
     }
 }
 
+// APKs and bundles are named kissos-<version>-<build type>, e.g. kissos-2026.10.22-release.apk
+base.archivesName = "kissos-${libs.versions.version.name.get()}"
+
 dependencies {
     implementation(projects.feature.attributions)
     implementation(projects.feature.balance)
     implementation(projects.feature.budgets)
     implementation(projects.feature.categories)
-    implementation(projects.feature.contributors)
     implementation(projects.feature.disclaimer)
     implementation(projects.feature.editTransaction)
     implementation(projects.feature.exchangeRates)
@@ -135,17 +137,15 @@ dependencies {
     implementation(projects.feature.importData)
     implementation(projects.feature.loans)
     implementation(projects.feature.main)
+    implementation(projects.feature.merchants)
     implementation(projects.feature.onboarding)
     implementation(projects.feature.piechart)
     implementation(projects.feature.plannedPayments)
-    implementation(projects.feature.poll.impl)
-    implementation(projects.feature.poll.public)
     implementation(projects.feature.releases)
     implementation(projects.feature.reports)
     implementation(projects.feature.search)
     implementation(projects.feature.settings)
     implementation(projects.feature.transactions)
-    implementation(projects.feature.poll.impl)
     implementation(projects.shared.base)
     implementation(projects.shared.data.core)
     implementation(projects.shared.domain)
@@ -163,7 +163,6 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.bundles.activity)
     implementation(libs.bundles.google)
-    implementation(libs.bundles.firebase)
     implementation(libs.datastore)
     implementation(libs.androidx.security)
     implementation(libs.androidx.biometrics)
