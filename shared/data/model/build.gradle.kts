@@ -1,7 +1,7 @@
 plugins {
-    id("ivy.feature")
+    id("kissos.feature")
 }
 
 android {
-    namespace = "com.ivy.data.model"
+    namespace = "com.spgrvl.kissos.data.model"
 }

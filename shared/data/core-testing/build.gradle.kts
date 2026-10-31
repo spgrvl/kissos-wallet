@@ -1,10 +1,10 @@
 plugins {
-    id("ivy.feature")
-    id("ivy.room")
+    id("kissos.feature")
+    id("kissos.room")
 }
 
 android {
-    namespace = "com.ivy.data.testing"
+    namespace = "com.spgrvl.kissos.data.testing"
 }
 
 dependencies {

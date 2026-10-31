@@ -1,17 +1,18 @@
 plugins {
-    id("ivy.feature")
-    id("ivy.integration.testing")
-    id("ivy.room")
+    id("kissos.feature")
+    id("kissos.integration.testing")
+    id("kissos.room")
 }
 
 android {
-    namespace = "com.ivy.domain"
+    namespace = "com.spgrvl.kissos.domain"
 }
 
 dependencies {
     implementation(projects.shared.base)
     implementation(projects.shared.data.core)
 
+    implementation(libs.androidx.work)
     implementation(libs.datastore)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.opencsv)

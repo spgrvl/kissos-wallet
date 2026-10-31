@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ivy.wallet">
+    package="com.spgrvl.kissos.wallet">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -21,7 +21,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name=".IvyAndroidApp"
+        android:name=".KissosAndroidApp"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,6 +36,7 @@
         <activity
             android:name=".RootActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
             <intent-filter>
@@ -43,14 +44,67 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="ivy.wallet.intent.action.add_transaction" />
+                <action android:name="com.spgrvl.kissos.intent.action.add_transaction" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Receipt QR links, so a receipt scanned with the camera app can open in Kissos -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="www1.aade.gr" />
+                <data android:host="www1.gsis.gr" />
+                <data android:path="/tameiakes/myweb/q1.php" />
+            </intent-filter>
+            <!-- Documents sent to myDATA, e.g. by a shop's invoicing software -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="mydatapi.aade.gr" />
+                <data android:path="/myDATA/TimologioQR/QRInfo" />
+            </intent-filter>
+            <!-- Fiscal Sign receipts, see ReceiptCode.FiscalSign -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="fiscalsign.gr" />
+                <data android:pathPrefix="/api/PrintInvoice/download/" />
+            </intent-filter>
+            <!-- E-invoicing providers' receipt pages, see ReceiptCode.Provider -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="*.epsilonnet.gr" />
+                <data android:pathPrefix="/fd/" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="e-invoicing.gr" />
+                <data android:pathPrefix="/edocuments/ViewInvoice/" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <!-- Download Google's code scanner when the app is installed, not on first scan -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode_ui" />
         <!-- It fixes HiltWorker injection for newer WorkManager versions -->
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -58,7 +112,7 @@
             tools:node="remove" />
 
         <receiver
-            android:name="com.ivy.widget.transaction.AddTransactionWidget"
+            android:name="com.spgrvl.kissos.widget.transaction.AddTransactionWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -69,7 +123,7 @@
         </receiver>
 
         <receiver
-            android:name="com.ivy.widget.transaction.AddTransactionWidgetCompact"
+            android:name="com.spgrvl.kissos.widget.transaction.AddTransactionWidgetCompact"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -80,7 +134,7 @@
         </receiver>
 
         <receiver
-            android:name="com.ivy.widget.balance.WalletBalanceWidgetReceiver"
+            android:name="com.spgrvl.kissos.widget.balance.WalletBalanceWidgetReceiver"
             android:enabled="@bool/glance_appwidget_available"
             android:exported="true"
             android:label="@string/wallet_balance"
@@ -96,7 +150,7 @@
         <service
             android:name=".PaymentTileService"
             android:exported="true"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/ic_launcher_monochrome"
             android:label="Add Payment"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
