@@ -56,6 +56,7 @@ import com.spgrvl.kissos.navigation.ReleasesScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
+import com.spgrvl.kissos.ui.component.KissosPrivacyPolicyUrl
 import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.ui.theme.Gradient
 import com.spgrvl.kissos.wallet.ui.theme.GradientGreen
@@ -449,6 +450,10 @@ private fun BoxWithConstraintsScope.UI(
             Spacer(Modifier.height(12.dp))
 
             Attributions()
+
+            Spacer(Modifier.height(12.dp))
+
+            PrivacyPolicy()
         }
 
         item {
@@ -674,6 +679,18 @@ private fun Attributions() {
         iconPadding = 6.dp
     ) {
         nav.navigateTo(AttributionsScreen)
+    }
+}
+
+@Composable
+private fun PrivacyPolicy() {
+    val uriHandler = LocalUriHandler.current
+    SettingsDefaultButton(
+        icon = R.drawable.ic_vue_security_shield,
+        text = stringResource(R.string.privacy_policy),
+        iconPadding = 6.dp
+    ) {
+        uriHandler.openUri(KissosPrivacyPolicyUrl)
     }
 }
 

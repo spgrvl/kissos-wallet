@@ -151,6 +151,7 @@
     <string name="swipe_to_agree_privacy_policy">Σύρετε για να αποδεχτείτε την Πολιτική Απορρήτου</string>
     <string name="agreed_privacy_policy">Αποδεχτήκατε την Πολιτική Απορρήτου</string>
     <string name="terms_and_conditions">Όροι και Προϋποθέσεις</string>
+    <string name="privacy_policy">Πολιτική απορρήτου</string>
     <string name="enter_your_name">Γράψτε το όνομά σας\nγια να εξατομικεύσετε\nτην εφαρμογή</string>
     <string name="what_is_your_name">Πώς σας λένε;</string>
     <string name="enter">Καταχώριση</string>
