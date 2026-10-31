@@ -22,6 +22,7 @@ import com.spgrvl.kissos.design.system.colors.KissosColors
 import com.spgrvl.kissos.ui.R
 
 const val KissosGitHubRepoUrl = "https://github.com/spgrvl/kissos-wallet"
+const val KissosPrivacyPolicyUrl = "$KissosGitHubRepoUrl/blob/main/PRIVACY.md"
 
 @Composable
 fun OpenSourceCard(
