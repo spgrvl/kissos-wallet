@@ -226,8 +226,8 @@
     <string name="report_bug">Αναφορά σφάλματος</string>
     <string name="request_a_feature">Πρόταση λειτουργίας</string>
     <string name="project_contributors">Συνεισφέροντες</string>
-    <string name="account_uppercase">ΠΡΟΦΙΛ</string>
-    <string name="anonymous">Ανώνυμος</string>
+    <string name="your_name">Το όνομά σας</string>
+    <string name="tap_to_add">Πατήστε για προσθήκη</string>
     <string name="export_to_csv">Εξαγωγή σε CSV</string>
     <string name="left_to_spend">Διαθέσιμα για έξοδα</string>
     <string name="budget_exceeded_by">Υπέρβαση προϋπολογισμού κατά</string>
