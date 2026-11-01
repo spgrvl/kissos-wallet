@@ -686,8 +686,6 @@ private fun LoanRecordItem(
                 }
 
                 if (loanRecord.interest) {
-                    // Spacer(modifier = Modifier.width(8.dp))
-
                     val textIconColor = if (isDarkColor(loan.color)) MediumWhite else MediumBlack
 
                     KissosButton(

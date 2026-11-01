@@ -229,9 +229,6 @@ private fun BoxWithConstraintsScope.UI(
             ) {
                 nameModalVisible = true
             }
-
-//            Spacer(Modifier.height(20.dp))
-//            Premium()
         }
 
         item {
@@ -294,14 +291,6 @@ private fun BoxWithConstraintsScope.UI(
             Spacer(Modifier.height(12.dp))
 
             val nav = navigation()
-//            SettingsDefaultButton(
-//                icon = R.drawable.ic_custom_atom_m,
-//                text = "Features"
-//            ) {
-//                nav.navigateTo(FeaturesScreen)
-//            }
-//
-//            Spacer(Modifier.height(12.dp))
 
             if (languageOptionVisible) {
                 SettingsDefaultButton(
@@ -394,20 +383,6 @@ private fun BoxWithConstraintsScope.UI(
                 onClick = { nav.navigateTo(FeaturesScreen) }
             )
         }
-
-//        item {
-//            SettingsSectionDivider(text = stringResource(R.string.experimental))
-//
-//            Spacer(Modifier.height(16.dp))
-//
-//            val nav = navigation()
-//            SettingsDefaultButton(
-//                icon = R.drawable.ic_custom_atom_m,
-//                text = stringResource(R.string.experimental_settings)
-//            ) {
-//                nav.navigateTo(ExperimentalScreen)
-//            }
-//        }
 
         item {
             SettingsSectionDivider(text = stringResource(R.string.other))
@@ -758,8 +733,6 @@ private fun AppSwitch(
                 )
             }
         }
-
-        // Spacer(Modifier.weight(1f))
 
         KissosSwitch(enabled = lockApp) {
             onSetLockApp(it)
