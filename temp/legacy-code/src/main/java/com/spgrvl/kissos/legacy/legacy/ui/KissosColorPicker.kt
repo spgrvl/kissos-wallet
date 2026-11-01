@@ -30,12 +30,10 @@ import com.spgrvl.kissos.design.KISSOS_COLOR_PICKER_COLORS_PREMIUM
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.dynamicContrast
 import com.spgrvl.kissos.design.l0_system.style
-import com.spgrvl.kissos.design.l1_buildingBlocks.KissosIcon
 import com.spgrvl.kissos.design.utils.densityScope
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.frp.test.TestingContext
 import com.spgrvl.kissos.legacy.frp.onScreenStart
-import com.spgrvl.kissos.legacy.kissosWalletCtx
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.ui.R
 import kotlinx.coroutines.launch
@@ -43,7 +41,6 @@ import kotlinx.coroutines.launch
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 private data class KissosColor(
     val color: Color,
-    val premium: Boolean
 )
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -64,23 +61,8 @@ fun ColumnScope.KissosColorPicker(
 
     Spacer(Modifier.height(16.dp))
 
-    val freeKissosColors = KISSOS_COLOR_PICKER_COLORS_FREE
-        .map {
-            KissosColor(
-                color = it,
-                premium = false
-            )
-        }
-
-    val premiumKissosColors = KISSOS_COLOR_PICKER_COLORS_PREMIUM
-        .map {
-            KissosColor(
-                color = it,
-                premium = true
-            )
-        }
-
-    val kissosColors = freeKissosColors + premiumKissosColors
+    val kissosColors = (KISSOS_COLOR_PICKER_COLORS_FREE + KISSOS_COLOR_PICKER_COLORS_PREMIUM)
+        .map { KissosColor(color = it) }
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -102,7 +84,6 @@ fun ColumnScope.KissosColorPicker(
         }
     }
 
-    val kissosContext = kissosWalletCtx()
     val navigation = navigation()
 
     LazyRow(
@@ -141,7 +122,6 @@ private fun ColorItem(
         Spacer(Modifier.width(24.dp))
     }
 
-    val kissosContext = kissosWalletCtx()
     Box(
         modifier = Modifier
             .clip(CircleShape)
@@ -153,16 +133,8 @@ private fun ColorItem(
             .clickable(onClick = {
                 onSelected(kissosColor)
             })
-            .testTag("color_item_${kissosColor.color.value}"),
-        contentAlignment = Alignment.Center
-    ) {
-        if (kissosColor.premium && !kissosContext.isPremium) {
-            KissosIcon(
-                icon = R.drawable.ic_custom_safe_s,
-                tint = color.dynamicContrast()
-            )
-        }
-    }
+            .testTag("color_item_${kissosColor.color.value}")
+    )
 
     Spacer(Modifier.width(if (selected) 16.dp else 24.dp))
 }

@@ -368,8 +368,6 @@
     <string name="skip_all">Παράλειψη όλων</string>
     <string name="confirm_skip_all">Επιβεβαίωση παράλειψης όλων</string>
     <string name="confirm_skip_all_description">Θέλετε σίγουρα να παραλείψετε όλες τις εκπρόθεσμες προγραμματισμένες πληρωμές;</string>
-    <string name="delete_all_user_cloud_data_warning">ΠΡΟΣΟΧΗ! Αυτή η ενέργεια θα διαγράψει ΟΡΙΣΤΙΚΑ όλα τα δεδομένα σας στο cloud για %1$s. Τα τοπικά δεδομένα στην εφαρμογή θα παραμείνουν.</string>
-    <string name="delete_all_cloud_data_question">Διαγραφή όλων των δεδομένων στο cloud;</string>
     <string name="experimental">Πειραματικά</string>
     <string name="experimental_settings">Πειραματικές ρυθμίσεις</string>
     <string name="wallet_balance">Υπόλοιπο πορτοφολιού</string>
