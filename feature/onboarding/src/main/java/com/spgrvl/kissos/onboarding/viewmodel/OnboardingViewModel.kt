@@ -12,14 +12,12 @@ import com.spgrvl.kissos.data.db.dao.read.SettingsDao
 import com.spgrvl.kissos.data.db.dao.write.WriteSettingsDao
 import com.spgrvl.kissos.ui.ComposeViewModel
 import com.spgrvl.kissos.domain.usecase.exchange.SyncExchangeRatesUseCase
-import com.spgrvl.kissos.legacy.LogoutLogic
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.data.repository.CategoryRepository
 import com.spgrvl.kissos.legacy.data.model.AccountBalance
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.legacy.datamodel.Settings
 import com.spgrvl.kissos.legacy.domain.deprecated.logic.AccountCreator
-import com.spgrvl.kissos.legacy.utils.OpResult
 import com.spgrvl.kissos.legacy.utils.ioThread
 import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.OnboardingScreen
@@ -59,14 +57,12 @@ class OnboardingViewModel @Inject constructor(
     sharedPrefs: SharedPrefs,
     transactionReminderLogic: TransactionReminderLogic,
     preloadDataLogic: PreloadDataLogic,
-    logoutLogic: LogoutLogic,
 ) : ComposeViewModel<OnboardingDetailState, OnboardingEvent>() {
 
     private val _state = mutableStateOf(OnboardingState.SPLASH)
     val state: State<OnboardingState> = _state
 
     private val _currency = mutableStateOf(KissosCurrency.getDefault())
-    private val _opGoogleSignIn = mutableStateOf<OpResult<Unit>?>(null)
     private val _accounts = mutableStateOf(listOf<AccountBalance>().toImmutableList())
     private val _accountSuggestions = mutableStateOf(listOf<CreateAccountData>().toImmutableList())
     private val _categories = mutableStateOf(listOf<Category>().toImmutableList())
@@ -86,7 +82,6 @@ class OnboardingViewModel @Inject constructor(
 
     private val router = OnboardingRouter(
         state = _state,
-        opGoogleSignIn = _opGoogleSignIn,
         accounts = _accounts,
         accountSuggestions = _accountSuggestions,
         categories = _categories,
@@ -98,7 +93,6 @@ class OnboardingViewModel @Inject constructor(
         categoryRepository = categoryRepository,
         preloadDataLogic = preloadDataLogic,
         transactionReminderLogic = transactionReminderLogic,
-        logoutLogic = logoutLogic,
         syncExchangeRatesUseCase = syncExchangeRatesUseCase,
     )
 
@@ -106,13 +100,7 @@ class OnboardingViewModel @Inject constructor(
         viewModelScope.launch {
             initiateSettings(isSystemDarkMode)
 
-            router.initBackHandling(
-                screen = screen,
-                viewModelScope = viewModelScope,
-                restartOnboarding = {
-                    start(screen, isSystemDarkMode)
-                }
-            )
+            router.initBackHandling(screen = screen)
 
             router.splashNext()
         }
@@ -145,7 +133,6 @@ class OnboardingViewModel @Inject constructor(
                 is OnboardingEvent.EditCategory -> editCategory(event.updatedCategory)
                 is OnboardingEvent.ImportFinished -> importFinished(event.success)
                 OnboardingEvent.ImportSkip -> importSkip()
-                OnboardingEvent.LoginOfflineAccount -> loginOfflineAccount()
                 OnboardingEvent.OnAddAccountsDone -> onAddAccountsDone()
                 OnboardingEvent.OnAddAccountsSkip -> onAddAccountsSkip()
                 OnboardingEvent.OnAddCategoriesDone -> onAddCategoriesDone()
@@ -157,9 +144,6 @@ class OnboardingViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loginOfflineAccount() {
-        router.offlineAccountNext()
-    }
     // Step 1 ---------------------------------------------------------------------------------------
 
     // Step 2 ---------------------------------------------------------------------------------------
