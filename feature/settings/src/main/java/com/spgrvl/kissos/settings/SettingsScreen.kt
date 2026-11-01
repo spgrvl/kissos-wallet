@@ -219,7 +219,7 @@ private fun BoxWithConstraintsScope.UI(
 
             Spacer(Modifier.height(12.dp))
 
-            AccountCard(
+            NameCard(
                 nameLocalAccount = nameLocalAccount,
             ) {
                 nameModalVisible = true
@@ -724,7 +724,7 @@ private fun AppSwitch(
 }
 
 @Composable
-private fun AccountCard(
+private fun NameCard(
     nameLocalAccount: String?,
     onCardClick: () -> Unit
 ) {
@@ -750,7 +750,7 @@ private fun AccountCard(
             Spacer(Modifier.width(24.dp))
 
             Text(
-                text = stringResource(R.string.account_uppercase),
+                text = stringResource(R.string.your_name),
                 style = UI.typo.c.style(
                     fontWeight = FontWeight.Black,
                     color = UI.colors.gray
@@ -760,7 +760,7 @@ private fun AccountCard(
 
         Spacer(Modifier.height(4.dp))
 
-        AccountCardLocalAccount(
+        NameCardRow(
             name = nameLocalAccount,
         )
 
@@ -769,9 +769,10 @@ private fun AccountCard(
 }
 
 @Composable
-private fun AccountCardLocalAccount(
+private fun NameCardRow(
     name: String?
 ) {
+    val hasName = !name.isNullOrBlank()
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -788,8 +789,9 @@ private fun AccountCardLocalAccount(
             modifier = Modifier
                 .weight(1f)
                 .testTag("local_account_name"),
-            text = if (!name.isNullOrBlank()) name else stringResource(R.string.anonymous),
+            text = if (hasName) name.orEmpty() else stringResource(R.string.tap_to_add),
             style = UI.typo.b2.style(
+                color = if (hasName) UI.colors.pureInverse else Gray,
                 fontWeight = FontWeight.Bold
             )
         )
@@ -889,44 +891,6 @@ private fun SettingsButtonRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()
-    }
-}
-
-@Composable
-private fun AccountCardButton(
-    @DrawableRes icon: Int,
-    text: String,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .clip(UI.shapes.rFull)
-            .background(UI.colors.pure, UI.shapes.rFull)
-            .clickable {
-                onClick()
-            },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Spacer(Modifier.width(12.dp))
-
-        KissosIconScaled(
-            icon = icon,
-            iconScale = IconScale.M
-        )
-
-        Spacer(Modifier.width(4.dp))
-
-        Text(
-            modifier = Modifier
-                .padding(vertical = 10.dp),
-            text = text,
-            style = UI.typo.b2.style(
-                fontWeight = FontWeight.Bold,
-                color = UI.colors.pureInverse
-            )
-        )
-
-        Spacer(Modifier.width(24.dp))
     }
 }
 
