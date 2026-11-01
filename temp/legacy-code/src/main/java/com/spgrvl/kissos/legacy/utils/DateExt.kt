@@ -1,7 +1,5 @@
 package com.spgrvl.kissos.legacy.utils
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import com.spgrvl.kissos.base.legacy.stringRes
 import com.spgrvl.kissos.base.time.INSTANT_MAX_SAFE
 import com.spgrvl.kissos.base.time.INSTANT_MIN_SAFE
@@ -27,10 +25,6 @@ fun dateNowLocal(): LocalDate = LocalDate.now()
 @Deprecated("Use the TimeProvider interface via DI")
 @Total
 fun timeNowUTC(): LocalDateTime = LocalDateTime.now(ZoneOffset.UTC)
-
-@Deprecated("Use the TimeProvider interface via DI")
-@Total
-fun timeUTC(): LocalTime = LocalTime.now(ZoneOffset.UTC)
 
 @Deprecated("Use the TimeProvider interface via DI")
 @Total
@@ -85,54 +79,6 @@ fun LocalDateTime.formatNicely(
 }
 
 fun LocalDateTime.getISOFormattedDateTime(): String = this.formatLocal("yyyyMMdd-HHmm")
-
-@Deprecated("Use the TimeConverter interface via DI")
-fun LocalDateTime.formatNicelyWithTime(
-    noWeekDay: Boolean = true,
-    zone: ZoneId = ZoneOffset.systemDefault()
-): String {
-    val today = dateNowUTC()
-    val isThisYear = today.year == this.year
-
-    val patternNoWeekDay = "dd MMM HH:mm"
-
-    if (noWeekDay) {
-        return if (isThisYear) {
-            this.formatLocal(patternNoWeekDay)
-        } else {
-            this.formatLocal("dd MMM, yyyy HH:mm")
-        }
-    }
-
-    return when (this.toLocalDate()) {
-        today -> {
-            stringRes(R.string.today_date, this.formatLocal(patternNoWeekDay, zone))
-        }
-
-        today.minusDays(1) -> {
-            stringRes(R.string.yesterday_date, this.formatLocal(patternNoWeekDay, zone))
-        }
-
-        today.plusDays(1) -> {
-            stringRes(R.string.tomorrow, this.formatLocal(patternNoWeekDay, zone))
-        }
-
-        else -> {
-            if (isThisYear) {
-                this.formatLocal("EEE, dd MMM HH:mm", zone)
-            } else {
-                this.formatLocal("dd MMM, yyyy HH:mm", zone)
-            }
-        }
-    }
-}
-
-@Deprecated("Use the TimeConverter interface via DI")
-@Composable
-fun LocalDateTime.formatLocalTime(): String {
-    val timeFormat = android.text.format.DateFormat.getTimeFormat(LocalContext.current)
-    return timeFormat.format(this.millis())
-}
 
 @Deprecated("Use the TimeConverter interface via DI")
 fun LocalDate.formatDateOnly(): String = this.formatLocal(

@@ -121,13 +121,6 @@ fun Iterable<com.spgrvl.kissos.data.model.Transaction>.filterOverdue(): List<com
     }
 }
 
-fun FromToTimeRange.toCloseTimeRangeUnsafe(): ClosedTimeRange {
-    return ClosedTimeRange(
-        from = from(),
-        to = to()
-    )
-}
-
 fun FromToTimeRange.toCloseTimeRange(): ClosedTimeRange {
     return ClosedTimeRange(
         from = from ?: kissosMinTime(),

@@ -1,22 +1,17 @@
 package com.spgrvl.kissos.data.repository
 
 import android.icu.util.Currency
-import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.base.threading.DispatchersProvider
 import com.spgrvl.kissos.data.db.dao.read.SettingsDao
-import com.spgrvl.kissos.data.db.dao.write.WriteSettingsDao
-import com.spgrvl.kissos.data.db.entity.SettingsEntity
 import com.spgrvl.kissos.data.model.primitive.AssetCode
 import kotlinx.coroutines.withContext
 import java.util.Locale
-import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class CurrencyRepository @Inject constructor(
     private val settingsDao: SettingsDao,
-    private val writeSettingsDao: WriteSettingsDao,
     private val dispatchersProvider: DispatchersProvider,
 ) {
     companion object {
@@ -37,26 +32,5 @@ class CurrencyRepository @Inject constructor(
 
     private fun getDefaultFIATCurrency(): Currency? {
         return Currency.getInstance(Locale.getDefault())
-    }
-
-    suspend fun setBaseBaseCurrency(newCurrency: AssetCode) {
-        withContext(dispatchersProvider.io) {
-            val currentEntity = settingsDao.findFirstOrNull()
-                ?: SettingsEntity(
-                    theme = Theme.AUTO,
-                    currency = FALLBACK_DEFAULT_CURRENCY,
-                    bufferAmount = 0.0,
-                    name = "",
-                    isSynced = true,
-                    isDeleted = false,
-                    id = UUID.randomUUID()
-                )
-            baseCurrencyMemo = newCurrency
-            writeSettingsDao.save(
-                currentEntity.copy(
-                    currency = newCurrency.code
-                )
-            )
-        }
     }
 }
