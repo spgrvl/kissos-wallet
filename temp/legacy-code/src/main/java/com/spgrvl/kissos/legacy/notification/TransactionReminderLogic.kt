@@ -23,19 +23,6 @@ class TransactionReminderLogic @Inject constructor(
 
         // v2 points at the worker's pre-Kissos class name, which no longer exists
         private const val UNIQUE_WORK_NAME_V3 = "transaction_reminder_work_v3"
-        private const val UNIQUE_WORK_NAME_TEST = "transaction_reminder_work_test"
-    }
-
-    fun testNow() {
-        val workBuilder = PeriodicWorkRequestBuilder<TransactionReminderWorker>(5, TimeUnit.MINUTES)
-
-        WorkManager
-            .getInstance(appContext)
-            .enqueueUniquePeriodicWork(
-                UNIQUE_WORK_NAME_TEST,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                workBuilder.build()
-            )
     }
 
     fun scheduleReminder() {
