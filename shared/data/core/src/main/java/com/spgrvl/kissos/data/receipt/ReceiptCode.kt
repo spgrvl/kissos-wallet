@@ -46,6 +46,7 @@ sealed interface ReceiptCode {
         private const val MYDATA_PATH = "/TimologioQR/QRInfo"
         private const val FISCAL_SIGN_PATH = "/api/PrintInvoice/download/"
         private val ESCAPE = Regex("%[0-9a-fA-F]{2}")
+        private val HTTP_SCHEME = Regex("^http:", RegexOption.IGNORE_CASE)
 
         /** Hosts of the e-invoicing providers whose pages are known to link to myDATA. */
         private val PROVIDER_HOSTS = listOf(
@@ -74,15 +75,17 @@ sealed interface ReceiptCode {
             }
             val host = uri.host?.lowercase() ?: return null
             val path = uri.rawPath.orEmpty()
+            // Printed codes can say http, but the app only makes secure connections
+            val secureUrl = text.replace(HTTP_SCHEME, "https:")
             return when {
                 host.isDomain("aade.gr") && path.endsWith(MYDATA_PATH, ignoreCase = true) &&
                     uri.rawQuery?.contains("q=") == true ->
                     MyData("https://${uri.rawAuthority}$path?${uri.rawQuery.upperCaseEscapes()}")
 
                 host.isDomain("fiscalsign.gr") && path.startsWith(FISCAL_SIGN_PATH, ignoreCase = true) ->
-                    FiscalSign(text)
+                    FiscalSign(secureUrl)
 
-                PROVIDER_HOSTS.any { host.isDomain(it) } -> Provider(text)
+                PROVIDER_HOSTS.any { host.isDomain(it) } -> Provider(secureUrl)
                 else -> null
             }
         }

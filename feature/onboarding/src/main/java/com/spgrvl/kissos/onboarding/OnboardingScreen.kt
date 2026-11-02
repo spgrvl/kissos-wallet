@@ -13,7 +13,7 @@ import com.spgrvl.kissos.navigation.OnboardingScreen
 import com.spgrvl.kissos.onboarding.steps.OnboardingAccounts
 import com.spgrvl.kissos.onboarding.steps.OnboardingCategories
 import com.spgrvl.kissos.onboarding.steps.OnboardingSetCurrency
-import com.spgrvl.kissos.onboarding.steps.OnboardingSplashLogin
+import com.spgrvl.kissos.onboarding.steps.OnboardingSplash
 import com.spgrvl.kissos.onboarding.steps.OnboardingType
 import com.spgrvl.kissos.onboarding.viewmodel.OnboardingViewModel
 import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
@@ -67,11 +67,8 @@ private fun BoxWithConstraintsScope.UI(
     onEvent: (OnboardingEvent) -> Unit = {}
 ) {
     when (onboardingState) {
-        OnboardingState.SPLASH, OnboardingState.LOGIN -> {
-            OnboardingSplashLogin(
-                onboardingState = onboardingState,
-                onSkip = { onEvent(OnboardingEvent.LoginOfflineAccount) }
-            )
+        OnboardingState.SPLASH -> {
+            OnboardingSplash()
         }
 
         OnboardingState.CHOOSE_PATH -> {

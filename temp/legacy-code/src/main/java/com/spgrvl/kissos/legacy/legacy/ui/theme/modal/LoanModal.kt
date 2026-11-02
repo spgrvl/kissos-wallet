@@ -152,7 +152,6 @@ fun BoxWithConstraintsScope.LoanModal(
         PrimaryAction = {
             ModalAddSave(
                 item = modal?.loan,
-                // enabled = nameTextFieldValue.text.isNotNullOrBlank() && amount > 0 && ((createLoanTrans && selectedAcc != null) || !createLoanTrans)
                 enabled = nameTextFieldValue.text.isNotNullOrBlank() && amount > 0 && selectedAcc != null
             ) {
                 accountChangeModal =
