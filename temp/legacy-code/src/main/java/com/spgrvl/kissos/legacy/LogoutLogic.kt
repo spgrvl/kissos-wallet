@@ -20,7 +20,6 @@ import com.spgrvl.kissos.data.repository.ExchangeRatesRepository
 import com.spgrvl.kissos.data.repository.TagRepository
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.legacy.utils.ioThread
-import com.spgrvl.kissos.navigation.MainScreen
 import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.OnboardingScreen
 import javax.inject.Inject
@@ -73,9 +72,5 @@ class LogoutLogic @Inject constructor(
         writeLoanDao.deleteAll()
         writeLoanRecordDao.deleteAll()
         exchangeRatesRepository.deleteAll()
-    }
-
-    suspend fun cloudLogout() {
-        navigation.navigateTo(MainScreen)
     }
 }

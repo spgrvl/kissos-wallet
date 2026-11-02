@@ -137,14 +137,6 @@ class KissosWalletCtx @Inject constructor() : KissosContext() {
     }
     // Activity help -------------------------------------------------------------------------------
 
-    // Billing -------------------------------------------------------------------------------------
-    @Deprecated("Legacy code. Don't use it, please.")
-    var isPremium = true // if (BuildConfig.DEBUG) Constants.PREMIUM_INITIAL_VALUE_DEBUG else false
-    // Billing -------------------------------------------------------------------------------------
-
-    @Deprecated("Legacy code. Don't use it, please.")
-    lateinit var googleSignIn: (idTokenResult: (String?) -> Unit) -> Unit
-
     @Deprecated("Legacy code. Don't use it, please.")
     lateinit var createNewFile: (fileName: String, onCreated: (Uri) -> Unit) -> Unit
 
@@ -156,7 +148,6 @@ class KissosWalletCtx @Inject constructor() : KissosContext() {
     fun reset() {
         mainTab = com.spgrvl.kissos.legacy.data.model.MainTab.HOME
         startDayOfMonth = 1
-        isPremium = true
         transactionsListState = null
         categoriesListState = null
         accountsListState = null
