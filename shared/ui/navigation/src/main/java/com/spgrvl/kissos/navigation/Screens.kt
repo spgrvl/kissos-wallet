@@ -70,7 +70,7 @@ data class EditPlannedScreen(
     val categoryId: UUID? = null,
     val title: String? = null,
     val description: String? = null,
-    val typeChosen: Boolean = false,
+    val typeChosen: Boolean,
 ) : Screen {
     override val isLegacy: Boolean
         get() = true

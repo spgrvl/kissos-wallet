@@ -98,7 +98,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
         navigation.navigateTo(
           EditPlannedScreen(
             type = TransactionType.EXPENSE,
-            plannedPaymentRuleId = null
+            plannedPaymentRuleId = null,
+            typeChosen = false
           )
         )
       }
