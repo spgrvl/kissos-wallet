@@ -444,7 +444,7 @@ private fun shouldFocusAmount(amount: Double) = amount == 0.0
 private fun Preview() {
     KissosWalletPreview {
         UI(
-            screen = EditPlannedScreen(null, TransactionType.EXPENSE),
+            screen = EditPlannedScreen(null, TransactionType.EXPENSE, typeChosen = false),
             EditPlannedScreenState(
                 oneTime = false,
                 startDate = null,

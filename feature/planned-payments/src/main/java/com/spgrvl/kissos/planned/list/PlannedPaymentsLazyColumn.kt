@@ -193,7 +193,8 @@ private fun onPlannedPaymentClick(
     nav.navigateTo(
         EditPlannedScreen(
             plannedPaymentRuleId = rule.id,
-            type = rule.type
+            type = rule.type,
+            typeChosen = false
         )
     )
 }
