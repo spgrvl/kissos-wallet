@@ -237,12 +237,6 @@ fun BoxWithConstraintsScope.AccountModal(
         dismiss = { currencyModalVisible = false }
     ) {
         currencyCode = it
-
-//        if (KissosCurrency.fromCode(it)?.isCrypto == true) {
-//            if (getCustomIconId(context = context, iconName = it, size = "m") != null) {
-//                icon = it
-//            }
-//        }
     }
 
     ChooseIconModal(

@@ -12,9 +12,7 @@ import com.spgrvl.kissos.data.model.CategoryId
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.data.repository.mapper.TransactionMapper
 import com.spgrvl.kissos.legacy.data.model.FromToTimeRange
-import com.spgrvl.kissos.legacy.data.model.filterOverdue
 import com.spgrvl.kissos.legacy.data.model.filterOverdueLegacy
-import com.spgrvl.kissos.legacy.data.model.filterUpcoming
 import com.spgrvl.kissos.legacy.data.model.filterUpcomingLegacy
 import com.spgrvl.kissos.legacy.datamodel.temp.toLegacy
 import com.spgrvl.kissos.legacy.datamodel.temp.toLegacyDomain
@@ -292,17 +290,6 @@ class WalletCategoryLogic @Inject constructor(
             .filterUpcomingLegacy(timeProvider, timeConverter)
     }
 
-    suspend fun upcomingByCategory(
-        category: Category,
-        range: FromToTimeRange
-    ): List<com.spgrvl.kissos.data.model.Transaction> {
-        return transactionRepository.findAllDueToBetweenByCategory(
-            categoryId = CategoryId(category.id.value),
-            startDate = range.upcomingFrom(timeProvider),
-            endDate = range.to()
-        ).filterUpcoming()
-    }
-
     @Deprecated("Uses legacy Transaction")
     suspend fun upcomingUnspecifiedLegacy(range: FromToTimeRange): List<Transaction> {
         return transactionRepository.findAllDueToBetweenByCategoryUnspecified(
@@ -313,15 +300,6 @@ class WalletCategoryLogic @Inject constructor(
                 it.toLegacy(transactionMapper)
             }
             .filterUpcomingLegacy(timeProvider, timeConverter)
-    }
-
-    suspend fun upcomingUnspecified(
-        range: FromToTimeRange
-    ): List<com.spgrvl.kissos.data.model.Transaction> {
-        return transactionRepository.findAllDueToBetweenByCategoryUnspecified(
-            startDate = range.upcomingFrom(timeProvider),
-            endDate = range.to()
-        ).filterUpcoming()
     }
 
     suspend fun calculateOverdueIncomeByCategory(
@@ -386,18 +364,6 @@ class WalletCategoryLogic @Inject constructor(
             .filterOverdueLegacy(timeProvider, timeConverter)
     }
 
-    suspend fun overdueByCategory(
-        category: Category,
-        range: FromToTimeRange
-    ): List<com.spgrvl.kissos.data.model.Transaction> {
-        return transactionRepository.findAllDueToBetweenByCategory(
-            categoryId = CategoryId(category.id.value),
-            startDate = range.from(),
-            endDate = range.overdueTo(timeProvider)
-        )
-            .filterOverdue()
-    }
-
     @Deprecated("Uses legacy Transaction")
     suspend fun overdueUnspecifiedLegacy(range: FromToTimeRange): List<Transaction> {
         return transactionRepository.findAllDueToBetweenByCategoryUnspecified(
@@ -408,14 +374,5 @@ class WalletCategoryLogic @Inject constructor(
                 it.toLegacy(transactionMapper)
             }
             .filterOverdueLegacy(timeProvider, timeConverter)
-    }
-
-    suspend fun overdueUnspecified(
-        range: FromToTimeRange
-    ): List<com.spgrvl.kissos.data.model.Transaction> {
-        return transactionRepository.findAllDueToBetweenByCategoryUnspecified(
-            startDate = range.from(),
-            endDate = range.overdueTo(timeProvider)
-        ).filterOverdue()
     }
 }
