@@ -13,6 +13,7 @@ import com.spgrvl.kissos.disclaimer.composables.AcceptTermsText
 import com.spgrvl.kissos.disclaimer.composables.AgreeButton
 import com.spgrvl.kissos.disclaimer.composables.AgreementCheckBox
 import com.spgrvl.kissos.disclaimer.composables.DisclaimerTopAppBar
+import com.spgrvl.kissos.disclaimer.composables.PrivacyPolicyLink
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.component.OpenSourceCard
 
@@ -70,7 +71,11 @@ private fun Content(
             )
         }
         item {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+            PrivacyPolicyLink()
+        }
+        item {
+            Spacer(modifier = Modifier.height(4.dp))
             AgreeButton(
                 enabled = viewState.agreeButtonEnabled,
             ) { onEvent(DisclaimerViewEvent.OnAgreeClick) }
