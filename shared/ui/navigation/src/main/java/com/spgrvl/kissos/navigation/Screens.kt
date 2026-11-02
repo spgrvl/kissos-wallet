@@ -70,14 +70,10 @@ data class EditPlannedScreen(
     val categoryId: UUID? = null,
     val title: String? = null,
     val description: String? = null,
+    val typeChosen: Boolean = false,
 ) : Screen {
     override val isLegacy: Boolean
         get() = true
-
-    fun mandatoryFilled(): Boolean {
-        return amount != null && amount > 0.0 &&
-                accountId != null
-    }
 }
 
 data object BalanceScreen : Screen {
