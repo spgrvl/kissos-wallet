@@ -91,6 +91,17 @@ class ReceiptCodeTest {
     }
 
     @Test
+    fun `provider and Fiscal Sign links over http use https`() {
+        // given
+        val provider = "epsilondigital6.epsilonnet.gr/fd/65f112109ef14dde635b08df32d26fd5:118"
+        val fiscalSign = "fiscalsign.gr/api/PrintInvoice/download/3f431961-dc73-4878-bf1d-ef17c2c1dbd6"
+
+        // then
+        ReceiptCode.parse("http://$provider") shouldBe ReceiptCode.Provider("https://$provider")
+        ReceiptCode.parse("HTTP://$fiscalSign") shouldBe ReceiptCode.FiscalSign("https://$fiscalSign")
+    }
+
+    @Test
     fun `other codes are not receipts`() {
         ReceiptCode.parse("https://example.com/receipt?q=1") shouldBe null
         ReceiptCode.parse("https://notepsilonnet.gr/fd/1") shouldBe null
