@@ -451,6 +451,7 @@ private fun BoxWithConstraintsScope.UI(
                             categoryId = category?.id?.value,
                             title = titleTextFieldValue.text,
                             description = description,
+                            typeChosen = true,
                         )
                     )
                 }
