@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -89,7 +90,6 @@ import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.TextStyle
-import java.util.Locale
 import java.util.UUID
 
 @Suppress("CyclomaticComplexMethod", "LongMethod")
@@ -405,7 +405,7 @@ private fun getTransactionDescription(transaction: Transaction): String? {
                 paidFor != null -> {
             stringResource(
                 R.string.bill_paid,
-                paidFor.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()),
+                paidFor.month.getDisplayName(TextStyle.FULL_STANDALONE, LocalConfiguration.current.locales[0]),
                 paidFor.year.toString()
             )
         }

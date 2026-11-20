@@ -274,7 +274,7 @@ private fun BoxWithConstraintsScope.UI(
             )
         )
     }
-    val titleFocus = FocusRequester()
+    val titleFocus = remember { FocusRequester() }
     val scrollState = rememberScrollState()
 
     val scanReceipt = rememberReceiptScanner(

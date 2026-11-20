@@ -13063,4 +13063,191 @@
             column="16"/>
     </issue>
 
+    <issue
+        id="ComposeModifierReused"
+        message="The modifier is passed to more than one composable on this execution path. Pass it only to the top-level layout, and use `Modifier` for child composables.&#10;&#10;See https://slackhq.github.io/compose-lints/rules/#dont-re-use-modifiers for more information."
+        errorLine1="        modifier = modifier,"
+        errorLine2="                   ~~~~~~~~">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ItemIcon.kt"
+            line="52"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ComposeModifierReused"
+        message="The modifier is passed to more than one composable on this execution path. Pass it only to the top-level layout, and use `Modifier` for child composables.&#10;&#10;See https://slackhq.github.io/compose-lints/rules/#dont-re-use-modifiers for more information."
+        errorLine1="                modifier = modifier,"
+        errorLine2="                           ~~~~~~~~">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ItemIcon.kt"
+            line="57"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="ComposeModifierReused"
+        message="The modifier is passed to more than one composable on this execution path. Pass it only to the top-level layout, and use `Modifier` for child composables.&#10;&#10;See https://slackhq.github.io/compose-lints/rules/#dont-re-use-modifiers for more information."
+        errorLine1="        modifier = modifier,"
+        errorLine2="                   ~~~~~~~~">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ItemIcon.kt"
+            line="95"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ComposeModifierReused"
+        message="The modifier is passed to more than one composable on this execution path. Pass it only to the top-level layout, and use `Modifier` for child composables.&#10;&#10;See https://slackhq.github.io/compose-lints/rules/#dont-re-use-modifiers for more information."
+        errorLine1="                modifier = modifier,"
+        errorLine2="                           ~~~~~~~~">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ItemIcon.kt"
+            line="100"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID = UUID.randomUUID(), keyword: String, visible: Boolean, dismiss: () -&gt; Unit, onKeywordChanged: (String) -&gt; Unit]` but should be `[keyword: String, visible: Boolean, dismiss: () -&gt; Unit, id: UUID = UUID.randomUUID(), onKeywordChanged: (String) -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.AddKeywordModal("
+        errorLine2="                                           ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/AddKeywordModal.kt"
+            line="32"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[bottomInset: Dp = navigationBarInset().toDensityDp(), onBack: () -&gt; Unit, PrimaryAction: @Composable () -&gt; Unit]` but should be `[onBack: () -&gt; Unit, bottomInset: Dp = navigationBarInset().toDensityDp(), PrimaryAction: @Composable () -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.BackBottomBar("
+        errorLine2="                                         ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/BackBottomBar.kt"
+            line="22"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[title: String = stringResource(R.string.set_transaction_type), visible: Boolean, includeTransferType: Boolean, initialType: TransactionType, id: UUID = UUID.randomUUID(), dismiss: () -&gt; Unit, onTransactionTypeChanged: (TransactionType) -&gt; Unit]` but should be `[visible: Boolean, includeTransferType: Boolean, initialType: TransactionType, dismiss: () -&gt; Unit, title: String = stringResource(R.string.set_transaction_type), id: UUID = UUID.randomUUID(), onTransactionTypeChanged: (TransactionType) -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.ChangeTransactionTypeModal("
+        errorLine2="                                                      ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ChangeTransactionTypeModal.kt"
+            line="45"
+            column="55"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID = UUID.randomUUID(), visible: Boolean, initialCategory: Category?, categories: List&lt;Category&gt;, showCategoryModal: (Category?) -&gt; Unit, onCategoryChanged: (Category?) -&gt; Unit, dismiss: () -&gt; Unit]` but should be `[visible: Boolean, initialCategory: Category?, categories: List&lt;Category&gt;, showCategoryModal: (Category?) -&gt; Unit, onCategoryChanged: (Category?) -&gt; Unit, id: UUID = UUID.randomUUID(), dismiss: () -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.ChooseCategoryModal("
+        errorLine2="                                               ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/edit/ChooseCategoryModal.kt"
+            line="62"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[visible: Boolean, initialIcon: String?, color: Color, id: UUID = UUID.randomUUID(), dismiss: () -&gt; Unit, onIconChosen: (String?) -&gt; Unit]` but should be `[visible: Boolean, initialIcon: String?, color: Color, dismiss: () -&gt; Unit, id: UUID = UUID.randomUUID(), onIconChosen: (String?) -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.ChooseIconModal("
+        errorLine2="                                           ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/ChooseIconModal.kt"
+            line="55"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID = UUID.randomUUID(), visible: Boolean, selectedStartDateOfMonth: Int, dismiss: () -&gt; Unit, onStartDateOfMonthSelected: (Int) -&gt; Unit]` but should be `[visible: Boolean, selectedStartDateOfMonth: Int, dismiss: () -&gt; Unit, id: UUID = UUID.randomUUID(), onStartDateOfMonthSelected: (Int) -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.ChooseStartDateOfMonthModal("
+        errorLine2="                                                       ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/ChooseStartDateOfMonthModal.kt"
+            line="37"
+            column="56"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID = UUID.randomUUID(), visible: Boolean, description: String?, onDescriptionChanged: (String?) -&gt; Unit, dismiss: () -&gt; Unit]` but should be `[visible: Boolean, description: String?, onDescriptionChanged: (String?) -&gt; Unit, id: UUID = UUID.randomUUID(), dismiss: () -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.DescriptionModal("
+        errorLine2="                                            ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/edit/DescriptionModal.kt"
+            line="45"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID?, visible: Boolean, dismiss: () -&gt; Unit, SecondaryActions: (@Composable () -&gt; Unit)? = null, PrimaryAction: @Composable () -&gt; Unit, scrollState: ScrollState? = rememberScrollState(), shiftIfKeyboardShown: Boolean = true, includeActionsRowPadding: Boolean = true, Content: @Composable ColumnScope.() -&gt; Unit]` but should be `[id: UUID?, visible: Boolean, dismiss: () -&gt; Unit, PrimaryAction: @Composable () -&gt; Unit, SecondaryActions: (@Composable () -&gt; Unit)? = null, scrollState: ScrollState? = rememberScrollState(), shiftIfKeyboardShown: Boolean = true, includeActionsRowPadding: Boolean = true, Content: @Composable ColumnScope.() -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxScope.KissosModal("
+        errorLine2="                        ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/KissosModal.kt"
+            line="71"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;    Current params are: `[modifier: Modifier = Modifier, dividerModifier: Modifier = Modifier, value: TextFieldValue, textColor: Color = UI.colors.pureInverse, hint: String?, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#10;    autoCorrect = true,&#10;    keyboardType = KeyboardType.Text,&#10;    imeAction = ImeAction.Done,&#10;    capitalization = KeyboardCapitalization.Sentences&#10;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -&gt; Unit]` but should be `[value: TextFieldValue, hint: String?, modifier: Modifier = Modifier, dividerModifier: Modifier = Modifier, textColor: Color = UI.colors.pureInverse, visualTransformation: VisualTransformation = VisualTransformation.None, keyboardOptions: KeyboardOptions = KeyboardOptions(&#10;    autoCorrect = true,&#10;    keyboardType = KeyboardType.Text,&#10;    imeAction = ImeAction.Done,&#10;    capitalization = KeyboardCapitalization.Sentences&#10;), keyboardActions: KeyboardActions? = null, onValueChanged: (TextFieldValue) -&gt; Unit]`.&#10;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun ColumnScope.KissosTitleTextField("
+        errorLine2="                                    ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/KissosTitleTextField.kt"
+            line="41"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[bottomInset: Dp = navigationBarInset().toDensityDp(), onClose: () -&gt; Unit, onAdd: () -&gt; Unit]` but should be `[onClose: () -&gt; Unit, bottomInset: Dp = navigationBarInset().toDensityDp(), onAdd: () -&gt; Unit]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.PlannedPaymentsBottomBar("
+        errorLine2="                                                    ^">
+        <location
+            file="../feature/planned-payments/src/main/java/com/spgrvl/kissos/planned/list/PlannedPaymentsBottomBar.kt"
+            line="26"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;Current params are: `[id: UUID = UUID.randomUUID(), title: String, description: String, visible: Boolean, color: Color = UI.colors.orange, dismiss: () -&gt; Unit = {}]` but should be `[title: String, description: String, visible: Boolean, id: UUID = UUID.randomUUID(), color: Color = UI.colors.orange, dismiss: () -&gt; Unit = {}]`.&#10;See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun BoxWithConstraintsScope.ProgressModal("
+        errorLine2="                                         ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/modal/ProgressModal.kt"
+            line="23"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;    Current params are: `[visible: Boolean, id: UUID = UUID.randomUUID(), TitleContent: @Composable ColumnScope.() -&gt; Unit = {&#10;    Text(&#10;        modifier = Modifier.padding(start = 32.dp),&#10;        text = stringResource(R.string.reorder),&#10;        style = UI.typo.b1.style(&#10;            UI.colors.pureInverse,&#10;            FontWeight.ExtraBold&#10;        )&#10;    )&#10;}, initialItems: List&lt;T&gt;, dismiss: () -&gt; Unit, onUpdateItemOrderNum: (item: T, newOrderNum: Double) -&gt; Unit = { _, _ -&gt; }, onReordered: ((List&lt;T&gt;) -&gt; Unit)? = null, ItemContent: @Composable (Int, T) -&gt; Unit]` but should be `[visible: Boolean, initialItems: List&lt;T&gt;, dismiss: () -&gt; Unit, id: UUID = UUID.randomUUID(), TitleContent: @Composable ColumnScope.() -&gt; Unit = {&#10;    Text(&#10;        modifier = Modifier.padding(start = 32.dp),&#10;        text = stringResource(R.string.reorder),&#10;        style = UI.typo.b1.style(&#10;            UI.colors.pureInverse,&#10;            FontWeight.ExtraBold&#10;        )&#10;    )&#10;}, onUpdateItemOrderNum: (item: T, newOrderNum: Double) -&gt; Unit = { _, _ -&gt; }, onReordered: ((List&lt;T&gt;) -&gt; Unit)? = null, ItemContent: @Composable (Int, T) -&gt; Unit]`.&#10;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun &lt;T : Reorderable&gt; BoxScope.ReorderModalSingleType("
+        errorLine2="                                                     ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ReorderModal.kt"
+            line="39"
+            column="54"/>
+    </issue>
+
+    <issue
+        id="ComposeParameterOrder"
+        message="    Parameters in a composable function should be ordered following this pattern: params without defaults, modifiers, params with defaults and optionally, a trailing function that might not have a default param.&#10;    Current params are: `[visible: Boolean, id: UUID = UUID.randomUUID(), TitleContent: @Composable ColumnScope.() -&gt; Unit = {&#10;    Text(&#10;        modifier = Modifier.padding(start = 32.dp),&#10;        text = stringResource(R.string.reorder),&#10;        style = UI.typo.b1.style(&#10;            UI.colors.pureInverse,&#10;            FontWeight.ExtraBold&#10;        )&#10;    )&#10;}, initialItems: List&lt;Any&gt;, dismiss: () -&gt; Unit, onUpdateItemOrderNum: (&#10;    itemsInNewOrder: List&lt;Any&gt;,&#10;    item: T,&#10;    newOrderNum: Double&#10;) -&gt; Unit = { _, _, _ -&gt; }, onReordered: ((List&lt;Any&gt;) -&gt; Unit)? = null, ItemContent: @Composable RowScope.(Int, Any) -&gt; Unit]` but should be `[visible: Boolean, initialItems: List&lt;Any&gt;, dismiss: () -&gt; Unit, id: UUID = UUID.randomUUID(), TitleContent: @Composable ColumnScope.() -&gt; Unit = {&#10;    Text(&#10;        modifier = Modifier.padding(start = 32.dp),&#10;        text = stringResource(R.string.reorder),&#10;        style = UI.typo.b1.style(&#10;            UI.colors.pureInverse,&#10;            FontWeight.ExtraBold&#10;        )&#10;    )&#10;}, onUpdateItemOrderNum: (&#10;    itemsInNewOrder: List&lt;Any&gt;,&#10;    item: T,&#10;    newOrderNum: Double&#10;) -&gt; Unit = { _, _, _ -&gt; }, onReordered: ((List&lt;Any&gt;) -&gt; Unit)? = null, ItemContent: @Composable RowScope.(Int, Any) -&gt; Unit]`.&#10;    See https://slackhq.github.io/compose-lints/rules/#ordering-composable-parameters-properly for more information."
+        errorLine1="fun &lt;T : Reorderable&gt; BoxScope.ReorderModal("
+        errorLine2="                                           ^">
+        <location
+            file="../temp/legacy-code/src/main/java/com/spgrvl/kissos/legacy/legacy/ui/theme/components/ReorderModal.kt"
+            line="81"
+            column="44"/>
+    </issue>
+
 </issues>
