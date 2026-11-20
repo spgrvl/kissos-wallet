@@ -14,3 +14,4 @@ dependencies {
     implementation(libs.bundles.testing)
     implementation(libs.paparazzi)
 }
+    implementation(libs.cashapp.molecule)
