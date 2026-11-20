@@ -284,6 +284,7 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
 ) {
     val context = LocalContext.current
     val clipboard = LocalClipboardManager.current
+    val noEmailMessage = stringResource(R.string.report_receipt_no_email, ReportReceiptEmail)
     MessageModal(
         visible = dialog != null,
         title = stringResource(R.string.not_aade_receipt_title),
@@ -296,7 +297,7 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
                         clipboard.setText(AnnotatedString(it.qrText))
                         Toast.makeText(
                             context,
-                            context.getString(R.string.report_receipt_no_email, ReportReceiptEmail),
+                            noEmailMessage,
                             Toast.LENGTH_LONG
                         ).show()
                     }
