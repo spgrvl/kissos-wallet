@@ -9,7 +9,8 @@ plugins {
 
 android {
     namespace = "com.spgrvl.kissos.wallet"
-    compileSdk = libs.versions.target.sdk.get().toInt()
+    compileSdk = libs.versions.compile.sdk.asProvider().get().toInt()
+    compileSdkMinor = libs.versions.compile.sdk.minor.get().toInt()
 
     defaultConfig {
         applicationId = "com.spgrvl.kissos"
