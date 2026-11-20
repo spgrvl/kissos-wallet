@@ -1,5 +1,6 @@
 plugins {
     id("kissos.feature")
+    id("kissos.paparazzi")
 }
 
 android {
