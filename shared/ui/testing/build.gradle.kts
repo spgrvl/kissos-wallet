@@ -1,5 +1,6 @@
 plugins {
     id("kissos.feature")
+    id("kissos.paparazzi")
 }
 
 android {
@@ -13,5 +14,5 @@ dependencies {
     // because it'll be added as "testImplementation"
     implementation(libs.bundles.testing)
     implementation(libs.paparazzi)
-}
     implementation(libs.cashapp.molecule)
+}
