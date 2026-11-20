@@ -12,6 +12,7 @@ android {
 
     // Android
     compileSdk = catalog.version("compile-sdk").toInt()
+    compileSdkMinor = catalog.version("compile-sdk-minor").toInt()
     defaultConfig {
         minSdk = catalog.version("min-sdk").toInt()
     }

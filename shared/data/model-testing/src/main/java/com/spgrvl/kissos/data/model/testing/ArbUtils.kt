@@ -10,7 +10,7 @@ import io.kotest.property.arbitrary.boolean
 import io.kotest.property.arbitrary.filter
 import io.kotest.property.arbitrary.int
 import io.kotest.property.arbitrary.map
-import io.kotest.property.arbitrary.positiveDouble
+import io.kotest.property.arbitrary.numericDouble
 import io.kotest.property.arbitrary.string
 
 fun Arb.Companion.notBlankTrimmedString(): Arb<NotBlankTrimmedString> = Arb.string()
@@ -38,9 +38,9 @@ fun <A> Arb.Companion.ofValue(a: A): Arb<A> = arbitrary { a }
 
 fun Arb.Companion.positiveDoubleExact(
     max: Double = Double.MAX_VALUE,
-): Arb<PositiveDouble> = Arb.positiveDouble(
+): Arb<PositiveDouble> = Arb.numericDouble(
+    min = Double.MIN_VALUE,
     max = max,
-    includeNonFiniteEdgeCases = false,
 ).map(PositiveDouble::unsafe)
 
 fun Arb.Companion.colorInt(): Arb<ColorInt> = Arb.int().map(::ColorInt)
