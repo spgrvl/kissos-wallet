@@ -19,6 +19,8 @@ import com.spgrvl.kissos.base.time.TimeConverter
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.read.LoanDao
 import com.spgrvl.kissos.data.db.dao.read.SettingsDao
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.model.AccountId
 import com.spgrvl.kissos.data.model.Afm
 import com.spgrvl.kissos.data.model.Category
@@ -43,6 +45,8 @@ import com.spgrvl.kissos.data.repository.TagRepository
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.data.repository.mapper.TagMapper
 import com.spgrvl.kissos.data.repository.mapper.TransactionMapper
+import com.spgrvl.kissos.domain.banknotification.DetectedPaymentNotifications
+import com.spgrvl.kissos.domain.banknotification.DetectedPayments
 import com.spgrvl.kissos.domain.features.Features
 import com.spgrvl.kissos.domain.receipt.ReceiptLookupScheduler
 import com.spgrvl.kissos.legacy.data.EditTransactionDisplayLoan
@@ -128,6 +132,7 @@ class EditTransactionViewModel @Inject constructor(
     private val aadeDataSource: AadeDataSource,
     private val providerPageResolver: ProviderPageResolver,
     private val receiptLookupScheduler: ReceiptLookupScheduler,
+    private val detectedPayments: DetectedPayments,
 ) : ComposeViewModel<EditTransactionViewState, EditTransactionViewEvent>() {
 
     private var transactionType by mutableStateOf(TransactionType.EXPENSE)
@@ -144,6 +149,9 @@ class EditTransactionViewModel @Inject constructor(
     private var account by mutableStateOf<Account?>(null)
     private var toAccount by mutableStateOf<Account?>(null)
     private var category by mutableStateOf<Category?>(null)
+
+    /** The bank notification's payment this expense comes from, until it's saved. */
+    private var detectedPayment: DetectedPaymentEntity? = null
     private var amount by mutableDoubleStateOf(0.0)
     private var hasChanges by mutableStateOf(false)
     private var displayLoanHelper by mutableStateOf(EditTransactionDisplayLoan())
@@ -229,7 +237,25 @@ class EditTransactionViewModel @Inject constructor(
                 pendingScanText = null
                 onReceiptScanned(it)
             }
+            screen.detectedPaymentId?.let { fillFromDetectedPayment(it) }
         }
+    }
+
+    /** A payment from a bank app's notification that the user wants to change before adding it. */
+    private suspend fun fillFromDetectedPayment(id: UUID) {
+        val payment = detectedPayments.find(id)?.takeIf { it.status == DetectedPaymentStatus.NEW } ?: return
+        detectedPayment = payment
+        val draft = detectedPayments.draft(payment)
+        onSetTransactionType(TransactionType.EXPENSE)
+        onAmountChanged(payment.amount)
+        setDateTimeFromReceipt(payment.postedAt)
+        draft.title?.let(::setTitleFromReceipt)
+        draft.categoryId
+            ?.let { categoryRepository.findById(it) }
+            ?.let(::setCategoryFromReceipt)
+        draft.account
+            ?.let { detected -> accounts.find { it.id == detected.id.value } }
+            ?.let { setAccountFromReceipt(it) }
     }
 
     @Composable
@@ -877,6 +903,7 @@ class EditTransactionViewModel @Inject constructor(
                 if (receiptIsNew) {
                     saveScannedReceipt()
                 }
+                saveDetectedPayment()
 
                 refreshWidget(WalletBalanceWidgetReceiver::class.java)
             }
@@ -1258,6 +1285,18 @@ class EditTransactionViewModel @Inject constructor(
         loadedTransaction = loadedTransaction().copy(accountId = newAccount.id)
         account = newAccount
         updateCurrency(account = newAccount)
+    }
+
+    /** Marks a detected payment as added, and learns from what the user changed in it. */
+    private suspend fun saveDetectedPayment() {
+        val transactionId = loadedTransaction().id
+        val payment = detectedPayment ?: detectedPayments.findByTransaction(transactionId) ?: return
+        if (payment.status == DetectedPaymentStatus.NEW) {
+            detectedPayments.markAdded(payment.id, transactionId)
+            DetectedPaymentNotifications.cancel(context, payment.id)
+        }
+        detectedPayments.learn(payment, title, category?.id?.value)
+        detectedPayment = null
     }
 
     private suspend fun shouldAskToRememberMerchant(): Boolean {
