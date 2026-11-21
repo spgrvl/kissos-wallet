@@ -21,6 +21,7 @@ import com.spgrvl.kissos.data.db.dao.read.SettingsDao
 import com.spgrvl.kissos.data.db.dao.read.TagAssociationDao
 import com.spgrvl.kissos.data.db.dao.read.TagDao
 import com.spgrvl.kissos.data.db.dao.read.TransactionDao
+import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.dao.write.WriteBudgetDao
 import com.spgrvl.kissos.data.db.dao.write.WriteCategoryDao
 import com.spgrvl.kissos.data.db.dao.write.WriteLoanDao
@@ -81,6 +82,7 @@ class BackupDataUseCase @Inject constructor(
     private val receiptWriter: WriteReceiptDao,
     private val merchantReader: MerchantDao,
     private val merchantWriter: WriteMerchantDao,
+    private val bankNotificationDao: BankNotificationDao,
 ) {
     suspend fun exportToFile(
         zipFileUri: Uri
@@ -118,6 +120,8 @@ class BackupDataUseCase @Inject constructor(
             val tagAssociations = async { tagAssociationReader.findAll() }
             val receipts = async { receiptReader.findAll() }
             val merchants = async { merchantReader.findAll() }
+            val payeeMemory = async { bankNotificationDao.findAllPayees() }
+            val categoryHintMemory = async { bankNotificationDao.findAllCategoryHints() }
 
             val completeData = KissosWalletCompleteData(
                 accounts = accounts.await(),
@@ -133,6 +137,8 @@ class BackupDataUseCase @Inject constructor(
                 tagAssociations = tagAssociations.await(),
                 receipts = receipts.await(),
                 merchants = merchants.await(),
+                payeeMemory = payeeMemory.await(),
+                categoryHintMemory = categoryHintMemory.await(),
             )
 
             json.encodeToString(completeData)
@@ -328,6 +334,8 @@ class BackupDataUseCase @Inject constructor(
             // Receipts reference transactions, so they go in after them.
             receiptWriter.saveMany(completeData.receipts)
             merchantWriter.saveMany(completeData.merchants)
+            bankNotificationDao.savePayees(completeData.payeeMemory)
+            bankNotificationDao.saveCategoryHints(completeData.categoryHintMemory)
 
             onProgress(0.9)
         }

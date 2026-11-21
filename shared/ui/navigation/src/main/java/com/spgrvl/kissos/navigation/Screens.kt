@@ -23,7 +23,7 @@ data class CSVScreen(
         get() = true
 }
 
-@Suppress("DataClassDefaultValues")
+@Suppress("DataClassDefaultValues", "DataClassTypedIDs")
 data class EditTransactionScreen(
     val initialTransactionId: UUID?,
     val type: TransactionType,
@@ -34,6 +34,8 @@ data class EditTransactionScreen(
     val scanReceipt: Boolean = false,
     /** A receipt QR code that was already scanned, e.g. opened from the phone's camera app. */
     val receiptQrText: String? = null,
+    /** A payment detected in a bank app's notification, to fill the expense in from. */
+    val detectedPaymentId: UUID? = null,
 ) : Screen {
     override val isLegacy: Boolean
         get() = true
@@ -135,6 +137,16 @@ data class LoanDetailsScreen(
 }
 
 data object MerchantsScreen : Screen {
+    override val isLegacy: Boolean
+        get() = true
+}
+
+data object BankNotificationsScreen : Screen {
+    override val isLegacy: Boolean
+        get() = true
+}
+
+data object DetectedPaymentsScreen : Screen {
     override val isLegacy: Boolean
         get() = true
 }

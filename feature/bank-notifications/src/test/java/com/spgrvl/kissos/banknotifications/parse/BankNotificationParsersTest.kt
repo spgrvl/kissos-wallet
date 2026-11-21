@@ -1,0 +1,100 @@
+package com.spgrvl.kissos.banknotifications.parse
+
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
+import org.junit.Test
+
+class BankNotificationParsersTest {
+    private val revolut = "com.revolut.revolut"
+    private val magentaPay = "gr.payzy"
+
+    private fun spent(amount: String, payee: String, hint: String? = null) = DetectedPayment(
+        amount = amount.toBigDecimal(),
+        currency = "EUR",
+        direction = PaymentDirection.OUT,
+        payee = payee,
+        categoryHint = hint,
+    )
+
+    @Test
+    fun `reads Magenta Pay payments`() {
+        BankNotificationParsers.parse(magentaPay, text("Πλήρωσες 8,80€ σε Pizza Test.")) shouldBe
+            spent("8.80", "Pizza Test")
+        BankNotificationParsers.parse(magentaPay, text("Πλήρωσες 46,65€ σε PowerCo.")) shouldBe
+            spent("46.65", "PowerCo")
+        BankNotificationParsers.parse(magentaPay, text("Πλήρωσες 19,51€ σε FoodApp.")) shouldBe
+            spent("19.51", "FoodApp")
+    }
+
+    @Test
+    fun `reads Magenta Pay payments over a thousand`() {
+        BankNotificationParsers.parse(magentaPay, text("Πλήρωσες 1.234,56€ σε Κωτσόβολος.")) shouldBe
+            spent("1234.56", "Κωτσόβολος")
+    }
+
+    @Test
+    fun `reads Revolut payments with their category`() {
+        // given
+        val pharmacy = NotificationText(
+            title = "Φαρμακείο Δοκιμή",
+            text = "❤️ You spent €3.20",
+            bigText = "❤️ You spent €3.20\nEUR balance: €133.04",
+        )
+        val marina = NotificationText(
+            title = "Test Pharmacy",
+            text = "❤️ You spent €24.62",
+            bigText = "❤️ You spent €24.62\nEUR balance: €136.24",
+        )
+
+        // then
+        BankNotificationParsers.parse(revolut, pharmacy) shouldBe
+            spent("3.20", "Φαρμακείο Δοκιμή", hint = "❤️")
+        BankNotificationParsers.parse(revolut, marina) shouldBe spent("24.62", "Test Pharmacy", hint = "❤️")
+    }
+
+    @Test
+    fun `reads Revolut payments without the expanded text or a category`() {
+        BankNotificationParsers.parse(
+            revolut,
+            NotificationText(title = "Lidl", text = "You spent €1,234.50", bigText = null),
+        ) shouldBe spent("1234.50", "Lidl")
+    }
+
+    @Test
+    fun `reads Revolut payments in another currency`() {
+        BankNotificationParsers.parse(
+            revolut,
+            NotificationText(title = "Amazon", text = "🛍️ You spent $10.99", bigText = null),
+        ) shouldBe spent("10.99", "Amazon", hint = "🛍️").copy(currency = "USD")
+    }
+
+    @Test
+    fun `the balance is not a payment`() {
+        BankNotificationParsers.parse(
+            revolut,
+            NotificationText(title = "Revolut", text = "EUR balance: €136.24", bigText = null),
+        ).shouldBeNull()
+    }
+
+    @Test
+    fun `other notifications are not payments`() {
+        BankNotificationParsers.parse(
+            revolut,
+            NotificationText(title = "Weekly summary", text = "You spent €120.00 last week", bigText = null),
+        ).shouldBeNull()
+        BankNotificationParsers.parse(
+            revolut,
+            NotificationText(title = "Test Pharmacy", text = "❤️ Payment of €24.62 declined", bigText = null),
+        ).shouldBeNull()
+        BankNotificationParsers.parse(revolut, NotificationText(null, "❤️ You spent €3.20", null)).shouldBeNull()
+        BankNotificationParsers.parse(magentaPay, text("Ο κωδικός σου είναι 123456")).shouldBeNull()
+        BankNotificationParsers.parse(magentaPay, text("Κέρδισες 5€ σε κουπόνια!")).shouldBeNull()
+    }
+
+    @Test
+    fun `apps without a parser have no payments`() {
+        BankNotificationParsers.parse("com.example.chat", text("Πλήρωσες 8,80€ σε Pizza Test.")).shouldBeNull()
+    }
+
+    private fun text(text: String) = NotificationText(title = "Magenta Pay", text = text, bigText = null)
+}

@@ -4,9 +4,11 @@ import androidx.annotation.Keep
 import com.spgrvl.kissos.data.db.entity.AccountEntity
 import com.spgrvl.kissos.data.db.entity.BudgetEntity
 import com.spgrvl.kissos.data.db.entity.CategoryEntity
+import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
 import com.spgrvl.kissos.data.db.entity.LoanEntity
 import com.spgrvl.kissos.data.db.entity.LoanRecordEntity
 import com.spgrvl.kissos.data.db.entity.MerchantEntity
+import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
 import com.spgrvl.kissos.data.db.entity.PlannedPaymentRuleEntity
 import com.spgrvl.kissos.data.db.entity.ReceiptEntity
 import com.spgrvl.kissos.data.db.entity.SettingsEntity
@@ -47,4 +49,9 @@ data class KissosWalletCompleteData(
     val receipts: List<ReceiptEntity> = emptyList(),
     @SerialName("merchants")
     val merchants: List<MerchantEntity> = emptyList(),
+    // What was learned from bank notifications. The detected payments themselves aren't backed up.
+    @SerialName("payeeMemory")
+    val payeeMemory: List<PayeeMemoryEntity> = emptyList(),
+    @SerialName("categoryHintMemory")
+    val categoryHintMemory: List<CategoryHintMemoryEntity> = emptyList(),
 )

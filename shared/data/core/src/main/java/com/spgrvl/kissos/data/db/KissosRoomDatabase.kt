@@ -16,6 +16,7 @@ import com.spgrvl.kissos.data.db.dao.read.TagAssociationDao
 import com.spgrvl.kissos.data.db.dao.read.TagDao
 import com.spgrvl.kissos.data.db.dao.read.TransactionDao
 import com.spgrvl.kissos.data.db.dao.read.UserDao
+import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.dao.write.WriteAccountDao
 import com.spgrvl.kissos.data.db.dao.write.WriteBudgetDao
 import com.spgrvl.kissos.data.db.dao.write.WriteCategoryDao
@@ -32,19 +33,24 @@ import com.spgrvl.kissos.data.db.dao.write.WriteTransactionDao
 import com.spgrvl.kissos.data.db.entity.AccountEntity
 import com.spgrvl.kissos.data.db.entity.BudgetEntity
 import com.spgrvl.kissos.data.db.entity.CategoryEntity
+import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
 import com.spgrvl.kissos.data.db.entity.ExchangeRateEntity
 import com.spgrvl.kissos.data.db.entity.LoanEntity
 import com.spgrvl.kissos.data.db.entity.LoanRecordEntity
 import com.spgrvl.kissos.data.db.entity.MerchantEntity
+import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
 import com.spgrvl.kissos.data.db.entity.PlannedPaymentRuleEntity
 import com.spgrvl.kissos.data.db.entity.ReceiptEntity
 import com.spgrvl.kissos.data.db.entity.SettingsEntity
 import com.spgrvl.kissos.data.db.entity.TagAssociationEntity
 import com.spgrvl.kissos.data.db.entity.TagEntity
 import com.spgrvl.kissos.data.db.entity.TransactionEntity
+import com.spgrvl.kissos.data.db.entity.UnparsedNotificationEntity
 import com.spgrvl.kissos.data.db.entity.UserEntity
 import com.spgrvl.kissos.data.db.migration.Migration130to131_Receipts
 import com.spgrvl.kissos.data.db.migration.Migration131to132_MyDataReceipts
+import com.spgrvl.kissos.data.db.migration.Migration132to133_BankNotifications
 import com.spgrvl.kissos.domain.db.RoomTypeConverters
 
 @Database(
@@ -53,9 +59,10 @@ import com.spgrvl.kissos.domain.db.RoomTypeConverters
         SettingsEntity::class, PlannedPaymentRuleEntity::class,
         UserEntity::class, ExchangeRateEntity::class, BudgetEntity::class,
         LoanEntity::class, LoanRecordEntity::class, TagEntity::class, TagAssociationEntity::class,
-        ReceiptEntity::class, MerchantEntity::class
+        ReceiptEntity::class, MerchantEntity::class, DetectedPaymentEntity::class,
+        PayeeMemoryEntity::class, CategoryHintMemoryEntity::class, UnparsedNotificationEntity::class,
     ],
-    version = 132,
+    version = 133,
     exportSchema = true
 )
 @TypeConverters(RoomTypeConverters::class)
@@ -88,13 +95,15 @@ abstract class KissosRoomDatabase : RoomDatabase() {
     abstract val writeTagAssociationDao: WriteTagAssociationDao
     abstract val writeReceiptDao: WriteReceiptDao
     abstract val writeMerchantDao: WriteMerchantDao
+    abstract val bankNotificationDao: BankNotificationDao
 
     companion object {
         const val DB_NAME = "kissos.db"
 
         fun migrations() = arrayOf(
             Migration130to131_Receipts(),
-            Migration131to132_MyDataReceipts()
+            Migration131to132_MyDataReceipts(),
+            Migration132to133_BankNotifications(),
         )
 
         @Suppress("SpreadOperator")

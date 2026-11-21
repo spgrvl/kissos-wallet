@@ -81,6 +81,7 @@ class BackupDataUseCaseAndroidTest {
             receiptWriter = db.writeReceiptDao,
             merchantReader = db.merchantDao,
             merchantWriter = db.writeMerchantDao,
+            bankNotificationDao = db.bankNotificationDao,
         )
     }
 
