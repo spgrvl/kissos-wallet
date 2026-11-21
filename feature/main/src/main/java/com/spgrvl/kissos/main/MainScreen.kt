@@ -100,7 +100,8 @@ private fun BoxWithConstraintsScope.UI(
             nav.navigateTo(
                 EditPlannedScreen(
                     type = TransactionType.EXPENSE,
-                    plannedPaymentRuleId = null
+                    plannedPaymentRuleId = null,
+                    typeChosen = false
                 )
             )
         },
