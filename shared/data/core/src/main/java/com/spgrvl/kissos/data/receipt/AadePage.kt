@@ -73,6 +73,9 @@ data class AadeReceipt(
 object AadePage {
     val VAT_CATEGORIES = listOf('Α', 'Β', 'Γ', 'Δ', 'Ε')
 
+    /** Cash registers' VAT categories by rate, for documents that only show the rate. */
+    internal val VAT_CATEGORY_BY_RATE = mapOf(6 to 'Α', 13 to 'Β', 24 to 'Γ', 36 to 'Δ', 0 to 'Ε')
+
     private val SCRIPT = Regex("(?is)<script\\b.*?</script>")
     private val COMMENT = Regex("(?s)<!--.*?-->")
     private val TAG = Regex("<[^>]+>")

@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.spgrvl.kissos.data.db.migration.Migration130to131_Receipts
 import com.spgrvl.kissos.data.db.migration.Migration131to132_MyDataReceipts
+import com.spgrvl.kissos.data.db.migration.Migration132to133_BankNotifications
 import io.kotest.matchers.shouldBe
 import org.junit.Rule
 import org.junit.Test
@@ -23,6 +24,35 @@ class KissosRoomDatabaseMigrationTest {
         emptyList(),
         FrameworkSQLiteOpenHelperFactory()
     )
+
+    @Test
+    fun migrate132to133_BankNotifications() {
+        // given
+        helper.createDatabase(TestDb, 132).apply {
+            close()
+        }
+
+        // when
+        val newDb = helper.runMigrationsAndValidate(
+            TestDb,
+            133,
+            true,
+            Migration132to133_BankNotifications()
+        )
+
+        // then: a notification counts once
+        val insert = "INSERT OR IGNORE INTO detected_payments (id, dedupKey, sourcePackage, postedAt, amount, " +
+            "currency, direction, status, createdAt) VALUES (?, 'gr.payzy|0|1', 'gr.payzy', 1, 8.8, 'EUR', " +
+            "'OUT', 'NEW', 1)"
+        newDb.execSQL(insert, arrayOf(UUID.randomUUID().toString()))
+        newDb.execSQL(insert, arrayOf(UUID.randomUUID().toString()))
+        newDb.query("SELECT COUNT(*) FROM detected_payments").apply {
+            moveToFirst()
+            getInt(0) shouldBe 1
+            close()
+        }
+        newDb.close()
+    }
 
     @Test
     fun migrate131to132_MyDataReceipts() {

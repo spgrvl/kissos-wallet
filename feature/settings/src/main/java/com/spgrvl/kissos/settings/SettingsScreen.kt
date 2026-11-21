@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -47,6 +48,7 @@ import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.rootScreen
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.navigation.AttributionsScreen
+import com.spgrvl.kissos.navigation.BankNotificationsScreen
 import com.spgrvl.kissos.navigation.ExchangeRatesScreen
 import com.spgrvl.kissos.navigation.FeaturesScreen
 import com.spgrvl.kissos.navigation.ImportScreen
@@ -71,7 +73,6 @@ import com.spgrvl.kissos.wallet.ui.theme.modal.CurrencyModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.DeleteModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.NameModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ProgressModal
-import java.util.Locale
 
 @ExperimentalFoundationApi
 @Composable
@@ -292,7 +293,7 @@ private fun BoxWithConstraintsScope.UI(
                     icon = R.drawable.ic_vue_location_global,
                     iconPadding = 6.dp,
                     text = stringResource(R.string.language),
-                    description = Locale.getDefault().displayName
+                    description = LocalConfiguration.current.locales[0].displayName
                 ) {
                     onSwitchLanguage()
                 }
@@ -314,6 +315,15 @@ private fun BoxWithConstraintsScope.UI(
                 text = stringResource(R.string.merchants),
             ) {
                 nav.navigateTo(MerchantsScreen)
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            SettingsDefaultButton(
+                icon = R.drawable.ic_notification_m,
+                text = stringResource(R.string.bank_notifications),
+            ) {
+                nav.navigateTo(BankNotificationsScreen)
             }
 
             Spacer(Modifier.height(12.dp))

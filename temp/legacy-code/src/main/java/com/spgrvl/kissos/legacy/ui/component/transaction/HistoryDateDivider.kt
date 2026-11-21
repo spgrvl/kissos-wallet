@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +28,6 @@ import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import java.time.LocalDate
-import java.util.Locale
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -53,7 +53,7 @@ fun HistoryDateDivider(
             Text(
                 text = date.formatLocal(
                     when {
-                        !Locale.getDefault().writesDayBeforeMonth() ->
+                        !LocalConfiguration.current.locales[0].writesDayBeforeMonth() ->
                             if (today.year == date.year) "MMMM dd." else "MMM dd. yyy"
 
                         today.year == date.year -> "d MMMM"

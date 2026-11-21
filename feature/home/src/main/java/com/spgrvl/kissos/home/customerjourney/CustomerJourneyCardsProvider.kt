@@ -5,6 +5,8 @@ import com.spgrvl.kissos.base.legacy.stringRes
 import com.spgrvl.kissos.base.model.TransactionType
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.read.PlannedPaymentRuleDao
+import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import com.spgrvl.kissos.design.l0_system.Gradient
 import com.spgrvl.kissos.design.l0_system.Green
@@ -14,6 +16,7 @@ import com.spgrvl.kissos.design.l0_system.Orange
 import com.spgrvl.kissos.design.l0_system.Red
 import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.MainTab
+import com.spgrvl.kissos.navigation.DetectedPaymentsScreen
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.PieChartStatisticScreen
 import com.spgrvl.kissos.ui.R
@@ -27,6 +30,7 @@ class CustomerJourneyCardsProvider @Inject constructor(
   private val sharedPrefs: SharedPrefs,
   private val kissosContext: KissosWalletCtx,
   private val timeProvider: TimeProvider,
+  private val bankNotificationDao: BankNotificationDao,
 ) {
 
   suspend fun loadCards(): List<CustomerJourneyCardModel> {
@@ -36,7 +40,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
       timeProvider = timeProvider,
     )
 
-    return ACTIVE_CARDS
+    val waitingPayments = bankNotificationDao.countPayments(DetectedPaymentStatus.NEW)
+    return listOfNotNull(detectedPaymentsCard(waitingPayments)) + ACTIVE_CARDS
       .filter {
         it.condition(
           trnCount,
@@ -60,6 +65,23 @@ class CustomerJourneyCardsProvider @Inject constructor(
   }
 
   companion object {
+    /** Payments from bank notifications waiting for the user; it goes away once there are none. */
+    private fun detectedPaymentsCard(waiting: Long): CustomerJourneyCardModel? = waiting.takeIf { it > 0 }?.let {
+      CustomerJourneyCardModel(
+        id = "detected_payments",
+        condition = { _, _, _, _ -> true },
+        title = stringRes(R.string.detected_payments),
+        description = stringRes(R.string.detected_payments_waiting, it.toString()),
+        cta = stringRes(R.string.detected_payments_review),
+        ctaIcon = R.drawable.ic_notification_m,
+        background = Gradient.solid(Kissos),
+        hasDismiss = false,
+        onAction = { navigation, _, _ ->
+          navigation.navigateTo(DetectedPaymentsScreen)
+        }
+      )
+    }
+
     val ACTIVE_CARDS = listOf(
       adjustBalanceCard(),
       addPlannedPaymentCard(),
@@ -98,7 +120,8 @@ class CustomerJourneyCardsProvider @Inject constructor(
         navigation.navigateTo(
           EditPlannedScreen(
             type = TransactionType.EXPENSE,
-            plannedPaymentRuleId = null
+            plannedPaymentRuleId = null,
+            typeChosen = false
           )
         )
       }

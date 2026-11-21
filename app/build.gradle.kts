@@ -1,7 +1,5 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("org.jetbrains.kotlin.android")
     org.jetbrains.kotlin.plugin.compose
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -11,7 +9,8 @@ plugins {
 
 android {
     namespace = "com.spgrvl.kissos.wallet"
-    compileSdk = libs.versions.target.sdk.get().toInt()
+    compileSdk = libs.versions.compile.sdk.asProvider().get().toInt()
+    compileSdkMinor = libs.versions.compile.sdk.minor.get().toInt()
 
     defaultConfig {
         applicationId = "com.spgrvl.kissos"
@@ -94,10 +93,6 @@ android {
     }
 
     val javaVersion = libs.versions.jvm.target.get()
-    kotlinOptions {
-        jvmTarget = javaVersion
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.valueOf("VERSION_$javaVersion")
         targetCompatibility = JavaVersion.valueOf("VERSION_$javaVersion")
@@ -106,6 +101,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
 
     lint {
@@ -138,6 +134,7 @@ dependencies {
     implementation(projects.feature.loans)
     implementation(projects.feature.main)
     implementation(projects.feature.merchants)
+    implementation(projects.feature.bankNotifications)
     implementation(projects.feature.onboarding)
     implementation(projects.feature.piechart)
     implementation(projects.feature.plannedPayments)

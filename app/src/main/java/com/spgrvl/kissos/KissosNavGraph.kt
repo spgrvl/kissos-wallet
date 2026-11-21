@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.runtime.Composable
 import com.spgrvl.kissos.attributions.AttributionsScreenImpl
 import com.spgrvl.kissos.balance.BalanceScreen
+import com.spgrvl.kissos.banknotifications.BankNotificationsScreen
+import com.spgrvl.kissos.banknotifications.DetectedPaymentsScreen
 import com.spgrvl.kissos.budgets.BudgetScreen
 import com.spgrvl.kissos.categories.CategoriesScreen
 import com.spgrvl.kissos.disclaimer.DisclaimerScreenImpl
@@ -19,9 +21,11 @@ import com.spgrvl.kissos.main.MainScreen
 import com.spgrvl.kissos.merchants.MerchantsScreen
 import com.spgrvl.kissos.navigation.AttributionsScreen
 import com.spgrvl.kissos.navigation.BalanceScreen
+import com.spgrvl.kissos.navigation.BankNotificationsScreen
 import com.spgrvl.kissos.navigation.BudgetScreen
 import com.spgrvl.kissos.navigation.CSVScreen
 import com.spgrvl.kissos.navigation.CategoriesScreen
+import com.spgrvl.kissos.navigation.DetectedPaymentsScreen
 import com.spgrvl.kissos.navigation.DisclaimerScreen
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.EditTransactionScreen
@@ -66,6 +70,8 @@ fun BoxWithConstraintsScope.KissosNavGraph(screen: Screen?) {
         is OnboardingScreen -> OnboardingScreen(screen = screen)
         is ExchangeRatesScreen -> ExchangeRatesScreen()
         is MerchantsScreen -> MerchantsScreen()
+        is BankNotificationsScreen -> BankNotificationsScreen()
+        is DetectedPaymentsScreen -> DetectedPaymentsScreen()
         is EditTransactionScreen -> EditTransactionScreen(screen = screen)
         is TransactionsScreen -> TransactionsScreen(screen = screen)
         is PieChartStatisticScreen -> PieChartStatisticScreen(screen = screen)

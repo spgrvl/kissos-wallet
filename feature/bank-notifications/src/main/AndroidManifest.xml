@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Lists the apps the user can pick from; avoids QUERY_ALL_PACKAGES -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application>
+        <!--
+          Disabled until the user first turns bank notifications on, so Kissos isn't listed in the system's
+          notification access settings before then. Turning them off unbinds it (requestUnbind).
+        -->
+        <service
+            android:name=".BankNotificationListener"
+            android:enabled="false"
+            android:exported="true"
+            android:label="@string/bank_notifications"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+            <!-- Only notifications that alert, not ongoing ones such as music or navigation -->
+            <meta-data
+                android:name="android.service.notification.default_filter_types"
+                android:value="alerting|silent" />
+        </service>
+
+        <!-- The Add, Dismiss and Undo buttons of Kissos's own notifications; nothing else may send these -->
+        <receiver
+            android:name=".DetectedPaymentActionReceiver"
+            android:exported="false" />
+    </application>
+
+</manifest>
