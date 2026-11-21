@@ -48,6 +48,7 @@ import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.legacy.rootScreen
 import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.navigation.AttributionsScreen
+import com.spgrvl.kissos.navigation.BankNotificationsScreen
 import com.spgrvl.kissos.navigation.ExchangeRatesScreen
 import com.spgrvl.kissos.navigation.FeaturesScreen
 import com.spgrvl.kissos.navigation.ImportScreen
@@ -314,6 +315,15 @@ private fun BoxWithConstraintsScope.UI(
                 text = stringResource(R.string.merchants),
             ) {
                 nav.navigateTo(MerchantsScreen)
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            SettingsDefaultButton(
+                icon = R.drawable.ic_notification_m,
+                text = stringResource(R.string.bank_notifications),
+            ) {
+                nav.navigateTo(BankNotificationsScreen)
             }
 
             Spacer(Modifier.height(12.dp))

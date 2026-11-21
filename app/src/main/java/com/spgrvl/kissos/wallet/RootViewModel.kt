@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spgrvl.kissos.banknotifications.BankNotificationIntents
 import com.spgrvl.kissos.base.legacy.SharedPrefs
 import com.spgrvl.kissos.base.legacy.Theme
 import com.spgrvl.kissos.base.legacy.stringRes
@@ -32,6 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.UUID
 import java.util.concurrent.atomic.AtomicLong
 import javax.inject.Inject
 
@@ -117,8 +119,21 @@ class RootViewModel @Inject constructor(
     }
 
     private fun handleSpecialStart(intent: Intent) {
-        (scannedReceiptScreen(intent) ?: addTransactionScreen(intent))?.let(nav::navigateTo)
+        (scannedReceiptScreen(intent) ?: detectedPaymentScreen(intent) ?: addTransactionScreen(intent))
+            ?.let(nav::navigateTo)
     }
+
+    /** Kissos's notification about a payment detected in a bank app's notification. */
+    private fun detectedPaymentScreen(intent: Intent): EditTransactionScreen? =
+        intent.getStringExtra(BankNotificationIntents.EXTRA_DETECTED_PAYMENT_ID)
+            ?.let { runCatching { UUID.fromString(it) }.getOrNull() }
+            ?.let {
+                EditTransactionScreen(
+                    initialTransactionId = null,
+                    type = TransactionType.EXPENSE,
+                    detectedPaymentId = it,
+                )
+            }
 
     /** A receipt's link, opened from the phone's camera app or a QR scanner. */
     private fun scannedReceiptScreen(intent: Intent): EditTransactionScreen? =
