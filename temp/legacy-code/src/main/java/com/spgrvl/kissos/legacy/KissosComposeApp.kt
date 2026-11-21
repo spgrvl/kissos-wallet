@@ -1,6 +1,7 @@
 package com.spgrvl.kissos.legacy
 
 import android.view.View
+import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,7 +35,7 @@ fun rootView(): View = LocalView.current
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
-fun rootActivity(): AppCompatActivity = LocalContext.current as AppCompatActivity
+fun rootActivity(): AppCompatActivity = LocalActivity.current as AppCompatActivity
 
 @Composable
 fun rootScreen(): RootScreen = LocalContext.current as RootScreen

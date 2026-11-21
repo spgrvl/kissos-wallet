@@ -31,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -58,7 +59,6 @@ import com.spgrvl.kissos.wallet.ui.theme.GradientKissos
 import com.spgrvl.kissos.wallet.ui.theme.Kissos
 import com.spgrvl.kissos.wallet.ui.theme.White
 import com.spgrvl.kissos.wallet.ui.theme.modal.DURATION_MODAL_ANIM
-import java.util.Locale
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Suppress("ParameterNaming")
@@ -117,7 +117,7 @@ fun CurrencyPicker(
         Spacer(Modifier.height(20.dp))
 
         CurrencyList(
-            searchQueryLowercase = searchTextFieldValue.text.toLowerCase(Locale.getDefault()),
+            searchQueryLowercase = searchTextFieldValue.text.lowercase(LocalConfiguration.current.locales[0]),
             selectedCurrency = selectedCurrency,
             lastItemSpacer = if (includeKeyboardShownInsetSpacer) {
                 keyboardShownInsetDp + lastItemSpacer
@@ -138,7 +138,7 @@ private fun SearchInput(
     searchTextFieldValue: TextFieldValue,
     onSetSearchTextFieldValue: (TextFieldValue) -> Unit
 ) {
-    val inputFocus = FocusRequester()
+    val inputFocus = remember { FocusRequester() }
 
     Row(
         modifier = Modifier
