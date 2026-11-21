@@ -50,6 +50,8 @@ class AddTransactionWidgetCompact : AppWidgetProvider() {
 
         widgetClick.clickListener(context, rv, R.id.ivTransfer, TransactionType.TRANSFER)
 
+        widgetClick.scanReceiptClickListener(context, rv, R.id.ivScanReceipt)
+
         appWidgetManager.updateAppWidget(appWidgetId, rv)
     }
 }

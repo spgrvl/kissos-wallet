@@ -53,6 +53,9 @@ class AddTransactionWidget : AppWidgetProvider() {
         widgetClick.clickListener(context, rv, R.id.ivTransfer, TransactionType.TRANSFER)
         widgetClick.clickListener(context, rv, R.id.tvTransfer, TransactionType.TRANSFER)
 
+        widgetClick.scanReceiptClickListener(context, rv, R.id.ivScanReceipt)
+        widgetClick.scanReceiptClickListener(context, rv, R.id.tvScanReceipt)
+
         appWidgetManager.updateAppWidget(appWidgetId, rv)
     }
 }

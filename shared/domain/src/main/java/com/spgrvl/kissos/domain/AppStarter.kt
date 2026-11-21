@@ -10,4 +10,7 @@ interface AppStarter {
     fun getRootIntent(): Intent
     fun defaultStartIntent(): Intent
     fun addTransactionStartIntent(type: TransactionType): Intent
+
+    /** Opens a new expense with the receipt scanner already running. */
+    fun scanReceiptStartIntent(): Intent
 }
