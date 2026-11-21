@@ -20,8 +20,8 @@ min-sdk = "28"
 compile-sdk = "37"
 compile-sdk-minor = "1"
 target-sdk = "36"
-version-name = "2026.11.02"
-version-code = "209"
+version-name = "2026.11.21"
+version-code = "210"
 jvm-target = "17"
 
 
