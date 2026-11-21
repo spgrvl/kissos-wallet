@@ -1,0 +1,614 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,greek');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .smpl-invoice {
+            box-sizing: border-box;
+            font-size: 11px;
+            color: #404040;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        /*.table-plain can be used to discard basic styling from tables so that they can be used as layout grids - if a table has a second class applied as well, prefer that one for targeting with a style rule*/
+        .table-plain {
+            border: none;
+            border-collapse: collapse;
+            margin-bottom: unset;
+        }
+
+        table.table-plain > thead > tr > th {
+            border: none;
+            color: unset;
+            font-weight: unset;
+            text-align: unset;
+            padding: unset;
+        }
+
+        table.table-plain > tbody > tr > td {
+            border: none;
+            border-width: unset;
+            padding: unset;
+            vertical-align: unset;
+        }
+
+        .wrapper {
+            /*min-width: 760px;*/
+            max-width: 910px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 55%;
+            vertical-align: middle !important;
+            padding: 10px 30px !important;
+            background-color: #ededed; /*dynamic primary-color*/
+            border-radius: 6px 0 0 6px;
+        }
+
+            .logo img {
+                display: block;
+                max-height: 90px;
+            }
+
+        .company-info {
+            white-space: nowrap;
+            vertical-align: middle !important;
+            padding: 10px 30px 10px 0 !important;
+            background-color: #ededed; /*dynamic primary-color*/
+            border-radius: 0 6px 6px 0;
+        }
+
+        .client-info,
+        .document-info {
+            white-space: nowrap;
+            padding-top: 10px !important;
+        }
+
+            .company-info .section-main-field, .client-info .section-main-field {
+                white-space: normal;
+                line-height: 1em;
+            }
+
+                .company-info .section-main-field + *,
+                .client-info .section-main-field + * {
+                    white-space: normal;
+                }
+
+            .client-info .section-main-field {
+                padding-right: 20px;
+            }
+
+            .document-info * { /*fix outlook white-space:normal*/
+                white-space: nowrap !important;
+            }
+
+        /*items table*/
+        .items-table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+
+            .items-table th {
+                background-color: #ededed; /*dynamic secondary-color*/
+            }
+
+                .items-table th:first-child {
+                    border-radius: 6px 0 0 6px;
+                }
+
+                .items-table th:last-child {
+                    border-radius: 0 6px 6px 0;
+                }
+
+            .items-table th,
+            .items-table td {
+                padding: 3px 10px;
+                text-align: right;
+            }
+
+            .items-table .single-item-comments {
+                border-bottom: 1px solid #d7d7d7;
+                padding: 0 10px;
+                text-align: left;
+                overflow: hidden;
+                /*color: #8b8b8b;*/
+                font-size: 10px;
+                background-color: #f6f6f6;
+                background-image: repeating-linear-gradient(135deg, #efefef, #efefef 5px, rgba(255,255,255,0) 5px, rgba(255,255,255,0) 10px);
+            }
+
+        .single-item-comments hr {
+            border: none;
+            height: 0;
+            border-top: 1px dashed #d7d7d7d7;
+            margin: 0 0 -1px 0;
+        }
+
+        /*vat analysis*/
+        .vat-analysis {
+            width: 430px;
+            margin-bottom: 40px;
+            border-collapse: collapse;
+        }
+
+            .vat-analysis th {
+                background-color: #ededed; /*dynamic secondary-color*/
+            }
+
+                .vat-analysis th:first-child {
+                    border-radius: 6px 0 0 6px;
+                }
+
+                .vat-analysis th:last-child {
+                    border-radius: 0 6px 6px 0;
+                }
+
+            .vat-analysis th,
+            .vat-analysis td {
+                padding: 5px 10px;
+                text-align: right;
+            }
+
+        /*comments*/
+        .comments {
+            width: 430px;
+            border-bottom: 1px solid #d7d7d7;
+        }
+
+        /*sums*/
+        .sums {
+            white-space: nowrap;
+            text-align: right;
+        }
+
+            .sums * { /*fix outlook white-space:normal*/
+                white-space: nowrap !important;
+            }
+
+            .sums td {
+                padding-left: 0.7em;
+            }
+
+            .sums label {
+                margin-top: unset;
+            }
+
+        .total td {
+            font-size: 24px;
+            font-weight: 700;
+            padding-top: 0.3em;
+        }
+
+        .total label {
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .signatures-wrapper {
+            text-align: right;
+        }
+
+        .signature-label {
+            display: inline-block;
+            margin-top: 40px;
+            margin-left: 200px;
+        }
+
+        /*helpers*/
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        label {
+            color: #9c9c9c;
+            display: block;
+            margin-top: 0.3em;
+            font-weight: normal;
+        }
+
+        .section-label {
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+
+        .section-main-field {
+            font-size: 20px;
+        }
+
+        .gap {
+            min-width: 35px !important;
+        }
+
+        .line-brake {
+            display: block;
+        }
+
+        .min-width-field {
+            display: inline-table;
+            min-width: 100px;
+        }
+
+        /*only printable elements*/
+        @media screen {
+            .show-for-print {
+                display: none;
+            }
+        }
+
+        @media print {
+            .wrapper {
+                padding: 0;
+            }
+        }
+    </style>
+
+    <style>
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            .page-end, .page-end * {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .divPrintable {
+                width: 660px;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+    <script>
+        var printme = true;
+
+        function checkImgSrc() {
+            var elem = document.getElementById('logoimg');
+            if (elem.getAttribute('src') == "") {
+                if (printme) {
+                    $('#QRDiv').qrcode({
+                        text: "https://app.simplycloud.gr/InvoiceData/v/GR999000022-00000000-0000-0000-0000-000000000000-0123456789ABCDEF0123456789ABCDEF01234567",
+                        width: 100,
+                        height: 100
+                    });
+                    printme = false;
+                    window.print();
+                }
+            }
+        }
+
+        function printDoc() {
+            if (printme) {
+                $('#QRDiv').qrcode({
+                    text: "https://app.simplycloud.gr/InvoiceData/v/GR999000022-00000000-0000-0000-0000-000000000000-0123456789ABCDEF0123456789ABCDEF01234567",
+                    width: 100,
+                    height: 100
+                });
+                printme = false;
+                window.print();
+            }
+        }
+
+        function onImageError(e) {
+            var elem = document.getElementById('logoimg');
+            elem.setAttribute('style', 'display:none');
+            if (printme) {
+                $('#QRDiv').qrcode({
+                    text: "https://app.simplycloud.gr/InvoiceData/v/GR999000022-00000000-0000-0000-0000-000000000000-0123456789ABCDEF0123456789ABCDEF01234567",
+                    width: 100,
+                    height: 100
+                });
+                printme = false;
+                window.print();
+            }
+        }
+    </script>
+</head>
+
+    <body onload="checkImgSrc()">
+        <div class="smpl-invoice">
+            <div class="wrapper">
+
+                <header>
+                    <table class="table-plain full-width">
+                        <tr>
+                            <!--.logo-->
+                            <td class="logo">
+                                <img src='' onload="printDoc()" id="logoimg" onerror="onImageError()" />
+                            </td>
+                            <td class="company-info">
+
+
+                                <span class="section-main-field line-brake" style="font-size: 15px;">ΔΟΚΙΜΑΣΤΙΚΟ ΚΡΕΟΠΩΛΕΙΟ ΟΕ</span>
+                                <span class="line-brake"></span>
+                                <span class="line-brake">ΟΔΟΣ ΔΟΚΙΜΗΣ 1 ΑΘΗΝΑ GR</span>
+                                <span class="line-brake">
+                                    <div class="min-width-field"><strong>Αρ. ΓΕΜΗ:</strong> </div>
+                                    <span class="line-brake">
+                                        <div class="min-width-field"><strong>Τηλ.:</strong> 4</div>
+                                        <span class="line-brake"><div class="min-width-field"><strong>ΑΦΜ:</strong> 999000022</div> <strong>ΔΟΥ:</strong> ΑΘΗΝΩΝ </span>
+                                        <span class="line-brake">
+                                            <div class="min-width-field">   </div>
+                                            <span class="line-brake"><div class="min-width-field">   </div></span>
+
+                                        </span>
+                                    </span>
+
+                                </span>
+
+                            </td><!--.company-info-->
+                            <td class="company-info">
+                                <div id="QRDiv"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="document-info" colspan="2">
+                                <label class="section-label line-brake">Στοιχεία παραστατικού</label>
+                                <span class="section-main-field line-brake">ΑΠΟΔΕΙΞΗ ΛΙΑΝΙΚΗΣ ΠΩΛΗΣΗΣ</span>
+
+                                <table class="table-plain">
+                                    <tr>
+                                        <td>
+                                            <label>Αριθμός</label>
+                                            ΑΠΛ 100022
+                                        </td>
+                                        <td class="gap"></td>
+                                        <td>
+                                            <label>Ημερ.</label>
+                                            14/11/2026
+                                        </td>
+                                        <td class="gap"></td>
+                                        <td>
+                                            <label>Shipping Date</label>
+                                            14/11/2026
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Τρόπος πληρωμής</label>
+OnLine                                        </td>
+                                            <td class="gap"></td>
+                                            <td>
+                                                <label>Σκοπός διακίνησης</label>
+
+                                                Πώληση
+                                            </td>
+                                        <td class="gap"></td>
+                                        <td>
+                                            <label>Τρόπος αποστολής</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td><!--.document-info-->
+                        </tr>
+
+                    </table>
+                </header>
+
+                <div class="divPrintable" style="height: 355px;">
+
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Κωδικός</th>
+                                <th class="text-left">Περιγραφή</th>
+                                <th>Ποσότητα</th>
+                                <th>Μ.Μ.</th>
+                                    <th style="width: 10%;">Τιμή μον.</th>
+                                    <th>Έκπτωση%</th>
+                                    <th style="text-align:center;">ΦΠΑ</th>
+                                    <th>Σύνολο</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>000045</td>
+
+                                    <td class="text-left" style="width: 50%;">
+                                        &quot;B.B.QUEΕN&quot;
+                                        <br />
+                                        <span style="font-size: smaller;float: left;padding-left: 10px;height: 5px;"></span>
+                                    </td>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>Τεμάχια</td>
+                                        <td class="FormatAmountC">6,90</td>
+                                        <td class="FormatAmountC">0,00 </td>
+                                        <td class="FormatAmountC" style="width: 13%;"><small>13,00%</small> 0,90</td>
+                                        <td class="FormatAmountC">6,90</td>
+
+                                </tr>
+                                <tr>
+                                    <td>000366</td>
+
+                                    <td class="text-left" style="width: 50%;">
+                                        ΜΠΡΙΖΟΛΑΚΙΑ ΧΟΙΡΙΝΑ
+                                        <br />
+                                        <span style="font-size: smaller;float: left;padding-left: 10px;height: 5px;"></span>
+                                    </td>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>Τεμάχια</td>
+                                        <td class="FormatAmountC">9,29</td>
+                                        <td class="FormatAmountC">0,00 </td>
+                                        <td class="FormatAmountC" style="width: 13%;"><small>13,00%</small> 1,21</td>
+                                        <td class="FormatAmountC">9,29</td>
+
+                                </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div style="text-align: right;font-style: italic;padding: 90px 0 3px 0;"> Page 1 of 1</div>
+                <table class="table-plain full-width">
+                    <tr>
+                        <td class="full-width">
+                                <label class="section-label">Ανάλυση ΦΠΑ</label>
+                                <table class="vat-analysis">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">Συντελεστής ΦΠΑ</th>
+                                            <th>Καθαρή αξία</th>
+                                            <th>Ποσό</th>
+                                        </tr>
+                                    </thead>
+                                                <tr>
+                                                    <td class="text-left">ΦΠΑ 13%</td>
+                                                    <td>16,19</td>
+                                                    <td>2,11</td>
+
+                                                </tr>
+
+                                </table><!--.vat-analysis-->
+                                <label class="section-label">Λοιποί φόροι / Κρατήσεις </label>
+                                <table class="vat-analysis">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">Τύπος φόρου </th>
+                                            <th>Ποσό</th>
+                                        </tr>
+                                    </thead>
+
+
+                                </table><!--.vat-analysis-->
+
+                            <label class="section-label" style="margin-top:-30px; ">Σημειώσεις</label>
+                            <div class="comments"></div>
+                        </td>
+
+                        <td class="sums">
+                                <label class="section-label">Σύνολο</label>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><label>Καθαρ.αξία πριν την έκπτωση:</label></td>
+                                            <td>
+                                                16,19
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Έκπτωση %:</label></td>
+                                            <td>
+                                                0,00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Σύνολο έκπτωσης:</label></td>
+                                            <td>
+
+                                                0,00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Καθαρ.αξία μετά την έκπτωση:</label></td>
+                                            <td>
+                                                16,19
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><label>Φόροι / Κρατήσεις :</label></td>
+                                            <td>
+                                                0,00
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><label>Σύνολο ΦΠΑ:</label></td>
+                                            <td>
+                                                2,11
+                                            </td>
+
+                                        </tr>
+                                        <tr class="total">
+                                            <td><label>Σύνολο :</label></td>
+                                            <td><b>18,30</b></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="full-width">
+
+                            <div class="comments"></div>
+
+                        </td>
+                    </tr>
+
+
+
+                </table>
+
+
+                <div class="footer" style="">
+
+                    <docstatus></docstatus>
+                    <sign><b>MARK:</b>400000000000022  <b>Authentication code:</b> 0123456789ABCDEF0123456789ABCDEF01234567 <b>UID:</b>FEDCBA9876543210FEDCBA9876543210FEDCBA98</sign>
+                    <br />
+                    <sign style="text-align: center;margin-left: 230px;"><b>Service provider:</b> Simply Services P.C. https://www.simplycloud.gr</sign>
+                    <br />
+                    <sign style="text-align: center;margin-left: 230px;"><b>License number:</b> 2021_11_111Simply_001_ Simply_V1_29112021</sign>
+                    <br />
+                        <sign style="text-align: center;margin-left: 300px;" date-offSetHours="2" date-realCreatedOn="14/11/2026 11:07:54 μμ +03:00"><b>Transmitted on:</b> 14/11/2026 10:07:54 μμ</sign>
+                        <br />
+
+
+                </div>
+
+                <div class="signatures-wrapper show-for-print">
+                    <div class="signature-label">
+                        <strong>Για την παραλαβή</strong>
+                    </div>
+
+                    <div class="signature-label">
+                        <strong>Για την έκδοση</strong>
+                    </div>
+                </div>
+
+            </div><!--.wrapper-->
+        </div><!--.smpl-invoice-->
+    </body>
+</html>
+

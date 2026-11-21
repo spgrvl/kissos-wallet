@@ -85,6 +85,46 @@
                 <data android:host="e-invoicing.gr" />
                 <data android:pathPrefix="/edocuments/ViewInvoice/" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="einvoice.impact.gr" />
+                <data android:pathPrefix="/p/" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="eskap.gr" />
+                <data android:host="www.eskap.gr" />
+                <data android:pathPrefix="/invoice/" />
+            </intent-filter>
+            <!-- See ReceiptCode.InvoicePortal -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="invoiceportal.gr" />
+                <data android:pathPrefix="/invoices/" />
+            </intent-filter>
+            <!-- See ReceiptCode.SimplyCloud. Its printed codes say http -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="app.simplycloud.gr" />
+                <data android:pathPrefix="/InvoiceData/v/" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.shortcuts"
