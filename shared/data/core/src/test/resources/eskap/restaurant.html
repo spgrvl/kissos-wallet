@@ -1,0 +1,494 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="shortcut icon" href="/assets/media/logos/Eskap4.png">
+    <title>ESKAP | Προβολή Παραστατικού</title>
+
+    <link href="/assets/v2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .invoice-wrapper {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .invoice-pair .value  {
+            list-style: none;
+        }
+        @media (max-width: 700px) {
+            .invoice-wrapper {
+                display: block;
+            }
+            .invoice-pair {
+                margin-bottom: 5px;
+            }
+            .invoice-pair .label {
+                font-weight: bold;
+                display: block;
+            }
+        }
+        @media print {
+            body.large-page {
+                zoom: 80%;
+            }
+
+            .page-break {
+                page-break-after: always;
+            }
+        }
+
+        :root {
+            --primary-color: #595d6e;
+            --background-color: #F2F3F8;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --border-gradient: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0));
+            --font-size: 13px;
+            --spacing: 20px;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-size: var(--font-size);
+            margin: auto;
+        }
+
+        .issuer-details {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .issuer-logo img {
+            max-width: 160px;
+            max-height: 90px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 700px) {
+            .issuer-details {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        hr.header {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background-image: var(--border-gradient);
+        }
+
+        .text-gray {
+            color: var(--primary-color) !important;
+        }
+
+        hr.line {
+            margin: 1rem 0;
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            opacity: 1;
+        }
+
+        .box {
+            display: grid;
+            gap: var(--spacing);
+        }
+
+        .box-5 {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+        }
+
+        .box-5>*:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .box-5>*:nth-child(5) {
+            grid-column: span 1;
+        }
+
+        .box-4 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .box-4>*:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        .box-3 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+        }
+
+        .box-2 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr;
+        }
+
+        .box-2-4 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr;
+        }
+
+
+        @media screen and (max-width: 1024px) {
+
+            .box-5,
+            .box-4,
+            .box-3,
+            .box-2,
+            .box-2-4 {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: 1fr !important;
+            }
+
+            .box-5>*,
+            .box-4>*,
+            .box-3>* {
+                grid-column: span 1 !important;
+            }
+
+            .box-5>*:nth-last-child(4) {
+                grid-column: span 1 !important;
+            }
+
+            .box-5>*:nth-last-child(5) {
+                grid-column: span 1 !important;
+            }
+
+        }
+
+        #materialTable tbody td {
+            font-weight: 300 !important;
+        }
+
+        .table-borderless thead th,
+        .table-borderless tfoot td:first-child {
+            color: var(--primary-color) !important;
+            font-weight: 600 !important;
+        }
+
+        .table-borderless tbody td,
+        .table-borderless tfoot td:not(:first-child) {
+            color: var(--primary-color) !important;
+            font-weight: 300 !important;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            if (document.body.scrollHeight > 1250) {
+                document.body.classList.add('large-page');
+                document.getElementById('page-break').classList.add('page-break');
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.querySelector('.invoice-wrapper');
+            if (!wrapper) return;
+
+            const originalHTML = wrapper.innerHTML;
+
+            function transformToPairs() {
+                const labels = [...wrapper.querySelectorAll('.labels li')];
+                const values = [...wrapper.querySelectorAll('.values li')];
+                const newContent = document.createDocumentFragment();
+
+                labels.forEach((label, i) => {
+                    const pairDiv = document.createElement('div');
+                    pairDiv.className = 'invoice-pair';
+                    const labelClone = label.cloneNode(true);
+                    labelClone.classList.add('label');
+                    const valueClone = values[i] ? values[i].cloneNode(true) : document.createElement('span');
+                    valueClone.classList.add('value');
+                    pairDiv.appendChild(labelClone);
+                    pairDiv.appendChild(valueClone);
+                    newContent.appendChild(pairDiv);
+                });
+
+                wrapper.innerHTML = '';
+                wrapper.appendChild(newContent);
+                wrapper.dataset.mode = 'pairs';
+            }
+
+            function restoreOriginal() {
+                wrapper.innerHTML = originalHTML;
+                wrapper.dataset.mode = 'original';
+            }
+
+            function handleResize() {
+                if (window.innerWidth <= 700 && wrapper.dataset.mode !== 'pairs') {
+                    transformToPairs();
+                } else if (window.innerWidth > 700 && wrapper.dataset.mode !== 'original') {
+                    restoreOriginal();
+                }
+            }
+            handleResize();
+            window.addEventListener('resize', handleResize);
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid p-3">
+        <div class="bg-white h-100 rounded shadow w-100">
+            <div class="row">
+                <div class="header col-lg-12 px-5 py-3 text-center">
+                    <img src="/assets/v2/img/eskap_logo_eng.png" class="img-fluid" alt="" width="320">
+                    <hr class="header">
+                </div>
+            </div>
+
+            <div class="box box-2-4 p-3">
+                <div class="col-lg-12 col-md-12 border rounded p-4 ">
+                    <div>
+                        <div class="">
+                            <span class="fw-semibold mb-3 text-gray">Στοιχεία Εκδότη</span>
+                            <hr class="box">
+                        </div>
+                        <div class="issuer-details">
+                                                        <ul class="list-unstyled">
+                                <li class="fw-semibold">ΔΟΚΙΜΑΣΤΙΚΗ ΠΙΤΣΑΡΙΑ Ε.Ε.</li>
+                                                                <li class="fw-light"> -  - </li>
+                                                                <li><span class="fw-normal">Α.Φ.Μ.: </span><span class="fw-light">
+                                        999000033</span></li>
+                                <li><span class="fw-normal">Δ.Ο.Υ.: </span><span class="fw-light"></span></li>
+                                                                    <li><span class="fw-normal">ΤΗΛ.: </span><span class="fw-light">210 0000000</span></li>
+                                                                                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 border p-4 rounded">
+                    <div>
+                        <div>
+                            <span class="fw-semibold mb-3 text-gray">Στοιχεία Παραστατικού</span>
+                            <hr class="box">
+                        </div>
+                        <div class="invoice-wrapper">
+    <ul class="list-unstyled labels">
+        <li class="fw-normal">Είδος Παραστατικού:</li>
+        <li class="fw-normal">Ημερομηνία Διαβίβασης:</li>
+        <li class="fw-normal">Ημερομηνία Έκδοσης:</li>
+        <li class="fw-normal">Σειρά Παραστατικού:</li>
+        <li class="fw-normal">Α/Α Παραστατικού:</li>
+                            <li class="fw-normal">Α/Α Τραπεζιού:</li>
+                            </ul>
+    <ul class="list-unstyled values">
+        <li class="text-gray fw-light">8.6 Δελτίο Παραγγελίας Εστίασης                </li>
+        <li class="text-gray fw-light"><span style="font-weight: bold;">20/11/2026 21:02:27</span></li>
+        <li class="text-gray fw-light">20/11/2026</li>
+        <li class="text-gray fw-light">ΔΠ</li>
+        <li class="text-gray fw-light">0100033</li>
+                            <li class="text-gray fw-light">Α07</li>
+                            </ul>
+</div>
+                    </div>
+                </div>
+                                <div class="col-lg-12 col-md-12 border rounded p-4 ">
+                    <div>
+                        <div class="">
+                            <span class="fw-semibold mb-3 text-gray">Πληροφορίες</span>
+                            <hr class="box">
+                        </div>
+                                                <div class="table-responsive">
+                            <table class="table w-auto border-0 m-0">
+                                <tbody>
+                                                                                                                                                                                                                                                                                                <tr class="m-0 p-0">
+                                        <td class="fw-normal text-nowrap border-0 pe-2 py-1">Τρόπος Πληρωμής:</td>
+                                        <td class="text-gray fw-light border-0 py-1"></td>
+                                    </tr>
+                                                                                                                                                                                                                                                        </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 px-3  ">
+                <div class="col-lg-12 col-md-12 border rounded p-4 table-responsive">
+                    <table id="materialTable" class="table table-striped">
+                        <thead class="table-dark text-white">
+                            <tr>
+                                <th>Κωδικός</th>
+                                <th>Περιγραφή</th>
+                                <th>Μ.Μ.</th>
+                                                                <th>Ποσότητα</th>
+                                <th>Τιμή Μονάδος</th>
+                                <th>Καθαρή Αξία</th>
+                                <th>% Φ.Π.Α.</th>
+                                <th>Αξία Φ.Π.Α.</th>
+                                <th>Συνολική Αξία</th>
+                                                                                                                            </tr>
+                        </thead>
+                        <tbody class="">
+
+                                                                                                                        <tr>
+                                    <td>000128</td>
+                                    <td>ΠΙΤΑ ΛΑΧΑΝΙΚΩΝ</td>
+                                    <td>ΤΕΜΑΧΙΑ</td>
+                                                                        <td>1.00</td>
+                                    <td>3.89€</td>
+                                    <td>3,89€</td>
+                                    <td>13.00%</td>
+                                    <td>0,51€</td>
+                                    <td>4,40€</td>
+                                                                                                        </tr>
+                                                                                            <tr>
+                                    <td>000499</td>
+                                    <td>ΠΙΤΑ ΚΟΛΟΚ ΦΤΕΔΕΣ</td>
+                                    <td>ΤΕΜΑΧΙΑ</td>
+                                                                        <td>1.00</td>
+                                    <td>3.89€</td>
+                                    <td>3,89€</td>
+                                    <td>13.00%</td>
+                                    <td>0,51€</td>
+                                    <td>4,40€</td>
+                                                                                                        </tr>
+                                                    </tbody>
+                    </table>
+
+                                        <div>
+                        <span class="text-gray"></span>
+                    </div>
+                                    </div>
+            </div>
+
+
+            <div id="page-break"></div>
+
+            <!-- Dynamically Create Boxes -->
+            <div class="box box-3 p-3">
+                
+                                            <div class="col-lg-12 col-md-12 border p-4 rounded">
+                            <div>
+                                <span class="fw-semibold mb-3 text-gray">Ανάλυση ΦΠΑ</span>
+                                <hr class="line">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>%Φ.Π.Α</th>
+                                            <th>Καθαρή Αξία</th>
+                                            <th>Αξία Φ.Π.Α</th>
+                                        </tr>
+                                    </thead>
+                                                                        <tbody>
+                                                                                    <tr>
+                                                <td>13.00%</td>
+                                                <td>7,78€</td>
+                                                <td>1,02€</td>
+                                            </tr>
+                                                                            </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Σύνολα:</td>
+                                            <td>7,78€</td>
+                                            <td>1,02€</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                    
+                
+                                            <div class="col-lg-12 col-md-12 border p-4 rounded">
+                            <div>
+                                <div>
+                                    <span class="fw-semibold mb-3 text-gray">Σύνολα Παραστατικού</span>
+                                    <hr class="line">
+                                </div>
+                                <div class="d-flex w-100 gap-5">
+                                    <ul class="list-unstyled">
+                                        <li class="fw-normal">Καθαρή Αξία:</li>
+                                        <li class="fw-normal">Αξία Φ.Π.Α.:</li>
+                                                                                <li class="fw-normal">Συνολική Αξία:</li>
+                                        <li class="fw-normal">Πληρωτέο:</li>
+                                    </ul>
+                                    <ul class="list-unstyled">
+                                        <li class="text-gray fw-light">7,78€</li>
+                                        <li class="text-gray fw-light">1,02€</li>
+                                                                                <li class="text-gray fw-light">8,80€</li>
+                                        <li class="text-gray fw-light">0,00€</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+                                            <div class="col-lg-12 col-md-12 border rounded p-4">
+                            <div>
+                                <div class="">
+                                    <span class="fw-semibold mb-3 text-gray">Σήμανση</span>
+                                    <hr class="line">
+                                </div>
+                                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100">
+                                    <ul class="list-unstyled">
+                                        <li class="fw-semibold">Αναγνωριστικό Παραστατικού</li>
+                                        <li class="fw-light text-break">0123456789ABCDEF0123456789ABCDEF01234567</li>
+                                        <li class="fw-semibold">Συμβολοσειρά Αυθεντικοποίησης Παρόχου</li>
+                                        <li class="fw-light text-break">FEDCBA9876543210FEDCBA9876543210FEDCBA98</li>
+                                        <li class="fw-semibold">Μοναδικός Αριθμός Καταχώρησης Παραστατικού</li>
+                                        <li class="fw-light">400000000000033</li>
+                                                                            </ul>
+                                                                        <img alt="qrcode" src="data:,">
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+            </div>
+            <div class="row">
+                <div class="footer col-lg-12 px-5 py-3 text-center">
+                                        <span class="fw-light" style="display: flex; justify-content: center; flex-wrap: wrap; text-align: center;">
+                        Άδεια καταλληλότητας (ΥΠΑΗΕΣ): 2021_12_112Kappa Development_001_ eskap_V1_10122021 –&nbsp;
+                        <span style="white-space: nowrap;">URL Παρόχου: <a class="text-decoration-none" href="https://www.eskap.gr">www.eskap.gr</a></span>
+                    </span>
+                                        <div class="fw-bold text-align-center">
+                        ΤΟ ΠΑΡΟΝ ΕΙΝΑΙ ΠΛΗΡΟΦΟΡΙΑΚΟ ΣΤΟΙΧΕΙΟ ΚΑΙ ΔΕΝ ΑΠΟΤΕΛΕΙ ΝΟΜΙΜΗ ΦΟΡΟΛΟΓΙΚΗ ΑΠΟΔΕΙΞΗ/ΤΙΜΟΛΟΓΙΟ.<br/>THE PRESENT DOCUMENT IS ISSUED ONLY FOR INFORMATION PURPOSES AND DOES NOT STAND FOR A VALIDTAX RECEIPT/INVOICE.
+                    </div>
+                                        <hr class="header">
+                    <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                    <button class="btn btn-sm btn-primary" onclick="printPage('/invoice_print.php?authentication_code=FEDCBA9876543210FEDCBA9876543210FEDCBA98')">Εκτύπωση</button>
+                                        <a class="btn btn-sm btn-primary ms-2" href="https://mydatapi.aade.gr/myDATA/TimologioQR/QRInfo?q=AAAAAAAAAAAAAAAAAAAA%2fBBBBBBBBBBBBBBBBBBBB%2bCCCCCCCCCCCCCCCCCCCC%3d" target="_blank">myDATA</a>
+                                                            </div>
+                    <!-- <button class="btn btn-sm btn-primary" onclick="printPage('/invoice.php?authentication_code=FEDCBA9876543210FEDCBA9876543210FEDCBA98')">Εκτύπωση</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+document.addEventListener('keydown', function (e) {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+    e.preventDefault();
+    printPage('/invoice_print.php?authentication_code=FEDCBA9876543210FEDCBA9876543210FEDCBA98'); // your target URL
+  }
+});
+
+function printPage(url) {
+  let iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = url;
+  document.body.appendChild(iframe);
+
+  iframe.onload = function () {
+    iframe.contentWindow.print();
+  };
+}
+</script>
+
+    
+</body>
+
+</html>
+
+

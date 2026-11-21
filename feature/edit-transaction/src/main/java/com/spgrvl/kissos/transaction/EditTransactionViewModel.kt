@@ -1179,7 +1179,11 @@ class EditTransactionViewModel @Inject constructor(
 
     private fun lookUpReceipt(code: ReceiptCode.Fetchable) {
         receiptLookupJob?.cancel()
-        val step = if (code is ReceiptCode.FiscalSign) ReceiptStep.DOWNLOAD_RECEIPT else ReceiptStep.CHECK_AADE
+        val step = when (code) {
+            is ReceiptCode.CashRegister, is ReceiptCode.MyData -> ReceiptStep.CHECK_AADE
+            is ReceiptCode.FiscalSign, is ReceiptCode.InvoicePortal, is ReceiptCode.SimplyCloud, is ReceiptCode.Eskap ->
+                ReceiptStep.DOWNLOAD_RECEIPT
+        }
         // After a provider's page, this is its last step
         if (step in receiptSteps) receiptStep = step else showReceiptSteps(step)
         receiptLookupJob = viewModelScope.launch {
