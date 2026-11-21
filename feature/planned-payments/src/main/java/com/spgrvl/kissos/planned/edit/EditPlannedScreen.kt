@@ -71,7 +71,7 @@ fun BoxWithConstraintsScope.EditPlannedScreen(screen: EditPlannedScreen) {
 
 /**
  * Flow Empty: Type -> Amount -> Category -> Recurring Rule -> Title
- * Flow Amount + Category: Recurring Rule -> Title
+ * Flow from a transaction: Recurring Rule -> then whichever of Amount, Category, Title is missing
  */
 @Suppress("LongMethod")
 @ExperimentalFoundationApi
@@ -198,8 +198,8 @@ private fun BoxWithConstraintsScope.UI(
     onScreenStart {
         if (screen.plannedPaymentRuleId == null) {
             // Create mode
-            if (screen.mandatoryFilled()) {
-                // Flow Convert (Amount, Account, Category)
+            if (screen.typeChosen) {
+                // Flow from a transaction
                 onEvent(
                     EditPlannedScreenEvent.OnRecurringRuleModalDataChanged(
                         RecurringRuleModalData(
@@ -298,16 +298,29 @@ private fun BoxWithConstraintsScope.UI(
         },
         onCategoryChanged = {
             onEvent(EditPlannedScreenEvent.OnCategoryChanged(it))
-            onEvent(
-                EditPlannedScreenEvent.OnRecurringRuleModalDataChanged(
-                    RecurringRuleModalData(
-                        initialStartDate = state.startDate,
-                        initialIntervalN = state.intervalN,
-                        initialIntervalType = state.intervalType,
-                        initialOneTime = state.oneTime
+            when {
+                shouldFocusRecurring(
+                    state.startDate,
+                    state.intervalN,
+                    state.intervalType,
+                    state.oneTime
+                ) -> {
+                    onEvent(
+                        EditPlannedScreenEvent.OnRecurringRuleModalDataChanged(
+                            RecurringRuleModalData(
+                                initialStartDate = state.startDate,
+                                initialIntervalN = state.intervalN,
+                                initialIntervalType = state.intervalType,
+                                initialOneTime = state.oneTime
+                            )
+                        )
                     )
-                )
-            )
+                }
+
+                shouldFocusTitle(titleTextFieldValue, state.transactionType) -> {
+                    titleFocus.requestFocus()
+                }
+            }
         },
         dismiss = {
             onEvent(EditPlannedScreenEvent.OnCategoryModalVisible(false))
@@ -380,6 +393,10 @@ private fun BoxWithConstraintsScope.UI(
             )
 
             when {
+                shouldFocusAmount(state.amount) -> {
+                    onEvent(EditPlannedScreenEvent.OnAmountModalVisible(true))
+                }
+
                 shouldFocusCategory(state.category, state.transactionType) -> {
                     onEvent(EditPlannedScreenEvent.OnCategoryModalVisible(true))
                 }
@@ -427,7 +444,7 @@ private fun shouldFocusAmount(amount: Double) = amount == 0.0
 private fun Preview() {
     KissosWalletPreview {
         UI(
-            screen = EditPlannedScreen(null, TransactionType.EXPENSE),
+            screen = EditPlannedScreen(null, TransactionType.EXPENSE, typeChosen = false),
             EditPlannedScreenState(
                 oneTime = false,
                 startDate = null,
