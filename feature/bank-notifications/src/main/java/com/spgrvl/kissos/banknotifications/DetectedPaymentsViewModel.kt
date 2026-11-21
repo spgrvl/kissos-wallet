@@ -69,15 +69,19 @@ class DetectedPaymentsViewModel @Inject constructor(
 ) : ComposeViewModel<DetectedPaymentsState, DetectedPaymentsEvent>() {
     private val dateFormat = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
 
-    private val waiting = dao.observePayments(DetectedPaymentStatus.NEW).map { list -> list.map { toUi(it) } }
-    private val recent = dao.observeRecentPayments(RECENT_LIMIT)
-        .map { list -> list.filter { it.status != DetectedPaymentStatus.NEW }.map { toUi(it) } }
+    /** One query for both lists, so a payment that's just been handled is never in both at once. */
+    private val lists = dao.observeAllPayments().map { all ->
+        val (waiting, handled) = all.partition { it.status == DetectedPaymentStatus.NEW }
+        DetectedPaymentsState(
+            waiting = waiting.map { toUi(it) }.toImmutableList(),
+            recent = handled.take(RECENT_LIMIT).map { toUi(it) }.toImmutableList(),
+        )
+    }
 
     @Composable
     override fun uiState(): DetectedPaymentsState {
-        val waiting by waiting.collectAsState(emptyList())
-        val recent by recent.collectAsState(emptyList())
-        return DetectedPaymentsState(waiting.toImmutableList(), recent.toImmutableList())
+        val state by lists.collectAsState(DetectedPaymentsState(persistentListOf(), persistentListOf()))
+        return state
     }
 
     override fun onEvent(event: DetectedPaymentsEvent) {

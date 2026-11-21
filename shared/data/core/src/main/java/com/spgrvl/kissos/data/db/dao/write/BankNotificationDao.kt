@@ -33,8 +33,9 @@ interface BankNotificationDao {
     @Query("SELECT * FROM detected_payments WHERE status = :status ORDER BY postedAt DESC")
     fun observePayments(status: DetectedPaymentStatus): Flow<List<DetectedPaymentEntity>>
 
-    @Query("SELECT * FROM detected_payments ORDER BY postedAt DESC LIMIT :limit")
-    fun observeRecentPayments(limit: Int): Flow<List<DetectedPaymentEntity>>
+    /** All of them, newest first: handled ones are purged after 30 days, so there are never many. */
+    @Query("SELECT * FROM detected_payments ORDER BY postedAt DESC")
+    fun observeAllPayments(): Flow<List<DetectedPaymentEntity>>
 
     @Query("UPDATE detected_payments SET status = :status, transactionId = :transactionId WHERE id = :id")
     suspend fun setStatus(id: UUID, status: DetectedPaymentStatus, transactionId: UUID?)

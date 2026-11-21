@@ -66,7 +66,7 @@ private fun BoxWithConstraintsScope.UI(
                     )
                 }
             }
-            items(items = state.waiting, key = { it.id }) { payment ->
+            items(items = state.waiting, key = { "waiting-${it.id}" }) { payment ->
                 Payment(payment) {
                     if (payment.canAddDirectly) {
                         Action(stringResource(R.string.add), UI.colors.green) {
@@ -91,7 +91,7 @@ private fun BoxWithConstraintsScope.UI(
                     )
                 }
             }
-            items(items = state.recent, key = { it.id }) { payment ->
+            items(items = state.recent, key = { "recent-${it.id}" }) { payment ->
                 Payment(payment) {
                     Text(
                         modifier = Modifier.padding(end = 16.dp, top = 8.dp),

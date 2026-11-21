@@ -40,8 +40,8 @@ class FakeBankNotificationDao : BankNotificationDao {
     override fun observePayments(status: DetectedPaymentStatus): Flow<List<DetectedPaymentEntity>> =
         payments.map { all -> all.values.filter { it.status == status }.sortedByDescending { it.postedAt } }
 
-    override fun observeRecentPayments(limit: Int): Flow<List<DetectedPaymentEntity>> =
-        payments.map { all -> all.values.sortedByDescending { it.postedAt }.take(limit) }
+    override fun observeAllPayments(): Flow<List<DetectedPaymentEntity>> =
+        payments.map { all -> all.values.sortedByDescending { it.postedAt } }
 
     override suspend fun setStatus(id: UUID, status: DetectedPaymentStatus, transactionId: UUID?) {
         payments.value[id]?.let { payments.value += id to it.copy(status = status, transactionId = transactionId) }
