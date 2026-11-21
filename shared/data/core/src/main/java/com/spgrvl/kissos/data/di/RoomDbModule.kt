@@ -22,6 +22,7 @@ import com.spgrvl.kissos.data.db.dao.write.WriteCategoryDao
 import com.spgrvl.kissos.data.db.dao.write.WriteExchangeRatesDao
 import com.spgrvl.kissos.data.db.dao.write.WriteLoanDao
 import com.spgrvl.kissos.data.db.dao.write.WriteLoanRecordDao
+import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.dao.write.WriteMerchantDao
 import com.spgrvl.kissos.data.db.dao.write.WritePlannedPaymentRuleDao
 import com.spgrvl.kissos.data.db.dao.write.WriteReceiptDao
@@ -185,5 +186,10 @@ object RoomDbModule {
     @Provides
     fun provideWriteMerchantDao(db: KissosRoomDatabase): WriteMerchantDao {
         return db.writeMerchantDao
+    }
+
+    @Provides
+    fun provideBankNotificationDao(db: KissosRoomDatabase): BankNotificationDao {
+        return db.bankNotificationDao
     }
 }

@@ -4,6 +4,7 @@ import com.spgrvl.kissos.base.TestDispatchersProvider
 import com.spgrvl.kissos.base.di.KotlinxSerializationModule
 import com.spgrvl.kissos.data.DataObserver
 import com.spgrvl.kissos.data.db.dao.fake.FakeAccountDao
+import com.spgrvl.kissos.data.db.dao.fake.FakeBankNotificationDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeBudgetDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeCategoryDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeLoanDao
@@ -15,7 +16,11 @@ import com.spgrvl.kissos.data.db.dao.fake.FakeSettingsDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeTagAssociationDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeTagDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeTransactionDao
+import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.db.entity.MerchantEntity
+import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
 import com.spgrvl.kissos.data.db.entity.ReceiptEntity
 import com.spgrvl.kissos.data.model.ReceiptStatus
 import com.spgrvl.kissos.data.repository.AccountRepository
@@ -25,10 +30,13 @@ import com.spgrvl.kissos.data.repository.mapper.AccountMapper
 import com.spgrvl.kissos.data.testResource
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldNotContain
 import io.mockk.mockk
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import java.time.Instant
+import java.util.UUID
 
 class BackupDataUseCaseTest {
     private fun newBackupDataUseCase(
@@ -44,6 +52,7 @@ class BackupDataUseCaseTest {
         tagAssociationDao: FakeTagAssociationDao = FakeTagAssociationDao(),
         receiptDao: FakeReceiptDao = FakeReceiptDao(),
         merchantDao: FakeMerchantDao = FakeMerchantDao(),
+        bankNotificationDao: FakeBankNotificationDao = FakeBankNotificationDao(),
     ): BackupDataUseCase {
         val accountMapper = AccountMapper(
             CurrencyRepository(
@@ -90,6 +99,7 @@ class BackupDataUseCaseTest {
             receiptWriter = receiptDao,
             merchantReader = merchantDao,
             merchantWriter = merchantDao,
+            bankNotificationDao = bankNotificationDao,
         )
     }
 
@@ -174,5 +184,55 @@ class BackupDataUseCaseTest {
         // then
         freshReceiptDao.findAll() shouldBe listOf(receipt)
         freshMerchantDao.findAll() shouldBe listOf(merchant)
+    }
+
+    @Test
+    fun `what was learned from bank notifications survives a backup, the payments don't`() = runTest {
+        // given
+        val bankNotificationDao = FakeBankNotificationDao()
+        val useCase = newBackupDataUseCase(bankNotificationDao = bankNotificationDao)
+        useCase.importJson(testResource("backups/450-150.json").readText(Charsets.UTF_16))
+        val learnedAt = Instant.parse("2026-11-21T10:00:00Z")
+        val payee = PayeeMemoryEntity(
+            payee = "powerco",
+            title = "Electricity",
+            categoryId = null,
+            updatedAt = learnedAt,
+        )
+        val hint = CategoryHintMemoryEntity(
+            sourcePackage = "com.revolut.revolut",
+            hint = "❤️",
+            categoryId = UUID.randomUUID(),
+            updatedAt = learnedAt,
+        )
+        bankNotificationDao.savePayee(payee)
+        bankNotificationDao.saveCategoryHint(hint)
+        bankNotificationDao.insertPayment(
+            DetectedPaymentEntity(
+                id = UUID.randomUUID(),
+                dedupKey = "gr.payzy|0|1|46.65",
+                sourcePackage = "gr.payzy",
+                postedAt = learnedAt,
+                amount = 46.65,
+                currency = "EUR",
+                direction = "OUT",
+                payee = "PowerCo",
+                categoryHint = null,
+                status = DetectedPaymentStatus.NEW,
+                transactionId = null,
+                createdAt = learnedAt,
+            )
+        )
+
+        // when
+        val exportedJson = useCase.generateJsonBackup()
+        val fresh = FakeBankNotificationDao()
+        newBackupDataUseCase(bankNotificationDao = fresh).importJson(exportedJson)
+
+        // then
+        fresh.findAllPayees() shouldBe listOf(payee)
+        fresh.findAllCategoryHints() shouldBe listOf(hint)
+        fresh.observePayments(DetectedPaymentStatus.NEW).first() shouldBe emptyList()
+        exportedJson shouldNotContain "46.65"
     }
 }

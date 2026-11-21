@@ -7,6 +7,7 @@ import com.spgrvl.kissos.base.legacy.SharedPrefs
 import com.spgrvl.kissos.data.DataObserver
 import com.spgrvl.kissos.data.DataWriteEvent
 import com.spgrvl.kissos.data.db.dao.read.UserDao
+import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.dao.write.WriteBudgetDao
 import com.spgrvl.kissos.data.db.dao.write.WriteLoanDao
 import com.spgrvl.kissos.data.db.dao.write.WriteLoanRecordDao
@@ -43,6 +44,7 @@ class LogoutLogic @Inject constructor(
     private val exchangeRatesRepository: ExchangeRatesRepository,
     private val writeReceiptDao: WriteReceiptDao,
     private val writeMerchantDao: WriteMerchantDao,
+    private val bankNotificationDao: BankNotificationDao,
 ) {
     suspend fun logout() {
         ioThread {
@@ -61,6 +63,10 @@ class LogoutLogic @Inject constructor(
     private suspend fun deleteAllData() {
         writeReceiptDao.deleteAll()
         writeMerchantDao.deleteAll()
+        bankNotificationDao.deleteAllPayments()
+        bankNotificationDao.deleteAllPayees()
+        bankNotificationDao.deleteAllCategoryHints()
+        bankNotificationDao.deleteAllUnparsed()
         accountRepository.deleteAll()
         transactionRepository.deleteAll()
         categoryRepository.deleteAll()
