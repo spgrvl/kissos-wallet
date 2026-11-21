@@ -27,7 +27,12 @@ fun Double.toReceiptMoney(): BigDecimal = toBigDecimal().toReceiptMoney()
 fun ReceiptCode.Fetchable.toPendingReceipt(transactionId: TransactionId, scannedAt: Instant): Receipt =
     when (this) {
         is ReceiptCode.CashRegister -> qr.toPendingReceipt(transactionId, scannedAt)
-        is ReceiptCode.MyData, is ReceiptCode.FiscalSign -> Receipt(
+        is ReceiptCode.MyData,
+        is ReceiptCode.FiscalSign,
+        is ReceiptCode.InvoicePortal,
+        is ReceiptCode.SimplyCloud,
+        is ReceiptCode.Eskap,
+        -> Receipt(
             transactionId = transactionId,
             sig = key,
             registerId = null,

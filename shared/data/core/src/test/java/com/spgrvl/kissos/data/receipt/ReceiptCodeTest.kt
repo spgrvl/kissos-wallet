@@ -78,6 +78,69 @@ class ReceiptCodeTest {
     }
 
     @Test
+    fun `an Impact page is a provider page`() {
+        // given
+        val impact = "https://einvoice.impact.gr/p/EL999000044/0123456789ABCDEF0123456789ABCDEF01234567/" +
+            "0123456789ABCDEF0123456789ABCDEF"
+
+        // then
+        ReceiptCode.parse(impact) shouldBe ReceiptCode.Provider(impact)
+    }
+
+    @Test
+    fun `an Eskap page is read directly`() {
+        // given
+        val eskap = "https://www.eskap.gr/invoice/abcdefghijklmnopqrstuvwxyz012345"
+
+        // when
+        val code = ReceiptCode.parse(eskap)
+
+        // then
+        code shouldBe ReceiptCode.Eskap(eskap)
+        ReceiptCode.fromKey(eskap) shouldBe code
+    }
+
+    @Test
+    fun `only a provider's document pages count`() {
+        ReceiptCode.parse("https://www.eskap.gr/") shouldBe null
+        ReceiptCode.parse("https://www.eskap.gr/invoice/") shouldBe null
+        ReceiptCode.parse("https://einvoice.impact.gr/login") shouldBe null
+    }
+
+    @Test
+    fun `an invoiceportal page is downloaded as myDATA XML`() {
+        // given
+        val url = "https://invoiceportal.gr/invoices/2026-0123456789ABCDEF0123456789ABCDEF01234567"
+
+        // when
+        val code = ReceiptCode.parse("$url/")
+
+        // then
+        code shouldBe ReceiptCode.InvoicePortal(url)
+        code.shouldBeInstanceOf<ReceiptCode.InvoicePortal>().lookupUrl shouldBe "$url/myDATA"
+        ReceiptCode.fromKey(url) shouldBe code
+    }
+
+    @Test
+    fun `an invoiceportal download is not a receipt page`() {
+        ReceiptCode.parse("https://invoiceportal.gr/invoices/2026-0123456789ABCDEF/pdf") shouldBe null
+    }
+
+    @Test
+    fun `a SimplyCloud page is downloaded over https`() {
+        // given
+        val page = "app.simplycloud.gr/InvoiceData/v/GR999000022-00000000-0000-0000-0000-000000000000-" +
+            "FEDCBA9876543210FEDCBA9876543210FEDCBA98"
+
+        // when
+        val code = ReceiptCode.parse("http://$page")
+
+        // then
+        code shouldBe ReceiptCode.SimplyCloud("https://$page")
+        ReceiptCode.fromKey("https://$page") shouldBe code
+    }
+
+    @Test
     fun `a Fiscal Sign receipt is downloaded from its link`() {
         // given
         val url = "https://fiscalsign.gr/api/PrintInvoice/download/3f431961-dc73-4878-bf1d-ef17c2c1dbd6"

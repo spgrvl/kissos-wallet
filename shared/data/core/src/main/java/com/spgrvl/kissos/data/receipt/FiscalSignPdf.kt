@@ -33,9 +33,6 @@ object FiscalSignPdf {
     private const val NET = 2
     private const val VAT = 3
 
-    /** Cash registers' VAT categories by rate, as [AadePage] reads them. */
-    private val VAT_CATEGORY_BY_RATE = mapOf(6 to 'Α', 13 to 'Β', 24 to 'Γ', 36 to 'Δ', 0 to 'Ε')
-
     fun parse(pdf: ByteArray): AadeLookup = parse(PdfText.lines(pdf))
 
     fun parse(lines: List<String>): AadeLookup {
@@ -56,7 +53,7 @@ object FiscalSignPdf {
         val vatRows = lines.mapNotNull { VAT_ROW.find(it.trim())?.groupValues }
             .mapNotNull { row ->
                 val rate = AadePage.money(row[RATE])?.toInt() ?: return@mapNotNull null
-                VAT_CATEGORY_BY_RATE[rate]?.let { it to row }
+                AadePage.VAT_CATEGORY_BY_RATE[rate]?.let { it to row }
             }
         return AadeLookup.Found(
             AadeReceipt(

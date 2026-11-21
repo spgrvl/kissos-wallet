@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InvoicesDoc xmlns="http://www.aade.gr/myDATA/invoice/v1.0" xmlns:icls="https://www.aade.gr/myDATA/incomeClassificaton/v1.0" xmlns:ecls="https://www.aade.gr/myDATA/expensesClassificaton/v1.0">
+  <invoice>
+    <uid>0123456789ABCDEF0123456789ABCDEF01234567</uid>
+    <mark>400000000000011</mark>
+    <authenticationCode>FEDCBA9876543210FEDCBA9876543210FEDCBA98</authenticationCode>
+    <issuer>
+      <vatNumber>999000011</vatNumber>
+      <country>GR</country>
+      <branch>0</branch>
+    </issuer>
+    <invoiceHeader>
+      <series>0</series>
+      <aa>101011</aa>
+      <issueDate>2026-11-12</issueDate>
+      <invoiceType>11.1</invoiceType>
+      <currency>EUR</currency>
+    </invoiceHeader>
+    <paymentMethods>
+      <paymentMethodDetails>
+        <type>3</type>
+        <amount>11.40</amount>
+      </paymentMethodDetails>
+    </paymentMethods>
+    <invoiceDetails>
+      <lineNumber>1</lineNumber>
+      <itemCode>124</itemCode>
+      <itemDescr>ΠΙΤΑ ΓΥΡΟ ΧΟΙΡΙΝΟ</itemDescr>
+      <quantity>1</quantity>
+      <measurementUnit>1</measurementUnit>
+      <netValue>3.72</netValue>
+      <vatCategory>2</vatCategory>
+      <vatAmount>0.48</vatAmount>
+      <lineComments>1</lineComments>
+    </invoiceDetails>
+    <invoiceDetails>
+      <lineNumber>2</lineNumber>
+      <itemCode>22</itemCode>
+      <itemDescr>ΣΟΥΒΛΑΚΙ ΚΟΤΟΠΟΥΛΟ</itemDescr>
+      <quantity>3</quantity>
+      <measurementUnit>1</measurementUnit>
+      <netValue>6.37</netValue>
+      <vatCategory>2</vatCategory>
+      <vatAmount>0.83</vatAmount>
+      <lineComments>3</lineComments>
+    </invoiceDetails>
+    <invoiceSummary>
+      <totalNetValue>10.09</totalNetValue>
+      <totalVatAmount>1.31</totalVatAmount>
+      <totalWithheldAmount>0.00</totalWithheldAmount>
+      <totalFeesAmount>0.00</totalFeesAmount>
+      <totalStampDutyAmount>0.00</totalStampDutyAmount>
+      <totalOtherTaxesAmount>0.00</totalOtherTaxesAmount>
+      <totalDeductionsAmount>0.00</totalDeductionsAmount>
+      <totalGrossValue>11.40</totalGrossValue>
+    </invoiceSummary>
+    <downloadingInvoiceUrl>https://invoiceportal.gr/invoices/2026-0123456789ABCDEF0123456789ABCDEF01234567</downloadingInvoiceUrl>
+  </invoice>
+</InvoicesDoc>
