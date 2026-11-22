@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
@@ -49,6 +50,10 @@ import com.spgrvl.kissos.navigation.DetectedPaymentsScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
+import com.spgrvl.kissos.ui.SupportEmail
+import com.spgrvl.kissos.ui.androidVersion
+import com.spgrvl.kissos.ui.emailSupport
+import com.spgrvl.kissos.ui.kissosVersion
 import com.spgrvl.kissos.wallet.ui.theme.components.BackBottomBar
 import com.spgrvl.kissos.wallet.ui.theme.components.KissosSwitch
 import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
@@ -155,7 +160,7 @@ private fun BoxWithConstraintsScope.UI(
                 ) { onEvent(BankNotificationsEvent.SetKeepUnparsed(it)) }
             }
             items(items = state.unparsed, key = { it.id }) { unparsed ->
-                Box(title = unparsed.app, subtitle = unparsed.text) { copy(context, unparsed.text) }
+                Box(title = unparsed.app, subtitle = unparsed.text) { report(context, unparsed) }
             }
         }
     }
@@ -164,6 +169,7 @@ private fun BoxWithConstraintsScope.UI(
 
     DisclosureModal(
         visible = disclosureVisible,
+        foundApps = state.foundApps,
         dismiss = { disclosureVisible = false },
     ) {
         disclosureVisible = false
@@ -260,6 +266,7 @@ private fun Box(
 @Composable
 private fun BoxWithConstraintsScope.DisclosureModal(
     visible: Boolean,
+    foundApps: List<String>,
     dismiss: () -> Unit,
     onContinue: () -> Unit,
 ) {
@@ -283,6 +290,14 @@ private fun BoxWithConstraintsScope.DisclosureModal(
             text = stringResource(R.string.bank_notifications_disclosure),
             style = UI.typo.nB2.style(color = UI.colors.pureInverse, fontWeight = FontWeight.Normal)
         )
+        if (foundApps.isNotEmpty()) {
+            Spacer(Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(horizontal = 32.dp),
+                text = stringResource(R.string.bank_notifications_found_apps, foundApps.joinToString(", ")),
+                style = UI.typo.nB2.style(color = UI.colors.pureInverse, fontWeight = FontWeight.Bold)
+            )
+        }
         Spacer(Modifier.height(32.dp))
     }
 }
@@ -390,9 +405,28 @@ private fun openAccessSettings(context: Context) {
     }
 }
 
-private fun copy(context: Context, text: String) {
-    context.getSystemService(ClipboardManager::class.java)
-        ?.setPrimaryClip(ClipData.newPlainText("notification", text))
+/** Emails it to support, or copies it when there's no email app. */
+private fun report(context: Context, unparsed: UnparsedUi) {
+    val sent = context.emailSupport(
+        subject = context.getString(R.string.bank_notifications_report_subject),
+        body = context.getString(
+            R.string.bank_notifications_report_body,
+            unparsed.app,
+            unparsed.packageName,
+            unparsed.text,
+            context.kissosVersion,
+            androidVersion,
+        ),
+    )
+    if (!sent) {
+        context.getSystemService(ClipboardManager::class.java)
+            ?.setPrimaryClip(ClipData.newPlainText("notification", unparsed.text))
+        Toast.makeText(
+            context,
+            context.getString(R.string.bank_notifications_report_no_email, SupportEmail),
+            Toast.LENGTH_LONG,
+        ).show()
+    }
 }
 
 @Preview

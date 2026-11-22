@@ -608,8 +608,15 @@
     <string name="bank_notifications_add_automatically_description">Adds its payments right away, with Undo, instead of asking first. Payments that may already be in Kissos, or are in another currency, are always asked about.</string>
     <string name="bank_notifications_adds_automatically">Adds automatically</string>
     <string name="bank_notifications_unrecognised">Unrecognised notifications</string>
-    <string name="bank_notifications_unrecognised_description">To support a new bank or format, Kissos can keep the notifications of your chosen apps that it didn\'t recognise, on this phone only, for 7 days. Tap one to copy it.</string>
+    <string name="bank_notifications_unrecognised_description">To support a new bank or format, Kissos can keep the notifications of your chosen apps that it didn\'t recognise, on this phone only, for 7 days. Tap one to send it to us by email.</string>
     <string name="bank_notifications_keep_unrecognised">Keep them for 7 days</string>
+    <string name="bank_notifications_report_subject">Kissos: Unsupported bank notification</string>
+    <string name="bank_notifications_report_body">Please check the notification below before sending, and remove anything you\'d rather not share, e.g. a balance or a name.\n\nApp: %1$s (%2$s)\n\n%3$s\n\nKissos %4$s · Android %5$s</string>
+    <string name="bank_notifications_report_no_email">No email app found. The notification was copied, so you can send it to %1$s.</string>
+    <string name="bank_notifications_found_apps">Kissos found %1$s on this phone and will read only their notifications. You can add or remove apps afterwards.</string>
+    <string name="bank_notifications_setup_title">Add card payments automatically</string>
+    <string name="bank_notifications_setup_description">Kissos can turn the payment notifications of %1$s into expenses. It reads only the bank apps you choose, and nothing leaves this phone.</string>
+    <string name="bank_notifications_setup">Set up</string>
     <string name="detected_payments">Detected payments</string>
     <string name="detected_payments_channel_description">Payments found in your bank apps\' notifications</string>
     <string name="detected_payments_waiting">%s waiting for you</string>

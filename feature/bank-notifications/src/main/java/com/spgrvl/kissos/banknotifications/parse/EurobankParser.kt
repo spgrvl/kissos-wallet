@@ -1,5 +1,7 @@
 package com.spgrvl.kissos.banknotifications.parse
 
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
+
 /**
  * Eurobank's card payments, titled "Αγορά/Πληρωμή σε POS":
  *
@@ -10,7 +12,7 @@ package com.spgrvl.kissos.banknotifications.parse
  * The payee is the card terminal's name, which ends with the country code. The card number is never kept.
  */
 object EurobankParser : BankNotificationParser {
-    override val packages: Set<String> = setOf("com.EurobankEFG")
+    override val packages: Set<String> = setOf(SupportedBankApps.EUROBANK)
 
     private val PAID = Regex(
         "^Κάνατε αγορά/πληρωμή (${AmountText.PATTERN}) στην εταιρεία (.+?) με την κάρτα .*$"

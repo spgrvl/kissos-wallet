@@ -608,8 +608,15 @@
     <string name="bank_notifications_add_automatically_description">Προσθέτει τις πληρωμές της αμέσως, με δυνατότητα αναίρεσης, αντί να ρωτά πρώτα. Για πληρωμές που ίσως υπάρχουν ήδη στο Kissos ή είναι σε άλλο νόμισμα, ρωτά πάντα.</string>
     <string name="bank_notifications_adds_automatically">Αυτόματη προσθήκη</string>
     <string name="bank_notifications_unrecognised">Μη αναγνωρισμένες ειδοποιήσεις</string>
-    <string name="bank_notifications_unrecognised_description">Για να υποστηριχτεί νέα τράπεζα ή μορφή, το Kissos μπορεί να κρατά τις ειδοποιήσεις των εφαρμογών σου που δεν αναγνώρισε, μόνο σε αυτό το κινητό, για 7 ημέρες. Πάτησε μία για να την αντιγράψεις.</string>
+    <string name="bank_notifications_unrecognised_description">Για να υποστηριχτεί νέα τράπεζα ή μορφή, το Kissos μπορεί να κρατά τις ειδοποιήσεις των εφαρμογών σου που δεν αναγνώρισε, μόνο σε αυτό το κινητό, για 7 ημέρες. Πάτησε μία για να μας τη στείλεις με email.</string>
     <string name="bank_notifications_keep_unrecognised">Διατήρηση για 7 ημέρες</string>
+    <string name="bank_notifications_report_subject">Kissos: Μη υποστηριζόμενη ειδοποίηση τράπεζας</string>
+    <string name="bank_notifications_report_body">Έλεγξε την ειδοποίηση πριν τη στείλεις και σβήσε ό,τι δεν θέλεις να μοιραστείς, π.χ. ένα υπόλοιπο ή ένα όνομα.\n\nΕφαρμογή: %1$s (%2$s)\n\n%3$s\n\nKissos %4$s · Android %5$s</string>
+    <string name="bank_notifications_report_no_email">Δεν βρέθηκε εφαρμογή email. Η ειδοποίηση αντιγράφηκε για να τη στείλεις στο %1$s.</string>
+    <string name="bank_notifications_found_apps">Το Kissos βρήκε στο κινητό: %1$s, και θα διαβάζει μόνο τις ειδοποιήσεις τους. Μπορείς να προσθέσεις ή να αφαιρέσεις εφαρμογές μετά.</string>
+    <string name="bank_notifications_setup_title">Αυτόματη καταχώριση πληρωμών</string>
+    <string name="bank_notifications_setup_description">Το Kissos μπορεί να κάνει έξοδα τις ειδοποιήσεις πληρωμών από: %1$s. Διαβάζει μόνο τις εφαρμογές τραπεζών που επιλέγεις και τίποτα δεν φεύγει από το κινητό.</string>
+    <string name="bank_notifications_setup">Ρύθμιση</string>
     <string name="detected_payments">Πληρωμές από ειδοποιήσεις</string>
     <string name="detected_payments_channel_description">Πληρωμές που βρέθηκαν στις ειδοποιήσεις των τραπεζικών σου εφαρμογών</string>
     <string name="detected_payments_waiting">%s σε αναμονή</string>

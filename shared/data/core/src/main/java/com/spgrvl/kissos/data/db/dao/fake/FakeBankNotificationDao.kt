@@ -94,6 +94,9 @@ class FakeBankNotificationDao : BankNotificationDao {
         unparsed.value += value
     }
 
+    override suspend fun hasUnparsed(sourcePackage: String, postedAt: Instant, text: String): Boolean =
+        unparsed.value.any { it.sourcePackage == sourcePackage && it.postedAt == postedAt && it.text == text }
+
     override fun observeUnparsed(): Flow<List<UnparsedNotificationEntity>> = unparsed
 
     override suspend fun deleteUnparsedBefore(before: Instant) {

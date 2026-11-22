@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.banknotifications.parse
 
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import org.junit.Test
@@ -16,6 +17,11 @@ class BankNotificationParsersTest {
         payee = payee,
         categoryHint = hint,
     )
+
+    @Test
+    fun `every app suggested as supported has a parser`() {
+        BankNotificationParsers.supportedPackages shouldBe SupportedBankApps.packages
+    }
 
     @Test
     fun `reads Magenta Pay payments`() {
