@@ -413,6 +413,7 @@
     <string name="language">Γλώσσα</string>
     <string name="advanced_features">Προχωρημένες λειτουργίες</string>
     <!-- Receipt scanning -->
+    <string name="widget_scan">Σάρωση</string>
     <string name="scan_receipt">Σάρωση απόδειξης</string>
     <string name="scanner_unavailable">Η σάρωση δεν είναι διαθέσιμη. Ελέγξτε ότι οι Υπηρεσίες Google Play είναι ενημερωμένες.</string>
     <string name="scanner_downloading">Γίνεται λήψη του σαρωτή αποδείξεων…</string>

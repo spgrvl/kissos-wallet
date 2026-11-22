@@ -27,4 +27,23 @@ class AddTransactionWidgetClick @Inject constructor(
         )
         rv.setOnClickPendingIntent(viewId, pendingIntent)
     }
+
+    fun scanReceiptClickListener(
+        context: Context,
+        rv: RemoteViews,
+        @IdRes viewId: Int,
+    ) {
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            SCAN_RECEIPT_REQUEST_CODE,
+            appStarter.scanReceiptStartIntent(),
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        rv.setOnClickPendingIntent(viewId, pendingIntent)
+    }
+
+    private companion object {
+        // Apart from the transaction types' ordinals
+        const val SCAN_RECEIPT_REQUEST_CODE = 100
+    }
 }

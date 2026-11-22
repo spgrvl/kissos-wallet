@@ -40,6 +40,7 @@ fun WalletBalanceWidgetContent(
     onIncomeClick: Action,
     onExpenseClick: Action,
     onTransferClick: Action,
+    onScanReceiptClick: Action,
     onWidgetClick: Action,
 ) {
     val resources = LocalContext.current.resources
@@ -67,7 +68,7 @@ fun WalletBalanceWidgetContent(
             } else {
                 BalanceSection(balance, currency)
                 IncomeExpenseSection(income, expense, currency)
-                ButtonsSection(onIncomeClick, onExpenseClick, onTransferClick)
+                ButtonsSection(onIncomeClick, onExpenseClick, onTransferClick, onScanReceiptClick)
             }
         }
     }
@@ -85,7 +86,7 @@ fun RowScope.WidgetClickableItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = GlanceModifier.size(52.dp),
+            modifier = GlanceModifier.size(48.dp),
             provider = ImageProvider(image),
             contentDescription = null
         )
@@ -178,14 +179,16 @@ fun ButtonsSection(
     onIncomeClick: Action,
     onExpenseClick: Action,
     onTransferClick: Action,
+    onScanReceiptClick: Action,
 ) {
     val buttons = listOf(
         R.drawable.ic_widget_income to onIncomeClick,
         R.drawable.ic_widget_expense to onExpenseClick,
         R.drawable.ic_widget_transfer to onTransferClick,
+        R.drawable.ic_widget_scan_receipt to onScanReceiptClick,
     )
     Row(
-        GlanceModifier.fillMaxWidth().padding(12.dp),
+        GlanceModifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         buttons.forEach { (image, onClick) ->

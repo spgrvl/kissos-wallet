@@ -7,6 +7,7 @@ import org.junit.Test
 class BankNotificationParsersTest {
     private val revolut = "com.revolut.revolut"
     private val magentaPay = "gr.payzy"
+    private val eurobank = "com.EurobankEFG"
 
     private fun spent(amount: String, payee: String, hint: String? = null) = DetectedPayment(
         amount = amount.toBigDecimal(),
@@ -92,9 +93,46 @@ class BankNotificationParsersTest {
     }
 
     @Test
+    fun `reads Eurobank card payments`() {
+        // given
+        val pos = NotificationText(
+            title = "Αγορά/Πληρωμή σε POS",
+            text = "Κάνατε αγορά/πληρωμή 19,11 EUR στην εταιρεία TEST MARKET AEBE GR " +
+                "με την κάρτα 1234 56** **** 7890 21/11/2026, 14:47",
+            bigText = null,
+        )
+
+        // then: without the country code, and nothing of the card
+        BankNotificationParsers.parse(eurobank, pos) shouldBe spent("19.11", "TEST MARKET AEBE")
+    }
+
+    @Test
+    fun `reads Eurobank payments over a thousand and in other currencies`() {
+        BankNotificationParsers.parse(
+            eurobank,
+            eurobankText("Κάνατε αγορά/πληρωμή 1.234,50 EUR στην εταιρεία ONLINE SHOP IE με την κάρτα 1234 56** 7890"),
+        ) shouldBe spent("1234.50", "ONLINE SHOP")
+        BankNotificationParsers.parse(
+            eurobank,
+            eurobankText("Κάνατε αγορά/πληρωμή 9,99 USD στην εταιρεία APP STORE US με την κάρτα 1234 56** **** 7890"),
+        ) shouldBe spent("9.99", "APP STORE").copy(currency = "USD")
+    }
+
+    @Test
+    fun `other Eurobank notifications are not payments`() {
+        BankNotificationParsers.parse(eurobank, eurobankText("Ο κωδικός μιας χρήσης είναι 123456")).shouldBeNull()
+        BankNotificationParsers.parse(
+            eurobank,
+            eurobankText("Η συναλλαγή 19,11 EUR στην εταιρεία TEST MARKET AEBE GR απορρίφθηκε"),
+        ).shouldBeNull()
+    }
+
+    @Test
     fun `apps without a parser have no payments`() {
         BankNotificationParsers.parse("com.example.chat", text("Πλήρωσες 8,80€ σε Pizza Test.")).shouldBeNull()
     }
 
     private fun text(text: String) = NotificationText(title = "Magenta Pay", text = text, bigText = null)
+
+    private fun eurobankText(text: String) = NotificationText(title = "Eurobank", text = text, bigText = null)
 }
