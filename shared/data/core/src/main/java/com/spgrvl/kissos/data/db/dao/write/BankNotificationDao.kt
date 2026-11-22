@@ -79,6 +79,13 @@ interface BankNotificationDao {
     @Insert
     suspend fun insertUnparsed(value: UnparsedNotificationEntity)
 
+    /** Whether it's kept already, e.g. read again from the notifications still shown after reconnecting. */
+    @Query(
+        "SELECT EXISTS(SELECT 1 FROM unparsed_notifications " +
+            "WHERE sourcePackage = :sourcePackage AND postedAt = :postedAt AND text = :text)"
+    )
+    suspend fun hasUnparsed(sourcePackage: String, postedAt: Instant, text: String): Boolean
+
     @Query("SELECT * FROM unparsed_notifications ORDER BY postedAt DESC")
     fun observeUnparsed(): Flow<List<UnparsedNotificationEntity>>
 

@@ -64,7 +64,7 @@ class BankNotificationProcessor @Inject constructor(
 
     private suspend fun keepIfAsked(packageName: String, postedAt: Instant, text: NotificationText) {
         val body = text.lines.joinToString("\n")
-        if (body.isEmpty() || !prefs.keepUnparsed.first()) return
+        if (body.isEmpty() || !prefs.keepUnparsed.first() || dao.hasUnparsed(packageName, postedAt, body)) return
         dao.insertUnparsed(
             UnparsedNotificationEntity(
                 id = UUID.randomUUID(),

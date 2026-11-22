@@ -1,11 +1,7 @@
 package com.spgrvl.kissos.transaction
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
@@ -52,6 +48,10 @@ import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionUi
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionsRow
 import com.spgrvl.kissos.ui.R
+import com.spgrvl.kissos.ui.SupportEmail
+import com.spgrvl.kissos.ui.androidVersion
+import com.spgrvl.kissos.ui.emailSupport
+import com.spgrvl.kissos.ui.kissosVersion
 import com.spgrvl.kissos.wallet.ui.theme.components.KissosNameTextField
 import com.spgrvl.kissos.wallet.ui.theme.modal.KissosModal
 import com.spgrvl.kissos.wallet.ui.theme.modal.ModalPositiveButton
@@ -284,7 +284,7 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
 ) {
     val context = LocalContext.current
     val clipboard = LocalClipboardManager.current
-    val noEmailMessage = stringResource(R.string.report_receipt_no_email, ReportReceiptEmail)
+    val noEmailMessage = stringResource(R.string.report_receipt_no_email, SupportEmail)
     MessageModal(
         visible = dialog != null,
         title = stringResource(R.string.not_aade_receipt_title),
@@ -313,25 +313,11 @@ private fun BoxWithConstraintsScope.NotAadeReceiptModal(
     }
 }
 
-/** Where unsupported receipts are reported, so their providers can be added. */
-private const val ReportReceiptEmail = "contact.sgsoftware@gmail.com"
-
-/** Opens an email to [ReportReceiptEmail] with the QR text filled in; false when there's no email app. */
-private fun Context.emailReceiptReport(qrText: String): Boolean {
-    val version = packageManager.getPackageInfo(packageName, 0).versionName
-    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")).apply {
-        putExtra(Intent.EXTRA_EMAIL, arrayOf(ReportReceiptEmail))
-        putExtra(Intent.EXTRA_SUBJECT, getString(R.string.report_receipt_subject))
-        putExtra(Intent.EXTRA_TEXT, getString(R.string.report_receipt_body, qrText, version, Build.VERSION.RELEASE))
-    }
-    return try {
-        startActivity(intent)
-        true
-    } catch (e: ActivityNotFoundException) {
-        Timber.w(e, "No email app to report a receipt")
-        false
-    }
-}
+/** Opens an email to support with the QR text filled in; false when there's no email app. */
+private fun Context.emailReceiptReport(qrText: String): Boolean = emailSupport(
+    subject = getString(R.string.report_receipt_subject),
+    body = getString(R.string.report_receipt_body, qrText, kissosVersion, androidVersion),
+)
 
 @Composable
 private fun BoxWithConstraintsScope.RememberMerchantModal(

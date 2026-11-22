@@ -1,8 +1,10 @@
 package com.spgrvl.kissos.banknotifications.parse
 
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
+
 /** Magenta Pay (formerly Payzy) says it all in the text: "Πλήρωσες 46,65€ σε PowerCo." */
 object MagentaPayParser : BankNotificationParser {
-    override val packages: Set<String> = setOf("gr.payzy")
+    override val packages: Set<String> = setOf(SupportedBankApps.MAGENTA_PAY)
 
     private val PAID = Regex("^Πλήρωσες (${AmountText.PATTERN}) σε (.+?)\\.?$")
 

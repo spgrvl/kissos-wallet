@@ -1,5 +1,7 @@
 package com.spgrvl.kissos.home.customerjourney
 
+import android.content.Context
+import android.content.pm.PackageManager
 import com.spgrvl.kissos.base.legacy.SharedPrefs
 import com.spgrvl.kissos.base.legacy.stringRes
 import com.spgrvl.kissos.base.model.TransactionType
@@ -8,19 +10,25 @@ import com.spgrvl.kissos.data.db.dao.read.PlannedPaymentRuleDao
 import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.repository.TransactionRepository
+import com.spgrvl.kissos.domain.banknotification.BankNotificationPrefs
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
 import com.spgrvl.kissos.design.l0_system.Gradient
 import com.spgrvl.kissos.design.l0_system.Green
 import com.spgrvl.kissos.design.l0_system.GreenLight
 import com.spgrvl.kissos.design.l0_system.Kissos
 import com.spgrvl.kissos.design.l0_system.Orange
+import com.spgrvl.kissos.design.l0_system.Purple
 import com.spgrvl.kissos.design.l0_system.Red
 import com.spgrvl.kissos.legacy.KissosWalletCtx
 import com.spgrvl.kissos.legacy.data.model.MainTab
+import com.spgrvl.kissos.navigation.BankNotificationsScreen
 import com.spgrvl.kissos.navigation.DetectedPaymentsScreen
 import com.spgrvl.kissos.navigation.EditPlannedScreen
 import com.spgrvl.kissos.navigation.PieChartStatisticScreen
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.widget.transaction.AddTransactionWidgetCompact
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 @Deprecated("Legacy code")
@@ -31,6 +39,9 @@ class CustomerJourneyCardsProvider @Inject constructor(
   private val kissosContext: KissosWalletCtx,
   private val timeProvider: TimeProvider,
   private val bankNotificationDao: BankNotificationDao,
+  private val bankNotificationPrefs: BankNotificationPrefs,
+  @ApplicationContext
+  private val context: Context,
 ) {
 
   suspend fun loadCards(): List<CustomerJourneyCardModel> {
@@ -41,7 +52,7 @@ class CustomerJourneyCardsProvider @Inject constructor(
     )
 
     val waitingPayments = bankNotificationDao.countPayments(DetectedPaymentStatus.NEW)
-    return listOfNotNull(detectedPaymentsCard(waitingPayments)) + ACTIVE_CARDS
+    val (adjustBalance, others) = ACTIVE_CARDS
       .filter {
         it.condition(
           trnCount,
@@ -50,6 +61,40 @@ class CustomerJourneyCardsProvider @Inject constructor(
           deps
         ) && !isCardDismissed(it)
       }
+      .partition { it.id == ADJUST_BALANCE_ID }
+    return listOfNotNull(detectedPaymentsCard(waitingPayments)) +
+      adjustBalance +
+      listOfNotNull(bankNotificationsSetupCard()?.takeUnless(::isCardDismissed)) +
+      others
+  }
+
+  /** Suggests reading bank notifications to people with a supported bank app, until they turn it on. */
+  private suspend fun bankNotificationsSetupCard(): CustomerJourneyCardModel? {
+    val apps = if (bankNotificationPrefs.enabled.first()) {
+      emptyList()
+    } else {
+      SupportedBankApps.installed(context).map(::appLabel)
+    }
+    return CustomerJourneyCardModel(
+      id = "bank_notifications_setup",
+      condition = { _, _, _, _ -> true },
+      title = stringRes(R.string.bank_notifications_setup_title),
+      description = stringRes(R.string.bank_notifications_setup_description, apps.joinToString(", ")),
+      cta = stringRes(R.string.bank_notifications_setup),
+      ctaIcon = R.drawable.ic_custom_bank_s,
+      background = Gradient.solid(Purple),
+      hasDismiss = true,
+      onAction = { navigation, _, _ ->
+        navigation.navigateTo(BankNotificationsScreen)
+      }
+    ).takeIf { apps.isNotEmpty() }
+  }
+
+  private fun appLabel(packageName: String): String = try {
+    val packageManager = context.packageManager
+    packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName, 0)).toString()
+  } catch (e: PackageManager.NameNotFoundException) {
+    packageName
   }
 
   private fun isCardDismissed(cardData: CustomerJourneyCardModel): Boolean {
@@ -89,8 +134,10 @@ class CustomerJourneyCardsProvider @Inject constructor(
       didYouKnow_expensesPieChart(),
     )
 
+    private const val ADJUST_BALANCE_ID = "adjust_balance"
+
     fun adjustBalanceCard() = CustomerJourneyCardModel(
-      id = "adjust_balance",
+      id = ADJUST_BALANCE_ID,
       condition = { trnCount, _, _, _ ->
         trnCount == 0L
       },
