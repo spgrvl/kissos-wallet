@@ -52,6 +52,7 @@ class RootViewModel @Inject constructor(
 
     companion object {
         const val EXTRA_ADD_TRANSACTION_TYPE = "add_transaction_type_extra"
+        const val ACTION_SCAN_RECEIPT = "com.spgrvl.kissos.wallet.ACTION_SCAN_RECEIPT"
 
         const val USER_INACTIVITY_TIME_LIMIT = 60 // Time in seconds
     }
@@ -119,9 +120,25 @@ class RootViewModel @Inject constructor(
     }
 
     private fun handleSpecialStart(intent: Intent) {
-        (scannedReceiptScreen(intent) ?: detectedPaymentScreen(intent) ?: addTransactionScreen(intent))
-            ?.let(nav::navigateTo)
+        (
+            scannedReceiptScreen(intent)
+                ?: scanReceiptScreen(intent)
+                ?: detectedPaymentScreen(intent)
+                ?: addTransactionScreen(intent)
+            )?.let(nav::navigateTo)
     }
+
+    /** The widgets' scan button: a new expense with the receipt scanner open. */
+    private fun scanReceiptScreen(intent: Intent): EditTransactionScreen? =
+        if (intent.action == ACTION_SCAN_RECEIPT) {
+            EditTransactionScreen(
+                initialTransactionId = null,
+                type = TransactionType.EXPENSE,
+                scanReceipt = true,
+            )
+        } else {
+            null
+        }
 
     /** Kissos's notification about a payment detected in a bank app's notification. */
     private fun detectedPaymentScreen(intent: Intent): EditTransactionScreen? =

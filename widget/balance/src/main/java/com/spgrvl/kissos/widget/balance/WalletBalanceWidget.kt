@@ -88,6 +88,7 @@ class WalletBalanceWidget(
                 onTransferClick = actionStartActivity(
                     getAppStarter().addTransactionStartIntent(TransactionType.TRANSFER)
                 ),
+                onScanReceiptClick = actionStartActivity(getAppStarter().scanReceiptStartIntent()),
                 onWidgetClick = actionStartActivity(getAppStarter().defaultStartIntent()),
             )
         }

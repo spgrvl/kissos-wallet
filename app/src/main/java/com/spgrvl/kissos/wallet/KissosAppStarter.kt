@@ -32,6 +32,13 @@ class KissosAppStarter @Inject constructor(
         }
     }
 
+    override fun scanReceiptStartIntent(): Intent {
+        return getRootIntent().apply {
+            action = RootViewModel.ACTION_SCAN_RECEIPT
+            applyWidgetStartFlags()
+        }
+    }
+
     private fun Intent.applyWidgetStartFlags() {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }

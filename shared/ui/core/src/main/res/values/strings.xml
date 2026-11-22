@@ -413,6 +413,7 @@
     <string name="language">Language</string>
     <string name="advanced_features">Advanced features</string>
     <!-- Receipt scanning -->
+    <string name="widget_scan">Scan</string>
     <string name="scan_receipt">Scan receipt</string>
     <string name="scanner_unavailable">The scanner isn’t available. Check that Google Play services is up to date.</string>
     <string name="scanner_downloading">Downloading the receipt scanner…</string>
