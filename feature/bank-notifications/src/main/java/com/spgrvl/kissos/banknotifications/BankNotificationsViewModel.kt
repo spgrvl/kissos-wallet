@@ -21,6 +21,7 @@ import com.spgrvl.kissos.data.model.Account
 import com.spgrvl.kissos.data.repository.AccountRepository
 import com.spgrvl.kissos.domain.banknotification.BankApp
 import com.spgrvl.kissos.domain.banknotification.BankNotificationPrefs
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
 import com.spgrvl.kissos.legacy.legacy.ui.theme.components.OptionUi
 import com.spgrvl.kissos.ui.ComposeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,6 +47,8 @@ data class BankNotificationsState(
     val waitingCount: Int,
     val keepUnparsed: Boolean,
     val unparsed: ImmutableList<UnparsedUi>,
+    /** Supported apps on this phone that turning the feature on adds, while the user hasn't picked any. */
+    val foundApps: ImmutableList<String>,
 )
 
 @Immutable
@@ -63,7 +66,7 @@ data class InstalledApp(val packageName: String, val label: String, val supporte
 
 @Immutable
 @Suppress("DataClassTypedIDs")
-data class UnparsedUi(val id: UUID, val app: String, val text: String)
+data class UnparsedUi(val id: UUID, val packageName: String, val app: String, val text: String)
 
 sealed interface BankNotificationsEvent {
     /** The user turned the feature on (after reading what it does) or off. */
@@ -88,6 +91,7 @@ class BankNotificationsViewModel @Inject constructor(
     private var accessGranted by mutableStateOf(false)
     private var accounts by mutableStateOf<List<Account>>(emptyList())
     private var installedApps by mutableStateOf<List<InstalledApp>>(emptyList())
+    private var foundApps by mutableStateOf<List<String>>(emptyList())
     private val waitingCount = dao.observePayments(DetectedPaymentStatus.NEW).map { it.size }
     private val unparsedNotifications = dao.observeUnparsed()
 
@@ -96,6 +100,7 @@ class BankNotificationsViewModel @Inject constructor(
         LaunchedEffect(Unit) {
             accounts = accountRepository.findAll()
             installedApps = launcherApps()
+            foundApps = SupportedBankApps.installed(context).map(::appLabel)
         }
         val enabled by prefs.enabled.collectAsState(false)
         val apps by prefs.apps.collectAsState(emptyList())
@@ -113,6 +118,7 @@ class BankNotificationsViewModel @Inject constructor(
             waitingCount = waiting,
             keepUnparsed = keepUnparsed,
             unparsed = unparsed.map(::toUi).toImmutableList(),
+            foundApps = if (apps.isEmpty()) foundApps.toImmutableList() else persistentListOf(),
         )
     }
 
@@ -157,6 +163,12 @@ class BankNotificationsViewModel @Inject constructor(
     private suspend fun setEnabled(enabled: Boolean) {
         prefs.setEnabled(enabled, timeProvider.utcNow())
         if (enabled) {
+            val found = SupportedBankApps.installed(context)
+            prefs.updateApps { apps ->
+                apps.ifEmpty {
+                    found.map { BankApp(packageName = it, addedAt = timeProvider.utcNow().toEpochMilli()) }
+                }
+            }
             ListenerAccess.startListening(context)
         } else {
             prefs.setKeepUnparsed(false)
@@ -178,6 +190,7 @@ class BankNotificationsViewModel @Inject constructor(
 
     private fun toUi(entity: UnparsedNotificationEntity): UnparsedUi = UnparsedUi(
         id = entity.id,
+        packageName = entity.sourcePackage,
         app = appLabel(entity.sourcePackage),
         text = listOfNotNull(entity.title, entity.text).joinToString("\n"),
     )
@@ -215,4 +228,5 @@ internal val previewState = BankNotificationsState(
     waitingCount = 2,
     keepUnparsed = false,
     unparsed = persistentListOf(),
+    foundApps = persistentListOf(),
 )

@@ -1,5 +1,7 @@
 package com.spgrvl.kissos.banknotifications.parse
 
+import com.spgrvl.kissos.domain.banknotification.SupportedBankApps
+
 /**
  * Revolut names the payee in the title and starts the text with its category's emoji:
  *
@@ -10,7 +12,7 @@ package com.spgrvl.kissos.banknotifications.parse
  * ```
  */
 object RevolutParser : BankNotificationParser {
-    override val packages: Set<String> = setOf("com.revolut.revolut")
+    override val packages: Set<String> = setOf(SupportedBankApps.REVOLUT)
 
     /**
      * The category is an emoji, i.e. anything but letters, digits and spaces. Anchored, so that
