@@ -40,7 +40,7 @@ interface BankNotificationParser {
 }
 
 object BankNotificationParsers {
-    val all: List<BankNotificationParser> = listOf(RevolutParser, MagentaPayParser)
+    val all: List<BankNotificationParser> = listOf(RevolutParser, MagentaPayParser, EurobankParser)
 
     val supportedPackages: Set<String> = all.flatMap { it.packages }.toSet()
 
