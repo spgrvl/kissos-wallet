@@ -58,7 +58,7 @@ fun Toolbar(
         when (type) {
             TransactionType.INCOME -> {
                 KissosOutlinedButton(
-                    text = stringResource(R.string.income),
+                    text = stringResource(R.string.income_transaction),
                     iconStart = R.drawable.ic_income
                 ) {
                     onChangeTransactionTypeModal()

@@ -68,6 +68,8 @@
     <string name="expense_title">Τίτλος εξόδου</string>
     <string name="transfer_title">Τίτλος μεταφοράς</string>
     <string name="expense">Έξοδο</string>
+    <!-- One income transaction, beside "expense"; "income" is the total (Έσοδα) -->
+    <string name="income_transaction">Έσοδο</string>
     <string name="add_planned_date_payment">Ορισμός ημερομηνίας πληρωμής</string>
     <string name="pay">Πληρωμή</string>
     <string name="get">Είσπραξη</string>

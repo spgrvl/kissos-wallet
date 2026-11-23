@@ -68,6 +68,8 @@
     <string name="expense_title">Expense title</string>
     <string name="transfer_title">Transfer title</string>
     <string name="expense">Expense</string>
+    <!-- One income transaction, beside "expense"; "income" is the total (Έσοδα) -->
+    <string name="income_transaction">Income</string>
     <string name="add_planned_date_payment">Add planned date of payment</string>
     <string name="pay">Pay</string>
     <string name="get">Get</string>

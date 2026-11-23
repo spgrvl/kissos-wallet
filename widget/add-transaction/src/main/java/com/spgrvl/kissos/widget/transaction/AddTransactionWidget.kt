@@ -93,7 +93,7 @@ class AddTransactionWidget : AppWidgetProvider() {
     private fun setLabels(context: Context, rv: RemoteViews, options: Bundle?) {
         val strings = AppLanguage.localized(context).resources
         val labels = listOf(
-            R.id.tvIncome to strings.getString(UiR.string.income),
+            R.id.tvIncome to strings.getString(UiR.string.income_transaction),
             R.id.tvExpense to strings.getString(UiR.string.expense),
             R.id.tvTransfer to strings.getString(UiR.string.transfer),
             R.id.tvScanReceipt to strings.getString(UiR.string.widget_scan),

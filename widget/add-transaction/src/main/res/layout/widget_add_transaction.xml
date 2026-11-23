@@ -42,7 +42,7 @@
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/raleway_bold"
                 android:gravity="center"
-                android:text="@string/income"
+                android:text="@string/income_transaction"
                 android:textColor="@color/white"
                 android:maxLines="1"
                 android:textSize="12sp" />
