@@ -182,7 +182,6 @@ private fun BoxWithConstraintsScope.UI(
                     .alpha(percentExpanded),
                 currency = state.baseCurrency,
                 balance = state.totalAmount,
-                currencyUpfront = false,
                 currencyFontSize = 30.sp
             )
         }

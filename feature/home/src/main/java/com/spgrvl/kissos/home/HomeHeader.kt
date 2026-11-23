@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.home
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Spring
@@ -274,9 +275,10 @@ fun CashFlowInfo(
                 ),
                 text = stringResource(
                     R.string.cashflow,
-                    (if (cashflow > 0) "+" else ""),
-                    cashflow.format(currency),
-                    currency,
+                    CurrencyDisplay.format(
+                        (if (cashflow > 0) "+" else "") + cashflow.format(currency),
+                        currency
+                    ),
                 ),
                 style = UI.typo.nB2.style(
                     color = if (cashflow < 0) Gray else Green,

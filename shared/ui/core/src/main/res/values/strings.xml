@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="accounts">Accounts</string>
-    <string name="total">Total: %1$s %2$s</string>
+    <string name="total">Total: %1$s</string>
     <string name="month_income">INCOME THIS MONTH</string>
     <string name="month_expenses">EXPENSES THIS MONTH</string>
     <string name="excluded">(excluded)</string>
@@ -16,12 +16,12 @@
     <string name="no_budgets">No budgets</string>
     <string name="no_budgets_text">You don\'t have any budgets set.\nTap the "+ Add budget" to add one.</string>
     <string name="budgets">Budgets</string>
-    <string name="for_categories">%1$s %2$s for categories</string>
-    <string name="app_budget">%1$s %2$s app budget</string>
+    <string name="for_categories">%1$s for categories</string>
+    <string name="app_budget">%1$s app budget</string>
     <string name="budget_info_both">Budget info: %1$s / %2$s</string>
     <string name="budget_info">Budget info: %1$s%2$s</string>
-    <string name="total_budget_info">Total Remaining Budget: %1$s %2$s</string>
-    <string name="budget_exceeded_info">Budget exceeded by %1$s %2$s</string>
+    <string name="total_budget_info">Total Remaining Budget: %1$s</string>
+    <string name="budget_exceeded_info">Budget exceeded by %1$s</string>
     <string name="add_category">Add category</string>
     <string name="add_manual_exchange_rate">Add rate</string>
     <string name="expenses">Expenses</string>
@@ -79,7 +79,7 @@
     <string name="created_on">Created on</string>
     <string name="hi">Hi</string>
     <string name="hi_name">Hi %1$s</string>
-    <string name="cashflow">Cashflow: %1$s%2$s %3$s</string>
+    <string name="cashflow">Cashflow: %1$s</string>
     <string name="search_transactions">Search transactions...</string>
     <string name="kissos_open_source">Kissos is open-source</string>
     <string name="savings_goal">Savings goal</string>
@@ -100,9 +100,9 @@
     <string name="loan_confirm_deletion_description">Note: Deleting this loan will permanently remove all related transactions.</string>
     <string name="confirm_account_loan_change">Please wait, recalculating all loan records</string>
     <string name="paid">Paid</string>
-    <string name="left_to_pay">%1$s %2$s left</string>
+    <string name="left_to_pay">%1$s left</string>
     <string name="loan_interest">Loan Interest</string>
-    <string name="interest_paid">%1$s %2$s paid</string>
+    <string name="interest_paid">%1$s paid</string>
     <string name="add_record">Add record</string>
     <string name="interest">Interest</string>
     <string name="no_records">No records</string>
@@ -371,7 +371,7 @@
     <string name="experimental">Experimental</string>
     <string name="experimental_settings">Experimental Settings</string>
     <string name="wallet_balance">Wallet balance</string>
-    <string name="total_exclusive">Total (exclusive): %1$s %2$s</string>
+    <string name="total_exclusive">Total (exclusive): %1$s</string>
     <string name="total_balance">Total Balance</string>
     <string name="total_balance_excluded">Incl. excluded accounts</string>
     <string name="initial_loan_record">Starting record</string>
@@ -632,4 +632,9 @@
     <string name="dismiss">Dismiss</string>
     <string name="undo">Undo</string>
     <string name="detected_payments_review">Review</string>
+    <string name="choose_language">Choose your language</string>
+    <string name="choose_language_hint">You can change it anytime in Settings.</string>
+    <string name="language_system">Phone\'s language</string>
+    <string name="language_greek" translatable="false">Ελληνικά</string>
+    <string name="language_english" translatable="false">English</string>
 </resources>

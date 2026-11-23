@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.legacy.ui.theme.components
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -50,39 +51,7 @@ fun BudgetBattery(
     if (budget == 0.0) return
     val percentSpent = expenses / budget
 
-    val textColor = when {
-        percentSpent <= 0.30 -> {
-            UI.colors.pureInverse
-        }
-
-        percentSpent <= 0.50 -> {
-            White
-        }
-
-        percentSpent <= 0.75 -> {
-            White
-        }
-
-        else -> White
-    }
-
-    val captionTextColor = when {
-        percentSpent <= 0.30 -> {
-            UI.colors.mediumInverse
-        }
-
-        percentSpent <= 0.50 -> {
-            White
-        }
-
-        percentSpent <= 0.75 -> {
-            White
-        }
-
-        else -> White
-    }
-
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(UI.shapes.r4)
@@ -90,18 +59,9 @@ fun BudgetBattery(
             .drawBehind {
                 drawRect(
                     color = when {
-                        percentSpent <= 0.25 -> {
-                            Green
-                        }
-
-                        percentSpent <= 0.50 -> {
-                            Kissos
-                        }
-
-                        percentSpent <= 0.75 -> {
-                            Orange
-                        }
-
+                        percentSpent <= 0.25 -> Green
+                        percentSpent <= 0.50 -> Kissos
+                        percentSpent <= 0.75 -> Orange
                         else -> Red
                     },
                     size = size.copy(
@@ -114,29 +74,57 @@ fun BudgetBattery(
                     onClick?.invoke()
                 }
             }
+    ) {
+        BudgetBatteryText(
+            modifier = Modifier.overBatteryFill(percentSpent),
+            currency = currency,
+            expenses = expenses,
+            budget = budget,
+            colors = BatteryTextColors(text = White, caption = White),
+        )
+        BudgetBatteryText(
+            modifier = Modifier.pastBatteryFill(percentSpent),
+            currency = currency,
+            expenses = expenses,
+            budget = budget,
+            colors = BatteryTextColors(text = UI.colors.pureInverse, caption = UI.colors.mediumInverse),
+        )
+    }
+}
+
+@Composable
+private fun BudgetBatteryText(
+    currency: String,
+    expenses: Double,
+    budget: Double,
+    colors: BatteryTextColors,
+    modifier: Modifier = Modifier,
+) {
+    val exceeded = expenses > budget
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
             .padding(vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(Modifier.width(16.dp))
 
         KissosIcon(
-            icon = if (percentSpent > 1.0) R.drawable.ic_buffer_exceeded else R.drawable.ic_buffer_ok,
-            tint = textColor
+            icon = if (exceeded) R.drawable.ic_buffer_exceeded else R.drawable.ic_buffer_ok,
+            tint = colors.text
         )
 
         Spacer(Modifier.width(16.dp))
 
         Column {
             Text(
-                text = when {
-                    percentSpent <= 1 -> {
-                        stringResource(R.string.left_to_spend)
-                    }
-
-                    else -> stringResource(R.string.budget_exceeded_by)
+                text = if (exceeded) {
+                    stringResource(R.string.budget_exceeded_by)
+                } else {
+                    stringResource(R.string.left_to_spend)
                 },
                 style = UI.typo.c.style(
-                    color = textColor,
+                    color = colors.text,
                     fontWeight = FontWeight.ExtraBold
                 )
             )
@@ -146,16 +134,17 @@ fun BudgetBattery(
             AmountCurrencyB2Row(
                 amount = abs(budget - expenses),
                 currency = currency,
-                textColor = textColor
+                textColor = colors.text
             )
 
             Spacer(Modifier.height(2.dp))
 
             Text(
-                text = "${expenses.format(currency)}/${budget.format(currency)} $currency",
+                text = "${CurrencyDisplay.format(expenses.format(currency), currency)}/" +
+                    CurrencyDisplay.format(budget.format(currency), currency),
                 style = UI.typo.nC.style(
                     fontWeight = FontWeight.ExtraBold,
-                    color = captionTextColor
+                    color = colors.caption
                 )
             )
         }

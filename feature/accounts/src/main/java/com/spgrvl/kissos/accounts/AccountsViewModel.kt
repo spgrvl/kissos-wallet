@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.accounts
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -204,16 +205,16 @@ class AccountsViewModel @Inject constructor(
         totalBalanceWithExcluded = totalBalanceWithExcludedAccounts.toString()
         totalBalanceWithExcludedText = context.getString(
             R.string.total,
-            baseCurrencyCode,
-            totalBalanceWithExcludedAccounts.format(
+            CurrencyDisplay.format(
+                totalBalanceWithExcludedAccounts.format(baseCurrencyCode),
                 baseCurrencyCode
             )
         )
         totalBalanceWithoutExcluded = totalBalanceWithoutExcludedAccounts.toString()
         totalBalanceWithoutExcludedText = context.getString(
             R.string.total_exclusive,
-            baseCurrencyCode,
-            totalBalanceWithoutExcludedAccounts.format(
+            CurrencyDisplay.format(
+                totalBalanceWithoutExcludedAccounts.format(baseCurrencyCode),
                 baseCurrencyCode
             )
         )

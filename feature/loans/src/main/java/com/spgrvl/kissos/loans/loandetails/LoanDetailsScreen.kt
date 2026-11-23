@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.loans.loandetails
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -509,8 +510,7 @@ private fun LoanInfoCard(
                 modifier = Modifier.testTag("left_to_pay"),
                 text = stringResource(
                     R.string.left_to_pay,
-                    leftToPay.format(baseCurrency),
-                    baseCurrency
+                    CurrencyDisplay.format(leftToPay.format(baseCurrency), baseCurrency)
                 ),
                 style = UI.typo.nB2.style(
                     color = Gray,
@@ -571,8 +571,7 @@ private fun LoanInfoCard(
                     modifier = Modifier.testTag("interest_paid"),
                     text = stringResource(
                         R.string.interest_paid,
-                        loanAmountPaid.format(baseCurrency),
-                        baseCurrency
+                        CurrencyDisplay.format(loanAmountPaid.format(baseCurrency), baseCurrency)
                     ),
                     style = UI.typo.nB2.style(
                         color = Gray,
@@ -766,7 +765,7 @@ private fun LoanRecordItem(
         if (loanRecord.convertedAmount != null) {
             Text(
                 modifier = Modifier.padding(start = 68.dp),
-                text = loanRecord.convertedAmount!!.format(baseCurrency) + " $loanBaseCurrency",
+                text = CurrencyDisplay.format(loanRecord.convertedAmount!!.format(baseCurrency), loanBaseCurrency),
                 style = UI.typo.nB2.style(
                     color = Gray,
                     fontWeight = FontWeight.Normal

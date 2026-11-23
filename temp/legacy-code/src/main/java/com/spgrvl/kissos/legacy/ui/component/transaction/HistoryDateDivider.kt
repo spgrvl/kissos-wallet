@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.ui.component.transaction
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -92,7 +93,7 @@ fun HistoryDateDivider(
 
         val cashflow = income - expenses
         Text(
-            text = "${cashflow.format(baseCurrency)} $baseCurrency",
+            text = CurrencyDisplay.format(cashflow.format(baseCurrency), baseCurrency),
             style = UI.typo.nB2.style(
                 fontWeight = FontWeight.Bold,
                 color = if (cashflow > 0) Green else Gray

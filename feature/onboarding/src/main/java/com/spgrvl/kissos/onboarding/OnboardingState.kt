@@ -5,6 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 enum class OnboardingState {
     SPLASH,
+    LANGUAGE,
     CHOOSE_PATH,
     CURRENCY,
     ACCOUNTS,

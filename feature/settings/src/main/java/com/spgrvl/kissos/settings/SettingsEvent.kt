@@ -17,5 +17,4 @@ sealed interface SettingsEvent {
 
     data class SetStartDateOfMonth(val startDate: Int) : SettingsEvent
     data object DeleteAllUserData : SettingsEvent
-    data object SwitchLanguage : SettingsEvent
 }

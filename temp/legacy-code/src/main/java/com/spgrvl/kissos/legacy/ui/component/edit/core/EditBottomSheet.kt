@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.wallet.ui.edit.core
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -149,13 +150,14 @@ fun BoxWithConstraintsScope.EditBottomSheet(
     val showConvertedAmountText by remember(convertedAmount) {
         if (type == TransactionType.TRANSFER && convertedAmount != null && convertedAmountCurrencyCode != null) {
             mutableStateOf(
-                "${
+                CurrencyDisplay.format(
                     convertedAmount.format(
                         KissosCurrency.getDecimalPlaces(
                             convertedAmountCurrencyCode
                         )
-                    )
-                } $convertedAmountCurrencyCode"
+                    ),
+                    convertedAmountCurrencyCode
+                )
             )
         } else {
             mutableStateOf(null)
@@ -704,7 +706,6 @@ private fun Amount(
                 balanceFontSize = balanceFontSize.sp,
                 currencyFontSize = currencyFontSize.sp,
 
-                currencyUpfront = false
             )
             if (showConvertedAmountText != null) {
                 Text(
