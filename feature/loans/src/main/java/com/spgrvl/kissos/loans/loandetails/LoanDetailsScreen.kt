@@ -510,8 +510,7 @@ private fun LoanInfoCard(
                 modifier = Modifier.testTag("left_to_pay"),
                 text = stringResource(
                     R.string.left_to_pay,
-                    leftToPay.format(baseCurrency),
-                    baseCurrency
+                    CurrencyDisplay.format(leftToPay.format(baseCurrency), baseCurrency)
                 ),
                 style = UI.typo.nB2.style(
                     color = Gray,
@@ -572,8 +571,7 @@ private fun LoanInfoCard(
                     modifier = Modifier.testTag("interest_paid"),
                     text = stringResource(
                         R.string.interest_paid,
-                        loanAmountPaid.format(baseCurrency),
-                        baseCurrency
+                        CurrencyDisplay.format(loanAmountPaid.format(baseCurrency), baseCurrency)
                     ),
                     style = UI.typo.nB2.style(
                         color = Gray,

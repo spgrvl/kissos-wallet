@@ -228,11 +228,11 @@ class LoanViewModel @Inject constructor(
                             loanTotalAmount = loanTotalAmount,
                             amountPaid = amountPaid,
                             currencyCode = currCode,
-                            formattedDisplayText = "${amountPaid.format(currCode)} $currCode / ${
-                                loanTotalAmount.format(
-                                    currCode
-                                )
-                            } $currCode (${
+                            formattedDisplayText = "${
+                                CurrencyDisplay.format(amountPaid.format(currCode), currCode)
+                            } / ${
+                                CurrencyDisplay.format(loanTotalAmount.format(currCode), currCode)
+                            } (${
                                 percentPaid.times(
                                     100
                                 ).format(2)

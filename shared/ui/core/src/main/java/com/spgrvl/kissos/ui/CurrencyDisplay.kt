@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
  * code. Stored data, exports and backups keep using codes; this is display only.
  */
 object CurrencyDisplay {
-    private const val NBSP = ' '
+    internal const val NBSP = '\u00A0'
 
     private val symbols = ConcurrentHashMap<Pair<String, Locale>, String>()
     private val symbolFirst = ConcurrentHashMap<Locale, Boolean>()
@@ -71,13 +71,14 @@ data class MoneyParts(
     val prefix: String,
     val number: String,
     val suffix: String,
-) {
-    fun joined(): String = buildString {
-        append(prefix)
-        append(number)
-        if (suffix.isNotEmpty()) {
-            append(' ')
-            append(suffix)
-        }
+)
+
+/** The parts as one string; a trailing symbol is kept on the same line as the number. */
+fun MoneyParts.joined(): String = buildString {
+    append(prefix)
+    append(number)
+    if (suffix.isNotEmpty()) {
+        append(CurrencyDisplay.NBSP)
+        append(suffix)
     }
 }
