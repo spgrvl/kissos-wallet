@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.loans.loandetails
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -766,7 +767,7 @@ private fun LoanRecordItem(
         if (loanRecord.convertedAmount != null) {
             Text(
                 modifier = Modifier.padding(start = 68.dp),
-                text = loanRecord.convertedAmount!!.format(baseCurrency) + " $loanBaseCurrency",
+                text = CurrencyDisplay.format(loanRecord.convertedAmount!!.format(baseCurrency), loanBaseCurrency),
                 style = UI.typo.nB2.style(
                     color = Gray,
                     fontWeight = FontWeight.Normal

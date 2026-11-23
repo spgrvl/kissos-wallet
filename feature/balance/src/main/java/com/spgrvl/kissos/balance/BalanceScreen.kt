@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.balance
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -185,7 +186,6 @@ private fun ColumnScope.BalanceAfterPlannedPayments(
             balanceFontSize = 30.sp,
             currencyFontSize = 18.sp,
 
-            currencyUpfront = false
         )
 
         Spacer(Modifier.weight(1f))
@@ -196,7 +196,7 @@ private fun ColumnScope.BalanceAfterPlannedPayments(
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = "${currentBalance.format(2)} $currency",
+                text = CurrencyDisplay.format(currentBalance.format(2), currency),
                 style = UI.typo.nC.style(
                     color = UI.colors.pureInverse,
                     fontWeight = FontWeight.Normal
@@ -207,7 +207,7 @@ private fun ColumnScope.BalanceAfterPlannedPayments(
 
             val plusSign = if (plannedPaymentsAmount >= 0) "+" else ""
             Text(
-                text = "${plusSign}${plannedPaymentsAmount.format(2)} $currency",
+                text = CurrencyDisplay.format("$plusSign${plannedPaymentsAmount.format(2)}", currency),
                 style = UI.typo.nC.style(
                     color = UI.colors.pureInverse,
                     fontWeight = FontWeight.ExtraBold

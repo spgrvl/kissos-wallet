@@ -704,7 +704,6 @@ private fun Amount(
                 balanceFontSize = balanceFontSize.sp,
                 currencyFontSize = currencyFontSize.sp,
 
-                currencyUpfront = false
             )
             if (showConvertedAmountText != null) {
                 Text(

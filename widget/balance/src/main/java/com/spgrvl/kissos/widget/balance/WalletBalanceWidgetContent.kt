@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.widget.balance
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -102,22 +103,26 @@ fun BalanceSection(
         verticalAlignment = Alignment.CenterVertically,
         modifier = GlanceModifier.padding(start = 12.dp, end = 12.dp, top = 12.dp),
     ) {
-        Text(
-            text = currency,
-            style = TextStyle(
-                fontSize = 30.sp,
-                color = ColorProvider(Color.White)
-            )
+        val parts = CurrencyDisplay.parts(balance, currency)
+        val symbolStyle = TextStyle(
+            fontSize = 30.sp,
+            color = ColorProvider(Color.White)
         )
-        Spacer(GlanceModifier.width(10.dp))
+        if (parts.prefix.isNotEmpty()) {
+            Text(text = parts.prefix, style = symbolStyle)
+        }
         Text(
-            text = balance,
+            text = parts.number,
             style = TextStyle(
                 fontSize = 34.sp,
                 fontWeight = FontWeight.Bold,
                 color = ColorProvider(Color.White)
             )
         )
+        if (parts.suffix.isNotEmpty()) {
+            Spacer(GlanceModifier.width(8.dp))
+            Text(text = parts.suffix, style = symbolStyle)
+        }
     }
 }
 
@@ -142,7 +147,7 @@ fun IncomeExpenseSection(
         ) {
             Image(ImageProvider(R.drawable.ic_income_white), resources.getString((R.string.income)))
             Text(
-                text = "$income $currency",
+                text = CurrencyDisplay.format(income, currency),
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
@@ -163,7 +168,7 @@ fun IncomeExpenseSection(
                 resources.getString(R.string.expense)
             )
             Text(
-                text = "$expense $currency",
+                text = CurrencyDisplay.format(expense, currency),
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,

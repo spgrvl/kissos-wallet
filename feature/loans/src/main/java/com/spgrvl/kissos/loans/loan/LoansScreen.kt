@@ -361,7 +361,6 @@ private fun LoanHeader(
             balanceFontSize = 30.sp,
             currencyFontSize = 30.sp,
 
-            currencyUpfront = false
         )
 
         Spacer(Modifier.height(16.dp))

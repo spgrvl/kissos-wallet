@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.legacy.ui.theme.components
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -152,7 +153,8 @@ fun BudgetBattery(
             Spacer(Modifier.height(2.dp))
 
             Text(
-                text = "${expenses.format(currency)}/${budget.format(currency)} $currency",
+                text = "${CurrencyDisplay.format(expenses.format(currency), currency)}/" +
+                    CurrencyDisplay.format(budget.format(currency), currency),
                 style = UI.typo.nC.style(
                     fontWeight = FontWeight.ExtraBold,
                     color = captionTextColor

@@ -22,6 +22,7 @@ import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.shortenAmount
 import com.spgrvl.kissos.legacy.utils.shouldShortAmount
+import com.spgrvl.kissos.ui.CurrencyDisplay
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 @Composable
@@ -31,7 +32,6 @@ fun BalanceRowMedium(
     modifier: Modifier = Modifier,
     textColor: Color = UI.colors.pureInverse,
     balanceAmountPrefix: String? = null,
-    currencyUpfront: Boolean = true,
     shortenBigNumbers: Boolean = false,
     hiddenMode: Boolean = false,
 ) {
@@ -47,7 +47,6 @@ fun BalanceRowMedium(
         balanceFontSize = 26.sp,
 
         balanceAmountPrefix = balanceAmountPrefix,
-        currencyUpfront = currencyUpfront,
         shortenBigNumbers = shortenBigNumbers
     )
 }
@@ -59,7 +58,6 @@ fun BalanceRowMini(
     modifier: Modifier = Modifier,
     textColor: Color = UI.colors.pureInverse,
     balanceAmountPrefix: String? = null,
-    currencyUpfront: Boolean = true,
     shortenBigNumbers: Boolean = false,
     hiddenMode: Boolean = false,
     doubleRowDisplay: Boolean = false,
@@ -76,7 +74,6 @@ fun BalanceRowMini(
         balanceFontSize = 22.sp,
 
         balanceAmountPrefix = balanceAmountPrefix,
-        currencyUpfront = currencyUpfront,
         shortenBigNumbers = shortenBigNumbers,
         doubleRowDisplay = doubleRowDisplay
     )
@@ -92,7 +89,6 @@ fun BalanceRow(
     spacerCurrency: Dp = 12.dp,
     currencyFontSize: TextUnit? = null,
     balanceFontSize: TextUnit? = null,
-    currencyUpfront: Boolean = true,
     balanceAmountPrefix: String? = null,
     shortenBigNumbers: Boolean = false,
     doubleRowDisplay: Boolean = false,
@@ -128,11 +124,7 @@ fun BalanceRow(
                     else -> integerPartFormatted
                 }
 
-                val balanceCurrencyText = if (currencyUpfront) {
-                    "$currency $balanceText"
-                } else {
-                    "$balanceText $currency"
-                }
+                val balanceCurrencyText = CurrencyDisplay.format(balanceText, currency)
 
                 Text(
                     text = balanceCurrencyText,
@@ -186,7 +178,7 @@ private fun Currency(
     textColor: Color,
 ) {
     Text(
-        text = currency,
+        text = CurrencyDisplay.symbol(currency),
         style = if (currencyFontSize == null) {
             UI.typo.h1.style(
                 fontWeight = FontWeight.Light,
