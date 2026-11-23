@@ -19,12 +19,13 @@ class FormatMoneyUseCase @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    private val locale = devicePreferences.locale()
-    private val withoutDecimalFormatter = DecimalFormat("###,###", DecimalFormatSymbols(locale))
-    private val withDecimalFormatter = DecimalFormat("###,###.00", DecimalFormatSymbols(locale))
-    private val shortenAmountFormatter = DecimalFormat("###,###.##", DecimalFormatSymbols(locale))
-
     suspend fun format(value: Double, shortenAmount: Boolean): String {
+        // Read on every call: the app language can change while this instance is alive
+        val symbols = DecimalFormatSymbols(devicePreferences.locale())
+        val withoutDecimalFormatter = DecimalFormat("###,###", symbols)
+        val withDecimalFormatter = DecimalFormat("###,###.00", symbols)
+        val shortenAmountFormatter = DecimalFormat("###,###.##", symbols)
+
         if (abs(value) >= THOUSAND && shortenAmount) {
             val result = if (abs(value) >= BILLION) {
                 "${shortenAmountFormatter.format(value / BILLION)}b"

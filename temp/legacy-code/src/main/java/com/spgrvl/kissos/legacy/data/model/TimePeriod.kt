@@ -206,12 +206,14 @@ data class TimePeriod(
         timeProvider: TimeProvider,
     ): String {
         val year = year
+        // Looked up again rather than month.name, which keeps the language it was created in
+        val name = Month.fromMonthValue(month.monthValue).name
         return if (year != null && timeProvider.localNow().year != year) {
             // not this year
-            "${month.name.substring(0, MonthNameAbbreviationLength)}, $year"
+            "${name.substring(0, MonthNameAbbreviationLength)}, $year"
         } else {
             // this year
-            month.name
+            name
         }
     }
 }
