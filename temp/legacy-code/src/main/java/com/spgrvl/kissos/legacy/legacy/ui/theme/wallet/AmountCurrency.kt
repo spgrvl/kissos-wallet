@@ -175,8 +175,8 @@ fun AmountCurrencyCaption(
 }
 
 /**
- * The amount and its currency symbol as separate texts, in the order the app language
- * expects ("23,84 €" or "€23.84"). Emitted without a container so callers keep their Row.
+ * The amount and its currency symbol as separate texts ("23,84 €"). Emitted without a
+ * container so callers keep their Row.
  */
 @SuppressLint(
     "ComposeMultipleContentEmitters",
@@ -192,9 +192,6 @@ fun MoneyTexts(
     symbolSpacing: Dp = 4.dp,
 ) {
     val parts = CurrencyDisplay.parts(amountText, currency)
-    if (parts.prefix.isNotEmpty()) {
-        Text(text = parts.prefix, style = symbolStyle)
-    }
     Text(modifier = numberModifier, text = parts.number, style = numberStyle)
     if (parts.suffix.isNotEmpty()) {
         Spacer(modifier = Modifier.width(symbolSpacing))

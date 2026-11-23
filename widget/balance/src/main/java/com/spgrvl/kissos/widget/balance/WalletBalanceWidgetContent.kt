@@ -108,9 +108,6 @@ fun BalanceSection(
             fontSize = 30.sp,
             color = ColorProvider(Color.White)
         )
-        if (parts.prefix.isNotEmpty()) {
-            Text(text = parts.prefix, style = symbolStyle)
-        }
         Text(
             text = parts.number,
             style = TextStyle(

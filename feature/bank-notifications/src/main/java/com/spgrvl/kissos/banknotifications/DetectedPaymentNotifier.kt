@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.banknotifications
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import android.Manifest
 import android.app.PendingIntent
 import android.content.Context
@@ -127,12 +128,15 @@ class DetectedPaymentNotifier @Inject constructor(
         const val ACTION_DISMISS = "com.spgrvl.kissos.banknotifications.DISMISS"
         const val ACTION_UNDO = "com.spgrvl.kissos.banknotifications.UNDO"
 
-        fun money(payment: DetectedPaymentEntity): String = try {
-            NumberFormat.getCurrencyInstance()
-                .apply { currency = Currency.getInstance(payment.currency) }
-                .format(payment.amount)
-        } catch (e: IllegalArgumentException) {
-            "${payment.amount} ${payment.currency}"
+        /** "18,60 €" / "18.60 €": the symbol after the number, as everywhere in the app. */
+        fun money(payment: DetectedPaymentEntity): String {
+            val digits = runCatching { Currency.getInstance(payment.currency).defaultFractionDigits }
+                .getOrNull()?.takeIf { it >= 0 } ?: 2
+            val number = NumberFormat.getNumberInstance().apply {
+                minimumFractionDigits = digits
+                maximumFractionDigits = digits
+            }.format(payment.amount)
+            return CurrencyDisplay.format(number, payment.currency)
         }
     }
 }
