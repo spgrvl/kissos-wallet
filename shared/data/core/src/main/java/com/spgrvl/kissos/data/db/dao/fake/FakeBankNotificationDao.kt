@@ -3,6 +3,7 @@ package com.spgrvl.kissos.data.db.dao.fake
 import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentKind
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
 import com.spgrvl.kissos.data.db.entity.UnparsedNotificationEntity
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.map
 import org.jetbrains.annotations.VisibleForTesting
 import java.time.Instant
 import java.util.UUID
+import kotlin.math.abs
 
 @VisibleForTesting
 @Suppress("TooManyFunctions")
@@ -45,6 +47,44 @@ class FakeBankNotificationDao : BankNotificationDao {
 
     override suspend fun setStatus(id: UUID, status: DetectedPaymentStatus, transactionId: UUID?) {
         payments.value[id]?.let { payments.value += id to it.copy(status = status, transactionId = transactionId) }
+    }
+
+    override suspend fun findUnmatchedPayment(
+        sourcePackage: String,
+        direction: String,
+        currency: String,
+        amount: Double,
+        from: Instant,
+        to: Instant,
+    ): DetectedPaymentEntity? {
+        val matched = payments.value.values.mapNotNull { it.matchedPaymentId }.toSet()
+        return payments.value.values
+            .filter {
+                it.sourcePackage == sourcePackage && it.kind == DetectedPaymentKind.PAYMENT &&
+                    it.direction == direction && it.currency == currency && abs(it.amount - amount) < HALF_CENT &&
+                    !it.postedAt.isBefore(from) && !it.postedAt.isAfter(to) && it.id !in matched
+            }
+            .minByOrNull { it.postedAt }
+    }
+
+    override suspend fun findPayments(sourcePackage: String, from: Instant, to: Instant): List<DetectedPaymentEntity> =
+        payments.value.values.filter {
+            it.sourcePackage == sourcePackage && it.kind == DetectedPaymentKind.PAYMENT &&
+                !it.postedAt.isBefore(from) && !it.postedAt.isAfter(to)
+        }
+
+    override suspend fun unmatch(id: UUID) {
+        payments.value[id]?.let {
+            payments.value += id to it.copy(
+                status = DetectedPaymentStatus.NEW,
+                transactionId = null,
+                matchedPaymentId = null,
+            )
+        }
+    }
+
+    private companion object {
+        const val HALF_CENT = 0.005
     }
 
     override suspend fun deleteAllPayments() {

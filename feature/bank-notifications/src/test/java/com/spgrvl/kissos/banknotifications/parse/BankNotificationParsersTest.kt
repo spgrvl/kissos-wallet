@@ -16,6 +16,7 @@ class BankNotificationParsersTest {
         direction = PaymentDirection.OUT,
         payee = payee,
         categoryHint = hint,
+        kind = PaymentKind.PAYMENT,
     )
 
     @Test
@@ -130,6 +131,49 @@ class BankNotificationParsersTest {
         BankNotificationParsers.parse(
             eurobank,
             eurobankText("Η συναλλαγή 19,11 EUR στην εταιρεία TEST MARKET AEBE GR απορρίφθηκε"),
+        ).shouldBeNull()
+    }
+
+    @Test
+    fun `reads Eurobank account debits`() {
+        // given: the debit a card payment gets days later, or a payment without the card
+        val debit = NotificationText(
+            title = "Κίνηση Λογαριασμού",
+            text = "23/11/2026, 15:16: Χρεώθηκε με 19,11 EUR ο λογαριασμός σας με τελευταία ψηφία *1234. " +
+                "Αιτιολογία: TEST MARKET GR. Νέο υπόλοιπο: 100,00 EUR.",
+            bigText = null,
+        )
+
+        // then: the payee without the country code, nothing of the account or the balance
+        BankNotificationParsers.parse(eurobank, debit) shouldBe
+            spent("19.11", "TEST MARKET").copy(kind = PaymentKind.ACCOUNT_DEBIT)
+    }
+
+    @Test
+    fun `reads Eurobank account debits wrapped over lines, over a thousand or without the balance`() {
+        BankNotificationParsers.parse(
+            eurobank,
+            NotificationText(
+                title = "Κίνηση Λογαριασμού",
+                text = "23/11/2026, 15:16: Χρεώθηκε με 1.234,56 EUR",
+                bigText = "23/11/2026, 15:16: Χρεώθηκε με 1.234,56 EUR ο λογαριασμός σας\n" +
+                    "με τελευταία ψηφία *1234. Αιτιολογία: ΠΑΓΙΑ ΕΝΤΟΛΗ ΔΟΚΙΜΗ.\nΝέο υπόλοιπο: 2.000,00 EUR.",
+            ),
+        ) shouldBe spent("1234.56", "ΠΑΓΙΑ ΕΝΤΟΛΗ ΔΟΚΙΜΗ").copy(kind = PaymentKind.ACCOUNT_DEBIT)
+        BankNotificationParsers.parse(
+            eurobank,
+            eurobankText("Χρεώθηκε με 5,00 EUR ο λογαριασμός σας με τελευταία ψηφία *1234. Αιτιολογία: ΣΥΝΔΡΟΜΗ"),
+        ) shouldBe spent("5.00", "ΣΥΝΔΡΟΜΗ").copy(kind = PaymentKind.ACCOUNT_DEBIT)
+    }
+
+    @Test
+    fun `Eurobank money in is not a payment`() {
+        BankNotificationParsers.parse(
+            eurobank,
+            eurobankText(
+                "23/11/2026, 09:00: Πιστώθηκε με 50,00 EUR ο λογαριασμός σας με τελευταία ψηφία *1234. " +
+                    "Αιτιολογία: ΜΕΤΑΦΟΡΑ. Νέο υπόλοιπο: 150,00 EUR."
+            ),
         ).shouldBeNull()
     }
 

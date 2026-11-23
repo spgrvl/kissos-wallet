@@ -18,6 +18,7 @@ object MagentaPayParser : BankNotificationParser {
                         direction = PaymentDirection.OUT,
                         payee = match.groupValues[2].trim(),
                         categoryHint = null,
+                        kind = PaymentKind.PAYMENT,
                     )
                 }
             }

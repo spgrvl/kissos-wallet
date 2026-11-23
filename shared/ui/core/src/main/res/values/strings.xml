@@ -68,6 +68,8 @@
     <string name="expense_title">Expense title</string>
     <string name="transfer_title">Transfer title</string>
     <string name="expense">Expense</string>
+    <!-- One income transaction, beside "expense"; "income" is the total (Έσοδα) -->
+    <string name="income_transaction">Income</string>
     <string name="add_planned_date_payment">Add planned date of payment</string>
     <string name="pay">Pay</string>
     <string name="get">Get</string>
@@ -204,6 +206,8 @@
     <string name="import_data">Import data</string>
     <string name="app_settings">App Settings</string>
     <string name="lock_app">Lock App</string>
+    <string name="widget_amounts_when_locked">Show amounts on widget</string>
+    <string name="widget_amounts_when_locked_description">The balance shows even while the app is locked, to anyone holding the phone</string>
     <string name="show_notifications">Show notifications</string>
     <string name="hide_balance">Hide balance</string>
     <string name="hide_balance_description">Tap on the hidden balance to reveal it for 5s</string>
@@ -608,11 +612,15 @@
     <string name="bank_notifications_add_automatically_description">Adds its payments right away, with Undo, instead of asking first. Payments that may already be in Kissos, or are in another currency, are always asked about.</string>
     <string name="bank_notifications_adds_automatically">Adds automatically</string>
     <string name="bank_notifications_unrecognised">Unrecognised notifications</string>
-    <string name="bank_notifications_unrecognised_description">To support a new bank or format, Kissos can keep the notifications of your chosen apps that it didn\'t recognise, on this phone only, for 7 days. Tap one to send it to us by email.</string>
+    <string name="bank_notifications_unrecognised_description">To support a new bank or format, Kissos can keep the notifications of your chosen apps that it didn\'t recognise, on this phone only, for 7 days.</string>
     <string name="bank_notifications_keep_unrecognised">Keep them for 7 days</string>
     <string name="bank_notifications_report_subject">Kissos: Unsupported bank notification</string>
     <string name="bank_notifications_report_body">Please check the notification below before sending, and remove anything you\'d rather not share, e.g. a balance or a name.\n\nApp: %1$s (%2$s)\n\n%3$s\n\nKissos %4$s · Android %5$s</string>
     <string name="bank_notifications_report_no_email">No email app found. The notification was copied, so you can send it to %1$s.</string>
+    <string name="bank_notifications_unrecognised_tap">Tap an entry to send it to us by email, so Kissos can learn to read it automatically.</string>
+    <string name="bank_notifications_report_title">Send by email?</string>
+    <string name="bank_notifications_report_confirm">Your email app will open with this notification, addressed to Kissos\'s support. Check it before sending and remove anything you\'d rather not share, e.g. a balance or a name.</string>
+    <string name="open_email">Open email</string>
     <string name="bank_notifications_found_apps">Kissos found %1$s on this phone and will read only their notifications. You can add or remove apps afterwards.</string>
     <string name="bank_notifications_setup_title">Add card payments automatically</string>
     <string name="bank_notifications_setup_description">Kissos can turn the payment notifications of %1$s into expenses. It reads only the bank apps you choose, and nothing leaves this phone.</string>
@@ -629,6 +637,14 @@
     <string name="detected_payment_possible_duplicate">Might already be in Kissos</string>
     <string name="detected_payment_added">Added</string>
     <string name="detected_payment_dismissed">Dismissed</string>
+    <string name="detected_payment_matched">Same as the payment of %s</string>
+    <string name="detected_payment_matched_earlier">Same as an earlier payment</string>
+    <string name="detected_payments_report_hint">Is there something wrong with a payment? Tap it to report it.</string>
+    <string name="detected_payment_report_title">Report a problem</string>
+    <string name="detected_payment_report_confirm">Your email app will open with what Kissos read from this payment\'s notification: the app, amount, payee and time, addressed to Kissos\'s support. Kissos doesn\'t keep the notification itself, so it would help if you also sent us a screenshot of it, with anything private hidden.</string>
+    <string name="detected_payment_report_subject">Kissos: Problem with a detected payment</string>
+    <string name="detected_payment_report_body">What\'s wrong? E.g. the amount or the payee, or it wasn\'t a payment:\n\n\n\nWhat Kissos read:\n%1$s\n\nKissos %2$s · Android %3$s</string>
+    <string name="detected_payment_report_no_email">No email app found. The payment\'s details were copied, so you can send them to %1$s.</string>
     <string name="dismiss">Dismiss</string>
     <string name="undo">Undo</string>
     <string name="detected_payments_review">Review</string>

@@ -7,6 +7,7 @@ data class SettingsState(
     val name: String,
     val currentTheme: Theme,
     val lockApp: Boolean,
+    val widgetAmountsWhenLocked: Boolean,
     val showNotifications: Boolean,
     val hideCurrentBalance: Boolean,
     val hideIncome: Boolean,

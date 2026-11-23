@@ -4,6 +4,7 @@ import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentKind
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
 import com.spgrvl.kissos.data.model.Account
@@ -32,7 +33,11 @@ data class PaymentDraft(
     val categoryId: CategoryId?,
     /** The account the app's payments go to; null if the user hasn't picked one. */
     val account: Account?,
-    /** The account already has an expense of the same amount around then, e.g. from a scanned receipt. */
+    /**
+     * The account already has an expense of the same amount around then, e.g. from a scanned receipt; or, for an
+     * account debit, the bank announced a payment to the same payee shortly before (e.g. a fuel pre-authorisation
+     * booked for another amount).
+     */
     val possibleDuplicate: Boolean,
 ) {
     /** Whether it can be added without the user looking at it first. */
@@ -72,9 +77,29 @@ class DetectedPayments @Inject constructor(
             title = payee?.title ?: payment.payee,
             categoryId = (payee?.categoryId ?: hintCategory)?.let(::CategoryId),
             account = account,
-            possibleDuplicate = account != null && hasSimilarExpense(account.id, payment),
+            possibleDuplicate = (account != null && hasSimilarExpense(account.id, payment)) ||
+                hasPaymentToSamePayee(payment),
         )
     }
+
+    /**
+     * For an account debit: the payment the bank announced before it that it's the same as, i.e. from the same app,
+     * of the same amount, at most [DEBIT_DELAY] before, and not matched to another debit yet. Each payment matches one
+     * debit, so two equal payments in a week match their two debits.
+     */
+    suspend fun matchingPayment(debit: DetectedPaymentEntity): DetectedPaymentEntity? =
+        if (debit.kind != DetectedPaymentKind.ACCOUNT_DEBIT) {
+            null
+        } else {
+            dao.findUnmatchedPayment(
+                sourcePackage = debit.sourcePackage,
+                direction = debit.direction,
+                currency = debit.currency,
+                amount = debit.amount,
+                from = debit.postedAt - DEBIT_DELAY,
+                to = debit.postedAt,
+            )
+        }
 
     /** @return false if it was already handled, or it needs the user to look at it first. */
     suspend fun add(id: UUID): Boolean {
@@ -111,9 +136,13 @@ class DetectedPayments @Inject constructor(
         dao.setStatus(id, DetectedPaymentStatus.DISMISSED, null)
     }
 
-    /** Removes the expense it became and puts it back for review. */
+    /** Removes the expense it became and puts it back for review; a matched debit becomes a payment of its own. */
     suspend fun undo(id: UUID) {
         val payment = dao.findPayment(id) ?: return
+        if (payment.status == DetectedPaymentStatus.MATCHED) {
+            dao.unmatch(id)
+            return
+        }
         payment.transactionId?.let { transactionRepository.deleteById(TransactionId(it)) }
         dao.setStatus(id, DetectedPaymentStatus.NEW, null)
     }
@@ -142,8 +171,22 @@ class DetectedPayments @Inject constructor(
             endDate = payment.postedAt + DUPLICATE_WINDOW,
         ).any { it is Expense && abs(it.value.amount.value - payment.amount) < CENT / 2 }
 
+    /** An unmatched account debit with the same payee as a payment shortly before it, whatever the amount. */
+    private suspend fun hasPaymentToSamePayee(debit: DetectedPaymentEntity): Boolean {
+        val payee = debit.payee?.let(::normalisedPayee)
+        if (debit.kind != DetectedPaymentKind.ACCOUNT_DEBIT || payee.isNullOrEmpty()) return false
+        return dao.findPayments(debit.sourcePackage, debit.postedAt - DEBIT_DELAY, debit.postedAt).any { earlier ->
+            val other = earlier.payee?.let(::normalisedPayee)
+            // The debit's description can be shorter or longer than the card terminal's name
+            !other.isNullOrEmpty() && (other.startsWith(payee) || payee.startsWith(other))
+        }
+    }
+
     companion object {
         private val DUPLICATE_WINDOW: Duration = Duration.ofDays(1)
+
+        /** How long after a card payment its account debit can come: days, more over a weekend or a holiday. */
+        val DEBIT_DELAY: Duration = Duration.ofDays(7)
         private const val CENT = 0.01
 
         /** "POWERCO ", "PowerCo" and "powerco" are the same payee. */
