@@ -49,6 +49,8 @@ data class DetectedPaymentUi(
     val canAddDirectly: Boolean,
     /** For an account debit matched to an earlier payment: when that payment was, e.g. "21 Nov 2026, 14:47". */
     val matchedPaymentTime: String?,
+    /** What Kissos read from the notification, for a report to support. Not translated. */
+    val reportDetails: String,
 )
 
 @Suppress("DataClassTypedIDs")
@@ -112,16 +114,19 @@ class DetectedPaymentsViewModel @Inject constructor(
 
     private suspend fun toUi(payment: DetectedPaymentEntity): DetectedPaymentUi {
         val draft = payments.draft(payment)
+        val app = appLabel(payment.sourcePackage)
         return DetectedPaymentUi(
             id = payment.id,
             title = listOfNotNull(DetectedPaymentNotifier.money(payment), draft.title).joinToString(" · "),
-            details = listOf(
-                appLabel(payment.sourcePackage),
-                time(payment),
-            ).joinToString(" · "),
+            details = listOf(app, time(payment)).joinToString(" · "),
             status = payment.status,
             canAddDirectly = draft.canAddDirectly,
             matchedPaymentTime = payment.matchedPaymentId?.let { dao.findPayment(it) }?.let(::time),
+            reportDetails = listOf(
+                "$app (${payment.sourcePackage}) · ${payment.postedAt}",
+                "${payment.amount} ${payment.currency} · ${payment.payee ?: "-"} · ${payment.direction}",
+                "${payment.kind} · ${payment.status}",
+            ).joinToString("\n"),
         )
     }
 
@@ -149,6 +154,7 @@ internal val previewPaymentsState = DetectedPaymentsState(
             DetectedPaymentStatus.NEW,
             true,
             null,
+            "",
         ),
     ),
     recent = persistentListOf(
@@ -159,6 +165,7 @@ internal val previewPaymentsState = DetectedPaymentsState(
             DetectedPaymentStatus.ADDED,
             false,
             null,
+            "",
         ),
     ),
 )
