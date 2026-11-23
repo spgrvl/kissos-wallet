@@ -192,6 +192,24 @@ class EditTransactionViewModel @Inject constructor(
     private var merchantPromptAnswered = false
     private var merchantDisplayName: String? = null
 
+    /** The screen this view model was last opened for (by identity: opening it again makes a new one). */
+    private var shownScreen: EditTransactionScreen? = null
+
+    /**
+     * True when [screen] is opened, false when the same screen is only drawn again: after the app
+     * lock screen or a recreated activity. Then its form keeps what was entered and the start
+     * actions (such as opening the receipt scanner) don't run again.
+     */
+    fun onScreenShown(screen: EditTransactionScreen): Boolean {
+        if (screen === shownScreen) {
+            // The title field is filled from the initial title, so it shows what was typed
+            initialTitle = title
+            return false
+        }
+        shownScreen = screen
+        return true
+    }
+
     fun start(screen: EditTransactionScreen) {
         viewModelScope.launch {
             editMode = screen.initialTransactionId != null
