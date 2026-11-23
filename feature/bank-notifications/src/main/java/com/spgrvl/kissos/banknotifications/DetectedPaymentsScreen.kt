@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.banknotifications
 
+import android.content.Context
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,10 +17,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,6 +39,8 @@ import com.spgrvl.kissos.legacy.KissosWalletPreview
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
+import com.spgrvl.kissos.ui.androidVersion
+import com.spgrvl.kissos.ui.kissosVersion
 import com.spgrvl.kissos.wallet.ui.theme.components.BackBottomBar
 
 @Composable
@@ -47,6 +55,8 @@ private fun BoxWithConstraintsScope.UI(
     onEvent: (DetectedPaymentsEvent) -> Unit,
 ) {
     val nav = navigation()
+    val context = LocalContext.current
+    var reporting by remember { mutableStateOf<DetectedPaymentUi?>(null) }
 
     ColumnRoot {
         LazyColumn(
@@ -67,9 +77,16 @@ private fun BoxWithConstraintsScope.UI(
                         style = UI.typo.b2.style(color = UI.colors.mediumInverse)
                     )
                 }
+                if (state.waiting.isNotEmpty() || state.recent.isNotEmpty()) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp),
+                        text = stringResource(R.string.detected_payments_report_hint),
+                        style = UI.typo.nB2.style(color = UI.colors.mediumInverse, fontWeight = FontWeight.Normal)
+                    )
+                }
             }
             items(items = state.waiting, key = { "waiting-${it.id}" }) { payment ->
-                Payment(payment) {
+                Payment(payment, onClick = { reporting = payment }) {
                     if (payment.canAddDirectly) {
                         Action(stringResource(R.string.add), UI.colors.green) {
                             onEvent(DetectedPaymentsEvent.Add(payment.id))
@@ -94,7 +111,7 @@ private fun BoxWithConstraintsScope.UI(
                 }
             }
             items(items = state.recent, key = { "recent-${it.id}" }) { payment ->
-                Payment(payment) {
+                Payment(payment, onClick = { reporting = payment }) {
                     Text(
                         // Leaves room for Undo when the text is long
                         modifier = Modifier.weight(1f, fill = false).padding(end = 16.dp),
@@ -118,16 +135,46 @@ private fun BoxWithConstraintsScope.UI(
     }
 
     BackBottomBar(onBack = { nav.back() }) {}
+
+    ReportModal(
+        visible = reporting != null,
+        title = stringResource(R.string.detected_payment_report_title),
+        text = stringResource(R.string.detected_payment_report_confirm),
+        dismiss = { reporting = null },
+    ) {
+        reporting?.let { report(context, it) }
+        reporting = null
+    }
+}
+
+/** Emails what Kissos read to support, or copies it when there's no email app. */
+private fun report(context: Context, payment: DetectedPaymentUi) {
+    context.sendReport(
+        subject = context.getString(R.string.detected_payment_report_subject),
+        body = context.getString(
+            R.string.detected_payment_report_body,
+            payment.reportDetails,
+            context.kissosVersion,
+            androidVersion,
+        ),
+        copied = payment.reportDetails,
+        noEmail = R.string.detected_payment_report_no_email,
+    )
 }
 
 @Composable
-private fun Payment(payment: DetectedPaymentUi, actions: @Composable RowScope.() -> Unit) {
+private fun Payment(
+    payment: DetectedPaymentUi,
+    onClick: () -> Unit,
+    actions: @Composable RowScope.() -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .clip(UI.shapes.r4)
             .border(2.dp, UI.colors.medium, UI.shapes.r4)
+            .clickable(onClick = onClick)
             .padding(start = 20.dp, end = 4.dp, top = 16.dp, bottom = 4.dp)
     ) {
         Text(text = payment.title, style = UI.typo.b1.style(fontWeight = FontWeight.Bold))

@@ -2,13 +2,10 @@ package com.spgrvl.kissos.banknotifications
 
 import android.Manifest
 import android.content.ActivityNotFoundException
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
@@ -50,9 +47,7 @@ import com.spgrvl.kissos.navigation.DetectedPaymentsScreen
 import com.spgrvl.kissos.navigation.navigation
 import com.spgrvl.kissos.navigation.screenScopedViewModel
 import com.spgrvl.kissos.ui.R
-import com.spgrvl.kissos.ui.SupportEmail
 import com.spgrvl.kissos.ui.androidVersion
-import com.spgrvl.kissos.ui.emailSupport
 import com.spgrvl.kissos.ui.kissosVersion
 import com.spgrvl.kissos.wallet.ui.theme.components.BackBottomBar
 import com.spgrvl.kissos.wallet.ui.theme.components.KissosSwitch
@@ -87,6 +82,7 @@ private fun BoxWithConstraintsScope.UI(
     var disclosureVisible by remember { mutableStateOf(false) }
     var editing by remember { mutableStateOf<BankAppUi?>(null) }
     var pickingApp by remember { mutableStateOf(false) }
+    var reporting by remember { mutableStateOf<UnparsedUi?>(null) }
     val notificationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         // Kissos's own notifications are optional: payments also wait in the review list
         openAccessSettings(context)
@@ -159,8 +155,11 @@ private fun BoxWithConstraintsScope.UI(
                     checked = state.keepUnparsed,
                 ) { onEvent(BankNotificationsEvent.SetKeepUnparsed(it)) }
             }
+            if (state.unparsed.isNotEmpty()) {
+                item { Description(stringResource(R.string.bank_notifications_unrecognised_tap)) }
+            }
             items(items = state.unparsed, key = { it.id }) { unparsed ->
-                Box(title = unparsed.app, subtitle = unparsed.text) { report(context, unparsed) }
+                Box(title = unparsed.app, subtitle = unparsed.text) { reporting = unparsed }
             }
         }
     }
@@ -179,6 +178,15 @@ private fun BoxWithConstraintsScope.UI(
         } else {
             openAccessSettings(context)
         }
+    }
+    ReportModal(
+        visible = reporting != null,
+        title = stringResource(R.string.bank_notifications_report_title),
+        text = stringResource(R.string.bank_notifications_report_confirm),
+        dismiss = { reporting = null },
+    ) {
+        reporting?.let { report(context, it) }
+        reporting = null
     }
     EditAppModal(app = editing, state = state, dismiss = { editing = null }, onEvent = onEvent)
     PickAppModal(
@@ -407,7 +415,7 @@ private fun openAccessSettings(context: Context) {
 
 /** Emails it to support, or copies it when there's no email app. */
 private fun report(context: Context, unparsed: UnparsedUi) {
-    val sent = context.emailSupport(
+    context.sendReport(
         subject = context.getString(R.string.bank_notifications_report_subject),
         body = context.getString(
             R.string.bank_notifications_report_body,
@@ -417,16 +425,9 @@ private fun report(context: Context, unparsed: UnparsedUi) {
             context.kissosVersion,
             androidVersion,
         ),
+        copied = unparsed.text,
+        noEmail = R.string.bank_notifications_report_no_email,
     )
-    if (!sent) {
-        context.getSystemService(ClipboardManager::class.java)
-            ?.setPrimaryClip(ClipData.newPlainText("notification", unparsed.text))
-        Toast.makeText(
-            context,
-            context.getString(R.string.bank_notifications_report_no_email, SupportEmail),
-            Toast.LENGTH_LONG,
-        ).show()
-    }
 }
 
 @Preview
