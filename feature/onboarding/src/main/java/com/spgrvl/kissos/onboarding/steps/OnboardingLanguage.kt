@@ -49,6 +49,7 @@ fun OnboardingLanguage(
     selected: AppLanguage?,
     onSelect: (AppLanguage) -> Unit,
     onNext: (AppLanguage) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     setStatusBarDarkTextCompat(darkText = UI.colors.isLight)
 
@@ -58,7 +59,7 @@ fun OnboardingLanguage(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .statusBarsPadding()
