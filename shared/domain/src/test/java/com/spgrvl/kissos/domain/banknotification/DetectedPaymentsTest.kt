@@ -3,6 +3,7 @@ package com.spgrvl.kissos.domain.banknotification
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.fake.FakeBankNotificationDao
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentKind
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.model.Account
 import com.spgrvl.kissos.data.model.AccountId
@@ -19,6 +20,7 @@ import com.spgrvl.kissos.data.repository.AccountRepository
 import com.spgrvl.kissos.data.repository.TransactionRepository
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.coEvery
@@ -29,6 +31,7 @@ import io.mockk.slot
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import java.time.Duration
 import java.time.Instant
 import java.util.UUID
 
@@ -63,11 +66,14 @@ class DetectedPaymentsTest {
         currency: String = "EUR",
         payee: String = "Φαρμακείο Δοκιμή",
         hint: String? = "❤️",
+        postedAt: Instant = now,
+        kind: DetectedPaymentKind = DetectedPaymentKind.PAYMENT,
+        sourcePackage: String = "com.revolut.revolut",
     ) = DetectedPaymentEntity(
         id = UUID.randomUUID(),
         dedupKey = UUID.randomUUID().toString(),
-        sourcePackage = "com.revolut.revolut",
-        postedAt = now,
+        sourcePackage = sourcePackage,
+        postedAt = postedAt,
         amount = amount,
         currency = currency,
         direction = "OUT",
@@ -76,7 +82,20 @@ class DetectedPaymentsTest {
         status = DetectedPaymentStatus.NEW,
         transactionId = null,
         createdAt = now,
+        kind = kind,
+        matchedPaymentId = null,
     )
+
+    private fun debit(amount: Double = 19.11, payee: String = "TEST MARKET", postedAt: Instant = now) =
+        payment(
+            amount = amount,
+            payee = payee,
+            hint = null,
+            postedAt = postedAt,
+            kind = DetectedPaymentKind.ACCOUNT_DEBIT,
+        )
+
+    private fun days(n: Long): Duration = Duration.ofDays(n)
 
     @Test
     fun `a payment in its account's currency can be added directly`() = runTest {
@@ -118,6 +137,83 @@ class DetectedPaymentsTest {
         // then
         draft.possibleDuplicate.shouldBeTrue()
         draft.canAddDirectly.shouldBeFalse()
+    }
+
+    @Test
+    fun `an account debit matches the card payment of the same amount days before it`() = runTest {
+        // given: the card payment on Saturday, its debit on Monday
+        val card = payment(amount = 19.11, payee = "TEST MARKET AEBE", postedAt = now - days(2))
+        dao.insertPayment(card)
+
+        // then
+        payments.matchingPayment(debit())?.id shouldBe card.id
+    }
+
+    @Test
+    fun `each card payment matches one account debit`() = runTest {
+        // given: two equal payments in a week, the first one's debit already matched
+        val first = payment(amount = 2.50, postedAt = now - days(3))
+        val second = payment(amount = 2.50, postedAt = now - days(2))
+        dao.insertPayment(first)
+        dao.insertPayment(second)
+        dao.insertPayment(
+            debit(amount = 2.50).copy(status = DetectedPaymentStatus.MATCHED, matchedPaymentId = first.id)
+        )
+
+        // then: the second debit matches the other payment, and a third has nothing left to match
+        val secondDebit = debit(amount = 2.50)
+        payments.matchingPayment(secondDebit)?.id shouldBe second.id
+        dao.insertPayment(secondDebit.copy(status = DetectedPaymentStatus.MATCHED, matchedPaymentId = second.id))
+        payments.matchingPayment(debit(amount = 2.50)).shouldBeNull()
+    }
+
+    @Test
+    fun `an account debit doesn't match another amount, an older payment, another app or a later one`() = runTest {
+        dao.insertPayment(payment(amount = 19.12, postedAt = now - days(1)))
+        dao.insertPayment(payment(amount = 19.11, postedAt = now - days(8)))
+        dao.insertPayment(payment(amount = 19.11, postedAt = now - days(1), sourcePackage = "gr.payzy"))
+        dao.insertPayment(payment(amount = 19.11, postedAt = now + days(1)))
+
+        payments.matchingPayment(debit()).shouldBeNull()
+    }
+
+    @Test
+    fun `a card payment is never matched as if it were a debit`() = runTest {
+        dao.insertPayment(payment(amount = 19.11, postedAt = now - days(1)))
+
+        payments.matchingPayment(payment(amount = 19.11)).shouldBeNull()
+    }
+
+    @Test
+    fun `an unmatched account debit can be added directly, unless the payee was just paid another amount`() =
+        runTest {
+            // given: a standing order, never paid by card
+            payments.draft(debit(payee = "ΠΑΓΙΑ ΕΝΤΟΛΗ")).canAddDirectly.shouldBeTrue()
+
+            // when: a card payment to the same payee for another amount, e.g. a fuel pre-authorisation
+            dao.insertPayment(payment(amount = 50.00, payee = "TEST FUEL STATION", postedAt = now - days(2)))
+            val draft = payments.draft(debit(amount = 43.70, payee = "TEST FUEL"))
+
+            // then
+            draft.possibleDuplicate.shouldBeTrue()
+            draft.canAddDirectly.shouldBeFalse()
+        }
+
+    @Test
+    fun `undo turns a matched debit into a payment of its own`() = runTest {
+        // given
+        val card = payment(amount = 19.11, postedAt = now - days(2))
+        val matched = debit().copy(status = DetectedPaymentStatus.MATCHED, matchedPaymentId = card.id)
+        dao.insertPayment(card)
+        dao.insertPayment(matched)
+
+        // when
+        payments.undo(matched.id)
+
+        // then
+        val undone = dao.findPayment(matched.id)!!
+        undone.status shouldBe DetectedPaymentStatus.NEW
+        undone.matchedPaymentId.shouldBeNull()
     }
 
     @Test

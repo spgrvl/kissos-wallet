@@ -2,14 +2,18 @@ package com.spgrvl.kissos.banknotifications
 
 import com.spgrvl.kissos.banknotifications.parse.BankNotificationParsers
 import com.spgrvl.kissos.banknotifications.parse.NotificationText
+import com.spgrvl.kissos.banknotifications.parse.PaymentKind
 import com.spgrvl.kissos.base.time.TimeProvider
 import com.spgrvl.kissos.data.db.dao.write.BankNotificationDao
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentKind
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.db.entity.UnparsedNotificationEntity
 import com.spgrvl.kissos.domain.banknotification.BankNotificationPrefs
 import com.spgrvl.kissos.domain.banknotification.DetectedPayments
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.time.Duration
 import java.time.Instant
 import java.util.UUID
@@ -29,7 +33,7 @@ class BankNotificationProcessor @Inject constructor(
             keepIfAsked(packageName, postedAt, text)
             return
         }
-        val payment = DetectedPaymentEntity(
+        val detected = DetectedPaymentEntity(
             id = UUID.randomUUID(),
             dedupKey = "$packageName|$notificationKey|${postedAt.toEpochMilli()}|${parsed.amount}",
             sourcePackage = packageName,
@@ -42,9 +46,21 @@ class BankNotificationProcessor @Inject constructor(
             status = DetectedPaymentStatus.NEW,
             transactionId = null,
             createdAt = timeProvider.utcNow(),
+            kind = when (parsed.kind) {
+                PaymentKind.PAYMENT -> DetectedPaymentKind.PAYMENT
+                PaymentKind.ACCOUNT_DEBIT -> DetectedPaymentKind.ACCOUNT_DEBIT
+            },
+            matchedPaymentId = null,
         )
-        // Seen before, e.g. the notification was updated or Kissos reconnected
-        if (dao.insertPayment(payment) == -1L) return
+        val payment = matching.withLock {
+            // An account debit for a card payment detected before is the same payment: kept as matched, quietly
+            val payment = payments.matchingPayment(detected)
+                ?.let { detected.copy(status = DetectedPaymentStatus.MATCHED, matchedPaymentId = it.id) }
+                ?: detected
+            // Seen before, e.g. the notification was updated or Kissos reconnected
+            payment.takeIf { dao.insertPayment(it) != -1L }
+        }
+        if (payment == null || payment.status == DetectedPaymentStatus.MATCHED) return
 
         val autoAdd = prefs.apps.first().find { it.packageName == packageName }?.autoAdd == true
         val draft = payments.draft(payment)
@@ -77,6 +93,9 @@ class BankNotificationProcessor @Inject constructor(
     }
 
     companion object {
+        /** One debit at a time, so two debits of the same amount never match the same payment. */
+        private val matching = Mutex()
+
         /** Long enough to recognise a notification shown again, e.g. after a restart. */
         private val KEEP_HANDLED: Duration = Duration.ofDays(30)
         val KEEP_UNPARSED: Duration = Duration.ofDays(7)

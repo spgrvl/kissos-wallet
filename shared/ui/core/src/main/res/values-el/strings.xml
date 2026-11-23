@@ -633,6 +633,8 @@
     <string name="detected_payment_possible_duplicate">Ίσως υπάρχει ήδη στο Kissos</string>
     <string name="detected_payment_added">Προστέθηκε</string>
     <string name="detected_payment_dismissed">Απορρίφθηκε</string>
+    <string name="detected_payment_matched">Ίδια με την πληρωμή της %s</string>
+    <string name="detected_payment_matched_earlier">Ίδια με παλαιότερη πληρωμή</string>
     <string name="dismiss">Απόρριψη</string>
     <string name="undo">Αναίρεση</string>
     <string name="detected_payments_review">Έλεγχος</string>

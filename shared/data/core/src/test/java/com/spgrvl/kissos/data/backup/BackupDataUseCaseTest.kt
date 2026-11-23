@@ -18,6 +18,7 @@ import com.spgrvl.kissos.data.db.dao.fake.FakeTagDao
 import com.spgrvl.kissos.data.db.dao.fake.FakeTransactionDao
 import com.spgrvl.kissos.data.db.entity.CategoryHintMemoryEntity
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentEntity
+import com.spgrvl.kissos.data.db.entity.DetectedPaymentKind
 import com.spgrvl.kissos.data.db.entity.DetectedPaymentStatus
 import com.spgrvl.kissos.data.db.entity.MerchantEntity
 import com.spgrvl.kissos.data.db.entity.PayeeMemoryEntity
@@ -221,6 +222,8 @@ class BackupDataUseCaseTest {
                 status = DetectedPaymentStatus.NEW,
                 transactionId = null,
                 createdAt = learnedAt,
+                kind = DetectedPaymentKind.PAYMENT,
+                matchedPaymentId = null,
             )
         )
 

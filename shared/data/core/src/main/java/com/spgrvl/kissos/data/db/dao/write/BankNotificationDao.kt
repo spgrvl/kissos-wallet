@@ -40,6 +40,37 @@ interface BankNotificationDao {
     @Query("UPDATE detected_payments SET status = :status, transactionId = :transactionId WHERE id = :id")
     suspend fun setStatus(id: UUID, status: DetectedPaymentStatus, transactionId: UUID?)
 
+    /**
+     * The earliest payment from [sourcePackage] of this amount between [from] and [to] that no account debit is
+     * matched to yet, whatever the user did with it.
+     */
+    @Query(
+        "SELECT * FROM detected_payments WHERE sourcePackage = :sourcePackage AND kind = 'PAYMENT' " +
+            "AND direction = :direction AND currency = :currency AND ABS(amount - :amount) < 0.005 " +
+            "AND postedAt BETWEEN :from AND :to " +
+            "AND id NOT IN (SELECT matchedPaymentId FROM detected_payments WHERE matchedPaymentId IS NOT NULL) " +
+            "ORDER BY postedAt ASC LIMIT 1"
+    )
+    suspend fun findUnmatchedPayment(
+        sourcePackage: String,
+        direction: String,
+        currency: String,
+        amount: Double,
+        from: Instant,
+        to: Instant,
+    ): DetectedPaymentEntity?
+
+    /** The payments (not account debits) from [sourcePackage] between [from] and [to]. */
+    @Query(
+        "SELECT * FROM detected_payments WHERE sourcePackage = :sourcePackage AND kind = 'PAYMENT' " +
+            "AND postedAt BETWEEN :from AND :to"
+    )
+    suspend fun findPayments(sourcePackage: String, from: Instant, to: Instant): List<DetectedPaymentEntity>
+
+    /** Back to waiting for the user, no longer matched to another payment. */
+    @Query("UPDATE detected_payments SET status = 'NEW', transactionId = NULL, matchedPaymentId = NULL WHERE id = :id")
+    suspend fun unmatch(id: UUID)
+
     @Query("DELETE FROM detected_payments")
     suspend fun deleteAllPayments()
 

@@ -1,6 +1,7 @@
 package com.spgrvl.kissos.data.db.entity
 
 import androidx.annotation.Keep
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -35,11 +36,29 @@ data class DetectedPaymentEntity(
     /** The transaction it became, if it was added. */
     val transactionId: UUID?,
     val createdAt: Instant,
+    @ColumnInfo(defaultValue = "PAYMENT")
+    val kind: DetectedPaymentKind,
+    /** For an account debit: the payment detected earlier that it's the same as ([DetectedPaymentStatus.MATCHED]). */
+    val matchedPaymentId: UUID?,
 )
+
+enum class DetectedPaymentKind {
+    /** The payment itself, e.g. a card payment announced as it happens. */
+    PAYMENT,
+
+    /**
+     * Money taken from the account, announced when it's booked: a card payment's comes days after the payment;
+     * a payment without the card, e.g. a standing order, only has this one.
+     */
+    ACCOUNT_DEBIT,
+}
 
 enum class DetectedPaymentStatus {
     /** Waiting for the user to add or dismiss it. */
     NEW,
     ADDED,
     DISMISSED,
+
+    /** An account debit for a payment detected earlier: nothing to add, it's already counted. */
+    MATCHED,
 }
