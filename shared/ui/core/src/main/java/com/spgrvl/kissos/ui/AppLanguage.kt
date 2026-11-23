@@ -2,6 +2,7 @@ package com.spgrvl.kissos.ui
 
 import android.app.LocaleManager
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
@@ -39,6 +40,17 @@ enum class AppLanguage(val tag: String?) {
                 storedTag(context)?.let(Locale::forLanguageTag)?.language
             }
             return fromLanguage(first)
+        }
+
+        /**
+         * [context] in the app's language, for text handed to the home screen: a widget's layout
+         * strings are drawn by the launcher, in the phone's language.
+         */
+        fun localized(context: Context): Context {
+            val tag = current(context).tag ?: return context
+            val config = Configuration(context.resources.configuration)
+            config.setLocale(Locale.forLanguageTag(tag))
+            return context.createConfigurationContext(config)
         }
 
         /** Applies [language]; the visible screen is recreated in that language. */
