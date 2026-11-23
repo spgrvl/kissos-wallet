@@ -622,8 +622,8 @@
     <string name="detected_payments_waiting">%s σε αναμονή</string>
     <string name="detected_payments_none_waiting">Τίποτα σε αναμονή</string>
     <string name="detected_payments_recent">Πρόσφατες</string>
-    <string name="detected_payment_add_to">Προσθήκη στο %s;</string>
-    <string name="detected_payment_added_to">Προστέθηκε στο %s</string>
+    <string name="detected_payment_add_to">Προσθήκη σε %s;</string>
+    <string name="detected_payment_added_to">Προστέθηκε σε %s</string>
     <string name="detected_payment_pick_account">Διάλεξε λογαριασμό για να την προσθέσεις</string>
     <string name="detected_payment_other_currency">Σε άλλο νόμισμα από τον λογαριασμό της</string>
     <string name="detected_payment_possible_duplicate">Ίσως υπάρχει ήδη στο Kissos</string>

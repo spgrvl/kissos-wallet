@@ -26,6 +26,8 @@ import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.design.utils.thenIf
 import com.spgrvl.kissos.legacy.KissosWalletComponentPreview
+import com.spgrvl.kissos.legacy.legacy.ui.theme.components.overBatteryFill
+import com.spgrvl.kissos.legacy.legacy.ui.theme.components.pastBatteryFill
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Kissos
@@ -54,20 +56,7 @@ fun BufferBattery(
         1.0
     }
 
-    val textColor = when {
-        bufferExceededPercent <= 0.25 -> {
-            UI.colors.pureInverse
-        }
-        bufferExceededPercent <= 0.50 -> {
-            White
-        }
-        bufferExceededPercent <= 0.75 -> {
-            White
-        }
-        else -> White
-    }
-
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(UI.shapes.r4)
@@ -75,18 +64,9 @@ fun BufferBattery(
             .drawBehind {
                 drawRect(
                     color = when {
-                        bufferExceededPercent <= 0.25 -> {
-                            Green
-                        }
-
-                        bufferExceededPercent <= 0.50 -> {
-                            Kissos
-                        }
-
-                        bufferExceededPercent <= 0.75 -> {
-                            Orange
-                        }
-
+                        bufferExceededPercent <= 0.25 -> Green
+                        bufferExceededPercent <= 0.50 -> Kissos
+                        bufferExceededPercent <= 0.75 -> Orange
                         else -> Red
                     },
                     size = size.copy(
@@ -99,6 +79,35 @@ fun BufferBattery(
                     onClick?.invoke()
                 }
             }
+    ) {
+        BufferBatteryText(
+            modifier = Modifier.overBatteryFill(bufferExceededPercent),
+            bufferExceeded = bufferExceeded,
+            leftToSpend = leftToSpend,
+            currency = currency,
+            color = White,
+        )
+        BufferBatteryText(
+            modifier = Modifier.pastBatteryFill(bufferExceededPercent),
+            bufferExceeded = bufferExceeded,
+            leftToSpend = leftToSpend,
+            currency = currency,
+            color = UI.colors.pureInverse,
+        )
+    }
+}
+
+@Composable
+private fun BufferBatteryText(
+    bufferExceeded: Boolean,
+    leftToSpend: Double,
+    currency: String,
+    color: Color,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
             .padding(vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -106,7 +115,7 @@ fun BufferBattery(
 
         KissosIcon(
             icon = if (bufferExceeded) R.drawable.ic_buffer_exceeded else R.drawable.ic_buffer_ok,
-            tint = textColor
+            tint = color
         )
 
         Spacer(Modifier.width(16.dp))
@@ -116,12 +125,10 @@ fun BufferBattery(
                 text = if (bufferExceeded) {
                     stringResource(R.string.buffer_exceeded_by)
                 } else {
-                    stringResource(
-                        R.string.left_to_spend
-                    )
+                    stringResource(R.string.left_to_spend)
                 },
                 style = UI.typo.c.style(
-                    color = textColor,
+                    color = color,
                     fontWeight = FontWeight.ExtraBold
                 )
             )
@@ -131,7 +138,7 @@ fun BufferBattery(
             AmountCurrencyB2Row(
                 amount = abs(leftToSpend),
                 currency = currency,
-                textColor = textColor
+                textColor = color
             )
         }
     }
