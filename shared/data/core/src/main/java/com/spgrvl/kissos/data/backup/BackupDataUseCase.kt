@@ -156,6 +156,9 @@ class BackupDataUseCase @Inject constructor(
         hashmap[SharedPrefs.HIDE_CURRENT_BALANCE] =
             sharedPrefs.getBoolean(SharedPrefs.HIDE_CURRENT_BALANCE, false).toString()
 
+        hashmap[SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED] =
+            sharedPrefs.getBoolean(SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED, false).toString()
+
         hashmap[SharedPrefs.TRANSFERS_AS_INCOME_EXPENSE] =
             sharedPrefs.getBoolean(SharedPrefs.TRANSFERS_AS_INCOME_EXPENSE, false).toString()
 
@@ -316,6 +319,11 @@ class BackupDataUseCase @Inject constructor(
             sharedPrefs.putBoolean(
                 SharedPrefs.HIDE_CURRENT_BALANCE,
                 (completeData.sharedPrefs[SharedPrefs.HIDE_CURRENT_BALANCE] ?: "false").toBoolean()
+            )
+
+            sharedPrefs.putBoolean(
+                SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED,
+                (completeData.sharedPrefs[SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED] ?: "false").toBoolean()
             )
 
             sharedPrefs.putBoolean(

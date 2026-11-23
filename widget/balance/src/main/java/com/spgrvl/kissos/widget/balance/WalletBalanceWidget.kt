@@ -40,7 +40,8 @@ import kotlin.math.abs
 const val THOUSAND = 1000
 
 object PrefsKey {
-    const val APP_LOCKED = "appLocked"
+    // The old "app locked" key: a widget not yet refreshed after an update stays hidden
+    const val AMOUNTS_HIDDEN = "appLocked"
     const val BALANCE = "balance_v2"
     const val CURRENCY = "currency"
     const val INCOME = "income_v2"
@@ -50,6 +51,11 @@ object PrefsKey {
 class WalletBalanceWidget(
     private val getAppStarter: () -> AppStarter,
 ) : GlanceAppWidget() {
+    private companion object {
+        /** Shown instead of an amount while the app lock hides them, as the app does. */
+        const val HIDDEN_AMOUNT = "****"
+    }
+
     @Composable
     fun formatBalance(balance: Double): String {
         val formattedBalance = remember(balance) {
@@ -65,18 +71,19 @@ class WalletBalanceWidget(
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
             val prefs = currentState<Preferences>()
-            val appLocked = prefs[booleanPreferencesKey(PrefsKey.APP_LOCKED)] ?: false
+            val amountsHidden = prefs[booleanPreferencesKey(PrefsKey.AMOUNTS_HIDDEN)] ?: false
             val balance = prefs[doublePreferencesKey(PrefsKey.BALANCE)] ?: 0.00
             val currency = prefs[stringPreferencesKey(PrefsKey.CURRENCY)] ?: "USD"
             val income = prefs[doublePreferencesKey(PrefsKey.INCOME)] ?: 0.00
             val expense = prefs[doublePreferencesKey(PrefsKey.EXPENSE)] ?: 0.00
 
+            // With the app lock on, the amounts are hidden but the buttons still work:
+            // they open the app, which asks to unlock first
             WalletBalanceWidgetContent(
-                appLocked = appLocked,
-                balance = formatBalance(balance),
+                balance = if (amountsHidden) HIDDEN_AMOUNT else formatBalance(balance),
                 currency = currency,
-                income = shortenAmount(income),
-                expense = shortenAmount(expense),
+                income = if (amountsHidden) HIDDEN_AMOUNT else shortenAmount(income),
+                expense = if (amountsHidden) HIDDEN_AMOUNT else shortenAmount(expense),
                 // Start the activity directly instead of from a callback, which
                 // Android 15+ may block as a background activity launch.
                 onIncomeClick = actionStartActivity(
@@ -148,11 +155,9 @@ class WalletBalanceWidgetReceiver : GlanceAppWidgetReceiver() {
     private fun updateData(context: Context) {
         coroutineScope.launch {
             val settings = settingsAct(Unit)
-            val appLocked = com.spgrvl.kissos.legacy.utils.ioThread {
-                sharedPrefs.getBoolean(
-                    SharedPrefs.APP_LOCK_ENABLED,
-                    false
-                )
+            val amountsHidden = com.spgrvl.kissos.legacy.utils.ioThread {
+                sharedPrefs.getBoolean(SharedPrefs.APP_LOCK_ENABLED, false) &&
+                    !sharedPrefs.getBoolean(SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED, false)
             }
             val currency = settings.baseCurrency
             val balance = walletBalanceAct(CalcWalletBalanceAct.Input(baseCurrency = currency))
@@ -179,7 +184,7 @@ class WalletBalanceWidgetReceiver : GlanceAppWidgetReceiver() {
                         it
                     ) { pref ->
                         pref.toMutablePreferences().apply {
-                            this[booleanPreferencesKey(PrefsKey.APP_LOCKED)] = appLocked
+                            this[booleanPreferencesKey(PrefsKey.AMOUNTS_HIDDEN)] = amountsHidden
                             this[doublePreferencesKey(PrefsKey.BALANCE)] =
                                 balance.toDouble()
                             this[stringPreferencesKey(PrefsKey.CURRENCY)] = currency

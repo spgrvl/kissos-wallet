@@ -25,6 +25,9 @@ class SharedPrefs @Inject constructor(
         const val SHOW_NOTIFICATIONS = "show_notifications"
         const val HIDE_CURRENT_BALANCE = "hide_current_balance"
         const val HIDE_INCOME = "hide_income"
+
+        /** With the app lock on, the balance widget still shows the amounts (opt-in). */
+        const val WIDGET_AMOUNTS_WHEN_LOCKED = "widget_amounts_when_locked"
         const val TRANSFERS_AS_INCOME_EXPENSE = "transfers_as_inc_exp"
         // ----------------------------- App Settings -----------------------------------------------
 

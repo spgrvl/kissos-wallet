@@ -26,14 +26,12 @@ import androidx.glance.layout.size
 import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
-import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.spgrvl.kissos.ui.R
 
 @Composable
 fun WalletBalanceWidgetContent(
-    appLocked: Boolean,
     balance: String,
     currency: String,
     income: String,
@@ -44,7 +42,6 @@ fun WalletBalanceWidgetContent(
     onScanReceiptClick: Action,
     onWidgetClick: Action,
 ) {
-    val resources = LocalContext.current.resources
     Box(
         GlanceModifier
             .background(ImageProvider(R.drawable.shape_widget_background))
@@ -54,23 +51,11 @@ fun WalletBalanceWidgetContent(
         Column(
             modifier = GlanceModifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalAlignment = if (appLocked) Alignment.CenterHorizontally else Alignment.Start
+            horizontalAlignment = Alignment.Start
         ) {
-            if (appLocked) {
-                Text(
-                    modifier = GlanceModifier.padding(8.dp),
-                    text = resources.getString(R.string.app_locked),
-                    style = TextStyle(
-                        fontSize = 25.sp,
-                        color = ColorProvider(Color.White),
-                        textAlign = TextAlign.Center
-                    )
-                )
-            } else {
-                BalanceSection(balance, currency)
-                IncomeExpenseSection(income, expense, currency)
-                ButtonsSection(onIncomeClick, onExpenseClick, onTransferClick, onScanReceiptClick)
-            }
+            BalanceSection(balance, currency)
+            IncomeExpenseSection(income, expense, currency)
+            ButtonsSection(onIncomeClick, onExpenseClick, onTransferClick, onScanReceiptClick)
         }
     }
 }
