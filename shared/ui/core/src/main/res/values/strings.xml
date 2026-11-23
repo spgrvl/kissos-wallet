@@ -631,6 +631,8 @@
     <string name="detected_payment_possible_duplicate">Might already be in Kissos</string>
     <string name="detected_payment_added">Added</string>
     <string name="detected_payment_dismissed">Dismissed</string>
+    <string name="detected_payment_matched">Same as the payment of %s</string>
+    <string name="detected_payment_matched_earlier">Same as an earlier payment</string>
     <string name="dismiss">Dismiss</string>
     <string name="undo">Undo</string>
     <string name="detected_payments_review">Review</string>

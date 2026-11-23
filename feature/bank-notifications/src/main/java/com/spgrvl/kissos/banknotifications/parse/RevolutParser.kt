@@ -31,6 +31,7 @@ object RevolutParser : BankNotificationParser {
                         direction = PaymentDirection.OUT,
                         payee = payee,
                         categoryHint = match.groupValues[1].ifEmpty { null },
+                        kind = PaymentKind.PAYMENT,
                     )
                 }
             }

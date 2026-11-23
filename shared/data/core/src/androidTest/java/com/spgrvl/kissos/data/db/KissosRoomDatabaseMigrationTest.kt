@@ -8,6 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.spgrvl.kissos.data.db.migration.Migration130to131_Receipts
 import com.spgrvl.kissos.data.db.migration.Migration131to132_MyDataReceipts
 import com.spgrvl.kissos.data.db.migration.Migration132to133_BankNotifications
+import com.spgrvl.kissos.data.db.migration.Migration133to134_DetectedPaymentKind
 import io.kotest.matchers.shouldBe
 import org.junit.Rule
 import org.junit.Test
@@ -24,6 +25,36 @@ class KissosRoomDatabaseMigrationTest {
         emptyList(),
         FrameworkSQLiteOpenHelperFactory()
     )
+
+    @Test
+    fun migrate133to134_DetectedPaymentKind() {
+        // given: a payment detected before the update
+        helper.createDatabase(TestDb, 133).apply {
+            execSQL(
+                "INSERT INTO detected_payments (id, dedupKey, sourcePackage, postedAt, amount, currency, " +
+                    "direction, status, createdAt) VALUES ('${UUID.randomUUID()}', 'k', 'gr.payzy', 1, 8.8, 'EUR', " +
+                    "'OUT', 'NEW', 1)"
+            )
+            close()
+        }
+
+        // when
+        val newDb = helper.runMigrationsAndValidate(
+            TestDb,
+            134,
+            true,
+            Migration133to134_DetectedPaymentKind()
+        )
+
+        // then: it's a payment, not matched to anything
+        newDb.query("SELECT kind, matchedPaymentId FROM detected_payments").apply {
+            moveToFirst()
+            getString(0) shouldBe "PAYMENT"
+            isNull(1) shouldBe true
+            close()
+        }
+        newDb.close()
+    }
 
     @Test
     fun migrate132to133_BankNotifications() {

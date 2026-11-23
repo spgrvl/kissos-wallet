@@ -18,6 +18,17 @@ data class NotificationText(
 
 enum class PaymentDirection { OUT, IN }
 
+enum class PaymentKind {
+    /** The payment itself, e.g. a card payment announced as it happens. */
+    PAYMENT,
+
+    /**
+     * Money taken from the account, announced when it's booked: for a card payment that's a second notification
+     * for the same payment, days later; it can also be a payment without the card, e.g. a standing order.
+     */
+    ACCOUNT_DEBIT,
+}
+
 /** A payment as a bank app's notification announced it. */
 data class DetectedPayment(
     val amount: BigDecimal,
@@ -28,6 +39,7 @@ data class DetectedPayment(
     val payee: String?,
     /** The bank's own category for the payment, if it shows one, e.g. Revolut's "❤️" for health. */
     val categoryHint: String?,
+    val kind: PaymentKind,
 )
 
 /** Reads the payments out of one bank app's notifications. */

@@ -47,6 +47,8 @@ data class DetectedPaymentUi(
     val details: String,
     val status: DetectedPaymentStatus,
     val canAddDirectly: Boolean,
+    /** For an account debit matched to an earlier payment: when that payment was, e.g. "21 Nov 2026, 14:47". */
+    val matchedPaymentTime: String?,
 )
 
 @Suppress("DataClassTypedIDs")
@@ -115,12 +117,16 @@ class DetectedPaymentsViewModel @Inject constructor(
             title = listOfNotNull(DetectedPaymentNotifier.money(payment), draft.title).joinToString(" · "),
             details = listOf(
                 appLabel(payment.sourcePackage),
-                with(timeConverter) { payment.postedAt.toLocalDateTime() }.format(dateFormat),
+                time(payment),
             ).joinToString(" · "),
             status = payment.status,
             canAddDirectly = draft.canAddDirectly,
+            matchedPaymentTime = payment.matchedPaymentId?.let { dao.findPayment(it) }?.let(::time),
         )
     }
+
+    private fun time(payment: DetectedPaymentEntity): String =
+        with(timeConverter) { payment.postedAt.toLocalDateTime() }.format(dateFormat)
 
     private fun appLabel(packageName: String): String = try {
         val packageManager = context.packageManager
@@ -142,6 +148,7 @@ internal val previewPaymentsState = DetectedPaymentsState(
             "Revolut · 21 Nov 2026, 14:02",
             DetectedPaymentStatus.NEW,
             true,
+            null,
         ),
     ),
     recent = persistentListOf(
@@ -151,6 +158,7 @@ internal val previewPaymentsState = DetectedPaymentsState(
             "Magenta Pay · 20 Nov 2026, 21:02",
             DetectedPaymentStatus.ADDED,
             false,
+            null,
         ),
     ),
 )

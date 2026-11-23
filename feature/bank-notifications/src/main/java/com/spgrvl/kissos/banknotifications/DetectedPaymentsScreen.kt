@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -94,14 +96,17 @@ private fun BoxWithConstraintsScope.UI(
             items(items = state.recent, key = { "recent-${it.id}" }) { payment ->
                 Payment(payment) {
                     Text(
-                        modifier = Modifier.padding(end = 16.dp, top = 8.dp),
-                        text = stringResource(
-                            if (payment.status == DetectedPaymentStatus.ADDED) {
-                                R.string.detected_payment_added
-                            } else {
-                                R.string.detected_payment_dismissed
-                            }
-                        ),
+                        // Leaves room for Undo when the text is long
+                        modifier = Modifier.weight(1f, fill = false).padding(end = 16.dp),
+                        text = when (payment.status) {
+                            DetectedPaymentStatus.ADDED -> stringResource(R.string.detected_payment_added)
+                            // An account debit for a payment already detected (e.g. Eurobank's, days later)
+                            DetectedPaymentStatus.MATCHED ->
+                                payment.matchedPaymentTime
+                                    ?.let { stringResource(R.string.detected_payment_matched, it) }
+                                    ?: stringResource(R.string.detected_payment_matched_earlier)
+                            else -> stringResource(R.string.detected_payment_dismissed)
+                        },
                         style = UI.typo.nB2.style(color = UI.colors.mediumInverse, fontWeight = FontWeight.Normal)
                     )
                     Action(stringResource(R.string.undo), UI.colors.pureInverse) {
@@ -116,7 +121,7 @@ private fun BoxWithConstraintsScope.UI(
 }
 
 @Composable
-private fun Payment(payment: DetectedPaymentUi, actions: @Composable () -> Unit) {
+private fun Payment(payment: DetectedPaymentUi, actions: @Composable RowScope.() -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +136,7 @@ private fun Payment(payment: DetectedPaymentUi, actions: @Composable () -> Unit)
             text = payment.details,
             style = UI.typo.nB2.style(color = UI.colors.mediumInverse, fontWeight = FontWeight.Normal)
         )
-        Row { actions() }
+        Row(verticalAlignment = Alignment.CenterVertically) { actions() }
     }
 }
 

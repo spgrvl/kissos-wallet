@@ -51,6 +51,7 @@ import com.spgrvl.kissos.data.db.entity.UserEntity
 import com.spgrvl.kissos.data.db.migration.Migration130to131_Receipts
 import com.spgrvl.kissos.data.db.migration.Migration131to132_MyDataReceipts
 import com.spgrvl.kissos.data.db.migration.Migration132to133_BankNotifications
+import com.spgrvl.kissos.data.db.migration.Migration133to134_DetectedPaymentKind
 import com.spgrvl.kissos.domain.db.RoomTypeConverters
 
 @Database(
@@ -62,7 +63,7 @@ import com.spgrvl.kissos.domain.db.RoomTypeConverters
         ReceiptEntity::class, MerchantEntity::class, DetectedPaymentEntity::class,
         PayeeMemoryEntity::class, CategoryHintMemoryEntity::class, UnparsedNotificationEntity::class,
     ],
-    version = 133,
+    version = 134,
     exportSchema = true
 )
 @TypeConverters(RoomTypeConverters::class)
@@ -104,6 +105,7 @@ abstract class KissosRoomDatabase : RoomDatabase() {
             Migration130to131_Receipts(),
             Migration131to132_MyDataReceipts(),
             Migration132to133_BankNotifications(),
+            Migration133to134_DetectedPaymentKind(),
         )
 
         @Suppress("SpreadOperator")
