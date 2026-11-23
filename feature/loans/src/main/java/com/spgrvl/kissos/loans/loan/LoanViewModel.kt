@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.loans.loan
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -227,11 +228,11 @@ class LoanViewModel @Inject constructor(
                             loanTotalAmount = loanTotalAmount,
                             amountPaid = amountPaid,
                             currencyCode = currCode,
-                            formattedDisplayText = "${amountPaid.format(currCode)} $currCode / ${
-                                loanTotalAmount.format(
-                                    currCode
-                                )
-                            } $currCode (${
+                            formattedDisplayText = "${
+                                CurrencyDisplay.format(amountPaid.format(currCode), currCode)
+                            } / ${
+                                CurrencyDisplay.format(loanTotalAmount.format(currCode), currCode)
+                            } (${
                                 percentPaid.times(
                                     100
                                 ).format(2)
@@ -249,7 +250,7 @@ class LoanViewModel @Inject constructor(
 
     private fun getTotalOwedAmount(totalOwedAmount: Double, currCode: String): String {
         return if (totalOwedAmount != 0.0) {
-            "${totalOwedAmount.format(currCode)} $currCode"
+            CurrencyDisplay.format(totalOwedAmount.format(currCode), currCode)
         } else {
             ""
         }
@@ -257,7 +258,7 @@ class LoanViewModel @Inject constructor(
 
     private fun getTotalOweAmount(totalOweAmount: Double, currCode: String): String {
         return if (totalOweAmount != 0.0) {
-            "${totalOweAmount.format(currCode)} $currCode"
+            CurrencyDisplay.format(totalOweAmount.format(currCode), currCode)
         } else {
             ""
         }

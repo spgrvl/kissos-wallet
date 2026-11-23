@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.wallet.ui.theme.modal.edit
 
+import com.spgrvl.kissos.wallet.ui.theme.wallet.MoneyTexts
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -201,20 +202,17 @@ fun AmountCurrency(
     ) {
         Spacer(Modifier.weight(1f))
 
-        Text(
-            text = amount.ifBlank { "0" },
-            style = UI.typo.nH2.style(
+        MoneyTexts(
+            amountText = amount.ifBlank { "0" },
+            currency = currency,
+            numberStyle = UI.typo.nH2.style(
                 fontWeight = FontWeight.Bold,
                 color = UI.colors.pureInverse
-            )
-        )
-        Spacer(Modifier.width(4.dp))
-        Text(
-            text = currency,
-            style = UI.typo.nH2.style(
+            ),
+            symbolStyle = UI.typo.nH2.style(
                 fontWeight = FontWeight.Normal,
                 color = UI.colors.pureInverse
-            )
+            ),
         )
 
         Spacer(Modifier.weight(1f))

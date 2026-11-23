@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.budgets
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
@@ -207,8 +208,7 @@ private fun Toolbar(
                 val categoryBudgetText = if (categoryBudgetsTotal > 0) {
                     stringResource(
                         R.string.for_categories,
-                        categoryBudgetsTotal.format(baseCurrency),
-                        baseCurrency
+                        CurrencyDisplay.format(categoryBudgetsTotal.format(baseCurrency), baseCurrency)
                     )
                 } else {
                     ""
@@ -217,8 +217,7 @@ private fun Toolbar(
                 val appBudgetMaxText = if (appBudgetMax > 0) {
                     stringResource(
                         R.string.app_budget,
-                        appBudgetMax.format(baseCurrency),
-                        baseCurrency
+                        CurrencyDisplay.format(appBudgetMax.format(baseCurrency), baseCurrency)
                     )
                 } else {
                     ""

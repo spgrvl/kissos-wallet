@@ -1,5 +1,7 @@
 package com.spgrvl.kissos.settings
 
+import androidx.compose.ui.platform.LocalContext
+import com.spgrvl.kissos.ui.AppLanguage
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -28,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -95,7 +96,6 @@ fun BoxWithConstraintsScope.SettingsScreen() {
         treatTransfersAsIncomeExpense = uiState.treatTransfersAsIncomeExpense,
         nameLocalAccount = uiState.name,
         startDateOfMonth = uiState.startDateOfMonth.toInt(),
-        languageOptionVisible = uiState.languageOptionVisible,
         onSetCurrency = {
             viewModel.onEvent(SettingsEvent.SetCurrency(it))
         },
@@ -128,9 +128,6 @@ fun BoxWithConstraintsScope.SettingsScreen() {
         },
         onDeleteAllUserData = {
             viewModel.onEvent(SettingsEvent.DeleteAllUserData)
-        },
-        onSwitchLanguage = {
-            viewModel.onEvent(SettingsEvent.SwitchLanguage)
         }
     )
 }
@@ -144,7 +141,6 @@ private fun BoxWithConstraintsScope.UI(
     onSwitchTheme: () -> Unit,
     lockApp: Boolean,
     nameLocalAccount: String?,
-    languageOptionVisible: Boolean,
     onSetCurrency: (String) -> Unit,
     startDateOfMonth: Int = 1,
     showNotifications: Boolean = true,
@@ -162,7 +158,6 @@ private fun BoxWithConstraintsScope.UI(
     onSetHideIncome: (Boolean) -> Unit = {},
     onSetStartDateOfMonth: (Int) -> Unit = {},
     onDeleteAllUserData: () -> Unit = {},
-    onSwitchLanguage: () -> Unit = {}
 ) {
     var currencyModalVisible by remember { mutableStateOf(false) }
     var nameModalVisible by remember { mutableStateOf(false) }
@@ -288,18 +283,30 @@ private fun BoxWithConstraintsScope.UI(
 
             val nav = navigation()
 
-            if (languageOptionVisible) {
-                SettingsDefaultButton(
-                    icon = R.drawable.ic_vue_location_global,
-                    iconPadding = 6.dp,
-                    text = stringResource(R.string.language),
-                    description = LocalConfiguration.current.locales[0].displayName
-                ) {
-                    onSwitchLanguage()
-                }
-
-                Spacer(Modifier.height(12.dp))
+            var languageDialogVisible by remember { mutableStateOf(false) }
+            val context = LocalContext.current
+            val language = AppLanguage.current(context)
+            SettingsDefaultButton(
+                icon = R.drawable.ic_vue_location_global,
+                iconPadding = 6.dp,
+                text = stringResource(R.string.language),
+                description = languageName(language)
+            ) {
+                languageDialogVisible = true
             }
+            if (languageDialogVisible) {
+                LanguageDialog(
+                    current = language,
+                    onDismiss = { languageDialogVisible = false },
+                    onPick = {
+                        languageDialogVisible = false
+                        // Recreates the screen in the new language
+                        AppLanguage.apply(it, context)
+                    }
+                )
+            }
+
+            Spacer(Modifier.height(12.dp))
 
             SettingsDefaultButton(
                 icon = R.drawable.ic_currency,
@@ -1011,7 +1018,6 @@ private fun Preview(theme: Theme = Theme.LIGHT) {
             lockApp = false,
             currencyCode = "BGN",
             onSetCurrency = {},
-            languageOptionVisible = true
         )
     }
 }

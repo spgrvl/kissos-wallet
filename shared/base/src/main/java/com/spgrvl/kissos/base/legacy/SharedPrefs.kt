@@ -13,6 +13,7 @@ class SharedPrefs @Inject constructor(
         private const val PREFS_FILENAME = "kissos_prefs"
 
         const val ONBOARDING_COMPLETED = "onboarding_completed"
+        const val LANGUAGE_SUGGESTED = "language_suggested"
 
         // -------------------------------------- UX ------------------------------------------------
         const val LAST_SELECTED_ACCOUNT_ID = "last_selected_account_id"

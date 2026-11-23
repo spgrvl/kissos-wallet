@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="accounts">Λογαριασμοί</string>
-    <string name="total">Σύνολο: %1$s %2$s</string>
+    <string name="total">Σύνολο: %1$s</string>
     <string name="month_income">ΕΣΟΔΑ ΑΥΤΟΥ ΤΟΥ ΜΗΝΑ</string>
     <string name="month_expenses">ΕΞΟΔΑ ΑΥΤΟΥ ΤΟΥ ΜΗΝΑ</string>
     <string name="excluded">(εκτός συνόλου)</string>
@@ -16,12 +16,12 @@
     <string name="no_budgets">Κανένας προϋπολογισμός</string>
     <string name="no_budgets_text">Δεν έχετε ορίσει προϋπολογισμό.\nΠατήστε «+ Προσθήκη προϋπολογισμού» για να προσθέσετε έναν.</string>
     <string name="budgets">Προϋπολογισμοί</string>
-    <string name="for_categories">%1$s %2$s για κατηγορίες</string>
-    <string name="app_budget">%1$s %2$s συνολικά</string>
+    <string name="for_categories">%1$s για κατηγορίες</string>
+    <string name="app_budget">%1$s συνολικά</string>
     <string name="budget_info_both">Προϋπολογισμός: %1$s / %2$s</string>
     <string name="budget_info">Προϋπολογισμός: %1$s%2$s</string>
-    <string name="total_budget_info">Υπόλοιπο προϋπολογισμού: %1$s %2$s</string>
-    <string name="budget_exceeded_info">Υπέρβαση προϋπολογισμού κατά %1$s %2$s</string>
+    <string name="total_budget_info">Υπόλοιπο προϋπολογισμού: %1$s</string>
+    <string name="budget_exceeded_info">Υπέρβαση προϋπολογισμού κατά %1$s</string>
     <string name="add_category">Προσθήκη κατηγορίας</string>
     <string name="add_manual_exchange_rate">Προσθήκη ισοτιμίας</string>
     <string name="expenses">Έξοδα</string>
@@ -79,7 +79,7 @@
     <string name="created_on">Ημερομηνία</string>
     <string name="hi">Γεια σας</string>
     <string name="hi_name">Γεια σας, %1$s</string>
-    <string name="cashflow">Ταμειακή ροή: %1$s%2$s %3$s</string>
+    <string name="cashflow">Ταμειακή ροή: %1$s</string>
     <string name="search_transactions">Αναζήτηση συναλλαγών…</string>
     <string name="kissos_open_source">Το Kissos είναι λογισμικό ανοιχτού κώδικα</string>
     <string name="savings_goal">Στόχος αποταμίευσης</string>
@@ -100,9 +100,9 @@
     <string name="loan_confirm_deletion_description">Σημείωση: Η διαγραφή του δανείου θα αφαιρέσει οριστικά όλες τις σχετικές συναλλαγές.</string>
     <string name="confirm_account_loan_change">Παρακαλώ περιμένετε, υπολογίζονται ξανά όλες οι εγγραφές του δανείου</string>
     <string name="paid">Πληρώθηκε</string>
-    <string name="left_to_pay">Απομένουν %1$s %2$s</string>
+    <string name="left_to_pay">Απομένουν %1$s</string>
     <string name="loan_interest">Τόκος δανείου</string>
-    <string name="interest_paid">Πληρώθηκαν %1$s %2$s</string>
+    <string name="interest_paid">Πληρώθηκαν %1$s</string>
     <string name="add_record">Προσθήκη εγγραφής</string>
     <string name="interest">Τόκος</string>
     <string name="no_records">Καμία εγγραφή</string>
@@ -371,7 +371,7 @@
     <string name="experimental">Πειραματικά</string>
     <string name="experimental_settings">Πειραματικές ρυθμίσεις</string>
     <string name="wallet_balance">Υπόλοιπο πορτοφολιού</string>
-    <string name="total_exclusive">Σύνολο (χωρίς εξαιρούμενους): %1$s %2$s</string>
+    <string name="total_exclusive">Σύνολο (χωρίς εξαιρούμενους): %1$s</string>
     <string name="total_balance">Συνολικό υπόλοιπο</string>
     <string name="total_balance_excluded">Μαζί με τους εξαιρούμενους</string>
     <string name="initial_loan_record">Αρχική εγγραφή</string>
@@ -632,4 +632,7 @@
     <string name="dismiss">Απόρριψη</string>
     <string name="undo">Αναίρεση</string>
     <string name="detected_payments_review">Έλεγχος</string>
+    <string name="choose_language">Διάλεξε γλώσσα</string>
+    <string name="choose_language_hint">Μπορείς να την αλλάξεις όποτε θέλεις από τις Ρυθμίσεις.</string>
+    <string name="language_system">Γλώσσα κινητού</string>
 </resources>

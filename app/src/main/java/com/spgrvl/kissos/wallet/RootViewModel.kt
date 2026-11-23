@@ -62,6 +62,8 @@ class RootViewModel @Inject constructor(
     private val _appLocked = MutableStateFlow<Boolean?>(null)
     val appLocked = _appLocked.readOnly()
 
+    private var navigationStarted = false
+
     fun start(systemDarkMode: Boolean, intent: Intent) {
         viewModelScope.launch {
             TestIdlingResource.increment()
@@ -76,6 +78,11 @@ class RootViewModel @Inject constructor(
 
             TestIdlingResource.decrement()
         }
+
+        // The activity is recreated when the theme or the app language changes; route the
+        // user only on the first start so they stay on the screen they were on.
+        if (navigationStarted) return
+        navigationStarted = true
 
         viewModelScope.launch {
             TestIdlingResource.increment()

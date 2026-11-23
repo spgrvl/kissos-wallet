@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.ui.component.transaction
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -212,10 +213,11 @@ fun TransactionCard(
         if (transaction.type == TransactionType.TRANSFER && toAccountCurrency != transactionCurrency) {
             Text(
                 modifier = Modifier.padding(start = 68.dp),
-                text = "${
+                text = CurrencyDisplay.format(
                     transaction.toAmount.toDouble()
-                        .format(KissosCurrency.getDecimalPlaces(toAccountCurrency))
-                } $toAccountCurrency",
+                        .format(KissosCurrency.getDecimalPlaces(toAccountCurrency)),
+                    toAccountCurrency
+                ),
                 style = UI.typo.nB2.style(
                     color = Gray,
                     fontWeight = FontWeight.Normal

@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.categories
 
+import com.spgrvl.kissos.wallet.ui.theme.wallet.MoneyTexts
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -377,20 +378,17 @@ private fun CompactCategoryCard(
                     val currencyFormatted =
                         categoryData.monthlyBalance.format(currency).replace(Regex("[+-]"), "")
 
-                    Text(
-                        text = "$balancePrefixValue$currencyFormatted",
-                        style = UI.typo.nB1.style(
+                    MoneyTexts(
+                        amountText = "$balancePrefixValue$currencyFormatted",
+                        currency = currency,
+                        numberStyle = UI.typo.nB1.style(
                             color = UI.colors.pureInverse,
                             fontWeight = FontWeight.Bold
-                        )
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = currency,
-                        style = UI.typo.nB2.style(
+                        ),
+                        symbolStyle = UI.typo.nB2.style(
                             color = UI.colors.pureInverse,
                             fontWeight = FontWeight.Medium
-                        )
+                        ),
                     )
                 }
             }
@@ -550,7 +548,6 @@ private fun CategoryHeader(
             balanceFontSize = 30.sp,
             currencyFontSize = 30.sp,
 
-            currencyUpfront = false,
             balanceAmountPrefix = balancePrefixValue
         )
 

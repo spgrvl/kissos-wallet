@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.budgets
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -140,8 +141,10 @@ class BudgetViewModel @Inject constructor(
         return when {
             categoryBudgetsTotal.doubleValue > 0 -> stringResource(
                 if (budgetExceeded) R.string.budget_exceeded_info else R.string.total_budget_info,
-                abs(totalRemainingBudget.doubleValue).format(baseCurrency.value),
-                baseCurrency.value
+                CurrencyDisplay.format(
+                    abs(totalRemainingBudget.doubleValue).format(baseCurrency.value),
+                    baseCurrency.value
+                )
             )
 
             else -> null

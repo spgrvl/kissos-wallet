@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.ui.component.transaction
 
+import com.spgrvl.kissos.ui.CurrencyDisplay
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -109,7 +110,7 @@ private fun SectionDividerIncomeExpenseRow(
         if (expenses > 0) {
             Text(
                 modifier = Modifier.testTag("upcoming_expense"),
-                text = "${expenses.format(baseCurrency)} $baseCurrency",
+                text = CurrencyDisplay.format(expenses.format(baseCurrency), baseCurrency),
                 style = UI.typo.nC.style(
                     fontWeight = FontWeight.ExtraBold,
                     color = UI.colors.pureInverse
@@ -136,7 +137,7 @@ private fun SectionDividerIncomeExpenseRow(
         if (income > 0) {
             Text(
                 modifier = Modifier.testTag("upcoming_income"),
-                text = "${income.format(baseCurrency)} $baseCurrency",
+                text = CurrencyDisplay.format(income.format(baseCurrency), baseCurrency),
                 style = UI.typo.nC.style(
                     fontWeight = FontWeight.ExtraBold,
                     color = UI.colors.green

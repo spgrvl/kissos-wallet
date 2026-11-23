@@ -10,13 +10,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spgrvl.kissos.design.l0_system.UI
 import com.spgrvl.kissos.design.l0_system.style
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.shortenAmount
 import com.spgrvl.kissos.legacy.utils.shouldShortAmount
+import com.spgrvl.kissos.ui.CurrencyDisplay
 
 @SuppressLint("ComposeModifierMissing")
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -30,20 +33,17 @@ fun AmountCurrencyB2Row(
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = amount.format(currency),
-            style = UI.typo.nB2.style(
+        MoneyTexts(
+            amountText = amount.format(currency),
+            currency = currency,
+            numberStyle = UI.typo.nB2.style(
                 fontWeight = amountFontWeight,
                 color = textColor
-            )
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            text = currency,
-            style = UI.typo.nB2.style(
+            ),
+            symbolStyle = UI.typo.nB2.style(
                 fontWeight = FontWeight.Normal,
                 color = textColor
-            )
+            ),
         )
     }
 }
@@ -83,21 +83,18 @@ fun AmountCurrencyB1(
 ) {
     val shortAmount = shortenBigNumbers && shouldShortAmount(amount)
     val text = if (shortAmount) shortenAmount(amount) else amount.format(currency)
-    Text(
-        modifier = Modifier.testTag("amount_currency_b1"),
-        text = text,
-        style = UI.typo.nB1.style(
+    MoneyTexts(
+        amountText = text,
+        currency = currency,
+        numberModifier = Modifier.testTag("amount_currency_b1"),
+        numberStyle = UI.typo.nB1.style(
             fontWeight = amountFontWeight,
             color = textColor
-        )
-    )
-    Spacer(modifier = Modifier.width(4.dp))
-    Text(
-        text = currency,
-        style = UI.typo.nB1.style(
+        ),
+        symbolStyle = UI.typo.nB1.style(
             fontWeight = FontWeight.Normal,
             color = textColor
-        )
+        ),
     )
 }
 
@@ -112,20 +109,17 @@ fun AmountCurrencyH1(
     currency: String,
     @SuppressLint("ComposeContentEmitterReturningValues") textColor: Color = UI.colors.pureInverse
 ) {
-    Text(
-        text = amount.format(currency),
-        style = UI.typo.nH1.style(
+    MoneyTexts(
+        amountText = amount.format(currency),
+        currency = currency,
+        numberStyle = UI.typo.nH1.style(
             fontWeight = FontWeight.Bold,
             color = textColor
-        )
-    )
-    Spacer(modifier = Modifier.width(4.dp))
-    Text(
-        text = currency,
-        style = UI.typo.nH2.style(
+        ),
+        symbolStyle = UI.typo.nH2.style(
             fontWeight = FontWeight.Normal,
             color = textColor
-        )
+        ),
     )
 }
 
@@ -139,20 +133,17 @@ fun AmountCurrencyH2Row(
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = amount.format(currency),
-            style = UI.typo.nH2.style(
+        MoneyTexts(
+            amountText = amount.format(currency),
+            currency = currency,
+            numberStyle = UI.typo.nH2.style(
                 fontWeight = FontWeight.Bold,
                 color = textColor
-            )
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            text = currency,
-            style = UI.typo.b1.style(
+            ),
+            symbolStyle = UI.typo.b1.style(
                 fontWeight = FontWeight.Normal,
                 color = textColor
-            )
+            ),
         )
     }
 }
@@ -169,19 +160,41 @@ fun AmountCurrencyCaption(
     amountFontWeight: FontWeight = FontWeight.ExtraBold,
     textColor: Color = UI.colors.pureInverse
 ) {
-    Text(
-        text = amount.format(currency),
-        style = UI.typo.nC.style(
+    MoneyTexts(
+        amountText = amount.format(currency),
+        currency = currency,
+        numberStyle = UI.typo.nC.style(
             fontWeight = amountFontWeight,
             color = textColor
-        )
-    )
-    Spacer(modifier = Modifier.width(4.dp))
-    Text(
-        text = currency,
-        style = UI.typo.nC.style(
+        ),
+        symbolStyle = UI.typo.nC.style(
             fontWeight = FontWeight.Normal,
             color = textColor
-        )
+        ),
     )
+}
+
+/**
+ * The amount and its currency symbol as separate texts ("23,84 €"). Emitted without a
+ * container so callers keep their Row.
+ */
+@SuppressLint(
+    "ComposeMultipleContentEmitters",
+    "ComposeModifierMissing"
+)
+@Composable
+fun MoneyTexts(
+    amountText: String,
+    currency: String,
+    numberStyle: TextStyle,
+    symbolStyle: TextStyle,
+    numberModifier: Modifier = Modifier,
+    symbolSpacing: Dp = 4.dp,
+) {
+    val parts = CurrencyDisplay.parts(amountText, currency)
+    Text(modifier = numberModifier, text = parts.number, style = numberStyle)
+    if (parts.suffix.isNotEmpty()) {
+        Spacer(modifier = Modifier.width(symbolSpacing))
+        Text(text = parts.suffix, style = symbolStyle)
+    }
 }

@@ -1,5 +1,7 @@
 package com.spgrvl.kissos.onboarding
 
+import com.spgrvl.kissos.onboarding.steps.OnboardingLanguage
+import com.spgrvl.kissos.ui.AppLanguage
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
@@ -40,6 +42,7 @@ fun BoxWithConstraintsScope.OnboardingScreen(screen: OnboardingScreen) {
     UI(
         onboardingState = state,
         currency = uiState.currency,
+        language = uiState.language,
 
         accountSuggestions = uiState.accountSuggestions,
         accounts = uiState.accounts,
@@ -57,6 +60,7 @@ fun BoxWithConstraintsScope.OnboardingScreen(screen: OnboardingScreen) {
 private fun BoxWithConstraintsScope.UI(
     onboardingState: OnboardingState,
     currency: KissosCurrency,
+    language: AppLanguage?,
 
     accountSuggestions: ImmutableList<CreateAccountData>,
     accounts: ImmutableList<AccountBalance>,
@@ -69,6 +73,14 @@ private fun BoxWithConstraintsScope.UI(
     when (onboardingState) {
         OnboardingState.SPLASH -> {
             OnboardingSplash()
+        }
+
+        OnboardingState.LANGUAGE -> {
+            OnboardingLanguage(
+                selected = language,
+                onSelect = { onEvent(OnboardingEvent.SelectLanguage(it)) },
+                onNext = { onEvent(OnboardingEvent.LanguageNext(it)) }
+            )
         }
 
         OnboardingState.CHOOSE_PATH -> {

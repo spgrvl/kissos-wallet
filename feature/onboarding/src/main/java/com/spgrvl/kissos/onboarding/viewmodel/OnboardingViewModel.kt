@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.onboarding.viewmodel
 
+import com.spgrvl.kissos.ui.AppLanguage
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
@@ -63,6 +64,7 @@ class OnboardingViewModel @Inject constructor(
     val state: State<OnboardingState> = _state
 
     private val _currency = mutableStateOf(KissosCurrency.getDefault())
+    private val _language = mutableStateOf<AppLanguage?>(null)
     private val _accounts = mutableStateOf(listOf<AccountBalance>().toImmutableList())
     private val _accountSuggestions = mutableStateOf(listOf<CreateAccountData>().toImmutableList())
     private val _categories = mutableStateOf(listOf<Category>().toImmutableList())
@@ -73,6 +75,7 @@ class OnboardingViewModel @Inject constructor(
     override fun uiState(): OnboardingDetailState {
         return OnboardingDetailState(
             currency = _currency.value,
+            language = _language.value,
             accounts = _accounts.value,
             accountSuggestions = _accountSuggestions.value,
             categories = _categories.value,
@@ -138,6 +141,14 @@ class OnboardingViewModel @Inject constructor(
                 OnboardingEvent.OnAddCategoriesDone -> onAddCategoriesDone()
                 OnboardingEvent.OnAddCategoriesSkip -> onAddCategoriesSkip()
                 is OnboardingEvent.SetBaseCurrency -> setBaseCurrency(event.baseCurrency)
+                is OnboardingEvent.SelectLanguage -> {
+                    _language.value = event.language
+                    router.selectLanguage(event.language)
+                }
+                is OnboardingEvent.LanguageNext -> {
+                    _language.value = event.language
+                    router.languageNext(event.language)
+                }
                 OnboardingEvent.StartFresh -> startFresh()
                 OnboardingEvent.StartImport -> startImport()
             }

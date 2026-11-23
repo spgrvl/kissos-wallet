@@ -31,7 +31,7 @@ import com.spgrvl.kissos.wallet.ui.theme.Gray
 import com.spgrvl.kissos.wallet.ui.theme.Green
 import com.spgrvl.kissos.wallet.ui.theme.Orange
 import com.spgrvl.kissos.wallet.ui.theme.White
-import com.spgrvl.kissos.wallet.ui.theme.components.CloseButton
+import com.spgrvl.kissos.wallet.ui.theme.components.BackButton
 import com.spgrvl.kissos.wallet.ui.theme.components.KissosOutlinedButtonFillMaxWidth
 import com.spgrvl.kissos.wallet.ui.theme.components.OnboardingButton
 
@@ -50,7 +50,7 @@ fun OnboardingType(
         Spacer(Modifier.height(16.dp))
 
         val nav = navigation()
-        CloseButton(
+        BackButton(
             modifier = Modifier.padding(start = 20.dp)
         ) {
             nav.onBackPressed()

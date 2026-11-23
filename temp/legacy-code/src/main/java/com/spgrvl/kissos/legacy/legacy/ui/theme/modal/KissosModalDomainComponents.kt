@@ -68,7 +68,6 @@ fun ModalAmountSection(
             balanceFontSize = 40.sp,
             currencyFontSize = 30.sp,
 
-            currencyUpfront = false
         )
 
         Spacer(Modifier.height(amountPaddingBottom))
