@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(projects.shared.base)
     implementation(projects.shared.domain)
+    implementation(libs.bundles.activity)
 }

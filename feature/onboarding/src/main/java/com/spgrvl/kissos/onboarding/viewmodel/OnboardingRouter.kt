@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.onboarding.viewmodel
 
+import com.spgrvl.kissos.ui.AppLanguage
 import androidx.compose.runtime.MutableState
 import com.spgrvl.kissos.domain.usecase.exchange.SyncExchangeRatesUseCase
 import com.spgrvl.kissos.base.legacy.SharedPrefs
@@ -49,9 +50,14 @@ class OnboardingRouter(
                     true
                 }
 
-                OnboardingState.CHOOSE_PATH -> {
+                OnboardingState.LANGUAGE -> {
                     // let the user exit the app
                     false
+                }
+
+                OnboardingState.CHOOSE_PATH -> {
+                    state.value = OnboardingState.LANGUAGE
+                    true
                 }
 
                 OnboardingState.CURRENCY -> {
@@ -82,10 +88,22 @@ class OnboardingRouter(
         if (state.value == OnboardingState.SPLASH) {
             delay(1000)
 
-            state.value = OnboardingState.CHOOSE_PATH
+            state.value = OnboardingState.LANGUAGE
         }
     }
     // ------------------------------------- Step 0 ----------------------------------------
+
+    // ------------------------------------- Step 1 - Language --------------------------------------
+    fun selectLanguage(language: AppLanguage) {
+        AppLanguage.apply(language)
+    }
+
+    fun languageNext(language: AppLanguage) {
+        state.value = OnboardingState.CHOOSE_PATH
+        // Recreates the screen in the chosen language if it differs from what is shown
+        AppLanguage.apply(language)
+    }
+    // ------------------------------------- Step 1 -------------------------------------------------
 
     // ------------------------------------- Step 2 - Choose path -----------------------------------
     fun startImport() {

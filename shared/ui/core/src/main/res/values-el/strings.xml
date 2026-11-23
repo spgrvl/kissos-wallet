@@ -632,4 +632,7 @@
     <string name="dismiss">Απόρριψη</string>
     <string name="undo">Αναίρεση</string>
     <string name="detected_payments_review">Έλεγχος</string>
+    <string name="choose_language">Διάλεξε γλώσσα</string>
+    <string name="choose_language_hint">Μπορείς να την αλλάξεις όποτε θέλεις από τις Ρυθμίσεις.</string>
+    <string name="language_system">Γλώσσα κινητού</string>
 </resources>

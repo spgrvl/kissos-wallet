@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.onboarding
 
+import com.spgrvl.kissos.ui.AppLanguage
 import androidx.compose.runtime.Immutable
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.legacy.data.model.AccountBalance
@@ -11,6 +12,7 @@ import kotlinx.collections.immutable.ImmutableList
 @Immutable
 data class OnboardingDetailState(
     val currency: KissosCurrency,
+    val language: AppLanguage?,
     val accounts: ImmutableList<AccountBalance>,
     val accountSuggestions: ImmutableList<CreateAccountData>,
     val categories: ImmutableList<Category>,

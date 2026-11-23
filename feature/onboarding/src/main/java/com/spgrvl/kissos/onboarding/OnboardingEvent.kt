@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.onboarding
 
+import com.spgrvl.kissos.ui.AppLanguage
 import com.spgrvl.kissos.data.model.Category
 import com.spgrvl.kissos.legacy.datamodel.Account
 import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
@@ -8,6 +9,8 @@ import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateCategoryData
 
 sealed interface OnboardingEvent {
 
+    data class SelectLanguage(val language: AppLanguage) : OnboardingEvent
+    data class LanguageNext(val language: AppLanguage) : OnboardingEvent
     data object StartImport : OnboardingEvent
     data object ImportSkip : OnboardingEvent
     data class ImportFinished(val success: Boolean) : OnboardingEvent
