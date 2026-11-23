@@ -1,5 +1,6 @@
 package com.spgrvl.kissos.legacy.utils
 
+import com.spgrvl.kissos.base.DefaultCurrency
 import android.app.KeyguardManager
 import android.content.Context
 import android.icu.util.Currency
@@ -18,10 +19,7 @@ fun numberBetween(min: Double, max: Double): Double {
     return Random().nextDouble() * (max - min) + min
 }
 
-fun getDefaultFIATCurrency(): Currency =
-    Currency.getInstance(Locale.getDefault()) ?: Currency.getInstance("USD")
-        ?: Currency.getInstance("usd") ?: Currency.getAvailableCurrencies().firstOrNull()
-        ?: Currency.getInstance("EUR")
+fun getDefaultFIATCurrency(): Currency = Currency.getInstance(DefaultCurrency.code())
 
 fun String.toUpperCaseLocal() = this.uppercase(Locale.getDefault())
 
