@@ -105,7 +105,8 @@ fun shortenAmount(amount: Double): String {
             formatShortenedNumber(amount / THOUSAND, "k")
         }
 
-        else -> amount.toString()
+        // In the language's format ("852,76" in Greek), not Double.toString's "852.76" / "12.5"
+        else -> amount.formatFIAT()
     }
 }
 
