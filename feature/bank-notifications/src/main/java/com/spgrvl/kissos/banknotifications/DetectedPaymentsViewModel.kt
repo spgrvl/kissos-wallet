@@ -71,7 +71,6 @@ class DetectedPaymentsViewModel @Inject constructor(
     private val nav: Navigation,
     private val timeConverter: TimeConverter,
 ) : ComposeViewModel<DetectedPaymentsState, DetectedPaymentsEvent>() {
-    private val dateFormat = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
 
     /** One query for both lists, so a payment that's just been handled is never in both at once. */
     private val lists = dao.observeAllPayments().map { all ->
@@ -131,7 +130,9 @@ class DetectedPaymentsViewModel @Inject constructor(
     }
 
     private fun time(payment: DetectedPaymentEntity): String =
-        with(timeConverter) { payment.postedAt.toLocalDateTime() }.format(dateFormat)
+        // Made each time, so it follows the app's language when it changes while this screen is open
+        with(timeConverter) { payment.postedAt.toLocalDateTime() }
+            .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
 
     private fun appLabel(packageName: String): String = try {
         val packageManager = context.packageManager

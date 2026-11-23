@@ -639,7 +639,7 @@
     <string name="detected_payment_matched_earlier">Ίδια με παλαιότερη πληρωμή</string>
     <string name="detected_payments_report_hint">Υπάρχει κάποιο λάθος σε μια πληρωμή; Πάτησέ την για να μας το αναφέρεις.</string>
     <string name="detected_payment_report_title">Αναφορά προβλήματος</string>
-    <string name="detected_payment_report_confirm">Θα ανοίξει η εφαρμογή email με ό,τι διάβασε το Kissos από την ειδοποίηση της πληρωμής: εφαρμογή, ποσό, δικαιούχο και ώρα, προς την υποστήριξη του Kissos. Το Kissos δεν κρατά την ίδια την ειδοποίηση, οπότε θα βοηθούσε αν μας στείλετε και ένα στιγμιότυπο οθόνης (screenshot) της, με κρυμμένα όσα είναι προσωπικά.</string>
+    <string name="detected_payment_report_confirm">Θα ανοίξει η εφαρμογή email με ό,τι διάβασε το Kissos από την ειδοποίηση της πληρωμής: εφαρμογή, ποσό, δικαιούχο και ώρα, προς την υποστήριξη του Kissos. Το Kissos δεν κρατά την ίδια την ειδοποίηση, οπότε θα βοηθούσε αν μας στείλεις και ένα στιγμιότυπο οθόνης (screenshot) της, με κρυμμένα όσα είναι προσωπικά.</string>
     <string name="detected_payment_report_subject">Kissos: Πρόβλημα σε πληρωμή από ειδοποίηση</string>
     <string name="detected_payment_report_body">Τι είναι λάθος; Π.χ. το ποσό ή ο δικαιούχος, ή δεν ήταν πληρωμή:\n\n\n\nΤι διάβασε το Kissos:\n%1$s\n\nKissos %2$s · Android %3$s</string>
     <string name="detected_payment_report_no_email">Δεν βρέθηκε εφαρμογή email. Τα στοιχεία της πληρωμής αντιγράφηκαν για να τα στείλεις στο %1$s.</string>
