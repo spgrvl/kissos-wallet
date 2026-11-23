@@ -89,6 +89,7 @@ fun BoxWithConstraintsScope.SettingsScreen() {
             viewModel.onEvent(SettingsEvent.SwitchTheme)
         },
         lockApp = uiState.lockApp,
+        widgetAmountsWhenLocked = uiState.widgetAmountsWhenLocked,
         showNotifications = uiState.showNotifications,
         hideCurrentBalance = uiState.hideCurrentBalance,
         hideIncome = uiState.hideIncome,
@@ -110,6 +111,9 @@ fun BoxWithConstraintsScope.SettingsScreen() {
         },
         onSetLockApp = {
             viewModel.onEvent(SettingsEvent.SetLockApp(it))
+        },
+        onSetWidgetAmountsWhenLocked = {
+            viewModel.onEvent(SettingsEvent.SetWidgetAmountsWhenLocked(it))
         },
         onSetShowNotifications = {
             viewModel.onEvent(SettingsEvent.SetShowNotifications(it))
@@ -143,6 +147,7 @@ private fun BoxWithConstraintsScope.UI(
     nameLocalAccount: String?,
     onSetCurrency: (String) -> Unit,
     startDateOfMonth: Int = 1,
+    widgetAmountsWhenLocked: Boolean = false,
     showNotifications: Boolean = true,
     hideCurrentBalance: Boolean = false,
     hideIncome: Boolean = false,
@@ -152,6 +157,7 @@ private fun BoxWithConstraintsScope.UI(
     onBackupData: () -> Unit = {},
     onExportToCSV: () -> Unit = {},
     onSetLockApp: (Boolean) -> Unit = {},
+    onSetWidgetAmountsWhenLocked: (Boolean) -> Unit = {},
     onSetShowNotifications: (Boolean) -> Unit = {},
     onSetTreatTransfersAsIncExp: (Boolean) -> Unit = {},
     onSetHideCurrentBalance: (Boolean) -> Unit = {},
@@ -341,6 +347,19 @@ private fun BoxWithConstraintsScope.UI(
                 text = stringResource(R.string.lock_app),
                 icon = R.drawable.ic_custom_fingerprint_m
             )
+
+            // Only means something with the lock on; the choice is kept while it's hidden
+            if (lockApp) {
+                Spacer(Modifier.height(12.dp))
+
+                AppSwitch(
+                    lockApp = widgetAmountsWhenLocked,
+                    onSetLockApp = onSetWidgetAmountsWhenLocked,
+                    text = stringResource(R.string.widget_amounts_when_locked),
+                    description = stringResource(R.string.widget_amounts_when_locked_description),
+                    icon = R.drawable.ic_show_m
+                )
+            }
 
             Spacer(Modifier.height(12.dp))
 

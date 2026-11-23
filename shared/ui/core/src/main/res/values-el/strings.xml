@@ -204,6 +204,8 @@
     <string name="import_data">Εισαγωγή δεδομένων</string>
     <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
     <string name="lock_app">Κλείδωμα εφαρμογής</string>
+    <string name="widget_amounts_when_locked">Εμφάνιση ποσών στο widget</string>
+    <string name="widget_amounts_when_locked_description">Το υπόλοιπο φαίνεται και με κλειδωμένη εφαρμογή, σε όποιον κρατά το κινητό</string>
     <string name="show_notifications">Εμφάνιση ειδοποιήσεων</string>
     <string name="hide_balance">Απόκρυψη υπολοίπου</string>
     <string name="hide_balance_description">Πατήστε το κρυμμένο υπόλοιπο για να εμφανιστεί για 5 δευτερόλεπτα</string>

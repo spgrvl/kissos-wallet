@@ -204,6 +204,8 @@
     <string name="import_data">Import data</string>
     <string name="app_settings">App Settings</string>
     <string name="lock_app">Lock App</string>
+    <string name="widget_amounts_when_locked">Show amounts on widget</string>
+    <string name="widget_amounts_when_locked_description">The balance shows even while the app is locked, to anyone holding the phone</string>
     <string name="show_notifications">Show notifications</string>
     <string name="hide_balance">Hide balance</string>
     <string name="hide_balance_description">Tap on the hidden balance to reveal it for 5s</string>

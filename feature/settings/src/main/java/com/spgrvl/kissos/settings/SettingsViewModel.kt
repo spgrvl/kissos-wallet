@@ -57,6 +57,7 @@ class SettingsViewModel @Inject constructor(
     private val name = mutableStateOf("")
     private val currentTheme = mutableStateOf<Theme>(Theme.AUTO)
     private val lockApp = mutableStateOf(false)
+    private val widgetAmountsWhenLocked = mutableStateOf(false)
     private val showNotifications = mutableStateOf(true)
     private val hideCurrentBalance = mutableStateOf(false)
     private val hideIncome = mutableStateOf(false)
@@ -75,6 +76,7 @@ class SettingsViewModel @Inject constructor(
             name = getName(),
             currentTheme = getCurrentTheme(),
             lockApp = getLockApp(),
+            widgetAmountsWhenLocked = widgetAmountsWhenLocked.value,
             showNotifications = getShowNotifications(),
             hideCurrentBalance = getHideCurrentBalance(),
             treatTransfersAsIncomeExpense = getTreatTransfersAsIncomeExpense(),
@@ -118,6 +120,8 @@ class SettingsViewModel @Inject constructor(
 
     private fun initializeLockApp() {
         lockApp.value = sharedPrefs.getBoolean(SharedPrefs.APP_LOCK_ENABLED, false)
+        widgetAmountsWhenLocked.value =
+            sharedPrefs.getBoolean(SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED, false)
     }
 
     private fun initializeShowNotifications() {
@@ -203,6 +207,7 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.BackupData -> exportToZip(event.rootScreen)
             SettingsEvent.SwitchTheme -> switchTheme()
             is SettingsEvent.SetLockApp -> setLockApp(event.lockApp)
+            is SettingsEvent.SetWidgetAmountsWhenLocked -> setWidgetAmountsWhenLocked(event.show)
             is SettingsEvent.SetShowNotifications -> setShowNotifications(event.showNotifications)
             is SettingsEvent.SetHideCurrentBalance -> setHideCurrentBalance(
                 event.hideCurrentBalance
@@ -309,6 +314,15 @@ class SettingsViewModel @Inject constructor(
 
         viewModelScope.launch {
             sharedPrefs.putBoolean(SharedPrefs.APP_LOCK_ENABLED, lock)
+            refreshWidget(WalletBalanceWidgetReceiver::class.java)
+        }
+    }
+
+    private fun setWidgetAmountsWhenLocked(show: Boolean) {
+        widgetAmountsWhenLocked.value = show
+
+        viewModelScope.launch {
+            sharedPrefs.putBoolean(SharedPrefs.WIDGET_AMOUNTS_WHEN_LOCKED, show)
             refreshWidget(WalletBalanceWidgetReceiver::class.java)
         }
     }
