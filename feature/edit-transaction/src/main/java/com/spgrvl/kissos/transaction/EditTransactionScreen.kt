@@ -93,17 +93,20 @@ import kotlin.math.roundToInt
 @Composable
 fun BoxWithConstraintsScope.EditTransactionScreen(screen: EditTransactionScreen) {
     val viewModel: EditTransactionViewModel = screenScopedViewModel()
+    // False when the screen is only drawn again, e.g. after the app lock screen: nothing restarts
+    val opened = remember(screen) { viewModel.onScreenShown(screen) }
     val uiState = viewModel.uiState()
 
     // Keyed on the screen: the view model is shared, e.g. when opening a duplicate receipt's expense
     LaunchedEffect(screen) {
-        viewModel.start(screen)
+        if (opened) viewModel.start(screen)
     }
 
     val view = LocalView.current
 
     UI(
         screen = screen,
+        opened = opened,
         transactionType = uiState.transactionType,
         baseCurrency = uiState.currency,
         initialTitle = uiState.initialTitle,
@@ -199,6 +202,8 @@ fun BoxWithConstraintsScope.EditTransactionScreen(screen: EditTransactionScreen)
 @Composable
 private fun BoxWithConstraintsScope.UI(
     screen: EditTransactionScreen,
+    /** False when the screen is only drawn again (see [EditTransactionViewModel.onScreenShown]). */
+    opened: Boolean,
     transactionType: TransactionType,
     baseCurrency: String,
     initialTitle: String?,
@@ -475,7 +480,8 @@ private fun BoxWithConstraintsScope.UI(
     }
 
     onScreenStart {
-        if (screen.initialTransactionId == null) {
+        // Only when opened: after the app lock screen the scanner would open again, in a loop
+        if (opened && screen.initialTransactionId == null) {
             when {
                 screen.scanReceipt -> scanReceipt()
                 // Already scanned: the amount comes from the QR code
@@ -721,6 +727,7 @@ private fun BoxWithConstraintsScope.Preview(isDark: Boolean = false) {
     KissosPreview(isDark) {
         UI(
             screen = EditTransactionScreen(null, TransactionType.EXPENSE),
+            opened = true,
             initialTitle = "",
             titleSuggestions = persistentSetOf(),
             tags = persistentListOf(),

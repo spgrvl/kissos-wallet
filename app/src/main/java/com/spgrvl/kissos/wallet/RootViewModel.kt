@@ -57,8 +57,6 @@ class RootViewModel @Inject constructor(
         const val USER_INACTIVITY_TIME_LIMIT = 60 // Time in seconds
     }
 
-    private var appLockEnabled = false
-
     private val _appLocked = MutableStateFlow<Boolean?>(null)
     val appLocked = _appLocked.readOnly()
 
@@ -88,9 +86,8 @@ class RootViewModel @Inject constructor(
             TestIdlingResource.increment()
 
             ioThread {
-                appLockEnabled = sharedPrefs.getBoolean(SharedPrefs.APP_LOCK_ENABLED, false)
                 // initial app locked state
-                _appLocked.value = appLockEnabled
+                _appLocked.value = isAppLockEnabled()
 
                 if (isOnboardingCompleted()) {
                     navigateOnboardedUser(intent)
@@ -212,8 +209,9 @@ class RootViewModel @Inject constructor(
     }
 
     // App Lock & UserInactivity --------------------------------------------------------------------
+    // Read each time (an in-memory lookup), so switching the lock in Settings applies right away
     fun isAppLockEnabled(): Boolean {
-        return appLockEnabled
+        return sharedPrefs.getBoolean(SharedPrefs.APP_LOCK_ENABLED, false)
     }
 
     fun isAppLocked(): Boolean {
@@ -227,6 +225,10 @@ class RootViewModel @Inject constructor(
 
     fun unlockApp() {
         _appLocked.value = false
+        // Count the next absence from zero. Without this the counter stayed at the limit after
+        // the first lock, so the app locked again the moment it was left, e.g. for the scanner.
+        userInactiveJob?.cancel()
+        resetUserInactiveTimer()
     }
 
     private val userInactiveTime = AtomicLong(0)
@@ -244,7 +246,7 @@ class RootViewModel @Inject constructor(
                 userInactiveTime.incrementAndGet()
             }
 
-            if (!isAppLocked()) {
+            if (isAppLockEnabled() && !isAppLocked()) {
                 lockApp()
             }
 
