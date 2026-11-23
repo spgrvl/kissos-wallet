@@ -147,7 +147,7 @@ fun IncomeExpenseSection(
         ) {
             Image(
                 ImageProvider(R.drawable.ic_expense),
-                resources.getString(R.string.expense)
+                resources.getString(R.string.expenses)
             )
             Text(
                 text = CurrencyDisplay.format(expense, currency),

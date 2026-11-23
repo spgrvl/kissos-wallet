@@ -177,7 +177,7 @@ private fun TransactionTypeButton(
 
         Text(
             text = when (transactionType) {
-                TransactionType.INCOME -> stringResource(R.string.income)
+                TransactionType.INCOME -> stringResource(R.string.income_transaction)
                 TransactionType.EXPENSE -> stringResource(R.string.expense)
                 TransactionType.TRANSFER -> stringResource(R.string.transfer)
             },

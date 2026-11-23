@@ -19,6 +19,8 @@
         android:paddingRight="16dp"
         android:paddingBottom="8dp">
 
+        <!-- Four equal slots: on a narrow widget the icons shrink to fit instead of overlapping.
+             The labels are set in code: in the app's language, one size that fits all four. -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,18 +30,19 @@
 
             <ImageView
                 android:id="@+id/ivIncome"
-                android:layout_width="48dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:paddingHorizontal="2dp"
                 android:src="@drawable/ic_widget_income" />
 
             <TextView
                 android:id="@+id/tvIncome"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/raleway_bold"
                 android:gravity="center"
-                android:text="@string/income"
+                android:text="@string/income_transaction"
                 android:textColor="@color/white"
                 android:maxLines="1"
                 android:textSize="12sp" />
@@ -56,13 +59,14 @@
 
             <ImageView
                 android:id="@+id/ivExpense"
-                android:layout_width="48dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:paddingHorizontal="2dp"
                 android:src="@drawable/ic_widget_expense" />
 
             <TextView
                 android:id="@+id/tvExpense"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/raleway_bold"
@@ -84,13 +88,14 @@
 
             <ImageView
                 android:id="@+id/ivTransfer"
-                android:layout_width="48dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:paddingHorizontal="2dp"
                 android:src="@drawable/ic_widget_transfer" />
 
             <TextView
                 android:id="@+id/tvTransfer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/raleway_bold"
@@ -112,14 +117,15 @@
 
             <ImageView
                 android:id="@+id/ivScanReceipt"
-                android:layout_width="48dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:paddingHorizontal="2dp"
                 android:contentDescription="@string/scan_receipt"
                 android:src="@drawable/ic_widget_scan_receipt" />
 
             <TextView
                 android:id="@+id/tvScanReceipt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/raleway_bold"
