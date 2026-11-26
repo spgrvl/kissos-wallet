@@ -1226,8 +1226,12 @@ class EditTransactionViewModel @Inject constructor(
         receiptLookupJob?.cancel()
         val step = when (code) {
             is ReceiptCode.CashRegister, is ReceiptCode.MyData -> ReceiptStep.CHECK_AADE
-            is ReceiptCode.FiscalSign, is ReceiptCode.InvoicePortal, is ReceiptCode.SimplyCloud, is ReceiptCode.Eskap ->
-                ReceiptStep.DOWNLOAD_RECEIPT
+            is ReceiptCode.FiscalSign,
+            is ReceiptCode.InvoicePortal,
+            is ReceiptCode.SimplyCloud,
+            is ReceiptCode.Eskap,
+            is ReceiptCode.Ilyda,
+            -> ReceiptStep.DOWNLOAD_RECEIPT
         }
         // After a provider's page, this is its last step
         if (step in receiptSteps) receiptStep = step else showReceiptSteps(step)
