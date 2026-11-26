@@ -66,6 +66,15 @@ sealed interface ReceiptCode {
     }
 
     /**
+     * An ILYDA page, e.g. `https://vs.gr/iv/invoice/download/<tenant>/<tenant>~k1~<id>~<token>`,
+     * which shows the whole document but doesn't link to myDATA.
+     */
+    data class Ilyda(val url: String) : Fetchable {
+        override val key: String get() = url
+        override val lookupUrl: String get() = url
+    }
+
+    /**
      * A page of an e-invoicing provider, which links to the document's [MyData] page.
      * Most providers build these pages in the browser behind bot checks, so only a WebView can open them.
      */
@@ -79,6 +88,7 @@ sealed interface ReceiptCode {
         private val INVOICE_PORTAL_PATH = Regex("^/invoices/([^/]+)/?$", RegexOption.IGNORE_CASE)
         private const val SIMPLY_CLOUD_PATH = "/InvoiceData/v/"
         private const val ESKAP_PATH = "/invoice/"
+        private const val ILYDA_PATH = "/iv/invoice/download/"
 
         /** Hosts, and where their documents are, of the e-invoicing providers whose pages link to myDATA. */
         private val PROVIDER_PAGES = listOf(
@@ -87,7 +97,9 @@ sealed interface ReceiptCode {
             // EntersoftOne, e.g. https://e-invoicing.gr/edocuments/ViewInvoice/-1/<id>
             "e-invoicing.gr" to "/",
             // Impact, e.g. https://einvoice.impact.gr/p/EL<ΑΦΜ>/<id>/<id>
+            // or https://einvoice.impact.gr/v/EL<ΑΦΜ>-<number>-<id>-<id>
             "einvoice.impact.gr" to "/p/",
+            "einvoice.impact.gr" to "/v/",
         )
 
         /** @return null for anything that isn't a supported receipt code. */
@@ -111,7 +123,15 @@ sealed interface ReceiptCode {
             val path = uri.rawPath.orEmpty()
             // Printed codes can say http, but the app only makes secure connections
             val secureUrl = text.replace(HTTP_SCHEME, "https:")
-            return when {
+            return fetchable(uri, host, path, secureUrl)
+                ?: Provider(secureUrl).takeIf {
+                    PROVIDER_PAGES.any { (domain, pages) -> host.isDomain(domain) && path.startsWith(pages) }
+                }
+        }
+
+        /** The documents Kissos downloads itself, without a WebView. */
+        private fun fetchable(uri: URI, host: String, path: String, secureUrl: String): Fetchable? =
+            when {
                 host.isDomain("aade.gr") && path.endsWith(MYDATA_PATH, ignoreCase = true) &&
                     uri.rawQuery?.contains("q=") == true ->
                     MyData("https://${uri.rawAuthority}$path?${uri.rawQuery.upperCaseEscapes()}")
@@ -128,12 +148,11 @@ sealed interface ReceiptCode {
                 host.isDomain("eskap.gr") && path.startsWith(ESKAP_PATH) && path.length > ESKAP_PATH.length ->
                     Eskap(secureUrl)
 
-                PROVIDER_PAGES.any { (domain, pages) -> host.isDomain(domain) && path.startsWith(pages) } ->
-                    Provider(secureUrl)
+                host.isDomain("vs.gr") && path.startsWith(ILYDA_PATH) && path.length > ILYDA_PATH.length ->
+                    Ilyda(secureUrl)
 
                 else -> null
             }
-        }
 
         private fun String.isDomain(domain: String): Boolean = this == domain || endsWith(".$domain")
 

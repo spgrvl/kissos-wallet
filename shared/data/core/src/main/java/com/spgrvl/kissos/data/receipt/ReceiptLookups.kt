@@ -32,6 +32,7 @@ fun ReceiptCode.Fetchable.toPendingReceipt(transactionId: TransactionId, scanned
         is ReceiptCode.InvoicePortal,
         is ReceiptCode.SimplyCloud,
         is ReceiptCode.Eskap,
+        is ReceiptCode.Ilyda,
         -> Receipt(
             transactionId = transactionId,
             sig = key,

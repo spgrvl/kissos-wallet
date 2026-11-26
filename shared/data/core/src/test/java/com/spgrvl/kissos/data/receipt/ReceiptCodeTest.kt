@@ -88,6 +88,30 @@ class ReceiptCodeTest {
     }
 
     @Test
+    fun `an Impact view page is a provider page too`() {
+        // given
+        val impact = "https://einvoice.impact.gr/v/EL999000044-10000044-0123456789ABCDEF0123456789ABCDEF01234567-" +
+            "0123456789ABCDEF0123456789ABCDEF"
+
+        // then
+        ReceiptCode.parse(impact) shouldBe ReceiptCode.Provider(impact)
+    }
+
+    @Test
+    fun `an ILYDA page is read directly`() {
+        // given
+        val page = "vs.gr/iv/invoice/download/test_1/test_1~k1~fedcba9876543210fedcba9876543210fedcba98~" +
+            "AbCdEfGhIjKlMnOpQrStUvWxYz0123456789-_AbCd"
+
+        // when
+        val code = ReceiptCode.parse("http://$page")
+
+        // then
+        code shouldBe ReceiptCode.Ilyda("https://$page")
+        ReceiptCode.fromKey("https://$page") shouldBe code
+    }
+
+    @Test
     fun `an Eskap page is read directly`() {
         // given
         val eskap = "https://www.eskap.gr/invoice/abcdefghijklmnopqrstuvwxyz012345"
@@ -105,6 +129,8 @@ class ReceiptCodeTest {
         ReceiptCode.parse("https://www.eskap.gr/") shouldBe null
         ReceiptCode.parse("https://www.eskap.gr/invoice/") shouldBe null
         ReceiptCode.parse("https://einvoice.impact.gr/login") shouldBe null
+        ReceiptCode.parse("https://vs.gr/") shouldBe null
+        ReceiptCode.parse("https://vs.gr/iv/invoice/download/") shouldBe null
     }
 
     @Test

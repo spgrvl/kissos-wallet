@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="el">
+<head>
+    <title>Ηλεκτρονική Τιμολόγηση</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <link rel="stylesheet"
+          href="/resources/common/assets/css/invoice_print-efa31eda91b304de65542aa64ba02a35.css"/>
+
+    <link rel="stylesheet"
+          href="/resources/common/vendor/gentelella_template/css/bootstrap.min-a15c2ac3234aa8f6064ef9c1f7383c37.css"/>
+    <link rel="stylesheet"
+          href="/resources/common/vendor/kendo/css/kendo.common.min-7c482cf193cab928dd56860d933c62b5.css"/>
+    <link rel="stylesheet"
+          href="/resources/common/vendor/kendo/css/kendo.office365.min-86d5c0205560d70658308081bfd7b95e.css"/>
+    <style>
+        :root {
+            --invoice-header-bg: #ff8300a8;
+        }
+
+        @media print {
+            .pdf-nowrap {
+                flex-wrap: nowrap !important;
+            }
+        }
+
+    </style>
+
+    
+        <script src="/resources/common/vendor/jquery/jquery-3.2.1.min-c9f5aeeca3ad37bf2aa006139b935f0a.js"></script>
+        <script src="/resources/common/vendor/bootstrap-3.3.4/js/bootstrap.min-21622d4d35c71d4d08c3f8ffa4565de1.js"></script>
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body style="font-size: 12px">
+<div class="container">
+    <div id="content">
+
+        
+        <div class="row no-print">
+            <div class="col-md-12" style="border-bottom: 1px solid black">
+                <div id="invoice_back_button" style="float:left">
+                    <a class='k-button k-grid-invoice_html a_hover'
+                       style='border:none; background-color:white; padding: 0; margin-top: 3px'
+                       href="#"
+                       onclick="return openPeppolVisualization();"
+                       title="Οπτικοποίηση PEPPOL">
+                        <button type="button" class="k-button">
+                            <span class="k-icon k-i-globe-outline"></span>
+                            <span>&nbsp;Εμφάνιση Οπτικοποίησης PEPPOL</span>
+                        </button>
+                    </a>
+                </div>
+                
+                <div id="invoice_html_print_html" style="float:right">
+                    <a id="invoice_html_print_button" class='k-button k-grid-invoice_html a_hover'
+                       style='border:none; background-color:white; padding: 0;'
+                       href=''
+
+                       title="Εκτύπωση">
+                        <span class='k-icon k-i-print' style=' font-size:40px'></span>
+                    </a>
+                </div>
+                <script>
+                    $("#invoice_html_print_button").off().on('click', function (e) {
+                        e.preventDefault();
+                        window.print();
+                    });
+                    function openPeppolVisualization() {
+                        var url = new URL(window.location.href);
+                        url.searchParams.set('peppol', 'true');
+                        window.location.href = url.toString();
+                        return false;
+                    }
+                </script>
+            </div>
+        </div>
+        
+
+        <div class="row">
+    <div class="col-md-2 logo-placeholder" style="margin: auto;">
+    
+    
+        <h4><span>ΔΟΚΙΜΑΣΤΙΚΟ ΦΑΡΜΑΚΕΙΟ ΙΚΕ</span>
+        </h4>
+    
+    </div>
+    <div class="col-md-8 text-center" style="margin: auto;">
+        <p>
+            <b><span>ΔΟΚΙΜΑΣΤΙΚΟ ΦΑΡΜΑΚΕΙΟ ΙΚΕ</span></b>
+            <span class="inline-block">
+                    <span class="gray-text">ΑΦΜ </span><b><span>EL999000066</span></b>
+                  </span>
+            
+            
+                       <span class="inline-block">
+                            <span class="gray-text">Αριθμός ΓΕΜΗ </span> <b><span>000000000000</span></b>
+                        </span>
+            
+            
+                
+                          <span class="inline-block">
+                             <span class="gray-text">Τηλέφωνο </span> <b><span>2100000000</span></b>
+                          </span>
+                
+                
+                          <span class="inline-block">
+                            <span class="gray-text">Email </span> <b><span>info@example.com</span></b>
+                           </span>
+                
+            
+            
+                
+                        <span class="inline-block">
+                      <span class="gray-text">Οδός </span> <b><span>ΟΔΟΣ ΔΟΚΙΜΗΣ 6</span></b>
+                      </span>
+                    <b><span></span></b>
+                    <b><span>ΑΘΗΝΑ</span></b>
+                
+                
+                      <span class="inline-block">
+                      <span class="gray-text">Τ.Κ. </span> <b><span>10000</span></b>
+                      </span>
+                
+            
+        </p>
+    </div>
+    <div class="col-md-2 text-center">
+        <img src="data:image/png;base64," alt="QRCODE" class="img-fluid" />
+    </div>
+</div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-sm table-with-borders">
+                    <tbody>
+                    <thead>
+                    <tr>
+                        <th class="text-center">Είδος Παραστατικού</th>
+                        <th class="text-center">Αριθμός</th>
+                        <th class="text-center">Ημερομηνία Έκδοσης</th>
+                        
+                    </tr>
+                    </thead>
+                    <tr>
+                        
+                            <td class="text-center"><span>ΑΠΥ</span>
+                                <span></span>
+                                
+                            </td>
+                        
+                        <td class="text-center"><span>ΑΠΥΜΒ</span>-<span>1066</span></td>
+                        <td class="text-center"><span>14/11/2026 09:41</span>
+                        </td>
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                
+
+                
+            </div>
+
+            
+                <div class="col-md-6">
+                    <table class="table table-bordered table-sm">
+                        <tbody>
+                        <thead>
+                        <tr>
+                            <th colspan="2" style="background-color: rgba(0, 0, 0, .05)">Στοιχεία Παράδοσης</th>
+                        </tr>
+                        </thead>
+                        
+                            <tr>
+                                <td class=""><b>Όνομα παραλαμβάνοντος μέρους</b></td>
+                                <td class="name_column"><span>: </span>
+                                    <span>ΠΕΛΑΤΗΣ ΛΙΑΝΙΚΗΣ</span>
+                                </td>
+                            </tr>
+                        
+                        
+                        
+                        
+                        
+                        </tbody>
+                    </table>
+                    
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="background-color: rgba(0, 0, 0, .05)">Δ/νση Παράδοσης</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            
+                            
+                            
+                            
+                                <tr>
+                                    <td class="" style="width: 50%"><b>Ταχυδρομικός κωδικός παράδοσης</b></td>
+                                    <td class="" style="width: 50%"><span>: </span>
+                                        <span>00000</span>
+                                    </td>
+                                </tr>
+                            
+                            </tbody>
+                        </table>
+                    
+                </div>
+            
+
+            
+            
+            
+                <div class="col-md-12">
+    <table class="table table-bordered table-sm">
+        <colgroup>
+            <col class="col-6" />
+            <col class="col-21" />
+            <col class="col-6" />
+            
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+            <col class="col-6" />
+        </colgroup>
+        <thead>
+        <tr>
+            <th colspan="12">Ανάλυση</th>
+        </tr>
+        <tr style="background-color: rgba(0, 0, 0, .03)">
+            <th>Κωδικός</th>
+            <th>Περιγραφή</th>
+            <th>Ποσότητα</th>
+            
+            <th>Μ.Μ. EN</th>
+            <th>Τιμή Μον.</th>
+            <th>Καθαρό (Προ εκπτ.)</th>
+            <th>Επιβαρ.</th>
+            <th>Εκπτ.</th>
+            <th>Καθαρό</th>
+            <th>ΦΠΑ</th>
+            <th>Τελικό</th>
+            <th>Φ.Π.Α. %</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1001</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Α</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1002</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Β</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1003</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Γ</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1004</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Δ</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1005</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Ε</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1006</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής ΣΤ</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+            <tr class="avoid-page-break">
+                <td class="">
+                    <span>1007</span>
+                </td>
+                <td class="">
+                    <span>Είδος δοκιμής Ζ</span>
+                    <div class="line-sub-text">
+                        
+                        
+                        <div class="line-sub-text-entry">
+                            <b>MeasurementUnit: </b>
+                            <span>EA</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="">
+                    <span>1.00</span>
+                </td>
+                
+                <td class="">
+                    <span>EA</span>
+                </td>
+                <td class="">
+                    <span>10</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>0</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>10.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+            
+
+            <div class="col-md-6 avoid-page-break">
+                
+
+                
+                    <div class="avoid-page-break">
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th colspan="3" style="background-color: rgba(0, 0, 0, .05)">Ανάλυση Φ.Π.Α.</th>
+        </tr>
+        <tr style="background-color: rgba(0, 0, 0, .03)">
+            <th>Φ.Π.Α. %</th>
+            <th>Καθαρό Ποσό ανά % Φ.Π.Α.</th>
+            <th>Ποσό Φ.Π.Α.</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+                <td class="">
+                    <span>70.00</span>
+                </td>
+                <td class="">
+                    <span>0.00</span>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+                
+            </div>
+
+            
+                <div class="col-md-6 avoid-page-break">
+    <table class="table table-bordered table-sm">
+        <tbody>
+        <thead>
+        <tr>
+            <th colspan="2" style="background-color: rgba(0, 0, 0, .05)">Ανάλυση Συγκεντρωτικών Ποσών
+            </th>
+        </tr>
+        </thead>
+        <tr>
+            <td class="text-right">Νόμισμα</td>
+            <th class="text-right">
+                            <span>EUR</span>
+            </th>
+        </tr>
+        
+        
+            <tr>
+                <td class="text-right" style="width: 50%">Σύνολο Επιβαρύνσεων</td>
+                <th class="text-right" style="width: 50%">
+                            <span>0.00</span>
+                </th>
+            </tr>
+        
+        
+            <tr>
+                <td class="text-right" style="width: 50%">Σύνολο Μειώσεων</td>
+                <th class="text-right" style="width: 50%">
+                    <span>- </span>
+                    <span>0.00</span>
+                </th>
+            </tr>
+        
+        
+            <tr>
+                <td class="text-right" style="width: 50%">Σύνολο Καθαρού Ποσού</td>
+                <th class="text-right" style="width: 50%">
+                            <span>70.00</span>
+                </th>
+            </tr>
+        
+        
+            <tr>
+                <td class="text-right" style="width: 50%">Σύνολο Φ.Π.Α</td>
+                <th class="text-right" style="width: 50%">
+                            <span>0.00</span>
+                </th>
+            </tr>
+        
+        
+            <tr>
+                <td class="text-right" style="width: 50%">ΠΛΗΡΩΤΕΟ ΠΟΣΟ ΠΕΛΑΤΗ</td>
+                <th class="text-right" style="width: 50%">
+                            <span>70.00</span>
+                </th>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+            
+
+            
+                <div class="col-md-12 avoid-page-break">
+    <table class="table table-bordered table-sm">
+        <colgroup>
+            <col class="col-10"/>
+            <col class="col-10"/>
+            <col class="col-11"/>
+            <col class="col-12"/>
+            <col class="col-24"/>
+            <col class="col-10"/>
+            <!--                  <col class="col-10"/> -->
+            <col class="col-23"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th colspan="8" style="background-color: rgba(0, 0, 0, .05)">Στοιχεία Πληρωμής</th>
+        </tr>
+        <tr style="background-color: rgba(0, 0, 0, .03)">
+            <th>Τύπος</th>
+            <th>Ποσό Πληρωμής</th>
+            <th>Περιγραφή</th>
+            <th>Φιλοδώρημα</th>
+            <th>Μοναδική Ταυτότητα Πληρωμής</th>
+            <th>Τερματικό</th>
+            <!--              <th>ΜΑΡΚ</th>-->
+            <th>Υπογραφή Πληρωμής Παρόχoυ</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                
+                    <td class="">
+                                            <span>Μετρητά</span>
+                    </td>
+                
+                
+                <td class="">
+                                    <span>70.00</span>
+                </td>
+                <td class="">
+                                    <span>-</span>
+                </td>
+                <td class="">
+                                    <span>-</span>
+                </td>
+                <td class="">
+                                        <span>-</span>
+                </td>
+                <td class="">
+                                        <span>-</span>
+                </td>
+                <!--                <td class="">-->
+                <!--                                    <span th:text="${-->
+                <!--                                    paymentMethod.getPaymentMethodMark()!=null-->
+                <!--                                    ? paymentMethod.getPaymentMethodMark() :'-'}">-->
+                <!--                                    </span>-->
+                <!--                </td>-->
+                <td class="">
+                                        <span>-</span>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+            
+            
+            
+            
+
+            
+        </div>
+        <div class="row pdf-nowrap">
+
+    
+    <div class="col-md-2 text-center">
+    <img src="data:image/png;base64," alt="QRCODE" class="img-fluid" />
+    </div>
+    <div class="col-md-10 text-center" style="margin: auto;">
+        <p>
+            <span class="gray-text">Σήμανση </span> <b><span>0123456789ABCDEF0123456789ABCDEF01234567</span></b>
+            <span class="gray-text">UNIQUE ID </span> <b><span>FEDCBA9876543210FEDCBA9876543210FEDCBA98</span></b>
+            <span class="inline-block"><span class="gray-text">ΜΑΡΚ </span> <b><span>400000000000066</span></b></span>
+            <span class="gray-text">Υ.ΠΑ.Η.Ε.Σ </span> <b><span>ILYDA S.A. https://vs.gr</span></b>
+            <span class="gray-text">Αρ. Άδειας Καταλληλότητας </span> <b><span>2021_09_108ILYDA_001_ Meg myData_V1_08092021</span></b>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <span class="gray-text">Ημ/νία Διαβίβασης myData</span>
+                <b>
+                <span>14/11/2026 09:41:29</span>
+                    
+                </b>
+            
+        </p>
+    </div>
+</div>
+    </div>
+
+</div>
+<div class="footer row no-print">
+    <div class="col-md-10 footer-details-div">
+        <span class="footer-details">Copyright © 2026 | v20261027.0.0 | ΙΛΥΔΑ Α.Ε. | Συστήματα Πληροφορικής | Πιστοποιημένος πάροχος ηλεκτρονικής τιμολόγησης</span>
+    </div>
+    <div class="col-md-2 powered-by-ilyda">
+        <span style="vertical-align: middle;">
+            <a href="https://www.ilyda.com" target="_blank">
+                <img src="/resources/assets/img/ILYDA_logo.png" class="img-responsive" style="width:100px;"
+                     alt="Ilyda" />
+            </a>
+        </span>
+    </div>
+</div>
+
+</body>
+</html>
