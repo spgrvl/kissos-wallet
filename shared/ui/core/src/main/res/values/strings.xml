@@ -42,7 +42,7 @@
     <string name="export_to_file_description">Character set: UTF-8\nDecimal separator: Decimal point \'.\'\nDelimiter character: Comma \',\'</string>
     <string name="export_excel_file">Export Excel file</string>
     <string name="convert_xls_to_csv">Convert XLS to CSV</string>
-    <string name="convert_xls_to_csv_description">!NOTE: If your exported file is missing the \'.xls\' extension, add it by renaming the file.</string>
+    <string name="convert_xls_to_csv_description">Note: If your exported file is missing the \'.xls\' extension, add it by renaming the file.</string>
     <string name="online_csv_converter_free">Online CSV converter FREE</string>
     <string name="check_email_spam">Please check your email\'s "Junk" and "Spam" folders</string>
     <string name="download_email_file">Download the \"transactions_export…\" file attached to the email.</string>
@@ -325,7 +325,7 @@
     <string name="sports">Sports</string>
     <string name="adjust_initial_balance">Adjust your initial balance</string>
     <string name="to_accounts">To accounts</string>
-    <string name="adjust_initial_balance_description"><![CDATA[Let\'s get started. Go to \"Accounts\" -> Tap an account -> Tap its balance -> Enter current balance. That\'s it!]]></string>
+    <string name="adjust_initial_balance_description"><![CDATA[Let\'s get started. Go to \"Accounts\" → Tap an account → Tap its balance → Enter current balance. That\'s it!]]></string>
     <string name="create_first_planned_payment">Create your first planned payment</string>
     <string name="create_first_planned_payment_description">Track your recurring transactions, like subscriptions, rent, and paychecks. Stay on top of your finances by being aware of how much you owe or expect to receive.</string>
     <string name="did_you_know">Did you know?</string>
@@ -333,7 +333,7 @@
     <string name="add_widget">Add widget</string>
     <string name="expenses_piechart">Expenses Pie Chart</string>
     <string name="review_kissos">Leave a review</string>
-    <string name="review_kissos_description">Share your feedback with us! Help Kissos improve and grow by leaving a review. We appreciate compliments, suggestions, and constructive criticism! Your input is essential to our ongoing efforts to enhance the app.\n\nCheers,\nThe Kissos Team</string>
+    <string name="review_kissos_description">Tell us what you think! A review on Google Play helps Kissos improve and helps others find it. Every kind word, suggestion and criticism counts.\n\nThank you!</string>
     <string name="share_with_friends">Share with friends</string>
     <string name="kissos_is_open_source">Kissos is open-source!</string>
     <string name="adjust_balance">Adjust balance</string>
@@ -411,7 +411,7 @@
     <string name="csv_import_failed">If this doesn\'t work, consider using manual CSV import.</string>
     <string name="import_a_csv_file_to_continue">Import a CSV file to continue.</string>
     <string name="import_csv_continue">Continue</string>
-    <string name="warning_import_csv_file">"\n!!!⚠️ WARNING: Importing may create duplicate transactions!!!\nPlease note that duplicate transactions cannot be easily removed and will need to be deleted individually.\nReason: We cannot parse transaction IDs because Kissos uses UUIDs exclusively, while other apps do not.\nIf you\'re starting fresh, you can safely ignore this message."</string>
+    <string name="warning_import_csv_file">"\n⚠️ WARNING: Importing may create duplicate transactions!\nPlease note that duplicate transactions cannot be easily removed and will need to be deleted individually.\nReason: We cannot parse transaction IDs because Kissos uses UUIDs exclusively, while other apps do not.\nIf you\'re starting fresh, you can safely ignore this message."</string>
     <string name="select_tags">Select Tags</string>
     <string name="bill_paid">Your bill for %1$s %2$s has been paid</string>
     <string name="language">Language</string>
