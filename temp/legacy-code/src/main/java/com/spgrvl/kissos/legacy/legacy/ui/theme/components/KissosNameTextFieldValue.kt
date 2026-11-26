@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
@@ -77,6 +78,8 @@ fun KissosNameTextField(
             val view = LocalView.current
             BasicTextField(
                 modifier = Modifier
+                    // The whole row under the line, so a tap right of the text puts the cursor at the end
+                    .fillMaxWidth()
                     .testTag("base_input")
                     .focusRequester(focusRequester),
                 value = value,
