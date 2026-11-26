@@ -65,6 +65,7 @@ import com.spgrvl.kissos.legacy.utils.navigationBarInsets
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.legacy.utils.rememberSwipeListenerState
 import com.spgrvl.kissos.legacy.utils.springBounce
+import com.spgrvl.kissos.legacy.utils.uppercaseLocal
 import com.spgrvl.kissos.legacy.utils.verticalSwipeListener
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
@@ -87,7 +88,6 @@ import com.spgrvl.kissos.wallet.ui.theme.modal.ModalSet
 import com.spgrvl.kissos.wallet.ui.theme.modal.edit.AmountModal
 import com.spgrvl.kissos.wallet.ui.theme.toComposeColor
 import kotlinx.coroutines.launch
-import java.util.Locale
 import java.util.UUID
 import kotlin.math.roundToInt
 
@@ -772,7 +772,7 @@ private fun LabelAccountMini(
         Spacer(Modifier.height(2.dp))
 
         Text(
-            text = account?.name?.uppercase(Locale.getDefault()) ?: "",
+            text = account?.name?.uppercaseLocal() ?: "",
             style = UI.typo.nB2.style(
                 color = UI.colors.pureInverse,
                 fontWeight = FontWeight.ExtraBold

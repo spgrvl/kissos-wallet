@@ -54,6 +54,7 @@ import com.spgrvl.kissos.legacy.utils.drawColoredShadow
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.formatNicely
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
+import com.spgrvl.kissos.legacy.utils.uppercaseLocal
 import com.spgrvl.kissos.legacy.utils.rememberInteractionSource
 import com.spgrvl.kissos.legacy.utils.setStatusBarDarkTextCompat
 import com.spgrvl.kissos.loans.loan.data.DisplayLoanRecord
@@ -378,7 +379,7 @@ private fun LoanItem(
                 Text(
                     text = it.formatNicely(
                         noWeekDay = false
-                    ).uppercase(),
+                    ).uppercaseLocal(),
                     style = UI.typo.nC.style(
                         color = contrastColor
                     )
@@ -718,7 +719,7 @@ private fun LoanRecordItem(
             text = with(timeFormatter) {
                 loanRecord.dateTime.formatLocal(
                     TimeFormatter.Style.DateAndTime(includeWeekDay = true)
-                ).uppercase()
+                ).uppercaseLocal()
             },
             style = UI.typo.nC.style(
                 color = Gray,
@@ -815,7 +816,7 @@ private fun InitialRecordItem(
                 text = with(timeFormatter) {
                     dateTime.format(
                         TimeFormatter.Style.DateAndTime(includeWeekDay = true)
-                    ).uppercase()
+                    ).uppercaseLocal()
                 },
                 style = UI.typo.nC.style(
                     color = Gray,

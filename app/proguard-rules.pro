@@ -20,3 +20,8 @@
 # R8 full mode strips generic signatures from return types if not kept.
 -if interface * { @retrofit2.http.* public *** *(...); }
 -keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+
+# ML Kit code scanner: play-services-code-scanner ships no keep rules, and with
+# R8 full mode the scanner gets a null SharedPrefManager and crashes on open.
+-keep class com.google.mlkit.** { *; }
+-keep class com.google.android.gms.internal.mlkit_code_scanner.** { *; }

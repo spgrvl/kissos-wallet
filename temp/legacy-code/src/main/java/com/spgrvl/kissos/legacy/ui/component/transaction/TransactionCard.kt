@@ -59,6 +59,7 @@ import com.spgrvl.kissos.legacy.utils.dateNowUTC
 import com.spgrvl.kissos.legacy.utils.format
 import com.spgrvl.kissos.legacy.utils.isNotNullOrBlank
 import com.spgrvl.kissos.legacy.utils.timeNowUTC
+import com.spgrvl.kissos.legacy.utils.uppercaseLocal
 import com.spgrvl.kissos.navigation.Navigation
 import com.spgrvl.kissos.navigation.TransactionsScreen
 import com.spgrvl.kissos.navigation.navigation
@@ -152,7 +153,7 @@ fun TransactionCard(
                             )
                         )
                     }
-                ).uppercase(),
+                ).uppercaseLocal(),
                 style = UI.typo.nC.style(
                     color = if (transaction.dueDate!!.isAfter(timeProvider.utcNow())) {
                         Orange
