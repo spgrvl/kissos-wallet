@@ -36,6 +36,7 @@ import com.spgrvl.kissos.legacy.utils.onScreenStart
 import com.spgrvl.kissos.legacy.utils.selectEndTextFieldValue
 import com.spgrvl.kissos.legacy.utils.toLowerCaseLocal
 import com.spgrvl.kissos.legacy.utils.toUpperCaseLocal
+import com.spgrvl.kissos.legacy.utils.uppercaseLocal
 import com.spgrvl.kissos.ui.R
 import com.spgrvl.kissos.wallet.domain.data.KissosCurrency
 import com.spgrvl.kissos.wallet.domain.deprecated.logic.model.CreateAccountData
@@ -189,7 +190,7 @@ fun BoxWithConstraintsScope.AccountModal(
                     includeInBalance = it
                 }
             },
-            label = stringResource(R.string.enter_account_balance).uppercase(),
+            label = stringResource(R.string.enter_account_balance).uppercaseLocal(),
             currency = currencyCode,
             amount = amount,
             amountPaddingTop = 40.dp,
