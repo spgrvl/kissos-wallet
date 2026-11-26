@@ -161,7 +161,7 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="due_on">Due on %1$s</string>
+    <string name="due_on">Due: %1$s</string>
     <string name="upcoming">Upcoming</string>
     <string name="overdue">Overdue</string>
     <string name="expenses_lowercase">expenses</string>

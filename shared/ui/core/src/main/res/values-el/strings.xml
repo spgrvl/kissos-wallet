@@ -161,7 +161,7 @@
     <string name="today">Σήμερα</string>
     <string name="yesterday">Χθες</string>
     <string name="tomorrow">Αύριο</string>
-    <string name="due_on">Λήγει στις %1$s</string>
+    <string name="due_on">Λήγει: %1$s</string>
     <string name="upcoming">Επερχόμενες</string>
     <string name="overdue">Εκπρόθεσμες</string>
     <string name="expenses_lowercase">έξοδα</string>
