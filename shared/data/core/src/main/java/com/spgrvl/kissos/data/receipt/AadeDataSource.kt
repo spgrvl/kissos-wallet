@@ -32,6 +32,7 @@ class AadeDataSource @Inject constructor(
                     MyDataXml.parse(xml).withIssuer(ublSupplier(code.ublUrl))
                 }
                 is ReceiptCode.SimplyCloud -> text(code.lookupUrl).map(SimplyCloudPage::parse)
+                is ReceiptCode.Ilyda -> text(code.lookupUrl).map(IlydaPage::parse)
                 is ReceiptCode.Eskap -> text(code.lookupUrl).flatMap { page ->
                     val document = EskapPage.parse(page)
                     if (document == null) {
