@@ -8,7 +8,7 @@
     <string name="income_uppercase">ΕΣΟΔΑ</string>
     <string name="expenses_uppercase">ΕΞΟΔΑ</string>
     <string name="app_locked">Η ΕΦΑΡΜΟΓΗ ΕΙΝΑΙ ΚΛΕΙΔΩΜΕΝΗ</string>
-    <string name="authenticate_text">Επαλήθευσε την ταυτότητά σου για να ανοίξεις την εφαρμογή</string>
+    <string name="authenticate_text">Ξεκλείδωσε για να ανοίξεις το Kissos</string>
     <string name="unlock">Ξεκλείδωμα</string>
     <string name="current_balance">ΤΡΕΧΟΝ ΥΠΟΛΟΙΠΟ</string>
     <string name="balance_after_payments">ΥΠΟΛΟΙΠΟ ΜΕΤΑ ΤΙΣ ΠΡΟΓΡΑΜΜΑΤΙΣΜΕΝΕΣ ΠΛΗΡΩΜΕΣ</string>
@@ -48,7 +48,7 @@
     <string name="download_email_file">Κατέβασε το αρχείο «transactions_export…» που είναι συνημμένο στο email.</string>
     <string name="download_email_file_description">Αν έχεις περισσότερα από ένα νομίσματα, θα χρειαστεί να κατεβάσεις κάθε αρχείο «transactions_export…» και να το εισαγάγεις στο Kissos.</string>
     <string name="import_from">Εισαγωγή από</string>
-    <string name="please_wait">Περίμενε λίγο</string>
+    <string name="please_wait">Μια στιγμή…</string>
     <string name="importing_the_csv_file">Εισαγωγή του αρχείου CSV</string>
     <string name="success">Επιτυχία</string>
     <string name="failure">Αποτυχία</string>
@@ -100,7 +100,7 @@
     <string name="no_loans">Κανένα δάνειο</string>
     <string name="no_loans_description">Δεν έχεις δάνεια.\nΠάτησε «+ Προσθήκη δανείου» για να προσθέσεις ένα.</string>
     <string name="loan_confirm_deletion_description">Σημείωση: Η διαγραφή του δανείου θα αφαιρέσει οριστικά όλες τις σχετικές συναλλαγές.</string>
-    <string name="confirm_account_loan_change">Περίμενε λίγο, υπολογίζονται ξανά όλες οι εγγραφές του δανείου</string>
+    <string name="confirm_account_loan_change">Υπολογίζονται ξανά όλες οι εγγραφές του δανείου…</string>
     <string name="paid">Πληρώθηκε</string>
     <string name="left_to_pay">Απομένουν %1$s</string>
     <string name="loan_interest">Τόκος δανείου</string>
@@ -170,7 +170,7 @@
     <string name="new_account">Νέος λογαριασμός</string>
     <string name="account_name">Όνομα λογαριασμού</string>
     <string name="include_account">Συμπερίληψη λογαριασμού</string>
-    <string name="enter_account_balance">Γράψε το υπόλοιπο του λογαριασμού</string>
+    <string name="enter_account_balance">Υπόλοιπο λογαριασμού</string>
     <string name="choose_currency">Επιλογή νομίσματος</string>
     <string name="calculator">Αριθμομηχανή</string>
     <string name="calculator_empty_expression">Υπολογισμός (+−÷×=)</string>
@@ -178,7 +178,7 @@
     <string name="create_category">Δημιουργία κατηγορίας</string>
     <string name="category_name">Όνομα κατηγορίας</string>
     <string name="choose_category">Επιλογή κατηγορίας</string>
-    <string name="description_text_field_hint">Γράψε εδώ οποιαδήποτε λεπτομέρεια</string>
+    <string name="description_text_field_hint">Λεπτομέρειες (προαιρετικά)</string>
     <string name="clean_filter">Καθαρισμός φίλτρου</string>
     <string name="filter">Φίλτρο</string>
     <string name="apply_filter">Εφαρμογή φίλτρου</string>
@@ -225,7 +225,7 @@
     <string name="all_of_your_data">όλων των δεδομένων σου</string>
     <string name="final_deletion_warning">ΤΕΛΕΥΤΑΙΑ ΠΡΟΕΙΔΟΠΟΙΗΣΗ! Μόλις πατήσεις «Διαγραφή», τα δεδομένα σου θα χαθούν για πάντα.</string>
     <string name="exporting_data">Εξαγωγή δεδομένων</string>
-    <string name="exporting_data_description">Περίμενε λίγο, γίνεται εξαγωγή δεδομένων</string>
+    <string name="exporting_data_description">Γίνεται εξαγωγή δεδομένων…</string>
     <string name="start_date_of_month">Ημέρα έναρξης του μήνα</string>
     <string name="report_bug">Αναφορά σφάλματος</string>
     <string name="request_a_feature">Πρόταση λειτουργίας</string>
@@ -270,7 +270,7 @@
     <string name="loan_name">Όνομα δανείου</string>
     <string name="associated_account">Συνδεδεμένος λογαριασμός</string>
     <string name="create_main_transaction">Δημιουργία κύριας συναλλαγής</string>
-    <string name="enter_loan_amount_uppercase">ΓΡΑΨΕ ΤΟ ΠΟΣΟ ΤΟΥ ΔΑΝΕΙΟΥ</string>
+    <string name="enter_loan_amount_uppercase">ΠΟΣΟ ΔΑΝΕΙΟΥ</string>
     <string name="confirm_account_change_warning">"Αν αλλάξεις τον λογαριασμό του δανείου σε λογαριασμό με διαφορετικό νόμισμα, όλες οι εγγραφές του δανείου θα υπολογιστούν ξανά με τις σημερινές ισοτιμίες."</string>
     <string name="loan_type">Τύπος δανείου</string>
     <string name="borrow_money">Δανείζομαι</string>
@@ -280,7 +280,7 @@
     <string name="note">Σημείωση</string>
     <string name="mark_as_interest">Σήμανση ως τόκος</string>
     <string name="recalculate_amount_with_today_exchange_rates">Ενημέρωση του ποσού με τις σημερινές ισοτιμίες.</string>
-    <string name="enter_record_amount_uppercase">ΓΡΑΨΕ ΤΟ ΠΟΣΟ ΤΗΣ ΕΓΓΡΑΦΗΣ</string>
+    <string name="enter_record_amount_uppercase">ΠΟΣΟ ΕΓΓΡΑΦΗΣ</string>
     <string name="record_deletion_warning">Σίγουρα θέλεις να διαγράψεις την εγγραφή «%1$s»;</string>
     <string name="account_change_warning">"Αν αλλάξεις τον λογαριασμό της εγγραφής δανείου σε λογαριασμό με διαφορετικό νόμισμα, όλες οι εγγραφές του δανείου θα υπολογιστούν ξανά με τις σημερινές ισοτιμίες."</string>
     <string name="edit_name">Επεξεργασία ονόματος</string>
@@ -338,7 +338,7 @@
     <string name="kissos_is_open_source">Το Kissos είναι λογισμικό ανοιχτού κώδικα!</string>
     <string name="adjust_balance">Διόρθωση υπολοίπου</string>
     <string name="authentication_required">Απαιτείται επαλήθευση ταυτότητας</string>
-    <string name="authentication_required_description">Επαλήθευσε την ταυτότητά σου για να ανοίξεις την εφαρμογή</string>
+    <string name="authentication_required_description">Ξεκλείδωσε για να ανοίξεις το Kissos</string>
     <string name="total_budget">Συνολικός προϋπολογισμός</string>
     <string name="category_budget">Προϋπολογισμός κατηγορίας</string>
     <string name="multi_category_budget">Προϋπολογισμός πολλών κατηγοριών (%1$s)</string>
@@ -524,9 +524,9 @@
     <string name="csv_to_account">Λογαριασμός προορισμού</string>
     <string name="csv_to_account_help">Ο λογαριασμός που δέχεται τη μεταφορά. Αν τον παραλείψεις, οι μεταφορές δεν θα εισαχθούν.</string>
     <string name="csv_to_account_currency">Νόμισμα λογαριασμού προορισμού</string>
-    <string name="csv_to_account_currency_help">Το νόμισμα του λογαριασμού που δέχεται τη μεταφορά. Παράλειψέ το αν δεν υπάρχει τέτοια στήλη.</string>
+    <string name="csv_to_account_currency_help">Το νόμισμα του λογαριασμού που δέχεται τη μεταφορά. Δεν χρειάζεται αν δεν υπάρχει τέτοια στήλη.</string>
     <string name="csv_to_amount">Ποσό προορισμού</string>
-    <string name="csv_to_amount_help">Το ποσό που λαμβάνει ο λογαριασμός προορισμού. Παράλειψέ το αν δεν υπάρχει τέτοια στήλη.</string>
+    <string name="csv_to_amount_help">Το ποσό που λαμβάνει ο λογαριασμός προορισμού. Δεν χρειάζεται αν δεν υπάρχει τέτοια στήλη.</string>
     <string name="csv_category_help">Η κατηγορία της συναλλαγής.</string>
     <string name="csv_title">Τίτλος</string>
     <string name="csv_title_help">Ο τίτλος της συναλλαγής.</string>
@@ -586,7 +586,7 @@
 
     <!-- User agreement -->
     <string name="agreement_title">Όροι χρήσης</string>
-    <string name="agreement_intro">Διάβασε και αποδέξου τα παρακάτω πριν χρησιμοποιήσεις το Kissos:</string>
+    <string name="agreement_intro">Πριν ξεκινήσεις, διάβασε και επιβεβαίωσε τα παρακάτω:</string>
     <string name="agreement_as_is">Κατανοώ ότι το Kissos είναι δωρεάν λογισμικό ανοιχτού κώδικα που παρέχεται «ως έχει», χωρίς καμία ρητή ή σιωπηρή εγγύηση, και ότι το χρησιμοποιώ αποκλειστικά με δική μου ευθύνη.</string>
     <string name="agreement_data">Κατανοώ ότι το Kissos αποθηκεύει τα δεδομένα μου μόνο σε αυτή τη συσκευή, χωρίς λογαριασμό ή συγχρονισμό στο cloud. Η δημιουργία αντιγράφων ασφαλείας είναι δική μου ευθύνη και οι δημιουργοί δεν ευθύνονται για τυχόν απώλεια δεδομένων.</string>
     <string name="agreement_accuracy">Κατανοώ ότι το Kissos μπορεί να εμφανίσει λανθασμένες ή ελλιπείς πληροφορίες, όπως ποσά, ημερομηνίες και καταστήματα από αποδείξεις, την ΑΑΔΕ ή παρόχους ηλεκτρονικής τιμολόγησης, και θα ελέγχω τα στοιχεία μου πριν βασιστώ σε αυτά. Το Kissos δεν είναι εφαρμογή της ΑΑΔΕ ούτε εγκεκριμένο από αυτήν και δεν αποτελεί επίσημο αρχείο για φορολογικούς σκοπούς.</string>
