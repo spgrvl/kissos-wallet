@@ -6,13 +6,11 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -36,7 +34,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -415,32 +412,31 @@ private fun QuickAccess(
 
         Spacer(Modifier.height(16.dp))
 
+        // Equal columns, so a long label wraps in its own column instead of crowding its neighbours
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = QuickAccessPadding),
             verticalAlignment = Alignment.Top
         ) {
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_settings,
                 label = stringResource(R.string.settings)
             ) {
                 nav.navigateTo(SettingsScreen)
             }
 
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_categories,
                 label = stringResource(R.string.categories)
             ) {
                 nav.navigateTo(CategoriesScreen)
             }
 
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = when (theme) {
                     Theme.LIGHT -> R.drawable.home_more_menu_light_mode
                     Theme.DARK -> R.drawable.home_more_menu_dark_mode
@@ -469,64 +465,63 @@ private fun QuickAccess(
                 onSwitchTheme()
             }
 
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_planned_payments,
                 label = stringResource(R.string.planned_payments)
             ) {
                 nav.navigateTo(PlannedPaymentsScreen)
             }
-
-            Spacer(Modifier.weight(1f))
         }
 
         Spacer(Modifier.height(16.dp))
 
-        // Second Row
+        // Second row: three columns as wide as the first row's, centred under them
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = QuickAccessPadding),
             verticalAlignment = Alignment.Top
         ) {
-            Spacer(Modifier.weight(1f))
-
-            val context = LocalContext.current
+            Spacer(Modifier.weight(HalfColumn))
 
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_reports,
                 label = stringResource(R.string.reports),
             ) {
                 nav.navigateTo(ReportScreen)
             }
 
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_budgets,
                 label = stringResource(R.string.budgets),
             ) {
                 nav.navigateTo(BudgetScreen)
             }
 
-            Spacer(Modifier.weight(1f))
-
             MoreMenuButton(
+                modifier = Modifier.weight(1f),
                 icon = R.drawable.home_more_menu_loans,
                 label = stringResource(R.string.loans),
             ) {
                 nav.navigateTo(LoansScreen)
             }
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(HalfColumn))
         }
     }
 }
+
+private val QuickAccessPadding = 8.dp
+private const val HalfColumn = 0.5f
 
 @Composable
 private fun MoreMenuButton(
     @DrawableRes icon: Int,
     label: String,
+    modifier: Modifier = Modifier,
 
     backgroundColor: Color = UI.colors.pure,
     tint: Color = UI.colors.pureInverse,
@@ -535,6 +530,7 @@ private fun MoreMenuButton(
     onClick: () -> Unit
 ) {
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CircleButtonFilled(
@@ -549,7 +545,7 @@ private fun MoreMenuButton(
 
         Text(
             modifier = Modifier
-                .defaultMinSize(minWidth = 92.dp)
+                .fillMaxWidth()
                 .clickableNoIndication(rememberInteractionSource()) {
                     onClick()
                 },

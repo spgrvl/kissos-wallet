@@ -91,7 +91,7 @@
     <string name="dark_mode">Σκοτεινό θέμα</string>
     <string name="amoled_mode">Σκοτεινό θέμα AMOLED</string>
     <string name="auto_mode">Αυτόματο θέμα</string>
-    <string name="planned_payments">Προγραμματισμένες\nπληρωμές</string>
+    <string name="planned_payments">Προγραμμ.\nπληρωμές</string>
     <string name="reports">Αναφορές</string>
     <string name="loans">Δάνεια</string>
     <string name="set_currency">Ορισμός νομίσματος</string>
